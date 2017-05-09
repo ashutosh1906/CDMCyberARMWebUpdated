@@ -1,0 +1,95 @@
+{% extends "base" %}
+{% block titlename %} Threat Action {% endblock %}
+{% block menuButton %}
+    <form method="post" action="/home/">
+    {% csrf_token %}
+        <div class="row" style="text-align: center;padding: 5px;background-color:floralwhite">
+            <button type="button" class="btn btn-primary actionButton" id="insert">Insert</button>
+            <button type="button" class="btn btn-primary actionButton" id="update">Update</button>
+            <button type="button" class="btn btn-primary actionButton" id="delete">Delete</button>
+            <button type="button" class="btn btn-primary actionButton" id="display">Display</button>
+            <button type="button" class="btn btn-primary actionButton" id="insertThreatAction">Threat Action</button>
+            <button type="button" class="btn btn-primary actionButton" id="cyberARM">cyberARM</button>
+            <button type="submit" class="btn btn-primary" id="action" style="display: none;">Action</button>
+            <input type="text" name="actionName" id="actionName" style="display:none;">
+         </div>
+    </form>
+
+{% endblock %}
+{% block scriptBlock %}
+        <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#jqxlistbox").jqxListBox({ source:JSON.parse("{{ sc_source | escapejs}}"), width: '500px', height: '200px' });
+                $("#jqxlistboxTA").jqxListBox({ source:JSON.parse("{{ threat_action_source | escapejs }}"), width: '500px', height: '200px' });
+
+                $('#jqxlistbox').bind('select', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxlistbox').jqxListBox('getItem', args.index);
+                    $("#sc_name").val(item.label);
+{#                    console.log($("#jqxlistbox").jqxListBox('getItem',$("#jqxlistbox").jqxListBox('getSelectedIndex')).value);#}
+                });
+                $('#jqxlistboxTA').bind('select', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxlistboxTA').jqxListBox('getItem', args.index);
+                    $("#threat_action").val(item.label);
+{#                    console.log($("#jqxlistboxTA").jqxListBox('getSelectedIndex'));#}
+                });
+                 $(".actionButton").click(function () {
+                    console.log("Hiii");
+                    $("#actionName").val($(this).html());
+                    console.log($("#actionName").val());
+                    $("#action").click();
+                });
+                 $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
+                $('#jqxgrid').jqxGrid({ pagesize: 150});
+                var data = JSON.parse("{{ grid_src | escapejs}}");
+                loadDataGridThreatAction(data);
+                var filter = $('#jqxgrid').jqxGrid('filter');
+
+            });
+
+        </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
+     <form method="post" action="">
+         {% csrf_token %}
+        <div class="row">
+                <div class="col-xs-6">
+                    <label for="sc_name">Security Control Name</label>
+
+                </div>
+                <div class="col-xs-6">
+                    <label for="threat_action">Threat Action</label>
+                </div>
+                 <div class="col-xs-6">
+                    <input type="text" class="form-control" name="sc_name" id="sc_name" placeholder="Security Control Name"/>
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" name="threat_action" id="threat_action" placeholder="Threat Action"/>
+                </div>
+                <div class="col-xs-6" style="padding-top: 10px;">
+                    <div id='jqxlistbox'>
+                    </div>
+                </div>
+                <div class="col-xs-6" style="padding-top: 10px;">
+                    <div id='jqxlistboxTA'>
+                    </div>
+                </div></div>
+                <input type="text" style="display:none" name="sc_name_current" id="sc_name_current">
+                <input type="text" style="display:none" name="threat_action_current" id="threat_action_current">
+             <div style="text-align:center;margin-top:20px;"><button type="submit" class="btn btn-primary">Map CSC to Threat Action</button></div>
+    </form>
+     </div>
+     <div style="padding-top: 20px;">
+            <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
+        </div>
+    </div>
+    <form method="post" action="/generatereport/">
+    {% csrf_token %}
+        <div class="row" style="text-align: center;padding-top: 10px;">
+           <button type="submit" class="btn btn-primary">Generate Report</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,278 @@
+{% extends "cdmDisplay" %}
+{% block titlename %} Cyber ARM {% endblock %}
+{% block content %}
+    <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
+        <form method="post" action="">
+         {% csrf_token %}
+         <div style="box-shadow:3px 3px 3px 3px ;padding:40px;" id="searchBox">
+             <div class="row">
+                <div class="col">
+                    <label for="Business Domain">Business Domain</label>
+                </div>
+                <div class="dropdown" name="Business Domain" id="enforcement_level">
+                    <input type="text" name="bus_dom" id="bus_dom" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Business Domain
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in business_domain %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+            </div>
+            <div  id="asset_list">
+                <div class="row" style="padding-top: 15px;">
+                    <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_1">Asset</label>
+                    </div>
+                    <div class="col-xs-4" style="padding-top: 10px;">
+                        <div class="dropdown" name="asset_type" id="asset_type_1">
+                            <input type="text" name="asset_ty_1" id="asset_ty_1" class="drop-text" style="display: none"/>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Asset Type
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                             {% for i in asset_type %}
+
+                                 <li><a href="#">{{ i }}</a></li>
+                             {% endfor %}
+        {#                      <li><a href="#">Execute</a></li>#}
+                            </ul>
+                         </div>
+                    </div>
+                    <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_impact">Asset Value</label>
+                    </div>
+                    <div class="col-xs-3" style="padding-top: 10px;">
+                        <input type="text" placeholder="In Dollars">
+                    </div>
+                     <!--div class="col-xs-1">
+                        <a id="add_asset_1" class="add_asset" style="text-decoration: underline;">Add Asset</a>
+                     </div-->
+                </div>
+
+                 <div class="row" style="padding-top: 15px;">
+                    <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_2">Asset</label>
+                    </div>
+                    <div class="col-xs-4" style="padding-top: 10px;">
+                        <div class="dropdown" name="asset_type" id="asset_type_1">
+                            <input type="text" name="asset_ty_2" id="asset_ty_2" class="drop-text" style="display: none"/>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Asset Type
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                             {% for i in asset_type %}
+
+                                 <li><a href="#">{{ i }}</a></li>
+                             {% endfor %}
+        {#                      <li><a href="#">Execute</a></li>#}
+                            </ul>
+                        </div>
+
+                    </div>
+                     <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_impact">Asset Value</label>
+                     </div>
+                     <div class="col-xs-3" style="padding-top: 10px;">
+                            <input type="text" placeholder="In Dollars">
+                     </div>
+                     <!--div class="col-xs-1">
+                            <a id="add_asset_1" class="add_asset" style="text-decoration: underline;">Add Asset</a>
+                     </div-->
+                 </div>
+
+                 <div class="row" style="padding-top: 15px;">
+                    <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_3">Asset</label>
+                    </div>
+                    <div class="col-xs-4" style="padding-top: 10px;">
+                        <div class="dropdown" name="asset_type" id="asset_type_3">
+                            <input type="text" name="asset_ty_3" id="asset_ty_3" class="drop-text" style="display: none"/>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Asset Type
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                             {% for i in asset_type %}
+
+                                 <li><a href="#">{{ i }}</a></li>
+                             {% endfor %}
+        {#                      <li><a href="#">Execute</a></li>#}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2" style="padding-top: 10px;">
+                         <label for="asset_id_impact">Asset Value</label>
+                     </div>
+                     <div class="col-xs-3" style="padding-top: 10px;">
+                            <input type="text" placeholder="In Dollars">
+                     </div>
+                     <div class="col-xs-1">
+                            <a id="add_asset_1" class="add_asset" style="text-decoration: underline;">Add Asset</a>
+                     </div>
+
+                </div>
+
+                <div class="row" style="padding-top: 15px;">
+                    <div class="col">
+                        <label for="Budget">Budget</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="Budget" id="Budget" placeholder="Budget in Dollars"/>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top: 15px;">
+                    <div class="col">
+                        <label for="a_risk">Affordable Risk</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="a_risk" id="a_risk" placeholder="Affordable Risk in Dollars"/>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                    <a id="cost_priority_constraint" style="color: red;text-decoration: underline;">Investment Priority Constraints</a>
+
+                </div>
+{#                Here are the changes#}
+               <div id="cost_priority_constraint_div" style="display: none;">
+                   <div class="row" style="padding-top: 15px;">
+                        <div class="col-xs-4">
+                            <label for="cost_priority_constraint_input">
+                                Cost Priority Constraint
+                            </label>
+                        </div>
+                        <div class="col-xs-6">
+                             <input type="text" name="cost_priority_constraint_input" placeholder="In Percentage">
+                        </div>
+
+                    </div>
+
+                   <div style="padding-top: 15px;" class="row">
+                       <div class="col-xs-4" style="padding-top: 10px;">
+                            <label for="k_c_phase">Kill Chain Phase</label>
+                        </div>
+                        <div class="col-xs-6" style="padding-top: 10px;">
+                            <div class="dropdown" name="k_c_phase_dd" id="k_c_phase_dd">
+                                <input type="text" name="k_c_phase" id="k_c_phase" class="drop-text" style="display: none"/>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Kill Chain Phase
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                 {% for i in k_c_phase %}
+
+                                     <li><a href="#">{{ i }}</a></li>
+                                 {% endfor %}
+            {#                      <li><a href="#">Execute</a></li>#}
+                                </ul>
+                            </div>
+                        </div>
+                   </div>
+
+                    <div style="padding-top: 15px;" class="row">
+                       <div class="col-xs-4" style="padding-top: 10px;">
+                            <label for="k_c_phase">Enforcement Level</label>
+                        </div>
+                        <div class="col-xs-6" style="padding-top: 10px;">
+                            <div class="dropdown" name="en_level_dd" id="en_level_dd">
+                                <input type="text" name="en_level" id="en_level" class="drop-text" style="display: none"/>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Enforcement Level
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                 {% for i in en_level %}
+
+                                     <li><a href="#">{{ i }}</a></li>
+                                 {% endfor %}
+            {#                      <li><a href="#">Execute</a></li>#}
+                                </ul>
+                            </div>
+                        </div>
+                   </div>
+
+                    <div style="padding-top: 15px;" class="row">
+                       <div class="col-xs-4" style="padding-top: 10px;">
+                            <label for="k_c_phase">Enforcement Level</label>
+                        </div>
+                        <div class="col-xs-6" style="padding-top: 10px;">
+                            <div class="dropdown" name="sc_func_dd" id="sc_func_dd">
+                                <input type="text" name="sc_func" id="sc_func" class="drop-text" style="display: none"/>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Security Function
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                 {% for i in sc_func %}
+
+                                     <li><a href="#">{{ i }}</a></li>
+                                 {% endfor %}
+            {#                      <li><a href="#">Execute</a></li>#}
+                                </ul>
+                            </div>
+                        </div>
+                   </div>
+
+               </div>
+
+
+            {# end of the changes #}
+
+            </div>
+            </div>
+
+
+
+        <div class="row">
+                    <div style="text-align:center;margin-top:20px;">
+                        <button type="button" class="btn btn-primary" id="genCDMSub">Generate Cyber Defense Matrix</button>
+                        <input type="submit" style="display: none;" id="genCDM">
+                    </div>
+             </div>
+        <input type="text" name="asset_name" id="asset_name" style="display: none;">
+        </form>
+    <div class="row"></div>
+    </div>
+
+{% endblock %}
+{% block scriptPageContent %}
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#genCDMSub").click(function () {
+{#                alert("nice");#}
+                valueStr = $("#asset_ty_1").val()+';'+$("#asset_ty_2").val()+';'+$("#asset_ty_3").val();
+                $("#asset_name").val(valueStr);
+                console.log( $("#asset_name").val());
+                $("#genCDM").click();
+            });
+            number_asset = 1
+            $(".dropdown-menu li a").click(function(){
+{#                alert("nice");#}
+                var selText = $(this).text();
+                //alert(selText);
+                $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+                $(this).parents('.dropdown').find('.drop-text').val(selText);
+        {#        $(this).parents('.dropdown').find('.dropdown-toggle').click(selText);#}
+        {#        console.log($(this).parent('.dropdown').find('dropdown-toggle'));#}
+            });
+
+            $("#cost_priority_constraint").click(function () {
+                   $("#cost_priority_constraint_div").show();
+            });
+
+
+            $(".add_asset").click(function () {
+                number_asset += 2
+                html_add = '<div class=\"row\" style=\"padding-top: 5px;\">'
+                html_add += '<div class=\"col-xs-2\" style=\"padding-top: 10px;\">'
+                html_add +=  '<label for=\"asset_id_'+number_asset+'\">Asset</label>'
+                html_add += '</div>'
+                html_add += '<div class=\"col-xs-4\" style=\"padding-top: 10px;\">'
+                html_add += '<input type=\"text\" name=\"asset_ty_'+number_asset+'\" id=\"asset_ty_'+number_asset+'\" class="drop-text\" style=\"display: none\"/>'
+                html_add += '<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Choose Asset Type<span class=\"caret\"></span></button>'
+                html_add += '</div>'
+                html_add += '<ul class=\"dropdown-menu\">'
+                html_add += '</ul>'
+                html_add += '</div>'
+
+                $("#asset_list").append(html_add);
+
+            });
+        });
+    </script>
+{% endblock %}

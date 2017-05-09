@@ -1,0 +1,36 @@
+{% extends "base" %}
+{% block titlename %} CDM Display {% endblock %}
+{% block menuButton %}
+    <form method="post" action="/home/">
+    {% csrf_token %}
+        <div class="row" style="text-align: center;padding: 5px;background-color:floralwhite">
+            <button type="button" class="btn btn-primary actionButton" id="insert">Insert</button>
+            <button type="button" class="btn btn-primary actionButton" id="update">Update</button>
+            <button type="button" class="btn btn-primary actionButton" id="delete">Delete</button>
+            <button type="button" class="btn btn-primary actionButton" id="display">Display</button>
+            <button type="button" class="btn btn-primary actionButton" id="insertThreatAction">Threat Action</button>
+            <button type="button" class="btn btn-primary actionButton" id="cyberARM">cyberARM</button>
+            <button type="submit" class="btn btn-primary" id="action" style="display: none;">Action</button>
+            <input type="text" name="actionName" id="actionName" style="display:none;">
+         </div>
+    </form>
+
+{% endblock %}
+{% block scriptBlock %}
+<script>
+
+    $(".actionButton").click(function () {
+        console.log("Hiii");
+        $("#actionName").val($(this).html());
+        console.log($("#actionName").val());
+        $("#action").click();
+    });
+     $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
+     $('#jqxgrid').jqxGrid({ pagesize: 50});
+</script>
+    {% block scriptPageContent %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+
+{% endblock %}

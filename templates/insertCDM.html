@@ -1,0 +1,113 @@
+{% extends "cdmDisplay" %}
+{% block titlename %} CDM Insert {% endblock %}
+{% block content %}
+
+    <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
+    <form method="post" action="/insert/">
+{% csrf_token %}
+        <div class="row">
+                <div class="col">
+                    <label for="sc_name">Security Control Name</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="sc_name" id="sc_name" placeholder="Security Control Name"/>
+                </div>
+        </div>
+         <div class="row">
+                <div class="col">
+                    <label for="sc_version">Security Control Version</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="sc_version" id="sc_version" placeholder="Security Control Version"/>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col">
+                    <label for="kill_chain_phase">Kill Chain Phase</label>
+                </div>
+                <div class="dropdown" name="kill_chain_phase" id="kill_chain_phase">
+                    <input type="text" name="kc_phase" id="kc_phase" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" id="kc_phase_dropdown" type="button" data-toggle="dropdown">Kill Chain Phase
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in kc_phase %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+        </div>
+         <div class="row">
+                <div class="col">
+                    <label for="enforcement_level">Enforcement Level</label>
+                </div>
+                <div class="dropdown" name="enforcement_level" id="enforcement_level">
+                    <input type="text" name="ef_level" id="ef_level" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Enforcement Level
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in enforcement_level %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+        </div>
+    <div class="row">
+                <div class="col">
+                    <label for="security_function">Security Function</label>
+                </div>
+                <div class="dropdown" name="security_function" id="security_function">
+                    <input type="text" name="sc_fun" id="sc_fun" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="btn_sf">Security Function
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in security_function %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+        </div>
+
+    <div style="text-align:center;padding-top:10px;"><button type="submit" class="btn btn-primary">Insert Security Control</button></div>
+    </form>
+
+     <div style="padding-top: 10px;">
+            <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
+     </div>
+        <form method="post" action="/generateCDM/">
+            {% csrf_token %}
+        <div class="row" style="text-align: center;padding-top: 10px;">
+           <button type="submit" class="btn btn-primary">Generate Security Controls</button>
+        </div>
+    </form>
+    </div>
+{% endblock %}
+{% block scriptPageContent %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        var data = JSON.parse("{{ cdmList | escapejs}}");
+        loadDataGrid(data);
+        $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
+        $('#jqxgrid').jqxGrid({ pagesize: 50});
+{#        $('#jqxgrid').jqxGrid('sortby','id', 'asc');#}
+        $(".dropdown-menu li a").click(function(){
+            var selText = $(this).text();
+            //alert(selText);
+            $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+            $(this).parents('.dropdown').find('.drop-text').val(selText);
+    {#        $(this).parents('.dropdown').find('.dropdown-toggle').click(selText);#}
+    {#        console.log($(this).parent('.dropdown').find('dropdown-toggle'));#}
+        });
+    });
+
+
+
+    </script>
+{% endblock %}

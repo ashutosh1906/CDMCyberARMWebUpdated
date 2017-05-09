@@ -1,0 +1,146 @@
+{% extends "cdmDisplay" %}
+{% block titlename %} CDM List {% endblock %}
+{% block content %}
+    <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 25px;">
+         <a id="searchLink" style="text-decoration: underline;color: Red;cursor: pointer;">Click Here To Search</a>
+    <form action="display" method="post">
+         <div style="box-shadow:3px 3px 3px 3px ;padding: 20px;display: none;" id="searchBox">
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6" style="text-align: right">
+                    <label for="sc_name">Security Control Name</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="sc_name" id="sc_name" placeholder="Security Control Name"/>
+                </div>
+            </div>
+             <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6" style="text-align: right">
+                    <label for="sc_version">Security Control Version</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="sc_version" id="sc_version" placeholder="Security Control Version"/>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6" style="text-align: right">
+                    <label for="kill_chain_phase">Kill Chain Phase</label>
+                </div>
+                <div class="dropdown col-md-6" name="kill_chain_phase" id="kill_chain_phase">
+                    <input type="text" name="kc_phase" id="kc_phase" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" id="kc_phase_dropdown" type="button" data-toggle="dropdown">Kill Chain Phase
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in kc_phase %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6" style="text-align: right">
+                    <label for="enforcement_level">Enforcement Level</label>
+                </div>
+                <div class="dropdown col-md-6" name="enforcement_level" id="enforcement_level">
+                    <input type="text" name="ef_level" id="ef_level" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Enforcement Level
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in enforcement_level %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6" style="text-align: right">
+                    <label for="security_function">Security Function</label>
+                </div>
+                <div class="dropdown col-md-6" name="security_function" id="security_function">
+                    <input type="text" name="sc_fun" id="sc_fun" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="btn_sf">Security Function
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                     {% for i in security_function %}
+
+                         <li><a href="#">{{ i }}</a></li>
+                     {% endfor %}
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align:center;padding:10px;"><button type="button" id="searchButton" class="btn btn-primary">Search Security Control</button></div>
+         </div>
+        </form>
+        <div style="padding-top: 20px;">
+            <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
+        </div>
+
+    </div>
+{#    <div id="dialog" title="Basic dialog">#}
+{#  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>#}
+{#</div>#}
+
+{% endblock %}
+
+{% block scriptPageContent %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+            var searchBoxVis = 0;
+            $("#searchLink").click(function () {
+                searchBoxVis = searchBoxVis ^ 1;
+               $("#searchBox").toggle();
+               if(searchBoxVis==1) $(this).html("Click here to close Search Box");
+               else{
+                 $(this).html("Click here to Search");
+               }
+            });
+
+            $("#searchButton").click(function () {
+                var sc_name = $("#sc_name").val();
+                var sc_id = $("#sc_version").val();
+                var k_phase = $("#kc_phase").val();
+                var e_level = $("#ef_level").val();
+                var sc_func = $("#sc_fun").val();
+                var search_parameter = {'sc_name':sc_name,'sc_version':sc_id,'kc_phase':k_phase,'ef_level':e_level,'sc_fun':sc_func};
+                refreshData(search_parameter);
+
+            });
+
+
+            ////////////////////////////Create the grid///////////////////////////////////
+
+            var data = JSON.parse("{{ cdmList | escapejs}}");
+            console.log(data);
+
+            $("#jqxgrid").bind('rowdoubleclick', function (event) {
+                var selectedRowIndex = event.args.rowindex;
+                var rowData = $(this).jqxGrid('getrowdata', selectedRowIndex);
+                console.log(rowData);
+            });
+
+
+
+
+
+            loadDataGrid(data);
+
+            function  refreshData(search_parameter) {
+                var new_data = ajaxCall(search_parameter,"/display/");
+            }
+            ///////////////////////////////Search task//////////////////////////////////////////////
+            $(".dropdown-menu li a").click(function(){
+                    var selText = $(this).text();
+                    $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+                    $(this).parents('.dropdown').find('.drop-text').val(selText);
+            {#        $(this).parents('.dropdown').find('.dropdown-toggle').click(selText);#}
+            {#        console.log($(this).parent('.dropdown').find('dropdown-toggle'));#}
+            });
+{#            $( "#dialog" ).dialog();#}
+    });
+    </script>
+{% endblock %}

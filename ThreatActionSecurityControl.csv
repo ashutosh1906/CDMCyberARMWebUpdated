@@ -1,0 +1,106 @@
+Unapproved Hardware;1.1;0.588
+Skimmer;1.1;0.54
+Unapproved Hardware;1.2;0.194
+Wiretapping;1.1;0.641
+Possession abuse;1.2;0.576
+Possession abuse;1.3;0.705
+Unapproved Hardware;1.3;0.304
+Skimmer;1.3;0.697
+Wiretapping;1.3;0.812
+Possession abuse;1.4;0.783
+Skimmer;1.4;0.263
+Unapproved Hardware;1.4;0.832
+Unapproved Hardware;1.5;0.764
+Skimmer;1.5;0.549
+Possession abuse;1.5;0.753
+Unapproved Hardware;1.6;0.255
+Possession abuse;1.6;0.641
+Unapproved Software;2.1;0.29
+Client Side Attack;2.1;0.536
+Exploit Vuln;2.1;0.306
+Downloader;2.2;0.104
+Adminware;2.2;0.722
+Packet Sniffer;2.2;0.302
+Client Side Attack;2.4;0.759
+Abuse of Functionality;2.4;0.15
+Bypassed Controls;3.1;0.767
+Exploit Vuln;3.1;0.536
+Misconfiguration;3.1;0.423
+Misconfiguration;3.2;0.452
+Exploit Vuln;3.2;0.179
+Packet Sniffer;3.4;0.514
+Snooping;3.4;0.435
+Wiretapping;3.4;0.664
+Backdoor;3.5;0.616
+Backdoor;3.6;0.232
+C2;3.6;0.83
+Connection;3.6;0.809
+Backdoor;3.7;0.722
+Disabled Controls;3.7;0.32
+Exploit Vuln;4.1;0.8
+Exploit Vuln;4.3;0.688
+Exploit Vuln;4.4;0.768
+Exploit Vuln;4.5;0.879
+Maintenance Error;4.7;0.228
+Exploit Vuln;4.7;0.181
+RFI;3.5;0.393
+Possession abuse;5.1;0.651
+Possession abuse;5.2;0.294
+Unapproved Work Around;5.1;0.537
+Brute Force;5.3;0.584
+Unapproved Work Around;5.4;0.185
+Brute Force;5.5;0.311
+Brute Force;5.6;0.26
+Spyware Or Keylogger;5.6;0.231
+Skimmer;5.6;0.407
+Brute Force;5.7;0.273
+Data Mishandling;5.9;0.686
+Rootkit;5.9;0.475
+Misinformation;6.2;0.417
+Misdelivery;6.4;0.552
+Net Misuse;6.4;0.843
+Disabled Controls;5.1;0.345
+Bypassed Controls;6.5;0.439
+Disabled Controls;6.5;0.824
+Bypassed Controls;6.6;0.125
+Disabled Controls;6.6;0.593
+Net Misuse;6.6;0.641
+Adware;7.1;0.759
+Downloader;7.1;0.8
+Adware;7.2;0.245
+Forced Browsing;7.2;0.498
+Client Side Attack;7.3;0.545
+SQLi;7.3;0.245
+SSI Injection;7.2;0.583
+Phishing;7.4;0.158
+C2;7.4;0.167
+XSS;7.3;0.53
+Connection;7.4;0.53
+Mail Command Injection;7.1;0.43
+Spam;7.1;0.573
+URL Redirect or Abuse;7.4;0.166
+Connection;7.5;0.232
+C2;7.6;0.148
+Baiting;7.6;0.59
+Phishing;7.7;0.601
+Scam;7.7;0.499
+Phishing;7.8;0.626
+Use of Stolen Creds;5.6;0.643
+XSS;7.8;0.257
+Adminware;8.1;0.37
+Adware;8.1;0.479
+Password Dumper;8.1;0.635
+Ramscraper;8.1;0.274
+Ransomware;8.1;0.858
+Rootkit;8.1;0.491
+Spyware Or Keylogger;8.1;0.828
+Worm;8.1;0.749
+Adminware;8.2;0.122
+Adware;8.2;0.817
+Password Dumper;8.2;0.604
+Ramscraper;8.2;0.801
+Ransomware;8.2;0.388
+Rootkit;8.2;0.86
+Rootkit;8.2;0.558
+Spyware Or Keylogger;8.2;0.847
+Worm;8.2;0.525
