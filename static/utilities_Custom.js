@@ -126,12 +126,12 @@ function loadDataGrid(dataLoad){
     }
 
     function loadDataGridThreatAction(dataLoad){
-            // console.log("(...)(..)(..)(..)"+dataLoad);
+            console.log(dataLoad);
             var source =
             {
                 localdata: dataLoad,
                 datatype: "array",
-                datafields: [{ name: 'sc_control'},
+                datafields: [{ name: 'sc_version'},
                   { name: 'security_control_name'},
                   { name: 'threat_action'},
 
@@ -152,6 +152,7 @@ function loadDataGrid(dataLoad){
     // cellValue - cell's current value, row data - row's data, data field - column's data field, filterGroup - group of filters, defaultFilterResult - the built-in boolean evaluated result-
 
                 columns: [
+                    {text: 'Security Control Version', datafield: 'sc_version', width:250,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Security Control', datafield: 'security_control_name', width:450,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Threat Action', datafield:'threat_action', width:370,renderer:columnrenderer,cellsrenderer:cellsrenderer},
 

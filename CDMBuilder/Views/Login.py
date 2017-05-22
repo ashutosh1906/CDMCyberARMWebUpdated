@@ -98,6 +98,7 @@ def insertThreatActions(request):
                                                      'grid_src':json.dumps(all_row)})
     if request.method=='POST':
         sc_name = request.POST["sc_name"].split(';')
+        print ":( :( :( :( %s"%(sc_name)
         threat_action = request.POST['threat_action']
         print sc_name, " ---> ", threat_action
         # print request.POST['sc_name_current']," :::: ",request.POST['threat_action_current']
@@ -236,7 +237,7 @@ def generate_CDM(request):
     for row in all_row:
         cost_sc_control = random.randrange(100,800)
         # cdmFile.write('%s;%s;%s;%s;%s;%s\n'%(row['sc_version'],row['security_control_name'],row['kill_chain_phase'],row['enforcement_level'],row['sc_function'],cost_sc_control))
-        cdmFile.write('%s,%s,%s,%s,%s\n'%(row['sc_version'],row['security_control_name'],row['kill_chain_phase'],row['enforcement_level'],row['sc_function']))
+        cdmFile.write('%s;%s;%s;%s;%s\n'%(row['sc_version'],row['security_control_name'],row['kill_chain_phase'],row['enforcement_level'],row['sc_function']))
     cdmFile.close()
     return redirect('insert')
 
@@ -248,9 +249,13 @@ def generate_sc_threat_action(request):
     print "##################### Security Control to Threat Action ################################################"
     print all_row
 
-    sc_threat_action = open('ThreatActionSecurityControl.csv','w')
+    sc_threat_action = open('ThreatActionSecurityControlNew.csv','w')
     for row in all_row:
         effectiveness_range = round(random.uniform(0.1,0.9),3)
+        # cursor = connection.cursor()
+        # cursor.execute("SELECT * from cyber_defense_matrix where security_control_name=\'"+row['sc_version']+"\'")
+        # all_row_cdm = dictfetchall(cursor)
+        # sc_name = all_row_cdm[0]['security_control_name']
         sc_threat_action.write('%s;%s;%s\n'%(row['threat_action'],row['sc_version'],effectiveness_range))
     return redirect('threatAction')
 
