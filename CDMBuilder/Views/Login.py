@@ -12,7 +12,7 @@ from multiprocessing import Process,Queue
 
 def login(request):
     if request.method == 'GET':
-        print "*********************In the login function******************************"
+        # print "*********************In the login function******************************"
         return render(request,"login.html")
     user_name = request.POST['inputUserName']
     user_pwd = request.POST['inputUserPassword']
