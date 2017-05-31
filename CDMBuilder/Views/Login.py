@@ -9,6 +9,8 @@ from django.core import serializers
 from django.db import connection
 import math,random
 from multiprocessing import Process,Queue
+from z3 import *
+from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
 
 def login(request):
     if request.method == 'GET':
@@ -71,6 +73,7 @@ def createCDMSCName(cdm_dict):
 
 def insertThreatActions(request):
     if request.method == 'GET':
+        a = Real('a')
         threat_action_list = model.Threat_Action.objects.all()
         threat_action_name = []
         for threat_action in threat_action_list:
@@ -200,6 +203,7 @@ def cdmInsertSecurityControl(request):
         cursor.execute('SELECT * FROM sc_to_enforcement_level JOIN cyber_defense_matrix ON sc_to_enforcement_level.sc_version=cyber_defense_matrix.sc_version')
         all_cdm_row = dictfetchall(cursor)
         send_data = developQueryModel(all_cdm_row)
+
         return render(request,"insertCDM.html",{'cdmList': json.dumps(send_data),'kc_phase':GlobalVariables.kill_chain_phase,'enforcement_level':GlobalVariables.enforcement_level,
                                                 'security_function':GlobalVariables.security_function})
     print "in the post function of insert"
@@ -258,14 +262,27 @@ def generate_sc_threat_action(request):
         # sc_name = all_row_cdm[0]['security_control_name']
         sc_threat_action.write('%s;%s;%s\n'%(row['threat_action'],row['sc_version'],effectiveness_range))
     return redirect('threatAction')
-
 def cyberARM_request(request):
     if request.method=='GET':
         print "Cyber ARm Generate"
+
         return render(request,'CyberARM.html',{'business_domain':GlobalVariables.business_domain,
                                                'asset_type':GlobalVariables.asset_type,'k_c_phase':GlobalVariables.kill_chain_phase,
                                                'en_level':GlobalVariables.enforcement_level,'sc_func':GlobalVariables.security_function})
     if request.method=='POST':
+        CyberARMPowerPlant.cyberarm_init_main()
+        return HttpResponse("Thanks")
+
+
+def cyberARM_request_old(request):
+    if request.method=='GET':
+        print "Cyber ARm Generate"
+
+        return render(request,'CyberARM.html',{'business_domain':GlobalVariables.business_domain,
+                                               'asset_type':GlobalVariables.asset_type,'k_c_phase':GlobalVariables.kill_chain_phase,
+                                               'en_level':GlobalVariables.enforcement_level,'sc_func':GlobalVariables.security_function})
+    if request.method=='POST':
+        CyberARMPowerPlant.cyberarm_init_main()
         asset_list = request.POST["asset_name"]
         asset_list = asset_list.split(';')
         print "Cyber ARM Generate POST ---> ",asset_list

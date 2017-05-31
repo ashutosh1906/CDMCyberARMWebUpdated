@@ -127,6 +127,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT = 'C:/Users/Ashutosh/PycharmProjects/CDMBuilder'
 STATICFILES_DIRS = [
-    "C:/Users/dutta/PycharmProjects/CyberARMWeb/static"
+    "C:/Users/dutta/PycharmProjects/CDMCyberARMWeb/static/"
 
 ]
