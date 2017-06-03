@@ -1,0 +1,142 @@
+{% extends "cdmDisplay.html" %}
+{% block titlename %} Cyber ARM {% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="container-fluid ">
+            <div class="col">
+                    <label for="Threat Data Source">Threat Data Source</label>
+            </div>
+            <div class="dropdown" name="Threat Data Source" id="threat_data_source">
+                    <input type="text" name="threat_data_source" id="threat_data_source" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Threat Data Source
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                         <li><a>VERIS</a></li>
+                         <li><a>Threat Experience</a></li>
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+            </div>
+        </div>
+        <div class="container-fluid search_specific_div form-inline" id="veris_source" style="margin-top:20px;display: none;box-shadow:3px 3px 3px 3px ;padding:40px;">
+
+
+        </div>
+
+        <div class="container-fluid search_specific_div" id="other_source" style="margin-top:20px;display: none;box-shadow:3px 3px 3px 3px ;padding:40px;">
+            <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="Asset Name">Asset Name</label>
+                   </div>
+                    <div class="col-sm-2" >
+                        <input type="text" id="asset_name_other_source"/>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="Number of Asset">Number of Asset</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="number_asset"/>
+                    </div>
+            </div>
+
+            <div class="container-fluid"  style="margin-top:25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="confidentiality">Confidentiality</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="confidentiality"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="integrity">Integrity</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="integrity"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="availability">Availability</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="availability"/>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="margin-top: 15px;padding-right: 20px;">
+                <a style="color: red;text-decoration: underline;"> Recursively Add Threat Action</a>
+            </div>
+            <div class="container-fluid" style="margin-top: 15px;text-align: center;">
+                <div id="threat_action_list" style="text-align: center;margin-left: auto;margin-right: auto;">
+                </div>
+            </div>
+
+            <div class="container-fluid" style="margin-top: 25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="threat_action_name">Threat Action</label>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <input type="text" name="threat_action_name" id="threat_action_name"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="occurrence">Occurrence</label>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <input type="text" name="occurrence" id="occurrence"/>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary what" id="add_threat_action">ADD</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+{% block scriptPageContent %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $(".dropdown-menu li a").click(function(){
+                var selText = $(this).text();
+                $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+                $(this).parents('.dropdown').find('.drop-text').val(selText);
+                if(selText == THREAT_DATA_VERIS){
+                      $(".search_specific_div").hide();
+                      $("#veris_source").show();
+                }
+                else{
+                      $(".search_specific_div").hide();
+                     $("#other_source").show();
+                }
+            });
+
+           $("#add_threat_action").click(function () {
+               console.log("great");
+           });
+
+           /* ############################################### Threat Actions List ################################# */
+           var dataThreatAction = [];
+            var source =
+            {
+                localdata: dataThreatAction,
+                datatype: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#threat_action_list").jqxGrid(
+            {
+                source: dataAdapter,
+                autowidth: true,
+                autoheight:true,
+                columns: [
+                    { text: 'Threat Action', datafield: 'threat_action_name_id', width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    { text: 'Occurrence', datafield: 'frequency', width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                ]
+            });
+
+
+
+           /* ############################################### End Threat Action List ############################### */
+        });
+    </script>
+{% endblock %}

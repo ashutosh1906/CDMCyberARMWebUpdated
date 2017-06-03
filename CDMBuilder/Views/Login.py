@@ -27,7 +27,7 @@ def login(request):
 def loginPost(request):
     if request.method=='GET':
         print "*********************In the login Post function******************************"
-        return render(request,"cdmDisplay")
+        return render(request, "cdmDisplay.html")
 
     action_name = request.POST['actionName']
     print "******ACTION************ -------------> %s" % (action_name)
@@ -37,7 +37,9 @@ def loginPost(request):
         return redirect('display')
     if action_name == 'Threat Action':
         return redirect('threatAction')
-    if action_name == 'cyberARM':
+    if action_name == 'cyberARM Old':
+        return redirect('cyberARM Old')
+    if action_name == 'CyberARM':
         return redirect('cyberARM')
 
 def developQueryModel(all_cdm_row):
@@ -262,6 +264,15 @@ def generate_sc_threat_action(request):
         # sc_name = all_row_cdm[0]['security_control_name']
         sc_threat_action.write('%s;%s;%s\n'%(row['threat_action'],row['sc_version'],effectiveness_range))
     return redirect('threatAction')
+
+################################################################# Call CyberARM #######################################################
+def cyberARM_request_updated(request):
+    if request.method == "GET":
+        print "CyberARM Updated Generation"
+        return render(request,'CyberARMUpdated.html')
+
+#################################################################### End Calling CyberARM #############################################
+
 def cyberARM_request(request):
     if request.method=='GET':
         print "Cyber ARm Generate"

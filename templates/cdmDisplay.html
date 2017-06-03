@@ -1,4 +1,4 @@
-{% extends "base" %}
+{% extends "base.html" %}
 {% block titlename %} CDM Display {% endblock %}
 {% block menuButton %}
     <form method="post" action="/home/">
@@ -9,7 +9,8 @@
             <button type="button" class="btn btn-primary actionButton" id="delete">Delete</button>
             <button type="button" class="btn btn-primary actionButton" id="display">Display</button>
             <button type="button" class="btn btn-primary actionButton" id="insertThreatAction">Threat Action</button>
-            <button type="button" class="btn btn-primary actionButton" id="cyberARM">cyberARM</button>
+            <button type="button" class="btn btn-primary actionButton" id="cyberARM Old">cyberARM Old</button>
+            <button type="button" class="btn btn-primary actionButton" id="CyberARM">CyberARM</button>
             <button type="submit" class="btn btn-primary" id="action" style="display: none;">Action</button>
             <input type="text" name="actionName" id="actionName" style="display:none;">
          </div>

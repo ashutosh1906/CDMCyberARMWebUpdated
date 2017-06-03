@@ -1,6 +1,7 @@
 /**
  * Created by Ashutosh on 2/17/2017.
  */
+THREAT_DATA_VERIS = "VERIS";
 function ajaxCall(search_parameter,url) {
     // alert("Nice");
     console.log(search_parameter);

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^threatAction/',Login.insertThreatActions,name='threatAction'),
     url(r'^generateCDM/',Login.generate_CDM,name='generateCDM'),
     url(r'^generatereport/',Login.generate_sc_threat_action,name='generatereport'),
-    url(r'^cyberARM/',Login.cyberARM_request,name='cyberARM'),
+    url(r'^cyberARM Old/',Login.cyberARM_request,name='cyberARM Old'),
+    url(r'^cyberARM/',Login.cyberARM_request_updated,name='cyberARM'),
     url(r'',Login.login,name='login'),
 ]
