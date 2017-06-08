@@ -11,6 +11,7 @@ import math,random
 from multiprocessing import Process,Queue
 from z3 import *
 from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
+import UtilityFunctions
 
 def login(request):
     if request.method == 'GET':
@@ -269,7 +270,12 @@ def generate_sc_threat_action(request):
 def cyberARM_request_updated(request):
     if request.method == "GET":
         print "CyberARM Updated Generation"
-        return render(request,'CyberARMUpdated.html')
+        threat_action_list = model.Threat_Action.objects.all()
+        threat_action_list = UtilityFunctions.threat_action_list_as_dict(threat_action_list)
+        print threat_action_list
+        send_data = {}
+        send_data['threat_action'] = json.dumps(threat_action_list)
+        return render(request,'CyberARMUpdated.html',send_data)
 
 #################################################################### End Calling CyberARM #############################################
 
