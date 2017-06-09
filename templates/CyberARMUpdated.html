@@ -88,8 +88,15 @@
 
             </div>
 
-        </div>
+            <div style="margin-top: 25px;text-align: center;">
+                    <button type="button" class="btn btn-primary" id="add_asset">Add Asset</button>
+            </div>
 
+        </div>
+         <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+                <div id="asset_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+         </div>
     </div>
 {% endblock %}
 {% block scriptPageContent %}
@@ -97,6 +104,43 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //////////////////////////////////////////// Data sent from the backend ////////////////////////////
+
+            /****************************************************** Asset List ****************************************/
+            var dataLoad = [];
+            var sourceAsset =
+            {
+                localdata: dataLoad,
+                datatype: "array",
+                datafields: [{ name: 'asset_name'},
+                  { name: 'frequency',type:'float'},
+                  { name: 'confidentiality',},
+                  { name: 'integrity',},
+                  { name: 'availability', },
+
+           ] };
+
+            var dataAdapterAsset = new $.jqx.dataAdapter(sourceAsset, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#asset_grid_list").jqxGrid(
+            {
+                source: dataAdapterAsset,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                columns: [
+                  { text: 'Asset Name', datafield: 'asset_name', width: 350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Number', datafield:'frequency', width:  120,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Confidentiality', datafield: 'confidentiality', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Integrity', datafield: 'integrity', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Availability', datafield: 'availability', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+
+                ]
+            });
+           /****************************************************** End Asset List ************************************/
+
             var threat_action_data = JSON.parse("{{ threat_action|escapejs }}");
 {#            threat_action_data = JSON.parse(threat_action_data);#}
             console.log(threat_action_data);
@@ -107,6 +151,10 @@
             console.log("Threat Action Data Below:");
 
             /////////////////////////////////////////// end of the data module //////////////////////
+
+            //////////////////////////////////////////// Global Data ////////////////////////////////////
+            var asset_list_given = [];
+            /////////////////////////////////////// End of the Global Data //////////////////////////////
 
             $("#threat_action_drop_down_list").jqxDropDownList({ source: threat_action_data, width: '200px', height: '25px'});
 
@@ -156,7 +204,10 @@
             var source =
             {
                 localdata: dataThreatAction,
-                datatype: "array"
+                datatype: "array",
+                datafields: [{ name: 'threat_action_name_id'},
+                  { name: 'frequency'},
+                ]
             };
             var dataAdapter = new $.jqx.dataAdapter(source, {
                 loadComplete: function (data) { },
@@ -176,6 +227,7 @@
 
 
            /* ############################################### End Threat Action List ############################### */
+
         });
     </script>
 {% endblock %}
