@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7a164e12-9212-4c75-9776-58561a96aa29" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CDMBuilder.iml" afterPath="$PROJECT_DIR$/.idea/CDMBuilder.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Models/model.py" afterPath="$PROJECT_DIR$/CDMBuilder/Models/model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" afterPath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Views/UtilityFunctions.py" afterPath="$PROJECT_DIR$/CDMBuilder/Views/UtilityFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/CyberARMUpdated.html" afterPath="$PROJECT_DIR$/templates/CyberARMUpdated.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" afterPath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/workspace.xml" />
     </list>
@@ -748,7 +740,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20644216" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
