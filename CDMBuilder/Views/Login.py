@@ -285,21 +285,25 @@ def cyberARM_request_updated(request):
         print "In the post of cyberARM"
         # print request.body.decode("utf-8")
         # json_loads = json.loads(request.body.decode("utf-8"))
+        send_data = {}
         json_loads = json.loads(request.POST["asset_list_user_input"])
+        # print json_loads
         asset_list_given = json_loads['real_data']
         print asset_list_given
         veris_list = []
         experience_list = []
         for asset_given in asset_list_given:
             if asset_given['data_source'] == 'VERIS':
-                veris_list.append([asset_given['asset_name'],[asset_given['confidentiality'],asset_given['integrity'],asset_given['availability']]])
+                veris_list.append([asset_given['asset_name'],[float(asset_given['confidentiality']),float(asset_given['integrity']),float(asset_given['availability'])]])
             else:
-                experience_list.append([asset_given['asset_name'], [asset_given['confidentiality'], asset_given['integrity'],asset_given['availability']]])
+                experience_list.append([asset_given['asset_name'], [float(asset_given['confidentiality']), float(asset_given['integrity']),float(asset_given['availability'])]])
         print veris_list
         print experience_list
-        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main()
+        asset_enterprise_list_input = [['database',[500000,500000,500000]],['laptop',[100000,100000,100000]]]
+        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input)
         print recommendedCDM
-        return HttpResponse("Great")
+        send_data['cdm_list'] = json.dumps(recommendedCDM)
+        return render(request,'CDM_Output.html',send_data)
 
 #################################################################### End Calling CyberARM #############################################
 

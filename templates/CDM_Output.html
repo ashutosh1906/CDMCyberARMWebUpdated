@@ -1,0 +1,52 @@
+{% extends "cdmDisplay.html" %}
+{% block titlename %} Cyber Defense Matrix {% endblock %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+                <div id="cdm_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+    </div>
+{% endblock %}
+{% block scriptPageContent %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /************************ Initialize the grid *****************************************/
+            var dataLoad = JSON.parse("{{ cdm_list | escapejs }}");;
+            var sourceAsset =
+            {
+                localdata: dataLoad,
+                datatype: "array",
+                datafields: [{ name: 'asset_name'},
+                  { name: 'sc_name'},
+                  { name: 'sc_function'},
+                  { name: 'en_level'},
+                  { name: 'kc_phase'},
+                ] };
+
+            var dataAdapterAsset = new $.jqx.dataAdapter(sourceAsset, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#cdm_grid").jqxGrid(
+            {
+                source: dataAdapterAsset,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                groupable: true,
+                columns: [
+                  { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Security Function', datafield: 'sc_function', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Enforcement Level', datafield: 'en_level', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+
+                ],
+                groups: ['asset_name']
+            });
+            $('#cdm_grid').jqxGrid({ pagesize: 200});
+            /************************ End of the initialization **********************************/
+        });
+    </script>
+{% endblock %}
