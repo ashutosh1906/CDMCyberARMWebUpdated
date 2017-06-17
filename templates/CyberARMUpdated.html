@@ -18,6 +18,45 @@
             </div>
         </div>
         <div class="container-fluid search_specific_div form-inline" id="veris_source" style="margin-top:20px;display: none;box-shadow:3px 3px 3px 3px ;padding:40px;">
+            <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="Asset Name">Asset Name</label>
+                   </div>
+                    <div class="col-sm-2" style="text-align: right">
+                        <div id='asset_name_veris'></div>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="Number of Asset">Number of Asset</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="number_asset_veris"/>
+                    </div>
+            </div>
+
+            <div class="container-fluid"  style="margin-top:25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="confidentiality">Confidentiality</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="confidentiality_veris"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="integrity">Integrity</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="integrity_veris"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="availability">Availability</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="availability_veris"/>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;text-align: center;">
+                    <button type="button" class="btn btn-primary add_asset">Add Asset</button>
+            </div>
 
 
         </div>
@@ -89,7 +128,7 @@
             </div>
 
             <div style="margin-top: 25px;text-align: center;">
-                    <button type="button" class="btn btn-primary" id="add_asset">Add Asset</button>
+                    <button type="button" class="btn btn-primary add_asset">Add Asset</button>
             </div>
 
         </div>
@@ -97,6 +136,18 @@
                 <div id="asset_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
          </div>
+         <div style="margin-top:10px;text-align: center;">
+                    <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
+         </div>
+
+        <div style="display: none;">
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="text" style="" id="asset_list_user_input" name="asset_list_user_input">
+                <input type="submit" id="submit_gen_cdm">
+            </form>
+        </div>
+
     </div>
 {% endblock %}
 {% block scriptPageContent %}
@@ -113,11 +164,12 @@
                 datatype: "array",
                 datafields: [{ name: 'asset_name'},
                   { name: 'frequency',type:'float'},
-                  { name: 'confidentiality',},
-                  { name: 'integrity',},
-                  { name: 'availability', },
+                  { name: 'confidentiality'},
+                  { name: 'integrity'},
+                  { name: 'availability'},
+                    {name:'data_source'}
 
-           ] };
+                ] };
 
             var dataAdapterAsset = new $.jqx.dataAdapter(sourceAsset, {
                 loadComplete: function (data) { },
@@ -136,6 +188,7 @@
                   { text: 'Confidentiality', datafield: 'confidentiality', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Integrity', datafield: 'integrity', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Availability', datafield: 'availability', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    { text: 'Threat Source', datafield: 'data_source', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
 
                 ]
             });
@@ -154,7 +207,14 @@
 
             //////////////////////////////////////////// Global Data ////////////////////////////////////
             var asset_list_given = [];
+            var threat_action_list_specific_asset = [];
+            var added_number_of_asset = 0;
+            var veris_selected = 0;
+            var number_threat_action = 0
+            var asset_veris;
             /////////////////////////////////////// End of the Global Data //////////////////////////////
+            asset_veris = JSON.parse("{{ asset_list | escapejs }}");
+            $("#asset_name_veris").jqxDropDownList({ source: asset_veris, width: '200px', height: '25px'});
 
             $("#threat_action_drop_down_list").jqxDropDownList({ source: threat_action_data, width: '200px', height: '25px'});
 
@@ -165,10 +225,12 @@
                 if(selText == THREAT_DATA_VERIS){
                       $(".search_specific_div").hide();
                       $("#veris_source").show();
+                      veris_selected = 1;
                 }
                 else{
                       $(".search_specific_div").hide();
-                     $("#other_source").show();
+                      $("#other_source").show();
+                      veris_selected = 0;
                 }
             });
 
@@ -192,15 +254,97 @@
                    $("#threat_action_occur").hide();
                }
                if(com_flag){
-                   $("#threat_action_list").jqxGrid('addrow', null, {'threat_action_name_id':threat_action_value,'frequency':occurrence_value});
+                   $("#threat_action_list").jqxGrid('addrow', number_threat_action, {'threat_action_name_id':threat_action_value,'frequency':occurrence_value});
+                   threat_action_list_specific_asset[number_threat_action] = {'threat_action_name_id':threat_action_value,'frequency':occurrence_value};
+                   number_threat_action += 1;
                    $("#occurrence").val("");
                    $("#threat_action_drop_down_list").jqxDropDownList('clearSelection');
                }
 
            });
 
+           /********************************* Add Asset in the list ************************/
+
+           $(".add_asset").click(function() {
+               row_asset_list = {};
+               if(veris_selected){
+                   console.log("VERIS Selected");
+                   row_asset_list['asset_name'] = $("#asset_name_veris").val();
+                    row_asset_list['frequency'] = $("#number_asset_veris").val();
+                    row_asset_list['confidentiality'] = $("#confidentiality_veris").val();
+                    row_asset_list['integrity'] = $("#integrity_veris").val();
+                    row_asset_list['availability'] = $("#availability_veris").val();
+                    row_asset_list['data_source'] = "VERIS";
+                    row_asset_list['threat_list'] = {};
+                    empty_list_veris();
+               }
+               else{
+                    row_asset_list['asset_name'] = $("#asset_name_other_source").val();
+                    row_asset_list['frequency'] = $("#number_asset").val();
+                    row_asset_list['confidentiality'] = $("#confidentiality").val();
+                    row_asset_list['integrity'] = $("#integrity").val();
+                    row_asset_list['availability'] = $("#availability").val();
+                    row_asset_list['data_source'] = "Experience";
+                    row_asset_list['threat_list'] = threat_action_list_specific_asset;
+                    empty_list_other_source();
+               }
+               asset_list_given[added_number_of_asset] = row_asset_list;
+               console.log("Asset List:");
+               console.log(row_asset_list);
+               $("#asset_grid_list").jqxGrid('addrow', null,row_asset_list);
+               added_number_of_asset += 1;
+               console.log("Added Number Of Assets "+added_number_of_asset);
+               console.log(asset_list_given);
+
+           });
+
+           function empty_list_veris(){
+                $("#asset_name_veris").jqxDropDownList('clearSelection');
+                $("#number_asset_veris").val("");
+                $("#confidentiality_veris").val("");
+                $("#integrity_veris").val("");
+                $("#availability_veris").val("");
+
+           }
+
+           function empty_list_other_source(){
+                $("#asset_name_other_source").val("");
+                $("#number_asset").val("");
+                $("#confidentiality").val("");
+                $("#integrity").val("");
+                $("#availability").val("");
+                for(var i = 0;i<number_threat_action;i++){
+                    $("#threat_action_list").jqxGrid('deleterow', i);
+                }
+                number_threat_action = 0;
+                threat_action_list_specific_asset = [];
+           }
+
+
+
+           /********************************* End of adding asset in the list **************/
+
+           /*  ###################################### Submit Button Action ########################################### */
+            $("#generate_cdm").click(function () {
+                var data_input = {};
+                data_input['real_data'] = asset_list_given;
+                data_input['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+                data_string_send = JSON.stringify(data_input);
+                console.log(data_string_send);
+                console.log(data_input);
+                $("#asset_list_user_input").val(data_string_send);
+                $("#submit_gen_cdm").click();
+{#                $.ajax({#}
+{#                  type:"POST",#}
+{#                  url:"/cyberARM/",#}
+{#                  data : data_string_send,#}
+{#                });#}
+            });
+
+
+            /* ####################################### End of Submit Button Action ############################################ */
            /* ############################################### Threat Actions List ################################# */
-           var dataThreatAction = [];
+            var dataThreatAction = [];
             var source =
             {
                 localdata: dataThreatAction,

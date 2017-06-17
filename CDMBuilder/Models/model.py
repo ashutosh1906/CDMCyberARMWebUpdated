@@ -34,3 +34,7 @@ class Threat_Action(models.Model):
     class Meta:
         db_table = 'threat_action'
 
+class Asset_VERIS(models.Model):
+    asset_name = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'asset_veris'

@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CDMBuilder.iml" filepath="$PROJECT_DIR$/.idea/CDMBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ComplexAdaptiveSystem/.idea/ComplexAdaptiveSystem.iml" filepath="$PROJECT_DIR$/../ComplexAdaptiveSystem/.idea/ComplexAdaptiveSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" filepath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" />
     </modules>
   </component>
 </project>

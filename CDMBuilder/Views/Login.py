@@ -27,7 +27,7 @@ def login(request):
 
 def loginPost(request):
     if request.method=='GET':
-        print "*********************In the login Post function******************************"
+        # print "*********************In the login Post function******************************"
         return render(request, "cdmDisplay.html")
 
     action_name = request.POST['actionName']
@@ -269,13 +269,37 @@ def generate_sc_threat_action(request):
 ################################################################# Call CyberARM #######################################################
 def cyberARM_request_updated(request):
     if request.method == "GET":
-        print "CyberARM Updated Generation"
+        # print "CyberARM Updated Generation"
         threat_action_list = model.Threat_Action.objects.all()
         threat_action_list = UtilityFunctions.threat_action_list_as_dict(threat_action_list)
         print threat_action_list
         send_data = {}
         send_data['threat_action'] = json.dumps(threat_action_list)
+        asset_list = model.Asset_VERIS.objects.all()
+        asset_list = UtilityFunctions.asset_list_as_dict(asset_list)
+        print asset_list
+        send_data['asset_list'] = json.dumps(asset_list)
         return render(request,'CyberARMUpdated.html',send_data)
+
+    if request.method == "POST":
+        print "In the post of cyberARM"
+        # print request.body.decode("utf-8")
+        # json_loads = json.loads(request.body.decode("utf-8"))
+        json_loads = json.loads(request.POST["asset_list_user_input"])
+        asset_list_given = json_loads['real_data']
+        print asset_list_given
+        veris_list = []
+        experience_list = []
+        for asset_given in asset_list_given:
+            if asset_given['data_source'] == 'VERIS':
+                veris_list.append([asset_given['asset_name'],[asset_given['confidentiality'],asset_given['integrity'],asset_given['availability']]])
+            else:
+                experience_list.append([asset_given['asset_name'], [asset_given['confidentiality'], asset_given['integrity'],asset_given['availability']]])
+        print veris_list
+        print experience_list
+        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main()
+        print recommendedCDM
+        return HttpResponse("Great")
 
 #################################################################### End Calling CyberARM #############################################
 
