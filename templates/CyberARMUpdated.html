@@ -2,6 +2,20 @@
 {% block titlename %} Cyber ARM {% endblock %}
 {% block content %}
     <div class="container-fluid">
+         <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="budget">Budget</label>
+                   </div>
+                    <div class="col-sm-2" style="text-align: right">
+                        <input type="text" id="budget" placeholder="Enter the Budget"/>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="affordable_risk">Affordable Risk</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="affordable_risk" placeholder="Enter Affordable Risk"/>
+                    </div>
+         </div>
         <div class="container-fluid ">
             <div class="col">
                     <label for="Threat Data Source">Threat Data Source</label>
@@ -328,6 +342,8 @@
             $("#generate_cdm").click(function () {
                 var data_input = {};
                 data_input['real_data'] = asset_list_given;
+                data_input['budget'] = $("#budget").val();
+                data_input['affordable_risk'] = $("#affordable_risk").val();
                 data_input['csrfmiddlewaretoken'] = '{{ csrf_token }}';
                 data_string_send = JSON.stringify(data_input);
                 console.log(data_string_send);

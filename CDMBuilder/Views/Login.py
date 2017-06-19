@@ -288,6 +288,8 @@ def cyberARM_request_updated(request):
         send_data = {}
         json_loads = json.loads(request.POST["asset_list_user_input"])
         # print json_loads
+        affordable_risk = json_loads['affordable_risk']
+        budget = json_loads['budget']
         asset_list_given = json_loads['real_data']
         print asset_list_given
         veris_list = []
@@ -300,7 +302,7 @@ def cyberARM_request_updated(request):
         print veris_list
         print experience_list
         asset_enterprise_list_input = [['database',[500000,500000,500000]],['laptop',[100000,100000,100000]]]
-        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input)
+        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
         print recommendedCDM
         send_data['cdm_list'] = json.dumps(recommendedCDM)
         return render(request,'CDM_Output.html',send_data)
