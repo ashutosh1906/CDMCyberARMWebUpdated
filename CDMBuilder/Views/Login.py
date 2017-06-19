@@ -10,7 +10,6 @@ from django.db import connection
 import math,random
 from multiprocessing import Process,Queue
 from z3 import *
-from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
 import UtilityFunctions
 
 def login(request):
@@ -302,6 +301,7 @@ def cyberARM_request_updated(request):
         print veris_list
         print experience_list
         asset_enterprise_list_input = [['database',[500000,500000,500000]],['laptop',[100000,100000,100000]]]
+        from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
         print recommendedCDM
         send_data['cdm_list'] = json.dumps(recommendedCDM)
