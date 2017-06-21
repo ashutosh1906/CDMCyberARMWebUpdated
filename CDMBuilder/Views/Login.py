@@ -300,7 +300,7 @@ def cyberARM_request_updated(request):
                 experience_list.append([asset_given['asset_name'], [float(asset_given['confidentiality']), float(asset_given['integrity']),float(asset_given['availability'])]])
         print veris_list
         print experience_list
-        asset_enterprise_list_input = [['database',[500000,500000,500000]],['laptop',[100000,100000,100000]]]
+        asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]]]
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
         print recommendedCDM
