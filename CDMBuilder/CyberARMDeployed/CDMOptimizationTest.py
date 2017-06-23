@@ -1,7 +1,7 @@
 from z3 import *
 import ProjectConfigFile
 def SMT_Environment(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,
-                    threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list):
+                    threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget):
     print selected_security_controls
     print threat_action_name_list
     print threat_action_id_list_for_all_assets
@@ -36,9 +36,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             threat.considerResidualThreatAction()
 
     # print "########################################## Threat Properties ########################################################"
-    for asset_index in range(len(threat_id_for_all_assets)):
-        for threat in threat_id_for_all_assets[asset_index]:
-            threat_list[threat].printGlobalProperties()
+    # for asset_index in range(len(threat_id_for_all_assets)):
+    #     for threat in threat_id_for_all_assets[asset_index]:
+    #         threat_list[threat].printGlobalProperties()
 
     ############################################################ Give rank to threat action ##########################################
     threat_action_id_to_position_roll = []
@@ -77,28 +77,28 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         minimum_affordable_risk.append(0.0)
         minimum_threat_specific_risk.append([1 for threat in threat_id_for_all_assets[asset_index]])
         # print "Security Controls %s" % (selected_security_controls[asset_index])
-        print "Threat Action %s" % (threat_action_id_list_for_all_assets[asset_index])
-        print "Threat Action Roll %s" % (threat_action_id_to_position_roll[asset_index])
+        # print "Threat Action %s" % (threat_action_id_list_for_all_assets[asset_index])
+        # print "Threat Action Roll %s" % (threat_action_id_to_position_roll[asset_index])
         # print "Threat ID %s" % (threat_id_for_all_assets[asset_index])
         threat_action_survive = [1.0 for i in threat_action_id_list_for_all_assets[asset_index]]
         for sec_id in selected_security_controls[asset_index]:
-            print "Security Control %s : %s" % (sec_id,security_control_list[sec_id].primary_key)
-            print "Threat Action %s" % (security_control_list[sec_id].global_asset_threat_action_list[asset_index])
-            print "Effectiveness %s" % (security_control_list[sec_id].threat_action_effectiveness)
+            # print "Security Control %s : %s" % (sec_id,security_control_list[sec_id].primary_key)
+            # print "Threat Action %s" % (security_control_list[sec_id].global_asset_threat_action_list[asset_index])
+            # print "Effectiveness %s" % (security_control_list[sec_id].threat_action_effectiveness)
             for threat_action_id in security_control_list[sec_id].global_asset_threat_action_list[asset_index]:
                 threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]] *= (1
                                                                                                       -security_control_list[sec_id].threat_action_effectiveness[threat_action_id])
 
-        print "Threat Action Survive %s" % (threat_action_survive)
-        print "All Threats %s" % (threat_id_for_all_assets[asset_index])
-        print "Threat Index %s" % (threat_id_to_position_roll[asset_index])
+        # print "Threat Action Survive %s" % (threat_action_survive)
+        # print "All Threats %s" % (threat_id_for_all_assets[asset_index])
+        # print "Threat Index %s" % (threat_id_to_position_roll[asset_index])
         for threat_id in threat_id_for_all_assets[asset_index]:
-            print "Threat ID %s : Ignored %s" % (threat_list[threat_id].primary_key,threat_list[threat_id].ignored_threat_action[asset_index])
-            print "Threat Action %s" % (threat_list[threat_id].global_asset_threat_action[asset_index])
-            print "Threat Action Prob %s" % (threat_list[threat_id].global_asset_threat_action_prob[asset_index])
-            print "Threat Action Position %s" % (threat_list[threat_id].global_threat_action_id_to_place_map[asset_index])
-            print "Threat Action Index %s" % (threat_action_id_list_for_all_assets[asset_index])
-            print "Threat Action ID to Position %s" % (threat_action_id_to_position_roll[asset_index])
+            # print "Threat ID %s : Ignored %s" % (threat_list[threat_id].primary_key,threat_list[threat_id].ignored_threat_action[asset_index])
+            # print "Threat Action %s" % (threat_list[threat_id].global_asset_threat_action[asset_index])
+            # print "Threat Action Prob %s" % (threat_list[threat_id].global_asset_threat_action_prob[asset_index])
+            # print "Threat Action Position %s" % (threat_list[threat_id].global_threat_action_id_to_place_map[asset_index])
+            # print "Threat Action Index %s" % (threat_action_id_list_for_all_assets[asset_index])
+            # print "Threat Action ID to Position %s" % (threat_action_id_to_position_roll[asset_index])
             threat_index = threat_id_to_position_roll[asset_index][threat_id]
             minimum_threat_specific_risk[asset_index][threat_index] = threat_list[threat_id].ignored_threat_action[asset_index]
             for threat_action_id in threat_list[threat_id].global_asset_threat_action[asset_index]:
@@ -109,9 +109,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                                                                       threat_list[threat_id].threat_impact_asset[asset_index]
         minimum_affordable_risk[asset_index] = sum(minimum_threat_specific_risk[asset_index])
 
-    for i in range(len(asset_enterprise_list)):
-        print "Minimum Threat Specific Risk %s" % (minimum_threat_specific_risk[i])
-        print "Minimum Affordable Risk %s" % (minimum_affordable_risk[i])
+    # for i in range(len(asset_enterprise_list)):
+    #     print "Minimum Threat Specific Risk %s" % (minimum_threat_specific_risk[i])
+    #     print "Minimum Affordable Risk %s" % (minimum_affordable_risk[i])
     print "Global Minimum Risk %s" % (sum(minimum_affordable_risk))
     ###################################################### End of Design of All Heuristics Here ############################################
     ############################################################ Set SMT Environment ####################################################
@@ -127,7 +127,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     ############################################################ 1. Declare the variables #################################################
     ############################################################ 1.1 Declare the boolean and cost variables #######################################
     smt_Security_Control_Bool = [[Bool('sec_con_%s_%s' % (i,j)) for j in selected_security_controls[i]] for i in range(len(asset_enterprise_list))]
-    print "SMT Security Control Bool %s" %(smt_Security_Control_Bool)
+    # print "SMT Security Control Bool %s" %(smt_Security_Control_Bool)
 
     smt_Security_Control_Cost = [[Real('sec_con_cost_%s_%s'%(i,j))for j in selected_security_controls[i]] for i in range(len(selected_security_controls))]
     # print "SMT Security Controls Cost %s" % (smt_Security_Control_Cost)
@@ -251,6 +251,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     ########################################################### 2.5 Total Security Control Cost ##################################################
     cyberARM.add([smt_Total_Security_Control_Cost[asset_index]==sum(smt_Security_Control_Cost[asset_index]) for asset_index in range(len(asset_enterprise_list))])
     cyberARM.add(smt_Global_Security_Control_Cost==sum(smt_Total_Security_Control_Cost))
+    cyberARM.add(smt_Global_Security_Control_Cost <= budget)
     ############################################################ End Constrainst Development #################################################
 
     ############################################################ 3. Check the model ##########################################################
@@ -262,15 +263,15 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     if satisfiability == z3.sat:
         recommended_CDM = cyberARM.model()
         # print "Model is ---> "
-        print recommended_CDM
+        # print recommended_CDM
         print "Residual Risk %s" % (recommended_CDM[smt_Global_Residual_Risk])
         for i in range(len(asset_enterprise_list)):
             print "Risk for Asset %s :: %s" % (asset_enterprise_list[i][0],recommended_CDM[smt_Residual_Risk_Asset[i]])
         print "\nGlobal Security Control Cost %s" % (recommended_CDM[smt_Global_Security_Control_Cost])
         for i in range(len(asset_enterprise_list)):
             print "Total Asset Security Control Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
-            for sec_control_id in selected_security_controls[i]:
-                print "Cost %s: %s" % (security_control_list[sec_control_id].sc_name,security_control_list[sec_control_id].investment_cost)
+            # for sec_control_id in selected_security_controls[i]:
+            #     print "Cost %s: %s" % (security_control_list[sec_control_id].sc_name,security_control_list[sec_control_id].investment_cost)
 
     ################################################################## Prepare the output ###################################################
     CDM_Global_id = []
@@ -279,9 +280,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         CDM_Global_id.append([])
         sec_control_index = 0
         for sec_control in selected_security_controls[asset_index]:
-            print "\n%s : %s" % (sec_control,smt_Security_Control_Bool[asset_index][sec_control_index])
+            # print "\n%s : %s" % (sec_control,smt_Security_Control_Bool[asset_index][sec_control_index])
             if recommended_CDM[smt_Security_Control_Bool[asset_index][sec_control_index]]:
-                print " ----  Boolean %s" % (recommended_CDM[smt_Security_Control_Bool[asset_index][sec_control_index]])
+                # print " ----  Boolean %s" % (recommended_CDM[smt_Security_Control_Bool[asset_index][sec_control_index]])
                 CDM_Global_id[asset_index].append(security_control_list[sec_control])
             sec_control_index += 1
 

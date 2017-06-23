@@ -11,7 +11,7 @@ def select_threat(threat_list,asset_enterprise_list,threat_id_for_all_assets):
                 threat_id_for_all_assets[i].append(threat.primary_key)
 
 
-def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id):
+def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget):
     ################################################################################## Global Variables ################################################################
     threat_action_name_list = []
     selected_security_controls = []
@@ -61,7 +61,7 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
     return CDMOptimizationTest.SMT_Environment(security_control_list, selected_security_controls, threat_action_name_list,
                                         threat_action_list, threat_action_id_list_for_all_assets,
                                         threat_id_for_all_assets, threat_list,
-                                        asset_enterprise_list)
+                                        asset_enterprise_list,affordable_risk,budget)
 
 
 

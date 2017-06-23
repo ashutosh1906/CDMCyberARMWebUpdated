@@ -1,7 +1,7 @@
 import ThreatStatisticsSingle,ThreatPrioritization,Utitilities,ProjectConfigFile
 import ThreatActionToSecurityControl,CyberARMEngine
 
-write_output_file = open("CyberARMOutput",'w')
+# write_output_file = open("CyberARMOutput",'w')
 
 def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
     for asset in asset_enterprise_list:
@@ -61,6 +61,6 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printSecurityControlThreatmapping(security_control_list,security_control_version_to_id,threat_action_list)
     # Utitilities.printThreatSecurityControlMapping(threat_action_list,threat_action_name_to_id,security_control_list,risk_threat_action,enterprise_asset_list_given)
 
-    recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id)
-    write_output_file.close()
+    recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget)
+    # write_output_file.close()
     return recommendedCDM
