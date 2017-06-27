@@ -303,6 +303,7 @@ def cyberARM_request_updated(request):
         asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]]]
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
+        # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)
         print recommendedCDM
         send_data['cdm_list'] = json.dumps(recommendedCDM)
         return render(request,'CDM_Output.html',send_data)
@@ -329,7 +330,7 @@ def cyberARM_request_old(request):
                                                'asset_type':GlobalVariables.asset_type,'k_c_phase':GlobalVariables.kill_chain_phase,
                                                'en_level':GlobalVariables.enforcement_level,'sc_func':GlobalVariables.security_function})
     if request.method=='POST':
-        CyberARMPowerPlant.cyberarm_init_main()
+        # CyberARMPowerPlant.cyberarm_init_main()
         asset_list = request.POST["asset_name"]
         asset_list = asset_list.split(';')
         print "Cyber ARM Generate POST ---> ",asset_list

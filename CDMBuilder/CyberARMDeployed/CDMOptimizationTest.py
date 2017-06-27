@@ -2,10 +2,10 @@ from z3 import *
 import ProjectConfigFile
 def SMT_Environment(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,
                     threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget):
-    print selected_security_controls
-    print threat_action_name_list
-    print threat_action_id_list_for_all_assets
-    print threat_id_for_all_assets
+    # print selected_security_controls
+    # print threat_action_name_list
+    # print threat_action_id_list_for_all_assets
+    # print threat_id_for_all_assets
 
     #########################################  Create the environment for all the selected security controls ##############################
     for asset_index in range(len(selected_security_controls)):
@@ -48,7 +48,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
             threat_action_id_to_position_roll[asset_index][threat_action_id] = num_threat_action
             num_threat_action += 1
-    print threat_action_id_to_position_roll
+    # print threat_action_id_to_position_roll
 
     ############################################################ Give rank to threat ##########################################
     threat_id_to_position_roll = []
@@ -58,7 +58,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for threat_id in threat_id_for_all_assets[asset_index]:
             threat_id_to_position_roll[asset_index][threat_id] = num_threat_action
             num_threat_action += 1
-    print threat_id_to_position_roll
+    # print threat_id_to_position_roll
 
     ####################################################### Determine the minimum value of the Affordable Risk ##################
     global_estimated_risk = 0
@@ -167,9 +167,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
 
     ##################################################################### Developing Constraints ############################################
     ##################################################################### 2.1 Threat Action Constraint ######################################
-    print "\n**********************************************The main constraints are here ******************************************************************\n"
+    # print "\n**********************************************The main constraints are here ******************************************************************\n"
     for asset_index in range(len(selected_security_controls)):
-        print "Selected Sec Controls %s" % (selected_security_controls[asset_index])
+        # print "Selected Sec Controls %s" % (selected_security_controls[asset_index])
         sec_index = 0
         for sec_control in selected_security_controls[asset_index]:
             # ######################### Test ##############
@@ -195,7 +195,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             sec_index += 1
 
     ############################################################# 2.2 Threat Action Success Constraint #####################################
-    print "**************************************************** Threat Action Success ***************************************************"
+    # print "**************************************************** Threat Action Success ***************************************************"
     for asset_index in range(len(threat_action_id_list_for_all_assets)):
         # print "\nFor the Asset Index %s: %s" % (asset_index,asset_enterprise_list[asset_index][0])
         for threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
@@ -211,9 +211,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 cyberARM.add(smt_Threat_Action_Success[asset_index][threat_action_index] == 1)
 
     ############################################################# 2.3 Threat Constraints ##################################################
-    print "\n******************************************* Printing the threat constraint ************************************************\n"
+    # print "\n******************************************* Printing the threat constraint ************************************************\n"
     for asset_index in range(len(threat_id_for_all_assets)):
-        print "\n Asset Index %s" % (asset_index)
+        # print "\n Asset Index %s" % (asset_index)
         threat_id_index = 0
         for threat_id in threat_id_for_all_assets[asset_index]:
             # threat_id_index = threat_id_to_position_roll[asset_index][threat_id]
@@ -272,11 +272,12 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             print "Total Asset Security Control Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
             # for sec_control_id in selected_security_controls[i]:
             #     print "Cost %s: %s" % (security_control_list[sec_control_id].sc_name,security_control_list[sec_control_id].investment_cost)
-
+    else:
+        print "There is no satisfiable model"
     ################################################################## Prepare the output ###################################################
     CDM_Global_id = []
     for asset_index in range(len(asset_enterprise_list)):
-        print "******** >>>>>>>>>>>>>>> Asset Index %s" % (asset_index)
+        # print "******** >>>>>>>>>>>>>>> Asset Index %s" % (asset_index)
         CDM_Global_id.append([])
         sec_control_index = 0
         for sec_control in selected_security_controls[asset_index]:

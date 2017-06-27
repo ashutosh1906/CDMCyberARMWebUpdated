@@ -38,3 +38,9 @@ class Asset_VERIS(models.Model):
     asset_name = models.CharField(max_length=200)
     class Meta:
         db_table = 'asset_veris'
+
+class threat_threat_action(models.Model):
+    threat = models.CharField(max_length=200)
+    threat_action = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'threat_threat_action'

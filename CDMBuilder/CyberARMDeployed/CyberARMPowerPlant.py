@@ -40,6 +40,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printNumberStatisticsThreatThreatAction(threat_threatAction_asset)
     # print "Asset Statistics %s" % (threat_threatAction_asset)
     # print "asset list %s" % (asset_name_list)
+    # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
 
     ################################ Threat Prioritization ####################################################################
     ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action,risk_threat,threat_threatAction_asset,asset_enterprise_list)
