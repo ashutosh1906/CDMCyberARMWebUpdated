@@ -12,6 +12,10 @@ from multiprocessing import Process,Queue
 from z3 import *
 import UtilityFunctions
 
+######################## Global ################################
+threat_threat_action_map = {}
+####################### End Global #############################
+
 def login(request):
     if request.method == 'GET':
         # print "*********************In the login function******************************"
@@ -297,10 +301,23 @@ def cyberARM_request_updated(request):
             if asset_given['data_source'] == 'VERIS':
                 veris_list.append([asset_given['asset_name'],[float(asset_given['confidentiality']),float(asset_given['integrity']),float(asset_given['availability'])]])
             else:
-                experience_list.append([asset_given['asset_name'], [float(asset_given['confidentiality']), float(asset_given['integrity']),float(asset_given['availability'])]])
+                threat_threat_action_asset_experience = {}
+                ####################################### Prepare the list of threat statistics from the experience ######################################
+                for threat_action in asset_given['threat_list']:
+                    if threat_action['threat_action_name_id'] not in threat_threat_action_asset_experience.keys():
+                        threat_threat_action_asset_experience[threat_action['threat_action_name_id']] = threat_action['frequency']
+
+                ####################################### End Preparation the list of threat statistics from the experience ######################################
+                experience_list.append([asset_given['asset_name'],
+                                        [float(asset_given['confidentiality']), float(asset_given['integrity']),
+                                         float(asset_given['availability'])],threat_threat_action_asset_experience])
         print veris_list
-        print experience_list
+        print "******************************* Given the asset experience list **********************"
+        for i in range(len(experience_list)):
+            print experience_list[i]
+
         asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]]]
+
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
         # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)

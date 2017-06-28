@@ -41,6 +41,7 @@ class Asset_VERIS(models.Model):
 
 class threat_threat_action(models.Model):
     threat = models.CharField(max_length=200)
-    threat_action = models.CharField(max_length=200)
+    threat_action = models.CharField(max_length=200,primary_key=True)
     class Meta:
         db_table = 'threat_threat_action'
+        unique_together=(('threat','threat_action'),)

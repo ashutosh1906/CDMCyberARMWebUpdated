@@ -14,7 +14,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     print "The Power Plant has started :: Affordable Risk --> %s Budget --> %s" % (affordable_risk,budget)
     asset_enterprise_list = asset_enterprise_list_input
     ###################################################################################### GLobal Variables ############################################################
-    threat_threatAction_asset = {}
+    threat_threatAction_asset = []
     asset_name_list = []
     prob_threat_action_threat = {}
     prob_threat_threat_action = {}
@@ -36,14 +36,16 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     ##################################################################################### End of Inputs #################################################################
 
     init_power_plant(asset_enterprise_list,enterprise_asset_list_given)
-    ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset,asset_name_list,threat_threat_action_possible_pair)
+    threat_threatAction_asset_veris = {}
+    ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset_veris,asset_name_list,threat_threat_action_possible_pair)
+    threat_threatAction_asset.append(threat_threatAction_asset_veris)
     # Utitilities.printNumberStatisticsThreatThreatAction(threat_threatAction_asset)
-    # print "Asset Statistics %s" % (threat_threatAction_asset)
+    print "Asset Statistics %s" % (threat_threatAction_asset[0])
     # print "asset list %s" % (asset_name_list)
     # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
 
     ################################ Threat Prioritization ####################################################################
-    ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action,risk_threat,threat_threatAction_asset,asset_enterprise_list)
+    ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action,risk_threat,threat_threatAction_asset[0],asset_enterprise_list)
     # print "Threat Statistics %s" % (prob_threat_action_threat)
 
     ######################################################### Check the output ##############################################################################
