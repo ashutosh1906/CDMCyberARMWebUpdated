@@ -45,6 +45,8 @@ def loginPost(request):
         return redirect('cyberARM Old')
     if action_name == 'CyberARM':
         return redirect('cyberARM')
+    if action_name == 'Classify CSC':
+        return redirect('csc_classification')
 
 def developQueryModel(all_cdm_row):
     # print "Number of rows %s" % (all_cdm_row.count())
@@ -272,7 +274,8 @@ def generate_sc_threat_action(request):
 ################################################################# Call CyberARM #######################################################
 def cyberARM_request_updated(request):
     if request.method == "GET":
-        # print "CyberARM Updated Generation"
+        print "CyberARM Updated Generation"
+        print "Threat Threat Action Map %s" % (threat_threat_action_map)
         threat_action_list = model.Threat_Action.objects.all()
         threat_action_list = UtilityFunctions.threat_action_list_as_dict(threat_action_list)
         print threat_action_list
@@ -304,8 +307,12 @@ def cyberARM_request_updated(request):
                 threat_threat_action_asset_experience = {}
                 ####################################### Prepare the list of threat statistics from the experience ######################################
                 for threat_action in asset_given['threat_list']:
-                    if threat_action['threat_action_name_id'] not in threat_threat_action_asset_experience.keys():
-                        threat_threat_action_asset_experience[threat_action['threat_action_name_id']] = threat_action['frequency']
+                    threat_action_name = threat_action['threat_action_name_id'].lower()
+                    threat_list = threat_threat_action_map[threat_action_name]
+                    for threat in threat_list:
+                        if threat not in threat_threat_action_asset_experience.keys():
+                            threat_threat_action_asset_experience[threat] = {}
+                        threat_threat_action_asset_experience[threat][threat_action_name] =  threat_action['frequency']
 
                 ####################################### End Preparation the list of threat statistics from the experience ######################################
                 experience_list.append([asset_given['asset_name'],

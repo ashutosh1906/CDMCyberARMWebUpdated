@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^cyberARM Old/',Login.cyberARM_request,name='cyberARM Old'),
     url(r'^cyberARM/',Login.cyberARM_request_updated,name='cyberARM'),
     url(r'^refreshDatabase/',DatabaseFunctions.insertMapThreatThreatAction,name='TTA'),
+    url(r'^csc_classification/',DatabaseFunctions.CSC_Classification,name='csc_classification'),
     url(r'',Login.login,name='login'),
 ]

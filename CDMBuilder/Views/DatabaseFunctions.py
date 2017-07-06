@@ -15,3 +15,6 @@ def insertMapThreatThreatAction(request):
             except:
                 print "Exception in %s : %s" % (threat)
     return HttpResponse("Successful request")
+
+def CSC_Classification(request):
+    return render(request,'insertCDMUpdated.html')
