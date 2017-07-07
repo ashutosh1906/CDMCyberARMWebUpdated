@@ -71,6 +71,27 @@ function ajaxInsertCDMRow(form_data,url) {
     console.log("URL "+url);
     form_data['csrfmiddlewaretoken'] = '{{ csrf_token }}';
     var sc_row = JSON.stringify(form_data);
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: 'application/json',
+        dataType: 'json',
+        data:sc_row,
+        "beforeSend": function(xhr, settings) {
+            console.log("Before Send");
+            $.ajaxSettings.beforeSend(xhr, settings);
+
+        },
+
+        success: function (data_received) {
+            loadDataGridUpdated(data_received);
+
+        },
+        error: function () {
+            alert("Error");
+        }
+    });
+
 }
 
 function getCookie(name) {
@@ -97,6 +118,43 @@ $.ajaxSetup({
         }
     }
 });
+
+function loadDataGridUpdated(dataLoad){
+            console.log(dataLoad);
+            var source =
+            {
+                localdata: dataLoad,
+                datatype: "array",
+                datafields: [{ name: 'sc_name'},
+                  { name: 'sc_version',type:'float'},
+                  { name: 'sc_func',},
+                  { name: 'en_level_name',},
+                  { name: 'kc_phase_name', },
+                    { name: 'explanation_row', },
+                ]};
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                source: dataAdapter,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                columns: [
+                  { text: 'Security Control', datafield: 'sc_name', width: 250,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Version', datafield:'sc_version', width:70,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Security Function', datafield: 'sc_func', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Enforcement Level', datafield: 'en_level_name', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Kill Chain Phase', datafield: 'kc_phase_name', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    { text: 'Explanation', datafield: 'explanation_row', width: 330, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                ]
+            });
+}
+
 
 function loadDataGrid(dataLoad){
             console.log("(...)(..)(..)(..)"+dataLoad);

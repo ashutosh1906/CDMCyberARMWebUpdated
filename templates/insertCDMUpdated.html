@@ -73,12 +73,14 @@
         var sc_func = JSON.parse("{{ sc_func | escapejs }}");
         var sc_name = JSON.parse("{{ sc_name | escapejs }}");
         var sc_version = JSON.parse("{{ sc_version | escapejs }}");
-        console.log(kc_phase);
-        console.log(en_level);
-        console.log(sc_func);
-        console.log(sc_name);
-        console.log(sc_version);
-        loadDataGrid([]);
+        var cdm_entries = JSON.parse("{{ cdm_entries | escapejs }}");
+{#        var cdm_entries = [];#}
+{#        console.log(kc_phase);#}
+{#        console.log(en_level);#}
+{#        console.log(sc_func);#}
+{#        console.log(sc_name);#}
+{#        console.log(sc_version);#}
+        loadDataGridUpdated(cdm_entries);
         $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
         $('#jqxgrid').jqxGrid({ pagesize: 50});
         $("#security_control_name").jqxDropDownList({ source:sc_name, width: '680px', height: '30px'});

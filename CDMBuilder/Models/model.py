@@ -66,3 +66,11 @@ class kill_chain_phase(models.Model):
     kc_phase = models.CharField(max_length=200)
     class Meta:
         db_table = 'kill_chain_phase'
+
+class cyber_defense_matrix_norm(models.Model):
+    sc_version = models.CharField(max_length=200)
+    sc_func_id = models.CharField(max_length=200)
+    en_level_id = models.CharField(max_length=200)
+    kc_phase_id = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'cyber_defense_matrix_norm'
