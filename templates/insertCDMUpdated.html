@@ -3,77 +3,52 @@
 {% block content %}
 
     <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
-    <form method="post" action="/insert/">
-{% csrf_token %}
         <div class="row">
                 <div class="col">
                     <label for="sc_name">Security Control Name</label>
                 </div>
-                <div class="col">
-                    <input type="text" class="form-control" name="sc_name" id="sc_name" placeholder="Security Control Name"/>
+                <div class="col" name="security_control_name" id="security_control_name">
+                    <div id='security_control_name'>
+                    </div>
                 </div>
         </div>
-         <div class="row">
+         <!--div class="row">
                 <div class="col">
                     <label for="sc_version">Security Control Version</label>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" name="sc_version" id="sc_version" placeholder="Security Control Version"/>
                 </div>
-        </div>
+        </div-->
         <div class="row">
                 <div class="col">
                     <label for="kill_chain_phase">Kill Chain Phase</label>
                 </div>
-                <div class="dropdown" name="kill_chain_phase" id="kill_chain_phase">
-                    <input type="text" name="kc_phase" id="kc_phase" class="drop-text" style="display: none"/>
-                    <button class="btn btn-primary dropdown-toggle" id="kc_phase_dropdown" type="button" data-toggle="dropdown">Kill Chain Phase
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                     {% for i in kc_phase %}
-
-                         <li><a href="#">{{ i }}</a></li>
-                     {% endfor %}
-{#                      <li><a href="#">Execute</a></li>#}
-                    </ul>
+                <div class="col" name="kill_chain_phase" id="kill_chain_phase">
+                    <div id="kill_chain_phase_list">
+                    </div>
                 </div>
-        </div>
+         </div>
          <div class="row">
                 <div class="col">
                     <label for="enforcement_level">Enforcement Level</label>
                 </div>
-                <div class="dropdown" name="enforcement_level" id="enforcement_level">
-                    <input type="text" name="ef_level" id="ef_level" class="drop-text" style="display: none"/>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Enforcement Level
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                     {% for i in enforcement_level %}
-
-                         <li><a href="#">{{ i }}</a></li>
-                     {% endfor %}
-{#                      <li><a href="#">Execute</a></li>#}
-                    </ul>
+                <div class="col" name="enforcement_level" id="enforcement_level">
+                    <div id="enforcement_level_list">
+                    </div>
                 </div>
         </div>
-    <div class="row">
+        <div class="row">
                 <div class="col">
                     <label for="security_function">Security Function</label>
                 </div>
-                <div class="dropdown" name="security_function" id="security_function">
-                    <input type="text" name="sc_fun" id="sc_fun" class="drop-text" style="display: none"/>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="btn_sf">Security Function
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                     {% for i in security_function %}
-
-                         <li><a href="#">{{ i }}</a></li>
-                     {% endfor %}
-{#                      <li><a href="#">Execute</a></li>#}
-                    </ul>
+                <div class="col" name="security_function" id="security_function">
+                    <div id='sc_func_list'>
+                    </div>
                 </div>
         </div>
 
-    <div style="text-align:center;padding-top:10px;"><button type="submit" class="btn btn-primary">Insert Security Control</button></div>
+    <div style="text-align:center;padding-top:10px;"><button class="btn btn-primary" id="insert_cdm_row">Insert Security Control</button></div>
     </form>
 
      <div style="padding-top: 10px;">
@@ -84,7 +59,7 @@
         <div class="row" style="text-align: center;padding-top: 10px;">
            <button type="submit" class="btn btn-primary">Generate Security Controls</button>
         </div>
-    </form>
+
     </div>
 {% endblock %}
 {% block scriptPageContent %}
@@ -93,18 +68,62 @@
     $(document).ready(function () {
 
 {#        var data = JSON.parse("{{ cdmList | escapejs}}");#}
+        var kc_phase = JSON.parse("{{ kc_phase | escapejs }}");
+        var en_level = JSON.parse("{{ en_level | escapejs }}")
+        var sc_func = JSON.parse("{{ sc_func | escapejs }}");
+        var sc_name = JSON.parse("{{ sc_name | escapejs }}");
+        var sc_version = JSON.parse("{{ sc_version | escapejs }}");
+        console.log(kc_phase);
+        console.log(en_level);
+        console.log(sc_func);
+        console.log(sc_name);
+        console.log(sc_version);
         loadDataGrid([]);
         $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
         $('#jqxgrid').jqxGrid({ pagesize: 50});
-{#        $('#jqxgrid').jqxGrid('sortby','id', 'asc');#}
-        $(".dropdown-menu li a").click(function(){
-            var selText = $(this).text();
-            //alert(selText);
-            $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
-            $(this).parents('.dropdown').find('.drop-text').val(selText);
-    {#        $(this).parents('.dropdown').find('.dropdown-toggle').click(selText);#}
-    {#        console.log($(this).parent('.dropdown').find('dropdown-toggle'));#}
+        $("#security_control_name").jqxDropDownList({ source:sc_name, width: '680px', height: '30px'});
+        $("#kill_chain_phase_list").jqxDropDownList({ source:kc_phase, width: '240px', height: '30px'});
+        $("#kill_chain_phase_list").jqxDropDownList({autoDropDownHeight: true});
+        $("#enforcement_level").jqxDropDownList({ source:en_level, width: '240px', height: '30px'});
+        $("#enforcement_level").jqxDropDownList({autoDropDownHeight: true});
+        $("#sc_func_list").jqxDropDownList({ source:sc_func, width: '240px', height: '30px'});
+        $("#sc_func_list").jqxDropDownList({autoDropDownHeight: true});
+
+        /********************************************* Button Characteristics *****************************************************/
+        $("#insert_cdm_row").click(function () {
+            var sc_name_value = $("#security_control_name").jqxDropDownList('val');
+            if (sc_name_value==""){
+                alert("Select Security Control First");
+                return;
+            }
+            var kc_phase = $("#kill_chain_phase_list").jqxDropDownList('val');
+            if (kc_phase==""){
+                alert("Select Kill Chain Phase");
+                return;
+            }
+{#            alert(kc_phase);#}
+            var en_level = $("#enforcement_level").jqxDropDownList('val');
+            if (en_level==""){
+                alert("Select Enforcement Level");
+                return;
+            }
+            var sc_func = $("#sc_func_list").jqxDropDownList('val');
+            if (sc_func==""){
+                alert("Select Security Function");
+                return;
+            }
+            form_data = {}
+            console.log(sc_name_value);
+            form_data['sc_version'] = sc_name_value.substring(sc_name_value.lastIndexOf("(")+1,sc_name_value.lastIndexOf(")"));
+            form_data['sc_func'] = sc_func;
+            form_data['kc_phase'] = kc_phase;
+            form_data['en_level'] = en_level;
+            ajaxInsertCDMRow(form_data,"/csc_classification/");
+
+
         });
+        /******************************************End Button Characteristics *****************************************************/
+
     });
 
 

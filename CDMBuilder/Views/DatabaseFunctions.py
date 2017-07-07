@@ -2,6 +2,9 @@ from CDMBuilder.CyberARMDeployed import ThreatThreatActionMapDatabase
 from django.http import HttpResponse
 from django.shortcuts import render
 from CDMBuilder.Models import model
+from CDMBuilder.Utilities import GlobalVariables
+import json
+
 def insertMapThreatThreatAction(request):
     print "Insert The Threat Threat Action Relationship"
     threat_threat_action_map = {}
@@ -17,4 +20,17 @@ def insertMapThreatThreatAction(request):
     return HttpResponse("Successful request")
 
 def CSC_Classification(request):
-    return render(request,'insertCDMUpdated.html')
+    send_data = {}
+    send_data['kc_phase'] = json.dumps(GlobalVariables.DATABASE_KILL_CHAIN_PHASE.keys())
+    send_data['en_level'] = json.dumps(GlobalVariables.DATABASE_ENFORCEMENT_LEVEL.keys())
+    send_data['sc_func'] = json.dumps(GlobalVariables.DATABASE_SECURITY_FUNCTION.keys())
+    security_control_list = model.security_control.objects.all()
+    sc_name_list = []
+    sc_version_list = []
+    for sc_obj in security_control_list:
+        sc_name_list.append('%s (%s)'%(sc_obj.sc_name,sc_obj.sc_version))
+        sc_version_list.append(sc_obj.sc_version)
+    send_data['sc_name'] = json.dumps(sc_name_list)
+    send_data['sc_version'] = json.dumps(sc_version_list)
+    print "Send Data %s" % (send_data)
+    return render(request,'insertCDMUpdated.html',send_data)

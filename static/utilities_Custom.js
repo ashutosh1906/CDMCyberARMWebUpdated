@@ -37,6 +37,7 @@ function ajaxCall(search_parameter,url) {
 function ajaxCallThreatAction(search_parameter,url) {
     // alert("Nice");
     console.log(search_parameter);
+    console.log("URL "+url);
     search_parameter['csrfmiddlewaretoken'] = '{{ csrf_token }}';
     var send_data = JSON.stringify(search_parameter);
     var rec_data;
@@ -63,6 +64,13 @@ function ajaxCallThreatAction(search_parameter,url) {
         }
     });
 
+}
+
+function ajaxInsertCDMRow(form_data,url) {
+    console.log(form_data);
+    console.log("URL "+url);
+    form_data['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+    var sc_row = JSON.stringify(form_data);
 }
 
 function getCookie(name) {

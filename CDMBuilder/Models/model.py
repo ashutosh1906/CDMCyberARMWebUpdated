@@ -45,3 +45,24 @@ class threat_threat_action(models.Model):
     class Meta:
         db_table = 'threat_threat_action'
         unique_together=(('threat','threat_action'),)
+
+class security_control(models.Model):
+    sc_name = models.CharField(max_length=200)
+    sc_version = models.CharField(max_length=100,primary_key=True)
+    class Meta:
+        db_table = 'security_control'
+
+class security_function(models.Model):
+    sc_function_name = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'security_function'
+
+class enforcement_level(models.Model):
+    en_level_name = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'enforcement_level'
+
+class kill_chain_phase(models.Model):
+    kc_phase = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'kill_chain_phase'
