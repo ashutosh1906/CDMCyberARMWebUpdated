@@ -49,6 +49,7 @@ class threat_threat_action(models.Model):
 class security_control(models.Model):
     sc_name = models.CharField(max_length=200)
     sc_version = models.CharField(max_length=100,primary_key=True)
+    sc_parent = models.FloatField()
     class Meta:
         db_table = 'security_control'
 
@@ -72,5 +73,6 @@ class cyber_defense_matrix_norm(models.Model):
     sc_func_id = models.CharField(max_length=200)
     en_level_id = models.CharField(max_length=200)
     kc_phase_id = models.CharField(max_length=200)
+    explanation = models.CharField(max_length=500)
     class Meta:
         db_table = 'cyber_defense_matrix_norm'

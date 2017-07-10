@@ -66,6 +66,14 @@ function ajaxCallThreatAction(search_parameter,url) {
 
 }
 
+function init_insert_cyber_defense_matrix_form(){
+    $("#security_control_name").jqxDropDownList('clearSelection');
+    $("#kill_chain_phase_list").jqxDropDownList('clearSelection');
+    $("#enforcement_level").jqxDropDownList('clearSelection');
+    $("#sc_func_list").jqxDropDownList('clearSelection');
+    $("#explanation").val("");
+}
+
 function ajaxInsertCDMRow(form_data,url) {
     console.log(form_data);
     console.log("URL "+url);
@@ -85,6 +93,7 @@ function ajaxInsertCDMRow(form_data,url) {
 
         success: function (data_received) {
             loadDataGridUpdated(data_received);
+            init_insert_cyber_defense_matrix_form();
 
         },
         error: function () {
@@ -145,7 +154,7 @@ function loadDataGridUpdated(dataLoad){
                 pageable:true,
                 sortable: true,
                 columns: [
-                  { text: 'Security Control', datafield: 'sc_name', width: 250,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Security Control', datafield: 'sc_name', width: 350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Version', datafield:'sc_version', width:70,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Security Function', datafield: 'sc_func', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Enforcement Level', datafield: 'en_level_name', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },

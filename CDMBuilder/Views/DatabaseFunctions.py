@@ -34,14 +34,15 @@ def objectToArrayOfDict():
     cdm_entries = dictfetchall(query_cursor)
     print "CDM Entries %s" % (cdm_entries)
     cdm_entries_grid_list = []
-    for cdm_row in cdm_entries:
+    for index in range(len(cdm_entries)-1,-1,-1):
+        cdm_row = cdm_entries[index]
         row = {}
         row['sc_version'] = cdm_row['sc_version']
         row['sc_name'] = cdm_row['sc_name']
         row['sc_func'] = GlobalVariables.DATABASE_ID_TO_SECURITY_FUNCTION[cdm_row['sc_func_id']]
         row['en_level_name'] = GlobalVariables.DATABASE_ID_TO_ENFORCEMENT_LEVEL[cdm_row['en_level_id']]
         row['kc_phase_name'] = GlobalVariables.DATABASE_ID_TO_KILL_CHAIN_PHASE[cdm_row['kc_phase_id']]
-        row['explanation_row'] = "Waiting for the insertion"
+        row['explanation_row'] = cdm_row['explanation']
         cdm_entries_grid_list.append(row)
     return cdm_entries_grid_list
 
@@ -51,7 +52,7 @@ def CSC_Classification(request):
         send_data['kc_phase'] = json.dumps(GlobalVariables.DATABASE_KILL_CHAIN_PHASE.keys())
         send_data['en_level'] = json.dumps(GlobalVariables.DATABASE_ENFORCEMENT_LEVEL.keys())
         send_data['sc_func'] = json.dumps(GlobalVariables.DATABASE_SECURITY_FUNCTION.keys())
-        security_control_list = model.security_control.objects.all()
+        security_control_list = model.security_control.objects.all().order_by('sc_parent')
         sc_name_list = []
         sc_version_list = []
         for sc_obj in security_control_list:
@@ -68,8 +69,9 @@ def CSC_Classification(request):
         en_level_id = GlobalVariables.DATABASE_ENFORCEMENT_LEVEL[json_loads['en_level']]
         sc_func_id = GlobalVariables.DATABASE_SECURITY_FUNCTION[json_loads['sc_func']]
         kc_phase_id = GlobalVariables.DATABASE_KILL_CHAIN_PHASE[json_loads['kc_phase']]
+        explanation = json_loads['explanation']
         cdm_row = model.cyber_defense_matrix_norm(sc_version=json_loads['sc_version'],en_level_id=en_level_id,
-                                                  kc_phase_id=kc_phase_id,sc_func_id=sc_func_id)
+                                                  kc_phase_id=kc_phase_id,sc_func_id=sc_func_id,explanation=explanation)
         cdm_row.save()
         return HttpResponse(
             json.dumps(objectToArrayOfDict()),

@@ -2,6 +2,11 @@
 {% block titlename %} CDM Insert {% endblock %}
 {% block content %}
 
+     <div id="dialog-message" title="Explanation" style="z-index:999999;">
+          <p id="explanation_box">
+            
+          </p>
+    </div>
     <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
         <div class="row">
                 <div class="col">
@@ -48,87 +53,117 @@
                 </div>
         </div>
 
+      <div class="row">
+            <div class="col">
+                <label for="sc_version">Explanation</label>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="explantion" id="explanation" placeholder="Please Enter Explanation"/>
+            </div>
+      </div>
+
     <div style="text-align:center;padding-top:10px;"><button class="btn btn-primary" id="insert_cdm_row">Insert Security Control</button></div>
-    </form>
+
 
      <div style="padding-top: 10px;">
             <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
      </div>
         <form method="post" action="/generateCDM/">
             {% csrf_token %}
-        <div class="row" style="text-align: center;padding-top: 10px;">
-           <button type="submit" class="btn btn-primary">Generate Security Controls</button>
-        </div>
+            <div class="row" style="text-align: center;padding-top: 10px;">
+               <button type="submit" class="btn btn-primary">Generate Security Controls</button>
+            </div>
+        </form>
 
     </div>
+
+
 {% endblock %}
 {% block scriptPageContent %}
+    {% load static %}
+    <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
     <script type="text/javascript" src="../static/utilities_Custom.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
-
-{#        var data = JSON.parse("{{ cdmList | escapejs}}");#}
+        {#        var data = JSON.parse("{{ cdmList | escapejs}}");#}
         var kc_phase = JSON.parse("{{ kc_phase | escapejs }}");
         var en_level = JSON.parse("{{ en_level | escapejs }}")
         var sc_func = JSON.parse("{{ sc_func | escapejs }}");
         var sc_name = JSON.parse("{{ sc_name | escapejs }}");
         var sc_version = JSON.parse("{{ sc_version | escapejs }}");
         var cdm_entries = JSON.parse("{{ cdm_entries | escapejs }}");
-{#        var cdm_entries = [];#}
-{#        console.log(kc_phase);#}
-{#        console.log(en_level);#}
-{#        console.log(sc_func);#}
-{#        console.log(sc_name);#}
-{#        console.log(sc_version);#}
+        {#        var cdm_entries = [];#}
+        {#        console.log(kc_phase);#}
+        {#        console.log(en_level);#}
+        {#        console.log(sc_func);#}
+        {#        console.log(sc_name);#}
+        {#        console.log(sc_version);#}
         loadDataGridUpdated(cdm_entries);
-        $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
-        $('#jqxgrid').jqxGrid({ pagesize: 50});
-        $("#security_control_name").jqxDropDownList({ source:sc_name, width: '680px', height: '30px'});
-        $("#kill_chain_phase_list").jqxDropDownList({ source:kc_phase, width: '240px', height: '30px'});
+        $('#jqxgrid').jqxGrid({pagesizeoptions: ['10', '20', '30', '40', '50', '100', '200']});
+        $('#jqxgrid').jqxGrid({pagesize: 50});
+        $("#security_control_name").jqxDropDownList({source: sc_name, width: '680px', height: '30px'});
+        $("#kill_chain_phase_list").jqxDropDownList({source: kc_phase, width: '240px', height: '30px'});
         $("#kill_chain_phase_list").jqxDropDownList({autoDropDownHeight: true});
-        $("#enforcement_level").jqxDropDownList({ source:en_level, width: '240px', height: '30px'});
+        $("#enforcement_level").jqxDropDownList({source: en_level, width: '240px', height: '30px'});
         $("#enforcement_level").jqxDropDownList({autoDropDownHeight: true});
-        $("#sc_func_list").jqxDropDownList({ source:sc_func, width: '240px', height: '30px'});
+        $("#sc_func_list").jqxDropDownList({source: sc_func, width: '240px', height: '30px'});
         $("#sc_func_list").jqxDropDownList({autoDropDownHeight: true});
 
         /********************************************* Button Characteristics *****************************************************/
         $("#insert_cdm_row").click(function () {
             var sc_name_value = $("#security_control_name").jqxDropDownList('val');
-            if (sc_name_value==""){
+            if (sc_name_value == "") {
                 alert("Select Security Control First");
                 return;
             }
             var kc_phase = $("#kill_chain_phase_list").jqxDropDownList('val');
-            if (kc_phase==""){
+            if (kc_phase == "") {
                 alert("Select Kill Chain Phase");
                 return;
             }
-{#            alert(kc_phase);#}
+            {#            alert(kc_phase);#}
             var en_level = $("#enforcement_level").jqxDropDownList('val');
-            if (en_level==""){
+            if (en_level == "") {
                 alert("Select Enforcement Level");
                 return;
             }
             var sc_func = $("#sc_func_list").jqxDropDownList('val');
-            if (sc_func==""){
+            if (sc_func == "") {
                 alert("Select Security Function");
                 return;
             }
             form_data = {}
             console.log(sc_name_value);
-            form_data['sc_version'] = sc_name_value.substring(sc_name_value.lastIndexOf("(")+1,sc_name_value.lastIndexOf(")"));
+            form_data['sc_version'] = sc_name_value.substring(sc_name_value.lastIndexOf("(") + 1, sc_name_value.lastIndexOf(")"));
             form_data['sc_func'] = sc_func;
             form_data['kc_phase'] = kc_phase;
             form_data['en_level'] = en_level;
-            ajaxInsertCDMRow(form_data,"/csc_classification/");
+            form_data['explanation'] = $("#explanation").val();
+            ajaxInsertCDMRow(form_data, "/csc_classification/");
 
 
         });
         /******************************************End Button Characteristics *****************************************************/
 
+        /**************************************** Show the explanation **********************************************************/
+        $("#jqxgrid").on("celldoubleclick", function (event) {
+            var dataRow = $('#jqxgrid').jqxGrid('getrowdata',event.args.rowindex);
+            console.log(dataRow['explanation_row']);
+            $("#explanation_box").text(dataRow['explanation_row']);
+            $("#dialog-message").dialog({
+                modal: true,
+                position: {my: "center top", at: "center top"},
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+        /******************************************* End of showing of the explanation *****************************************/
+
     });
-
-
 
     </script>
 {% endblock %}
