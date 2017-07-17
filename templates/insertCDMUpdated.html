@@ -6,8 +6,77 @@
           <p id="explanation_box">
             
           </p>
+          <!--button id="edit_button_cdm_row">Edit</button-->
     </div>
-    <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
+    <div id="edit_box" title="Edit Security Control Mapping" style="display: none;padding-left:30px;">
+          <div class="row">
+                <div class="col">
+                    <label for="sc_name">Security Control Name</label>
+                </div>
+                <div class="col">
+                        <input type="text" class="form-control" name="security_control_name_edit" id="security_control_name_edit" readonly style="width:400px; "/>
+                </div>
+        </div>
+         <!--div class="row">
+                <div class="col">
+                    <label for="sc_version">Security Control Version</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="sc_version" id="sc_version" placeholder="Security Control Version"/>
+                </div>
+        </div-->
+        <div class="row">
+                <div class="col">
+                    <label for="kill_chain_phase">Kill Chain Phase</label>
+                </div>
+                <div class="col" name="kill_chain_phase_edit" id="kill_chain_phase_edit">
+                    <div id="kill_chain_phase_list_edit">
+                    </div>
+                </div>
+         </div>
+         <div class="row">
+                <div class="col">
+                    <label for="enforcement_level">Enforcement Level</label>
+                </div>
+                <div class="col" name="enforcement_level_edit" id="enforcement_level_edit">
+                    <div id="enforcement_level_list_edit">
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col">
+                    <label for="security_function">Security Function</label>
+                </div>
+                <div class="col" name="security_function_edit" id="security_function_edit">
+                    <div id='security_function_list_edit'>
+                    </div>
+                </div>
+        </div>
+
+      <div class="row">
+            <div class="col">
+                <label for="sc_version">Old Explanation</label>
+            </div>
+            <div class="col">
+                <p id="explanation_edit_old" style="color:midnightblue;">
+                </p>
+            </div>
+      </div>
+
+     <div class="row">
+            <div class="col">
+                <a style="text-decoration: underline;color: red;" id="exp_error">Please Enter the Explanation Before Editing</a>
+            </div>
+            <div class="col">
+                <label for="sc_version">Explanation</label>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="explantion_edit" id="explanation_edit" placeholder="Please Enter Explanation"/>
+            </div>
+      </div>
+
+    </div>
+    <div class="container-fluid col-md-10 col-md-offset-1" style="">
         <div class="row">
                 <div class="col">
                     <label for="sc_name">Security Control Name</label>
@@ -110,6 +179,15 @@
         $("#sc_func_list").jqxDropDownList({source: sc_func, width: '240px', height: '30px'});
         $("#sc_func_list").jqxDropDownList({autoDropDownHeight: true});
 
+        /************************************ Edit Button Box **********************************************/
+        $("#kill_chain_phase_list_edit").jqxDropDownList({source: kc_phase, width: '240px', height: '30px'});
+        $("#kill_chain_phase_list_edit").jqxDropDownList({autoDropDownHeight: true});
+        $("#enforcement_level_list_edit").jqxDropDownList({source: en_level, width: '240px', height: '30px'});
+        $("#enforcement_level_list_edit").jqxDropDownList({autoDropDownHeight: true});
+        $("#security_function_list_edit").jqxDropDownList({source: sc_func, width: '240px', height: '30px'});
+        $("#security_function_list_edit").jqxDropDownList({autoDropDownHeight: true});
+        /************************************ End of the edit button box ***********************************/
+
         /********************************************* Button Characteristics *****************************************************/
         $("#insert_cdm_row").click(function () {
             var sc_name_value = $("#security_control_name").jqxDropDownList('val');
@@ -157,11 +235,52 @@
                 buttons: {
                     Ok: function () {
                         $(this).dialog("close");
+                    },
+                    Edit: function () {
+                         security_control_version = dataRow["sc_version"];
+                        $("#security_control_name_edit").val(dataRow["sc_name"]+" ("+security_control_version+")");
+                        $("#kill_chain_phase_list_edit").jqxDropDownList('selectItem',dataRow["kc_phase_name"]);
+                        $("#security_function_list_edit").jqxDropDownList('selectItem',dataRow["sc_func"]);
+                        $("#enforcement_level_list_edit").jqxDropDownList('selectItem',dataRow["en_level_name"]);
+                        $("#explanation_edit_old").text(dataRow["explanation_row"]);
+                        $("#explanation_edit").val("");
+                        $("#edit_box").dialog({
+                            modal: true,
+                            width: 800,
+                            position: {my: "center top", at: "center top"},
+                            buttons: {
+                                Submit: function () {
+                                     var new_exp = $("#explanation_edit").val()
+                                     if(new_exp==""){
+                                          $("#exp_error").show();
+                                     }
+                                     var dataEdit = {};
+{#                                    $(this).dialog("close");#}
+                                    dataEdit['sc_version'] = security_control_version;
+                                    dataEdit['sc_func'] = $("#security_function_list_edit").jqxDropDownList('val');
+                                    dataEdit['kc_phase'] = $("#kill_chain_phase_list_edit").jqxDropDownList('val');
+                                    dataEdit['en_level'] = $("#enforcement_level_list_edit").jqxDropDownList('val');
+                                    dataEdit['explanation'] = $("#explanation_edit").val();
+                                    console.log(dataEdit);
+                                    ajaxInsertCDMRow(dataEdit,"/edit_csc_classification/");
+                                    $(this).dialog("close");
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                         });
+                        $("#exp_error").hide();
+                        $(this).dialog("close");
                     }
                 }
             });
         });
         /******************************************* End of showing of the explanation *****************************************/
+
+        /******************************************** Edit the explanation box ******************************************/
+
+        /******************************************** End of edit of the explanation box ********************************/
 
     });
 

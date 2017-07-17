@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^cyberARM/',Login.cyberARM_request_updated,name='cyberARM'),
     url(r'^refreshDatabase/',DatabaseFunctions.insertMapThreatThreatAction,name='TTA'),
     url(r'^csc_classification/',DatabaseFunctions.CSC_Classification,name='csc_classification'),
+    url(r'^edit_csc_classification/',DatabaseFunctions.edit_CSC_Classification,name='edit_csc_classification'),
     url(r'',Login.login,name='login'),
 ]

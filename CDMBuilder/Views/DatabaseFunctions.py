@@ -77,3 +77,21 @@ def CSC_Classification(request):
             json.dumps(objectToArrayOfDict()),
             content_type="application/json"
         )
+
+def edit_CSC_Classification(request):
+    json_loads = json.loads(request.body.decode("utf-8"))
+    print "Got the Edit request %s" % (json_loads)
+    en_level_id = GlobalVariables.DATABASE_ENFORCEMENT_LEVEL[json_loads['en_level']]
+    sc_func_id = GlobalVariables.DATABASE_SECURITY_FUNCTION[json_loads['sc_func']]
+    kc_phase_id = GlobalVariables.DATABASE_KILL_CHAIN_PHASE[json_loads['kc_phase']]
+    explanation = json_loads['explanation']
+    csc_row = model.cyber_defense_matrix_norm.objects.get(sc_version=json_loads['sc_version'])
+    csc_row.sc_func_id = sc_func_id
+    csc_row.en_level_id = en_level_id
+    csc_row.kc_phase_id = kc_phase_id
+    csc_row.explanation = explanation
+    csc_row.save()
+    return HttpResponse(
+        json.dumps(objectToArrayOfDict()),
+        content_type="application/json"
+    )
