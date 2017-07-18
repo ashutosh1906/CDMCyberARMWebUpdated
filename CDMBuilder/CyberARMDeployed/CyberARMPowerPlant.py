@@ -2,6 +2,9 @@ import ThreatStatisticsSingle,ThreatPrioritization,Utitilities,ProjectConfigFile
 import ThreatActionToSecurityControl,CyberARMEngine
 
 # write_output_file = open("CyberARMOutput",'w')
+threat_threatAction_asset_veris = {}
+asset_name_list = []
+threat_threat_action_possible_pair = {}
 
 def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
     for asset in asset_enterprise_list:
@@ -15,14 +18,12 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     asset_enterprise_list = asset_enterprise_list_input
     ###################################################################################### GLobal Variables ############################################################
     threat_threatAction_asset = []
-    asset_name_list = []
     prob_threat_action_threat = {}
     prob_threat_threat_action = {}
     prob_threat_threat_action_alternative = {}
     prob_threat = {}
     risk_threat = []
     risk_threat_action = []
-    threat_threat_action_possible_pair = {}
     security_control_list = []
     security_control_version_to_id = {}
     threat_action_list = []
@@ -36,8 +37,10 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     ##################################################################################### End of Inputs #################################################################
 
     init_power_plant(asset_enterprise_list,enterprise_asset_list_given)
-    threat_threatAction_asset_veris = {}
-    ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset_veris,asset_name_list,threat_threat_action_possible_pair)
+    # ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset_veris,asset_name_list,threat_threat_action_possible_pair)
+    print "Threat Threat Action Asset Veris %s" % (threat_threatAction_asset_veris)
+    print "Asset List %s" % (asset_name_list)
+    print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
     threat_threatAction_asset.append(threat_threatAction_asset_veris)
     # Utitilities.printNumberStatisticsThreatThreatAction(threat_threatAction_asset)
     print "Asset Statistics %s" % (threat_threatAction_asset[0])

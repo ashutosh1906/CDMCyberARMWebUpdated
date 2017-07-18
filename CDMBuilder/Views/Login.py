@@ -323,7 +323,7 @@ def cyberARM_request_updated(request):
         for i in range(len(experience_list)):
             print experience_list[i]
 
-        asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]]]
+        asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
 
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)

@@ -1,21 +1,6 @@
-{% extends "base.html" %}
+{% extends "cdmDisplay.html" %}
 {% block titlename %} Threat Action {% endblock %}
-{% block menuButton %}
-    <form method="post" action="/home/">
-    {% csrf_token %}
-        <div class="row" style="text-align: center;padding: 5px;background-color:floralwhite">
-            <button type="button" class="btn btn-primary actionButton" id="insert">Insert</button>
-            <button type="button" class="btn btn-primary actionButton" id="update">Update</button>
-            <button type="button" class="btn btn-primary actionButton" id="delete">Delete</button>
-            <button type="button" class="btn btn-primary actionButton" id="display">Display</button>
-            <button type="button" class="btn btn-primary actionButton" id="insertThreatAction">Threat Action</button>
-            <button type="button" class="btn btn-primary actionButton" id="cyberARM">cyberARM</button>
-            <button type="submit" class="btn btn-primary" id="action" style="display: none;">Action</button>
-            <input type="text" name="actionName" id="actionName" style="display:none;">
-         </div>
-    </form>
 
-{% endblock %}
 {% block scriptBlock %}
         <script type="text/javascript" src="../static/utilities_Custom.js"></script>
         <script type="text/javascript">
