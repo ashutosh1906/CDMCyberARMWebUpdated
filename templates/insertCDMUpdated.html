@@ -162,6 +162,7 @@
         var sc_name = JSON.parse("{{ sc_name | escapejs }}");
         var sc_version = JSON.parse("{{ sc_version | escapejs }}");
         var cdm_entries = JSON.parse("{{ cdm_entries | escapejs }}");
+{#        console.log(cdm_entries);#}
         {#        var cdm_entries = [];#}
         {#        console.log(kc_phase);#}
         {#        console.log(en_level);#}
@@ -227,7 +228,7 @@
         /**************************************** Show the explanation **********************************************************/
         $("#jqxgrid").on("celldoubleclick", function (event) {
             var dataRow = $('#jqxgrid').jqxGrid('getrowdata',event.args.rowindex);
-            console.log(dataRow['explanation_row']);
+            console.log(dataRow);
             $("#explanation_box").text(dataRow['explanation_row']);
             $("#dialog-message").dialog({
                 modal: true,
@@ -237,6 +238,7 @@
                         $(this).dialog("close");
                     },
                     Edit: function () {
+                        prim_key = dataRow["id"];
                          security_control_version = dataRow["sc_version"];
                         $("#security_control_name_edit").val(dataRow["sc_name"]+" ("+security_control_version+")");
                         $("#kill_chain_phase_list_edit").jqxDropDownList('selectItem',dataRow["kc_phase_name"]);
@@ -256,6 +258,7 @@
                                      }
                                      var dataEdit = {};
 {#                                    $(this).dialog("close");#}
+                                    dataEdit['id'] = prim_key;
                                     dataEdit['sc_version'] = security_control_version;
                                     dataEdit['sc_func'] = $("#security_function_list_edit").jqxDropDownList('val');
                                     dataEdit['kc_phase'] = $("#kill_chain_phase_list_edit").jqxDropDownList('val');

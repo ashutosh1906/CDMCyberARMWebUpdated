@@ -140,6 +140,7 @@ function loadDataGridUpdated(dataLoad){
                   { name: 'en_level_name',},
                   { name: 'kc_phase_name', },
                     { name: 'explanation_row', },
+                    {name:'id'},
                 ]};
 
             var dataAdapter = new $.jqx.dataAdapter(source, {
@@ -154,6 +155,7 @@ function loadDataGridUpdated(dataLoad){
                 pageable:true,
                 sortable: true,
                 columns: [
+                  { text: 'Id', datafield: 'id', width:50,renderer:columnrenderer,cellsrenderer:cellsrenderer,hidden:true},
                   { text: 'Security Control', datafield: 'sc_name', width: 350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Version', datafield:'sc_version', width:70,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Security Function', datafield: 'sc_func', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },

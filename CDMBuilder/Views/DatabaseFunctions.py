@@ -37,6 +37,7 @@ def objectToArrayOfDict():
     for index in range(len(cdm_entries)-1,-1,-1):
         cdm_row = cdm_entries[index]
         row = {}
+        row['id'] = cdm_row['id']
         row['sc_version'] = cdm_row['sc_version']
         row['sc_name'] = cdm_row['sc_name']
         row['sc_func'] = GlobalVariables.DATABASE_ID_TO_SECURITY_FUNCTION[cdm_row['sc_func_id']]
@@ -85,7 +86,7 @@ def edit_CSC_Classification(request):
     sc_func_id = GlobalVariables.DATABASE_SECURITY_FUNCTION[json_loads['sc_func']]
     kc_phase_id = GlobalVariables.DATABASE_KILL_CHAIN_PHASE[json_loads['kc_phase']]
     explanation = json_loads['explanation']
-    csc_row = model.cyber_defense_matrix_norm.objects.get(sc_version=json_loads['sc_version'])
+    csc_row = model.cyber_defense_matrix_norm.objects.get(id=json_loads['id'])
     csc_row.sc_func_id = sc_func_id
     csc_row.en_level_id = en_level_id
     csc_row.kc_phase_id = kc_phase_id
