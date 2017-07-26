@@ -58,9 +58,6 @@ def calculate_threatAction_threat_prob_distribution(prob_threat,prob_threat_acti
         sum_threat_for_asset = 0
         ###################################################### Collect all threat threat action in probability distribution ############################################
         for threat in threat_threatAction_asset[asset_name].keys():
-            if len(threat_threatAction_asset[asset_name][threat].keys()) == 1:
-                if ProjectConfigFile.THREAT_ACTION_UNKNOWN_TAG in threat_threatAction_asset[asset_name][threat].keys():
-                    continue
             total_threat = 0
             prob_threat_action_threat[asset_name][threat] = {}
             for threat_action in threat_threatAction_asset[asset_name][threat].keys():
@@ -89,9 +86,6 @@ def calculate_threat_threatAction_prob_distribution(prob_threat_threat_action,th
         if asset_name not in prob_threat_threat_action.keys():
             prob_threat_threat_action[asset_name] = {}
         for threat in threat_threatAction_asset[asset_name].keys():
-            if len(threat_threatAction_asset[asset_name][threat].keys()) == 1:
-                if ProjectConfigFile.THREAT_ACTION_UNKNOWN_TAG in threat_threatAction_asset[asset_name][threat].keys():
-                    continue
             for threat_action in threat_threatAction_asset[asset_name][threat].keys():
                 if threat_action not in prob_threat_threat_action[asset_name]:
                     prob_threat_threat_action[asset_name][threat_action] = {}
@@ -110,6 +104,6 @@ def calculate_threat_threatAction_prob_distribution(prob_threat_threat_action,th
 
 def threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action,risk_threat,threat_threatAction_asset,asset_enterprise_list):
     # print "Asset Enterprise List %s" % (asset_enterprise_list)
-    # calculate_threatAction_threat_prob_distribution(prob_threat,prob_threat_action_threat,threat_threatAction_asset)
-    # calculate_threat_threatAction_prob_distribution(prob_threat_threat_action,threat_threatAction_asset)
+    calculate_threatAction_threat_prob_distribution(prob_threat,prob_threat_action_threat,threat_threatAction_asset)
+    calculate_threat_threatAction_prob_distribution(prob_threat_threat_action,threat_threatAction_asset)
     calculateRisk(prob_threat,prob_threat_action_threat,asset_enterprise_list,risk_threat_action,risk_threat)

@@ -189,3 +189,13 @@ def printSelectedSecurityControls(security_control_list,selected_security_contro
             print "Security Control ID : %s ---> Cost : %s" % (sec_con,security_control_list[sec_con].investment_cost)
         print ""
 
+def printAssetList(asset_eneterprise_list):
+    for i in range(len(asset_eneterprise_list)):
+        if i == ProjectConfigFile.VERIS_LIST:
+            print "*************************** VERIS LIST ***************************"
+        if i == ProjectConfigFile.EXPERIENCE_LIST:
+            print "*************************** Experience LIST ***********************"
+        for asset in asset_eneterprise_list[i]:
+            print asset
+
+

@@ -12,9 +12,13 @@ from multiprocessing import Process,Queue
 from z3 import *
 import UtilityFunctions
 
+
 ######################## Global ################################
 threat_threat_action_map = {}
 ####################### End Global #############################
+
+from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST
+
 
 def login(request):
     if request.method == 'GET':
@@ -39,13 +43,13 @@ def loginPost(request):
         return redirect('insert')
     if action_name=='Display':
         return redirect('display')
-    if action_name == 'Threat Action':
+    if action_name == 'CSC-Threat Mapping':
         return redirect('threatAction')
     if action_name == 'cyberARM Old':
         return redirect('cyberARM Old')
     if action_name == 'CyberARM':
         return redirect('cyberARM')
-    if action_name == 'Classify CSC':
+    if action_name == 'CSC Mapping':
         return redirect('csc_classification')
 
 def developQueryModel(all_cdm_row):
@@ -323,7 +327,19 @@ def cyberARM_request_updated(request):
         for i in range(len(experience_list)):
             print experience_list[i]
 
-        asset_enterprise_list_input = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
+        ############################################### Just for Testing ###############################################
+        experience_list = []
+        experience_list.append([u'laptop', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
+        experience_list.append([u'files', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
+        ############################################### End of Testing #################################################
+
+        # veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
+        asset_enterprise_list_input = [[] for i in range(2)]
+        asset_enterprise_list_input[VERIS_LIST] = veris_list
+        asset_enterprise_list_input[EXPERIENCE_LIST] = experience_list
+
+        print " ***************************** All the CyberARM Asset ************************************"
+        print asset_enterprise_list_input
 
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)

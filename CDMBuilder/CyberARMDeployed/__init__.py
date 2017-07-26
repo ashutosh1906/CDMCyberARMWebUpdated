@@ -1,7 +1,8 @@
 from CDMBuilder.Views.Login import threat_threat_action_map
 from CDMBuilder.Models import model
-from CyberARMPowerPlant import threat_threat_action_possible_pair,asset_name_list,threat_threatAction_asset_veris
+from CyberARMPowerPlant import threat_threat_action_possible_pair,asset_name_list,threat_threatAction_asset_veris,prob_threat_action_threat,prob_threat,prob_threat_threat_action
 import ThreatStatisticsSingle
+import ThreatPrioritization
 
 def draw_threat_threat_action_map():
     print "Init Threat Threat Action Map"
@@ -15,6 +16,9 @@ def draw_threat_threat_action_map():
 def read_threat_reports():
     ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset_veris, asset_name_list,
                                                       threat_threat_action_possible_pair)
+    ThreatPrioritization.calculate_threatAction_threat_prob_distribution(prob_threat, prob_threat_action_threat, threat_threatAction_asset_veris)
+    ThreatPrioritization.calculate_threat_threatAction_prob_distribution(prob_threat_threat_action, threat_threatAction_asset_veris)
+
 
 draw_threat_threat_action_map()
 print "Threat Threat Action Map %s" % (threat_threat_action_map)
