@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a164e12-9212-4c75-9776-58561a96aa29" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/Utitilities.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/Utitilities.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" afterPath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/CyberARMUpdated.html" afterPath="$PROJECT_DIR$/templates/CyberARMUpdated.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cdmDisplay.html" afterPath="$PROJECT_DIR$/templates/cdmDisplay.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" afterPath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/CyberARMDeployed.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../CyberARMDeployedTest/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CyberARMDeployedTest/CDMOptimizationTest.py" afterPath="$PROJECT_DIR$/../CyberARMDeployedTest/CDMOptimizationTest.py" />
@@ -32,7 +26,7 @@
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$build_transition_matrix.coverage" NAME="build_transition_matrix Coverage Results" MODIFIED="1496874021302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../POMDP" />
     <SUITE FILE_PATH="coverage/CDMBuilder$hailAtaxi.coverage" NAME="hailAtaxi Coverage Results" MODIFIED="1490919624130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop" />
     <SUITE FILE_PATH="coverage/CDMBuilder$Test__CDMBuilder.coverage" NAME="Test: CDMBuilder Coverage Results" MODIFIED="1485817047562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/CDMCyberARMWeb$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1501042830210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CDMCyberARMWeb$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1501546285145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CDMBuilder$CyberARMEngine.coverage" NAME="CyberARMEngine Coverage Results" MODIFIED="1494878397701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects_prev/CyberARMFinalCCAA" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$Machine.coverage" NAME="Machine Coverage Results" MODIFIED="1496359422431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Google Drive/Meeting_6_1_2017" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$MysqlDatabase.coverage" NAME="MysqlDatabase Coverage Results" MODIFIED="1499472884270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../CustomUtilities" />
@@ -54,11 +48,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CyberARMPowerPlant.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CyberARMPowerPlant.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="58" column="4" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+            <state relative-caret-position="265">
+              <caret line="50" column="47" lean-forward="true" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -67,18 +61,18 @@
       <file leaf-file-name="ThreatPrioritization.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="93" column="28" lean-forward="false" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
+            <state relative-caret-position="17">
+              <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ThreatPrioritizationExperience.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ThreatPrioritizationExperience.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+            <state relative-caret-position="347">
+              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -95,16 +89,16 @@
                 <element signature="e#9813#11421#0" expanded="false" />
                 <element signature="e#11454#12346#0" expanded="false" />
                 <element signature="e#12392#13403#0" expanded="false" />
-                <element signature="e#18252#18799#0" expanded="false" />
-                <element signature="e#18841#21726#0" expanded="false" />
-                <element signature="e#21760#21806#0" expanded="false" />
-                <marker date="1501041963379" expanded="true" signature="3660:3793" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1501041963379" expanded="true" signature="4068:4339" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1501041963379" expanded="true" signature="5875:6008" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1501041963379" expanded="true" signature="6856:6995" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1501041963379" expanded="true" signature="9900:10033" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1501041963379" expanded="true" signature="11548:11683" ph="SELECT * FRO... cyber_defense_matrix" />
-                <marker date="1501041963379" expanded="true" signature="12510:12670" ph="SELECT * fro... sc_to_enforcement_level" />
+                <element signature="e#18250#18797#0" expanded="false" />
+                <element signature="e#18839#21724#0" expanded="false" />
+                <element signature="e#21758#21804#0" expanded="false" />
+                <marker date="1501544568278" expanded="true" signature="3660:3793" ph="SELECT * FRO... sc_to_enforcement_level" />
+                <marker date="1501544568278" expanded="true" signature="4068:4339" ph="SELECT * FRO... sc_to_enforcement_level" />
+                <marker date="1501544568278" expanded="true" signature="5875:6008" ph="SELECT * FRO... sc_to_enforcement_level" />
+                <marker date="1501544568278" expanded="true" signature="6856:6995" ph="SELECT * FRO... sc_to_enforcement_level" />
+                <marker date="1501544568278" expanded="true" signature="9900:10033" ph="SELECT * FRO... sc_to_enforcement_level" />
+                <marker date="1501544568278" expanded="true" signature="11548:11683" ph="SELECT * FRO... cyber_defense_matrix" />
+                <marker date="1501544568278" expanded="true" signature="12510:12670" ph="SELECT * fro... sc_to_enforcement_level" />
               </folding>
             </state>
           </provider>
@@ -144,7 +138,7 @@
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="123">
-              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+              <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
@@ -227,9 +221,10 @@
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/Utitilities.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py" />
-        <option value="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py" />
+        <option value="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py" />
+        <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py" />
       </list>
     </option>
   </component>
@@ -852,6 +847,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20497803" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -859,7 +855,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58044165" sideWeight="0.6734993" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31388012" sideWeight="0.6734993" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.4969743" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1135,14 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatStatisticsSingle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-719">
-          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../CustomUtilities/MysqlDatabase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -1225,18 +1213,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
@@ -1251,14 +1231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="54" lean-forward="false" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CDMBuilder/Views/Login.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1269,32 +1241,56 @@
             <element signature="e#9813#11421#0" expanded="false" />
             <element signature="e#11454#12346#0" expanded="false" />
             <element signature="e#12392#13403#0" expanded="false" />
-            <element signature="e#18252#18799#0" expanded="false" />
-            <element signature="e#18841#21726#0" expanded="false" />
-            <element signature="e#21760#21806#0" expanded="false" />
-            <marker date="1501041963379" expanded="true" signature="3660:3793" ph="SELECT * FRO... sc_to_enforcement_level" />
-            <marker date="1501041963379" expanded="true" signature="4068:4339" ph="SELECT * FRO... sc_to_enforcement_level" />
-            <marker date="1501041963379" expanded="true" signature="5875:6008" ph="SELECT * FRO... sc_to_enforcement_level" />
-            <marker date="1501041963379" expanded="true" signature="6856:6995" ph="SELECT * FRO... sc_to_enforcement_level" />
-            <marker date="1501041963379" expanded="true" signature="9900:10033" ph="SELECT * FRO... sc_to_enforcement_level" />
-            <marker date="1501041963379" expanded="true" signature="11548:11683" ph="SELECT * FRO... cyber_defense_matrix" />
-            <marker date="1501041963379" expanded="true" signature="12510:12670" ph="SELECT * fro... sc_to_enforcement_level" />
+            <element signature="e#18250#18797#0" expanded="false" />
+            <element signature="e#18839#21724#0" expanded="false" />
+            <element signature="e#21758#21804#0" expanded="false" />
+            <marker date="1501544568278" expanded="true" signature="3660:3793" ph="SELECT * FRO... sc_to_enforcement_level" />
+            <marker date="1501544568278" expanded="true" signature="4068:4339" ph="SELECT * FRO... sc_to_enforcement_level" />
+            <marker date="1501544568278" expanded="true" signature="5875:6008" ph="SELECT * FRO... sc_to_enforcement_level" />
+            <marker date="1501544568278" expanded="true" signature="6856:6995" ph="SELECT * FRO... sc_to_enforcement_level" />
+            <marker date="1501544568278" expanded="true" signature="9900:10033" ph="SELECT * FRO... sc_to_enforcement_level" />
+            <marker date="1501544568278" expanded="true" signature="11548:11683" ph="SELECT * FRO... cyber_defense_matrix" />
+            <marker date="1501544568278" expanded="true" signature="12510:12670" ph="SELECT * fro... sc_to_enforcement_level" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py">
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="93" column="28" lean-forward="false" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
+        <state relative-caret-position="270">
+          <caret line="22" column="54" lean-forward="false" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatStatisticsSingle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="100" column="13" lean-forward="true" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="58" column="4" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+        <state relative-caret-position="265">
+          <caret line="50" column="47" lean-forward="true" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatPrioritizationExperience.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
         </state>
       </provider>
