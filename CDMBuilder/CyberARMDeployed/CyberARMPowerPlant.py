@@ -1,4 +1,4 @@
-import ThreatStatisticsSingle,ThreatPrioritization,Utitilities,ProjectConfigFile
+import ThreatStatisticsSingle,ThreatPrioritization,Utitilities,ProjectConfigFile, ThreatPrioritizationExperience
 import ThreatActionToSecurityControl,CyberARMEngine
 
 # write_output_file = open("CyberARMOutput",'w')
@@ -30,6 +30,9 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     threat_action_name_to_id = {}
     threat_list = []
     threat_name_to_id = {}
+    prob_threat_action_threat_experience = {}
+    prob_threat_threat_action_experience = {}
+    prob_threat_experience = {}
     ###################################################################################### End GLobal Variables ############################################################
 
     ###################################################################################### Inputs #######################################################################
@@ -51,13 +54,21 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action[ProjectConfigFile.VERIS_LIST],risk_threat[ProjectConfigFile.VERIS_LIST],threat_threatAction_asset[0],asset_enterprise_list[0])
     print "Threat Statistics %s" % (prob_threat_action_threat)
 
+    ######################################## This is the experience part #######################################################
+    ThreatPrioritizationExperience.threat_prioritization_main(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,risk_threat_action[ProjectConfigFile.EXPERIENCE_LIST],risk_threat[ProjectConfigFile.EXPERIENCE_LIST],asset_enterprise_list[ProjectConfigFile.EXPERIENCE_LIST])
+    print "Threat Experience %s" % (prob_threat_experience)
+    print "Threat Action given Threat Experience %s" % (prob_threat_action_threat_experience)
+    print "Threat given Threat Action Experience %s" % (prob_threat_threat_action_experience)
+    print "Risk Threat %s" % (risk_threat[1])
+    print "Risk Threat Action %s" % (risk_threat_action[1])
+
     ######################################################### Check the output ##############################################################################
     # Utitilities.printAllStatistics(prob_threat,threat_threatAction_asset[0],prob_threat_action_threat,threat_threat_action_possible_pair)
     # Utitilities.printAllStatisticsGivenAssets(prob_threat, threat_threatAction_asset, prob_threat_action_threat,threat_threat_action_possible_pair,enterprise_asset_list_given)
     # Utitilities.printNumberStatisticsThreatThreatActionWithProb(prob_threat,threat_threatAction_asset,prob_threat_action_threat)
     # Utitilities.printThreatThreatActionStatistics(threat_threatAction_asset[0],prob_threat_threat_action)
     # Utitilities.printThreatImpact()
-    Utitilities.printRiskThreatThreatAction(risk_threat_action[ProjectConfigFile.VERIS_LIST],risk_threat[ProjectConfigFile.VERIS_LIST],enterprise_asset_list_given)
+    # Utitilities.printRiskThreatThreatAction(risk_threat_action[ProjectConfigFile.VERIS_LIST],risk_threat[ProjectConfigFile.VERIS_LIST],enterprise_asset_list_given)
     # Utitilities.printKillChainPhases(enterprise_asset_list_given)
 
     ########################################################## List of Security Controls, Threat Action and Mappings ##########################################
