@@ -34,12 +34,18 @@ class ThreatAction(object):
         self.asset_applicable_security_controls.append(security_control_entity_id)
         self.asset_number_security_controls += 1
 
-    def setProbThreatAction(self,prob_threat_action_threat,enterprise_asset_list_given):
+    def setProbThreatAction(self,prob_threat_action_threat,prob_threat_action_threat_experience,enterprise_asset_list_given):
         for asset in enterprise_asset_list_given:
-            self.prob_given_threat_asset[asset] = {}
-            for threat in prob_threat_action_threat[asset].keys():
-                if self.threat_action_name in prob_threat_action_threat[asset][threat].keys():
-                    self.prob_given_threat_asset[asset][threat] = prob_threat_action_threat[asset][threat][self.threat_action_name]
+            if asset not in self.prob_given_threat_asset.keys():
+                self.prob_given_threat_asset[asset] = {}
+            if asset in prob_threat_action_threat.keys():
+                for threat in prob_threat_action_threat[asset].keys():
+                    if self.threat_action_name in prob_threat_action_threat[asset][threat].keys():
+                        self.prob_given_threat_asset[asset][threat] = prob_threat_action_threat[asset][threat][self.threat_action_name]
+            else:
+                for threat in prob_threat_action_threat_experience[asset].keys():
+                    if self.threat_action_name in prob_threat_action_threat_experience[asset][threat].keys():
+                        self.prob_given_threat_asset[asset][threat] = prob_threat_action_threat_experience[asset][threat][self.threat_action_name]
 
     def addSecurityControl(self,security_control_entity_id):
         if security_control_entity_id in self.applicable_security_controls:

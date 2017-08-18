@@ -55,10 +55,11 @@ class Threat(object):
 
     def addThreatImpact(self,risk_threat):
         for i in range(len(risk_threat)):
-            if self.threat_name in risk_threat[i].keys():
-                self.threat_impact_asset.append(risk_threat[i][self.threat_name])
-            else:
-                self.threat_impact_asset.append(0)
+            for j in range(len(risk_threat[i])):
+                if self.threat_name in risk_threat[i][j].keys():
+                    self.threat_impact_asset.append(risk_threat[i][j][self.threat_name])
+                else:
+                    self.threat_impact_asset.append(0)
 
     def createAssetThreatAction(self,threat_action_id_list_for_specific_asset,asset_name,threat_action_list):
         self.clearApplicableThreatActions()

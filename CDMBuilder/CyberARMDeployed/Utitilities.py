@@ -59,16 +59,16 @@ def printKillChainPhases(enterprise_asset_list_given):
     print enterprise_asset_list_given
 
 def printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given):
-    # print risk_threat_action
-    # print risk_threat
-    for i in range(len(enterprise_asset_list_given)):
-        print "Asset Name : %s ----> " % (enterprise_asset_list_given[i])
-        print "\n                  Threat ---> "
-        for threat in risk_threat[i].keys():
-            print "                         %s : %s" % (threat,risk_threat[i][threat])
-        print "\n                  Threat Action---> "
-        for threat_action in risk_threat_action[i].keys():
-            print "                         %s : %s" % (threat_action,risk_threat_action[i][threat_action])
+    print risk_threat_action
+    print risk_threat
+    # for i in range(len(enterprise_asset_list_given)):
+    #     print "Asset Name : %s ----> " % (enterprise_asset_list_given[i])
+    #     print "\n                  Threat ---> "
+    #     for threat in risk_threat[i].keys():
+    #         print "                         %s : %s" % (threat,risk_threat[i][threat])
+    #     print "\n                  Threat Action---> "
+    #     for threat_action in risk_threat_action[i].keys():
+    #         print "                         %s : %s" % (threat_action,risk_threat_action[i][threat_action])
 
 
 
@@ -198,4 +198,23 @@ def printAssetList(asset_eneterprise_list):
         for asset in asset_eneterprise_list[i]:
             print asset
 
+
+def printThreatAction(risk_threat,risk_threat_action,prob_threat_experience,prob_threat_action_threat_experience):
+    print "Prob Threat Experience %s" % (prob_threat_experience)
+    print "Prob Threat Action Experience %s" % (prob_threat_action_threat_experience)
+    for i in range(2):
+        print "Risk %s" % (risk_threat[i])
+        print "Risk Threat Action %s" % (risk_threat_action[i])
+
+def printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given):
+    for asset in enterprise_asset_list_given:
+        if asset in prob_threat_threat_action.keys():
+            print "Prob Threat Action Given Threat %s" % (prob_threat_action_threat[asset])
+            print "Prob Threat Given Threat Action %s" % (prob_threat_threat_action[asset])
+
+def printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given):
+    for asset in enterprise_asset_list_given:
+        if asset in prob_threat_action_threat_experience.keys():
+            print "Prob Threat Action Given Threat Experience %s" % (prob_threat_action_threat_experience[asset])
+            print "Prob Threat Given Threat Action Experience %s" % (prob_threat_threat_action_experience[asset])
 

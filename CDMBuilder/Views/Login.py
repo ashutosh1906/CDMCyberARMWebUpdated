@@ -319,7 +319,7 @@ def cyberARM_request_updated(request):
                         threat_threat_action_asset_experience[threat][threat_action_name] =  threat_action['frequency']
 
                 ####################################### End Preparation the list of threat statistics from the experience ######################################
-                experience_list.append([asset_given['asset_name'],
+                experience_list.append([('%s_exp' % (asset_given['asset_name'])),
                                         [float(asset_given['confidentiality']), float(asset_given['integrity']),
                                          float(asset_given['availability'])],threat_threat_action_asset_experience])
         print veris_list
@@ -329,8 +329,8 @@ def cyberARM_request_updated(request):
 
         ############################################### Just for Testing ###############################################
         experience_list = []
-        experience_list.append([u'laptop', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
-        experience_list.append([u'files', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
+        experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
+        experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
         ############################################### End of Testing #################################################
 
         veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
