@@ -4,12 +4,18 @@ def calculateRiskExperience(prob_threat_experience,prob_threat_action_threat_exp
     for asset_des in asset_enterprise_list:
         asset_name = asset_des[0]
         asset_value = asset_des[1]
+        print "Asset Name %s Value %s" % (asset_name,asset_value)
         risk_threat_action_asset = {}
         risk_threat_asset = {}
         if asset_name not in prob_threat_action_threat_experience.keys():
             asset_name = ProjectConfigFile.OTHER_ASSET
         for threat in prob_threat_action_threat_experience[asset_name].keys():
-            impact_threat = (float(asset_value[0])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 1))+(float(asset_value[1])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 2))+(float(asset_value[2])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 4))
+            impact_threat = (float(asset_value[0])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 1))
+            # print "Threat %s Impact %s" % (threat, impact_threat)
+            impact_threat+=(float(asset_value[1])*((ProjectConfigFile.THREAT_MAP_COST[threat] & 2) >> 1))
+            # print "Threat %s Impact %s" % (threat, impact_threat)
+            impact_threat+=(float(asset_value[2])*((ProjectConfigFile.THREAT_MAP_COST[threat] & 4) >> 2))
+            # print "Threat %s Impact %s" % (threat,impact_threat)
             risk_threat_asset[threat] = impact_threat*prob_threat_experience[asset_name][threat]
             for threat_action in prob_threat_action_threat_experience[asset_name][threat].keys():
                 if threat_action not in risk_threat_action_asset.keys():
@@ -108,7 +114,7 @@ def calculate_threat_threatAction_prob_distribution_experience(prob_threat_threa
 
 
 def threat_prioritization_main(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,risk_threat_action_experience,risk_threat_experience,asset_enterprise_list):
-    # print "Asset Enterprise List %s" % (asset_enterprise_list)
+    print "Asset Enterprise List %s" % (asset_enterprise_list)
     calculate_threatAction_threat_prob_distribution_experience(prob_threat_experience, prob_threat_action_threat_experience, asset_enterprise_list)
     calculate_threat_threatAction_prob_distribution_experience(prob_threat_threat_action_experience, asset_enterprise_list)
     calculateRiskExperience(prob_threat_experience,prob_threat_action_threat_experience,asset_enterprise_list,risk_threat_action_experience,risk_threat_experience)

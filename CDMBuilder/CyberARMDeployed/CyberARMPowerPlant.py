@@ -63,8 +63,8 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # print "Threat given Threat Action Experience %s" % (prob_threat_threat_action_experience)
     # print "Risk Threat %s" % (risk_threat[1])
     # print "Risk Threat Action %s" % (risk_threat_action[1])
-    # Utitilities.printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given)
-    # Utitilities.printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given)
+    Utitilities.printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given)
+    Utitilities.printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given)
 
     ######################################################### Check the output ##############################################################################
     # Utitilities.printAllStatistics(prob_threat,threat_threatAction_asset[0],prob_threat_action_threat,threat_threat_action_possible_pair)
@@ -78,11 +78,13 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
 
     ########################################################## List of Security Controls, Threat Action and Mappings ##########################################
     ThreatActionToSecurityControl.parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given)
+    # Utitilities.printThreatActionNameToId(threat_action_name_to_id)
     # Utitilities.printSecurityControls(security_control_list,security_control_version_to_id)
     # Utitilities.printThreatActionList(threat_action_list,threat_action_name_to_id)
+    # Utitilities.printThreatProperties(threat_list)
     # Utitilities.printSecurityControlThreatmapping(security_control_list,security_control_version_to_id,threat_action_list)
     # Utitilities.printThreatSecurityControlMapping(threat_action_list,threat_action_name_to_id,security_control_list,risk_threat_action,enterprise_asset_list_given)
     recommendedCDM = []
-    # recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action[0],asset_enterprise_list[0],threat_list,threat_name_to_id,affordable_risk,budget)
+    recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget)
     # write_output_file.close()
     return recommendedCDM

@@ -18,14 +18,16 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     #         security_control_list[sec_control].printGlobalAssetThreatActionProperties()
 
     ########################################## Create the environment for all the threat action #############################################
+    print "Selected Threat Action %s" % (threat_action_id_list_for_all_assets)
+    print "Selected Security Controls %s" % (selected_security_controls)
     for asset_index in range(len(threat_action_id_list_for_all_assets)):
         for threat_action in threat_action_id_list_for_all_assets[asset_index]:
             threat_action_list[threat_action].prepare_global_asset_applicable_security_controls(selected_security_controls)
 
-    # print "############################################ Threat Action Properties ########################################################"
-    # for asset_index in range(len(threat_action_id_list_for_all_assets)):
-    #     for threat_action in threat_action_id_list_for_all_assets[asset_index]:
-    #         threat_action_list[threat_action].printGlobalAssetThreatActionProperties()
+    print "############################################ Threat Action Properties ########################################################"
+    for asset_index in range(len(threat_action_id_list_for_all_assets)):
+        for threat_action in threat_action_id_list_for_all_assets[asset_index]:
+            threat_action_list[threat_action].printGlobalAssetThreatActionProperties()
 
     ################################################## Create the environment for threat properties ####################################
     for asset_index in range(len(threat_id_for_all_assets)):
@@ -35,10 +37,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     for threat in threat_list:
             threat.considerResidualThreatAction()
 
-    # print "########################################## Threat Properties ########################################################"
-    # for asset_index in range(len(threat_id_for_all_assets)):
-    #     for threat in threat_id_for_all_assets[asset_index]:
-    #         threat_list[threat].printGlobalProperties()
+    print "########################################## Threat Properties ########################################################"
+    for threat in threat_list:
+            threat.printGlobalProperties()
 
     ############################################################ Give rank to threat action ##########################################
     threat_action_id_to_position_roll = []

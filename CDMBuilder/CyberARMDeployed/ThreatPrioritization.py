@@ -9,7 +9,8 @@ def calculateRisk(prob_threat,prob_threat_action_threat,asset_enterprise_list,ri
         if asset_name not in prob_threat_action_threat.keys():
             asset_name = ProjectConfigFile.OTHER_ASSET
         for threat in prob_threat_action_threat[asset_name].keys():
-            impact_threat = (float(asset_value[0])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 1))+(float(asset_value[1])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 2))+(float(asset_value[2])*(ProjectConfigFile.THREAT_MAP_COST[threat] & 4))
+            impact_threat = (float(asset_value[0])*((ProjectConfigFile.THREAT_MAP_COST[threat] & 1)))+(float(asset_value[1])*((ProjectConfigFile.THREAT_MAP_COST[threat] & 2) >> 1))+\
+                            (float(asset_value[2])*((ProjectConfigFile.THREAT_MAP_COST[threat] & 4) >> 2))
             risk_threat_asset[threat] = impact_threat*prob_threat[asset_name][threat]
             for threat_action in prob_threat_action_threat[asset_name][threat].keys():
                 if threat_action not in risk_threat_action_asset.keys():

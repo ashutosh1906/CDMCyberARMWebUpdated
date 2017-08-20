@@ -27,6 +27,7 @@ def printSecurityControls(security_control_list,security_control_version_to_id):
         print "Name : %s ## Version : %s"%(sec_con.sc_name,sec_con.sc_version)
         print "%s %s %s" % (sec_con.kc_phase,sec_con.en_level,sec_con.sc_function)
         print " Version : %s to ID ---> %s\n" % (sec_con.sc_version,security_control_version_to_id[sec_con.sc_version])
+        print "Threat Action Effectiveness %s" % (sec_con.threat_action_effectiveness)
 
 def printThreatActionList(threat_action_list,threat_action_name_to_id):
     for threat_action in threat_action_list:
@@ -59,16 +60,13 @@ def printKillChainPhases(enterprise_asset_list_given):
     print enterprise_asset_list_given
 
 def printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given):
-    print risk_threat_action
-    print risk_threat
-    # for i in range(len(enterprise_asset_list_given)):
-    #     print "Asset Name : %s ----> " % (enterprise_asset_list_given[i])
-    #     print "\n                  Threat ---> "
-    #     for threat in risk_threat[i].keys():
-    #         print "                         %s : %s" % (threat,risk_threat[i][threat])
-    #     print "\n                  Threat Action---> "
-    #     for threat_action in risk_threat_action[i].keys():
-    #         print "                         %s : %s" % (threat_action,risk_threat_action[i][threat_action])
+    asset_index = 0
+    for i in range(len(risk_threat)):
+        for j in range(len(risk_threat[i])):
+            print "Asset Name %s" % (enterprise_asset_list_given[asset_index])
+            print "Risk Threat %s" % (risk_threat[i][j])
+            print "Risk Threat Action %s" % (risk_threat_action[i][j])
+            asset_index += 1
 
 
 
@@ -209,12 +207,39 @@ def printThreatAction(risk_threat,risk_threat_action,prob_threat_experience,prob
 def printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given):
     for asset in enterprise_asset_list_given:
         if asset in prob_threat_threat_action.keys():
+            print "Prob Threat %s" % (prob_threat[asset])
             print "Prob Threat Action Given Threat %s" % (prob_threat_action_threat[asset])
             print "Prob Threat Given Threat Action %s" % (prob_threat_threat_action[asset])
 
 def printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given):
     for asset in enterprise_asset_list_given:
         if asset in prob_threat_action_threat_experience.keys():
+            print "Prob Threat Experience %s" % (prob_threat_experience[asset])
             print "Prob Threat Action Given Threat Experience %s" % (prob_threat_action_threat_experience[asset])
             print "Prob Threat Given Threat Action Experience %s" % (prob_threat_threat_action_experience[asset])
+
+def printThreatActionNameToId(threat_action_name_to_id):
+    for threat_action in threat_action_name_to_id.keys():
+        print "Threat Action Name %s : ID %s" % (threat_action,threat_action_name_to_id[threat_action])
+
+def printThreatProperties(threat_list):
+    for threat in threat_list:
+        print "Threat Name %s" % (threat.threat_name)
+        print threat.asset_threat_action_distribution
+
+def printThreatActionNameListIter(threat_action_name_list):
+    print "Threat Action List"
+    for i in range(len(threat_action_name_list)):
+        print "Asset Index %s" % (i)
+        print "Threat Action List\n %s" % (threat_action_name_list[i])
+
+def printThreatIdForAllAssets(threat_id_for_all_assets,threat_list):
+    for i in threat_list:
+        print "Key %s : %s" % (i.primary_key,i.threat_name)
+    print "Selected Threat ID"
+    for i in range(len(threat_id_for_all_assets)):
+        print "Asset Index %s : %s" % (i,threat_id_for_all_assets[i])
+
+
+
 

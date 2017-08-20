@@ -13,6 +13,8 @@ class ThreatAction(object):
         self.asset_number_security_controls = 0
 
     def prepare_global_asset_applicable_security_controls(self,selected_security_controls):
+        if len(self.global_asset_applicable_security) <> 0:
+            return
         for i in range(len(selected_security_controls)):
             self.global_asset_applicable_security.append([])
             self.global_asset_security_control_index.append({})
