@@ -333,7 +333,7 @@ def cyberARM_request_updated(request):
         experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
         ############################################### End of Testing #################################################
 
-        veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
+        veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
         asset_enterprise_list_input = [[] for i in range(2)]
         asset_enterprise_list_input[VERIS_LIST] = veris_list
         asset_enterprise_list_input[EXPERIENCE_LIST] = experience_list

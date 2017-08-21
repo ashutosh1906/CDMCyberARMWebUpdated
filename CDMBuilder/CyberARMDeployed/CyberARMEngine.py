@@ -46,17 +46,19 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
             threat_action_id_list_for_all_assets[i].append(threat_action_id[0])
     print "Threat Action ID %s" % (threat_action_id_list_for_all_assets)
 
+    asset_index = 0
     for asset_type_index in range(len(asset_enterprise_list)):
         for i in range(len(asset_enterprise_list[asset_type_index])):
             asset_name = asset_enterprise_list[asset_type_index][i][0]
             selected_security_controls_asset = []
-            for threat_action in threat_action_name_list[i]:
+            for threat_action in threat_action_name_list[asset_index]:
                 for security_control in threat_action_list[threat_action[0]].applicable_security_controls:
                     if threat_action[1] < security_control_list[security_control].investment_cost:
                         continue
                     if security_control not in selected_security_controls_asset:
                         selected_security_controls_asset.append(security_control)
             selected_security_controls.append(selected_security_controls_asset)
+            asset_index += 1
     Utitilities.printSelectThreatActionName(threat_action_name_list,threat_action_list)
     Utitilities.printSelectedSecurityControls(security_control_list,selected_security_controls)
     # TestCases.securityControlCoverage(security_control_list,selected_security_controls,threat_action_name_list)

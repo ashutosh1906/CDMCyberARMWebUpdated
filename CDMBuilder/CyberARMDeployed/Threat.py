@@ -77,6 +77,7 @@ class Threat(object):
     def globalCreateAssetThreatAction(self,threat_action_id_list_for_asset,asset_enterprise_list,threat_action_list):
         if len(self.global_asset_threat_action) > 0:
             return
+        asset_index = 0
         for i in range(len(asset_enterprise_list)):
             for index in range(len(asset_enterprise_list[i])):
                 asset_name = asset_enterprise_list[i][index][0]
@@ -84,13 +85,14 @@ class Threat(object):
                 self.global_asset_threat_action_prob.append([])
                 self.global_number_threat_action = 0
                 self.global_threat_action_id_to_place_map.append({})
-                for threat_action_id in threat_action_id_list_for_asset[index]:
+                for threat_action_id in threat_action_id_list_for_asset[asset_index]:
                     # print ":(:((::( %s"%(threat_action_id)
                     if self.threat_name in threat_action_list[threat_action_id].prob_given_threat_asset[asset_name].keys():
-                        self.global_asset_threat_action[index].append(threat_action_id)
-                        self.global_asset_threat_action_prob[index].append(threat_action_list[threat_action_id].prob_given_threat_asset[asset_name][self.threat_name])
-                        self.global_threat_action_id_to_place_map[index][threat_action_id] = self.global_number_threat_action
+                        self.global_asset_threat_action[asset_index].append(threat_action_id)
+                        self.global_asset_threat_action_prob[asset_index].append(threat_action_list[threat_action_id].prob_given_threat_asset[asset_name][self.threat_name])
+                        self.global_threat_action_id_to_place_map[asset_index][threat_action_id] = self.global_number_threat_action
                         self.global_number_threat_action += 1
+                asset_index += 1
 
 
     def printProperties(self):

@@ -32,6 +32,7 @@ class SecurityControl(object):
         self.asset_threat_action_list.append(threat_action_entity_id)
 
     def addThreatAction(self,threat_action_entity_id,effectiveness):
+        print "Threat Actin Entity ID %s" % (threat_action_entity_id)
         if threat_action_entity_id in self.threat_action:
             return
         self.threat_action.append(threat_action_entity_id)
@@ -48,4 +49,5 @@ class SecurityControl(object):
         print "\nSecurity Control ID: %s, Name: %s" % (self.primary_key,self.sc_name)
         print " ::::::::::::: Applicable Against Threat Actions ----> "
         for i in range(len(self.global_asset_threat_action_list)):
+            print "Overall Threat Action %s" % (self.threat_action)
             print "                                                       %s" % (self.global_asset_threat_action_list[i])

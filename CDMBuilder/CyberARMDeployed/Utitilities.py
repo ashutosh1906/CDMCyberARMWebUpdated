@@ -240,6 +240,11 @@ def printThreatIdForAllAssets(threat_id_for_all_assets,threat_list):
     for i in range(len(threat_id_for_all_assets)):
         print "Asset Index %s : %s" % (i,threat_id_for_all_assets[i])
 
+def printAssetList(asset_list):
+    for i in range(len(asset_list)):
+        print "Asset Index %s -----> " % (i)
+        print asset_list[i]
+
 
 
 
