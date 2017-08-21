@@ -72,7 +72,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printNumberStatisticsThreatThreatActionWithProb(prob_threat,threat_threatAction_asset,prob_threat_action_threat)
     # Utitilities.printThreatThreatActionStatistics(threat_threatAction_asset[0],prob_threat_threat_action)
     # Utitilities.printThreatImpact()
-    # Utitilities.printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given)
+    Utitilities.printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given)
     # Utitilities.printKillChainPhases(enterprise_asset_list_given)
     # Utitilities.printThreatAction(risk_threat,risk_threat_action,prob_threat_experience,prob_threat_action_threat_experience)
 

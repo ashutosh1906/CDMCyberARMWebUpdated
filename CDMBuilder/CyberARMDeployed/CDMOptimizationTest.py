@@ -18,8 +18,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     #         security_control_list[sec_control].printGlobalAssetThreatActionProperties()
 
     ########################################## Create the environment for all the threat action #############################################
-    print "Selected Threat Action %s" % (threat_action_id_list_for_all_assets)
-    print "Selected Security Controls %s" % (selected_security_controls)
+
     for asset_index in range(len(threat_action_id_list_for_all_assets)):
         for threat_action in threat_action_id_list_for_all_assets[asset_index]:
             threat_action_list[threat_action].prepare_global_asset_applicable_security_controls(selected_security_controls)
@@ -49,7 +48,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
             threat_action_id_to_position_roll[asset_index][threat_action_id] = num_threat_action
             num_threat_action += 1
-    # print threat_action_id_to_position_roll
+    print threat_action_id_to_position_roll
 
     ############################################################ Give rank to threat ##########################################
     threat_id_to_position_roll = []
@@ -59,7 +58,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for threat_id in threat_id_for_all_assets[asset_index]:
             threat_id_to_position_roll[asset_index][threat_id] = num_threat_action
             num_threat_action += 1
-    # print threat_id_to_position_roll
+    print threat_id_to_position_roll
 
     ####################################################### Determine the minimum value of the Affordable Risk ##################
     global_estimated_risk = 0
@@ -74,46 +73,58 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     minimum_affordable_risk = []
     minimum_threat_specific_risk = []
     print "******************************** Minimum Affordable Risk *************************************************"
-    for asset_index in range(len(asset_enterprise_list)):
-        minimum_affordable_risk.append(0.0)
-        minimum_threat_specific_risk.append([1 for threat in threat_id_for_all_assets[asset_index]])
-        # print "Security Controls %s" % (selected_security_controls[asset_index])
-        # print "Threat Action %s" % (threat_action_id_list_for_all_assets[asset_index])
-        # print "Threat Action Roll %s" % (threat_action_id_to_position_roll[asset_index])
-        # print "Threat ID %s" % (threat_id_for_all_assets[asset_index])
-        threat_action_survive = [1.0 for i in threat_action_id_list_for_all_assets[asset_index]]
-        for sec_id in selected_security_controls[asset_index]:
-            # print "Security Control %s : %s" % (sec_id,security_control_list[sec_id].primary_key)
-            # print "Threat Action %s" % (security_control_list[sec_id].global_asset_threat_action_list[asset_index])
-            # print "Effectiveness %s" % (security_control_list[sec_id].threat_action_effectiveness)
-            for threat_action_id in security_control_list[sec_id].global_asset_threat_action_list[asset_index]:
-                threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]] *= (1
-                                                                                                      -security_control_list[sec_id].threat_action_effectiveness[threat_action_id])
+    asset_index = 0
+    for i in range(len(asset_enterprise_list)):
+        for j in range(len(asset_enterprise_list[i])):
+            minimum_affordable_risk.append(0.0)
+            minimum_threat_specific_risk.append([1 for threat in threat_id_for_all_assets[asset_index]])
+            # print "Security Controls %s" % (selected_security_controls[asset_index])
+            # print "Threat Action %s" % (threat_action_id_list_for_all_assets[asset_index])
+            # print "Threat Action Roll %s" % (threat_action_id_to_position_roll[asset_index])
+            # print "Threat ID %s" % (threat_id_for_all_assets[asset_index])
+            threat_action_survive = [1.0 for i in threat_action_id_list_for_all_assets[asset_index]]
+            for sec_id in selected_security_controls[asset_index]:
+                # print "Security Control %s : %s" % (sec_id,security_control_list[sec_id].primary_key)
+                # print "Threat Action %s" % (security_control_list[sec_id].global_asset_threat_action_list[asset_index])
+                # print "Effectiveness %s" % (security_control_list[sec_id].threat_action_effectiveness)
+                for threat_action_id in security_control_list[sec_id].global_asset_threat_action_list[asset_index]:
+                    threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]] *= (1
+                                                                                                          -security_control_list[sec_id].threat_action_effectiveness[threat_action_id])
 
-        # print "Threat Action Survive %s" % (threat_action_survive)
-        # print "All Threats %s" % (threat_id_for_all_assets[asset_index])
-        # print "Threat Index %s" % (threat_id_to_position_roll[asset_index])
-        for threat_id in threat_id_for_all_assets[asset_index]:
-            # print "Threat ID %s : Ignored %s" % (threat_list[threat_id].primary_key,threat_list[threat_id].ignored_threat_action[asset_index])
-            # print "Threat Action %s" % (threat_list[threat_id].global_asset_threat_action[asset_index])
-            # print "Threat Action Prob %s" % (threat_list[threat_id].global_asset_threat_action_prob[asset_index])
-            # print "Threat Action Position %s" % (threat_list[threat_id].global_threat_action_id_to_place_map[asset_index])
-            # print "Threat Action Index %s" % (threat_action_id_list_for_all_assets[asset_index])
-            # print "Threat Action ID to Position %s" % (threat_action_id_to_position_roll[asset_index])
-            threat_index = threat_id_to_position_roll[asset_index][threat_id]
-            minimum_threat_specific_risk[asset_index][threat_index] = threat_list[threat_id].ignored_threat_action[asset_index]
-            for threat_action_id in threat_list[threat_id].global_asset_threat_action[asset_index]:
-                minimum_threat_specific_risk[asset_index][threat_index] \
-                    *= (1-threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]]*
-                        threat_list[threat_id].global_asset_threat_action_prob[asset_index][threat_list[threat_id].global_threat_action_id_to_place_map[asset_index][threat_action_id]])
-            minimum_threat_specific_risk[asset_index][threat_index] = (1-minimum_threat_specific_risk[asset_index][threat_index])*\
-                                                                      threat_list[threat_id].threat_impact_asset[asset_index]
-        minimum_affordable_risk[asset_index] = sum(minimum_threat_specific_risk[asset_index])
+            # print "Threat Action Survive %s" % (threat_action_survive)
+            # print "All Threats %s" % (threat_id_for_all_assets[asset_index])
+            # print "Threat Index %s" % (threat_id_to_position_roll[asset_index])
+            for threat_id in threat_id_for_all_assets[asset_index]:
+                # print "Threat ID %s : Ignored %s" % (threat_list[threat_id].primary_key,threat_list[threat_id].ignored_threat_action[asset_index])
+                # print "Threat Action %s" % (threat_list[threat_id].global_asset_threat_action[asset_index])
+                # print "Threat Action Prob %s" % (threat_list[threat_id].global_asset_threat_action_prob[asset_index])
+                # print "Threat Action Position %s" % (threat_list[threat_id].global_threat_action_id_to_place_map[asset_index])
+                # print "Threat Action Index %s" % (threat_action_id_list_for_all_assets[asset_index])
+                # print "Threat Action ID to Position %s" % (threat_action_id_to_position_roll[asset_index])
+                threat_index = threat_id_to_position_roll[asset_index][threat_id]
+                minimum_threat_specific_risk[asset_index][threat_index] = 1-threat_list[threat_id].ignored_threat_action[asset_index]
+                for threat_action_id in threat_list[threat_id].global_asset_threat_action[asset_index]:
+                    minimum_threat_specific_risk[asset_index][threat_index] \
+                        *= (1-threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]]*
+                            threat_list[threat_id].global_asset_threat_action_prob[asset_index][threat_list[threat_id].global_threat_action_id_to_place_map[asset_index][threat_action_id]])
+                minimum_threat_specific_risk[asset_index][threat_index] = (1-minimum_threat_specific_risk[asset_index][threat_index])*\
+                                                                          threat_list[threat_id].threat_impact_asset[asset_index]
+            minimum_affordable_risk[asset_index] = sum(minimum_threat_specific_risk[asset_index])
+            asset_index += 1
 
-    # for i in range(len(asset_enterprise_list)):
-    #     print "Minimum Threat Specific Risk %s" % (minimum_threat_specific_risk[i])
-    #     print "Minimum Affordable Risk %s" % (minimum_affordable_risk[i])
+    asset_index = 0
+    for i in range(len(asset_enterprise_list)):
+        for j in range(len(asset_enterprise_list[i])):
+            print "Minimum Threat Specific Risk %s" % (minimum_threat_specific_risk[asset_index])
+            print "Minimum Affordable Risk %s" % (minimum_affordable_risk[asset_index])
+            asset_index += 1
     print "Global Minimum Risk %s" % (sum(minimum_affordable_risk))
+
+    print "Selected Threat Action %s" % (threat_action_id_list_for_all_assets)
+    print "Threat Action Roll %s" % (threat_action_id_to_position_roll)
+    print "Selected Security Controls %s" % (selected_security_controls)
+    print "Selected Threat %s" % (threat_id_for_all_assets)
+    print "Threat Roll %s" % (threat_id_to_position_roll)
     ###################################################### End of Design of All Heuristics Here ############################################
     ############################################################ Set SMT Environment ####################################################
     set_option(rational_to_decimal=True)
