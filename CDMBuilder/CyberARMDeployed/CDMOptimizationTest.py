@@ -264,7 +264,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     ############################################################# 2.4 Residual Risk Constraints ##################################################
 
     cyberARM.add([smt_Residual_Risk_Asset[i]==sum(smt_Threat[i]) for i in range(len(smt_Residual_Risk_Asset))])
-    # cyberARM.add([smt_Residual_Risk_Asset[i] >= (minimum_affordable_risk[i]-1) for i in range(len(minimum_affordable_risk))])
+    cyberARM.add([smt_Residual_Risk_Asset[i] >= (minimum_affordable_risk[i]-1) for i in range(len(minimum_affordable_risk))])
     cyberARM.add(smt_Global_Residual_Risk == sum(smt_Residual_Risk_Asset))
     cyberARM.add(smt_Global_Residual_Risk > sum(minimum_affordable_risk))
 
