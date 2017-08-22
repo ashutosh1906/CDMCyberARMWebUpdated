@@ -1,8 +1,22 @@
 {% extends "cdmDisplay.html" %}
 {% block titlename %} Cyber Defense Matrix {% endblock %}
 {% block content %}
-    <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+    <div class="container-fluid">
+        <div style="text-align: center">
+            <a id="cdm_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Cyber Defense Matrix</a>
+        </div>
+    </div>
+    <div class="container-fluid" id="cdm_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px ;">
                 <div id="cdm_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 30px;">
+        <div style="text-align: center">
+            <a id="risk_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Risk Statistics</a>
+        </div>
+    </div>
+     <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
+                <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
     </div>
 {% endblock %}
@@ -47,6 +61,45 @@
             });
             $('#cdm_grid').jqxGrid({ pagesize: 200});
             /************************ End of the initialization **********************************/
+
+            /************************ Initialize the risk grid *****************************************/
+            var dataLoadRisk = [];
+            var sourceAssetRisk =
+            {
+                localdata: dataLoadRisk,
+                datatype: "array",
+                datafields: [{ name: 'asset_name'},
+                  { name: 'res_risk'},
+                  { name: 'imp_cost'},
+                ] };
+
+            var dataAdapterAssetRisk = new $.jqx.dataAdapter(sourceAssetRisk, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#risk_grid").jqxGrid(
+            {
+                source: dataAdapterAssetRisk,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                columns: [
+                  { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    { text: 'Residual Risk', datafield: 'res_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Implementation Cost', datafield: 'imp_cost', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                ],
+            });
+            $('#risk_grid').jqxGrid({ pagesize: 200});
+            /************************ End of the initialization **********************************/
+
+            /*************************** Grid View ***********************************************/
+            $(".box_label").click(function () {
+                div_id = $(this).attr('id');
+                div_box = div_id.substring(0,div_id.lastIndexOf("_"));
+                $("#"+div_box).toggle();
+
+            });
         });
     </script>
 {% endblock %}

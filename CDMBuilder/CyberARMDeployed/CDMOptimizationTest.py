@@ -308,6 +308,13 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             sec_control_index += 1
 
     # print CDM_Global_id
+    ############################################### Capture The Risk ###############################################################
+    for i in range(len(threat_id_for_all_assets)):
+        print "Asset Name : %s" % (asset_list_for_smt[i])
+        for j in range(len(threat_id_for_all_assets[i])):
+            threat_id = threat_id_for_all_assets[i][j]
+            print "Risk Id: %s Name: %s Values: %s" % (threat_id,threat_list[threat_id].threat_name,recommended_CDM[smt_Threat[i][j]])
+
     ############################################################ Prepare the dataset for the grid view ##############################
     CDM_Global = []
     for asset_index in range(len(CDM_Global_id)):
