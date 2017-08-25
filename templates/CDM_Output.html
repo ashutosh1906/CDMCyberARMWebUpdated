@@ -19,9 +19,18 @@
                 <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
     </div>
+    <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="position:relative;">
+        <div id="threat_action_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+        </div>
+          <!--button id="edit_button_cdm_row">Edit</button-->
+    </div>
 {% endblock %}
 {% block scriptPageContent %}
+    {% load static %}
     <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
+    <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
     <script type="text/javascript">
         $(document).ready(function () {
             /************************ Initialize the grid *****************************************/
@@ -49,6 +58,7 @@
                 pageable:true,
                 sortable: true,
                 groupable: true,
+                theme: 'energyblue',
                 columns: [
                   { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                     { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
@@ -85,6 +95,7 @@
                 autoheight:true,
                 pageable:true,
                 sortable: true,
+                theme: 'energyblue',
                 columns: [
                   { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                     { text: 'Risk', datafield: 'max_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
@@ -93,6 +104,36 @@
                 ],
             });
             $('#risk_grid').jqxGrid({ pagesize: 200});
+
+            /********************************** Click on the row of the grid and show the threat list********************************/
+            $('#risk_grid').on('celldoubleclick', function (event)
+            {
+                var dataRow = $('#risk_grid').jqxGrid('getrowdata',event.args.rowindex);
+                var asset_name = dataRow['asset_name'];
+                console.log(asset_name);
+                /********************** Dialog Box ***********************************/
+                loadThreatActionGrid(threatActionList(asset_name));
+                $("#dialog-message").dialog({
+                    modal: true,
+                    position: {my: "center top", at: "center top"},
+                    width: 1000,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        },
+                    }
+                });
+
+            });
+
+            function threatActionList(asset_name){
+                for(var i = 0;i<dataLoadRisk.length;i++){
+                    if (asset_name==dataLoadRisk[i]['asset_name']){
+                        return dataLoadRisk[i]['threat_list'];
+                    }
+                }
+            }
+
             /************************ End of the initialization **********************************/
 
             /*************************** Grid View ***********************************************/
@@ -102,6 +143,41 @@
                 $("#"+div_box).toggle();
 
             });
+
+            /****************************************** Threat Action Grid ***************************************/
+            function loadThreatActionGrid(threat_action_list){
+                var dataLoadThreatAction = threat_action_list;
+                var sourceAssetTA =
+                {
+                    localdata: dataLoadThreatAction,
+                    datatype: "array",
+                    datafields: [{ name: 'threat_action_name'},
+                      { name: 'risk_ta'},
+                        {name:'prev_risk'},
+                    ]
+                };
+
+                var dataAdapterThreatAction= new $.jqx.dataAdapter(sourceAssetTA, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#threat_action_grid").jqxGrid(
+                {
+                    source: dataAdapterThreatAction,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    columns: [
+                      { text: 'Threat Action Name', datafield: 'threat_action_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                         { text: 'Risk', datafield: 'prev_risk', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Residual Risk', datafield: 'risk_ta', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    ],
+
+                });
+                $("#threat_action_grid").jqxGrid({ pagesize: 200});
+
+            }
         });
     </script>
 {% endblock %}

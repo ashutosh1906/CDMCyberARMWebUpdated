@@ -314,19 +314,22 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         # print "Asset Name : %s" % (asset_list_for_smt[i])
         risk_All.append({})
         risk_All[i]['asset_name']=asset_list_for_smt[i][0]
-        threat_specific_risk = {}
+        threat_specific_risk_list = []
         risk_All[i]['max_risk'] = 0
         for j in range(len(threat_id_for_all_assets[i])):
+            threat_specific_risk = {}
             threat_id = threat_id_for_all_assets[i][j]
             # print "Risk Id: %s Name: %s Values: %s" % (threat_id,threat_list[threat_id].threat_name,recommended_CDM[smt_Threat[i][j]])
+            threat_specific_risk['threat_action_name'] = threat_list[threat_id].threat_name
             try:
-                threat_specific_risk[threat_list[threat_id].threat_name] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3))
+                threat_specific_risk['risk_ta'] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3))
             except:
                 print "Remove the last character"
-                threat_specific_risk[threat_list[threat_id].threat_name] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3)[:-1])
-
+                threat_specific_risk['risk_ta'] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3)[:-1])
+            threat_specific_risk['prev_risk'] = threat_list[threat_id].maximum_risk[i]
             # print type(recommended_CDM[smt_Threat[i][j]])
             risk_All[i]['max_risk'] += threat_list[threat_id].maximum_risk[i]
+            threat_specific_risk_list.append(threat_specific_risk)
         try:
             risk_All[i]['res_risk'] = float(recommended_CDM[smt_Residual_Risk_Asset[i]].as_decimal(3))
         except:
@@ -339,7 +342,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             print "Remove the last character"
             risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3)[:-1])
 
-        risk_All[i]['threat_list']=threat_specific_risk
+        risk_All[i]['threat_list']=threat_specific_risk_list
         # print "Total Residual Risk for Asset %s" % (recommended_CDM[smt_Residual_Risk_Asset[i]])
         # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
     Utitilities.printRiskPerThreatStatistics(risk_All)
