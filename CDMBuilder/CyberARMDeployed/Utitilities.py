@@ -245,6 +245,14 @@ def printAssetList(asset_list):
         print "Asset Index %s -----> " % (i)
         print asset_list[i]
 
+def printRiskPerThreatStatistics(risk):
+    for risk_row in risk:
+            print "Asset name %s" % (risk_row['asset_name'])
+            print "Residual Risk %s" % (risk_row['res_risk'])
+            print "Implementation Cost %s" % (risk_row['imp_cost'])
+            print "Threat Action %s" % (risk_row['threat_list'])
+
+
 
 
 

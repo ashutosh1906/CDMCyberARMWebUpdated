@@ -17,7 +17,7 @@ import UtilityFunctions
 threat_threat_action_map = {}
 ####################### End Global #############################
 
-from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST
+from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK
 
 
 def login(request):
@@ -330,10 +330,10 @@ def cyberARM_request_updated(request):
         ############################################## Just for Testing ###############################################
         experience_list = []
         experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
-        # experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
+        experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
         ############################################## End of Testing #################################################
 
-        veris_list = [['database',[500000,500000,500000]]]#,['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]],['end-user',[100000,100000,100000]]]
+        veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]],['laptop',[100000,100000,100000]]]#,['end-user',[100000,100000,100000]]]
         asset_enterprise_list_input = [[] for i in range(2)]
         asset_enterprise_list_input[VERIS_LIST] = veris_list
         asset_enterprise_list_input[EXPERIENCE_LIST] = experience_list
@@ -345,7 +345,8 @@ def cyberARM_request_updated(request):
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
         # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)
         print recommendedCDM
-        send_data['cdm_list'] = json.dumps(recommendedCDM)
+        send_data['cdm_list'] = json.dumps(recommendedCDM[CYBERARM_CDM_MATRIX])
+        send_data['risk_list'] = json.dumps(recommendedCDM[CYBERARM_RISK])
         return render(request,'CDM_Output.html',send_data)
 
 #################################################################### End Calling CyberARM #############################################

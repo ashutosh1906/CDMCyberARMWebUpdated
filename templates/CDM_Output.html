@@ -25,7 +25,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             /************************ Initialize the grid *****************************************/
-            var dataLoad = JSON.parse("{{ cdm_list | escapejs }}");;
+            var dataLoad = JSON.parse("{{ cdm_list | escapejs }}");
             var sourceAsset =
             {
                 localdata: dataLoad,
@@ -63,12 +63,13 @@
             /************************ End of the initialization **********************************/
 
             /************************ Initialize the risk grid *****************************************/
-            var dataLoadRisk = [];
+            var dataLoadRisk = JSON.parse("{{ risk_list | escapejs }}");;
             var sourceAssetRisk =
             {
                 localdata: dataLoadRisk,
                 datatype: "array",
                 datafields: [{ name: 'asset_name'},
+                    { name: 'max_risk'},
                   { name: 'res_risk'},
                   { name: 'imp_cost'},
                 ] };
@@ -86,6 +87,7 @@
                 sortable: true,
                 columns: [
                   { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    { text: 'Risk', datafield: 'max_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                     { text: 'Residual Risk', datafield: 'res_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Implementation Cost', datafield: 'imp_cost', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                 ],

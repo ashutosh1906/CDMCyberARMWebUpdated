@@ -15,10 +15,13 @@ MISUSE_COST = DESTROY_C | DESTROY_I | DESTROY_A
 PHYSICAL_COST = DESTROY_C | DESTROY_I | DESTROY_A
 THREAT_MAP_COST = {}
 THREAT_PRIORITIZATION_THRESHOLD = 0.05
-CHOSEN_NUMBER_THREAT_ACTION = 4
+CHOSEN_NUMBER_THREAT_ACTION = 5
 RESOURCE_FOLDER = 'ResourceFolder'
 VERIS_LIST = 0
 EXPERIENCE_LIST = 1
+CYBERARM_CDM_MATRIX = 0
+CYBERARM_RISK = 1
+
 ######################################### Kill chain phase dimension ##################################################
 RECON_KEY = 'recon'
 WEAPONIZE_KEY = 'weaponize'

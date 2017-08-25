@@ -309,11 +309,40 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
 
     # print CDM_Global_id
     ############################################### Capture The Risk ###############################################################
+    risk_All = []
     for i in range(len(threat_id_for_all_assets)):
-        print "Asset Name : %s" % (asset_list_for_smt[i])
+        # print "Asset Name : %s" % (asset_list_for_smt[i])
+        risk_All.append({})
+        risk_All[i]['asset_name']=asset_list_for_smt[i][0]
+        threat_specific_risk = {}
+        risk_All[i]['max_risk'] = 0
         for j in range(len(threat_id_for_all_assets[i])):
             threat_id = threat_id_for_all_assets[i][j]
-            print "Risk Id: %s Name: %s Values: %s" % (threat_id,threat_list[threat_id].threat_name,recommended_CDM[smt_Threat[i][j]])
+            # print "Risk Id: %s Name: %s Values: %s" % (threat_id,threat_list[threat_id].threat_name,recommended_CDM[smt_Threat[i][j]])
+            try:
+                threat_specific_risk[threat_list[threat_id].threat_name] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3))
+            except:
+                print "Remove the last character"
+                threat_specific_risk[threat_list[threat_id].threat_name] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3)[:-1])
+
+            # print type(recommended_CDM[smt_Threat[i][j]])
+            risk_All[i]['max_risk'] += threat_list[threat_id].maximum_risk[i]
+        try:
+            risk_All[i]['res_risk'] = float(recommended_CDM[smt_Residual_Risk_Asset[i]].as_decimal(3))
+        except:
+            print "Remove the last character"
+            risk_All[i]['res_risk'] = float(recommended_CDM[smt_Residual_Risk_Asset[i]].as_decimal(3)[:-1])
+
+        try:
+            risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3))
+        except:
+            print "Remove the last character"
+            risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3)[:-1])
+
+        risk_All[i]['threat_list']=threat_specific_risk
+        # print "Total Residual Risk for Asset %s" % (recommended_CDM[smt_Residual_Risk_Asset[i]])
+        # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
+    Utitilities.printRiskPerThreatStatistics(risk_All)
 
     ############################################################ Prepare the dataset for the grid view ##############################
     CDM_Global = []
@@ -330,4 +359,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             CDM_Global.append(row)
     ########################################################### End of the dataset of the grid view #################################
 
-    return CDM_Global
+    ########################################################### Return Value ########################################################
+    CDM_Global_All_Statistice = []
+    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX,CDM_Global)
+    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK,risk_All)
+    return CDM_Global_All_Statistice
