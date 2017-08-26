@@ -33,18 +33,18 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
                         ta_index += 1
                     threat_action_name_list_specific_asset.insert(ta_index,[threat_action_name_to_id[threat_action_specific_asset],threat_action_specific_asset_list[threat_action_specific_asset]])
             threat_action_name_list.append(threat_action_name_list_specific_asset)
-    Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    # Utitilities.printThreatActionNameListIter(threat_action_name_list)
     ######################################################################### Prune The Threat Action Name List Here ####################
     for threat_action_list_specific_asset_index in range(len(threat_action_name_list)):
         threat_action_name_list[threat_action_list_specific_asset_index] = threat_action_name_list[threat_action_list_specific_asset_index][0:ProjectConfigFile.CHOSEN_NUMBER_THREAT_ACTION]
     ######################################################################### End of Pruning The Threat Action Name List Here ###################
-    Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    # Utitilities.printThreatActionNameListIter(threat_action_name_list)
 
     for i in range(len(threat_action_name_list)):
         threat_action_id_list_for_all_assets.append([])
         for threat_action_id in threat_action_name_list[i]:
             threat_action_id_list_for_all_assets[i].append(threat_action_id[0])
-    print "Threat Action ID %s" % (threat_action_id_list_for_all_assets)
+    # print "Threat Action ID %s" % (threat_action_id_list_for_all_assets)
 
     asset_index = 0
     for asset_type_index in range(len(asset_enterprise_list)):
@@ -59,13 +59,13 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
                         selected_security_controls_asset.append(security_control)
             selected_security_controls.append(selected_security_controls_asset)
             asset_index += 1
-    Utitilities.printSelectThreatActionName(threat_action_name_list,threat_action_list)
-    Utitilities.printSelectedSecurityControls(security_control_list,selected_security_controls)
+    # Utitilities.printSelectThreatActionName(threat_action_name_list,threat_action_list)
+    # Utitilities.printSelectedSecurityControls(security_control_list,selected_security_controls)
     # TestCases.securityControlCoverage(security_control_list,selected_security_controls,threat_action_name_list)
     # startProcessing(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,asset_enterprise_list,risk_threat_action,threat_list,threat_name_to_id)
     ######################################################### STart of the test and alternative approach ###########################################
     select_threat(threat_list, asset_enterprise_list,threat_id_for_all_assets)
-    Utitilities.printThreatIdForAllAssets(threat_id_for_all_assets,threat_list)
+    # Utitilities.printThreatIdForAllAssets(threat_id_for_all_assets,threat_list)
     return CDMOptimizationTest.SMT_Environment(security_control_list, selected_security_controls, threat_action_name_list,
                                         threat_action_list, threat_action_id_list_for_all_assets,
                                         threat_id_for_all_assets, threat_list,

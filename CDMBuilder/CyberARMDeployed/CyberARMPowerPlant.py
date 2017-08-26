@@ -42,7 +42,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     Utitilities.printAssetList(asset_enterprise_list)
     init_power_plant(asset_enterprise_list,enterprise_asset_list_given)
     # ThreatStatisticsSingle.find_threat_statistics_all(threat_threatAction_asset_veris,asset_name_list,threat_threat_action_possible_pair)
-    print "Asset Enterprise List %s" % (enterprise_asset_list_given)
+    # print "Asset Enterprise List %s" % (enterprise_asset_list_given)
     # print "Threat Threat Action Asset Veris %s" % (threat_threatAction_asset_veris)
     # print "Asset List %s" % (asset_name_list)
     # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
@@ -63,8 +63,8 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # print "Threat given Threat Action Experience %s" % (prob_threat_threat_action_experience)
     # print "Risk Threat %s" % (risk_threat[1])
     # print "Risk Threat Action %s" % (risk_threat_action[1])
-    Utitilities.printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given)
-    Utitilities.printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given)
+    # Utitilities.printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given)
+    # Utitilities.printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given)
 
     ######################################################### Check the output ##############################################################################
     # Utitilities.printAllStatistics(prob_threat,threat_threatAction_asset[0],prob_threat_action_threat,threat_threat_action_possible_pair)
@@ -72,7 +72,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printNumberStatisticsThreatThreatActionWithProb(prob_threat,threat_threatAction_asset,prob_threat_action_threat)
     # Utitilities.printThreatThreatActionStatistics(threat_threatAction_asset[0],prob_threat_threat_action)
     # Utitilities.printThreatImpact()
-    Utitilities.printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given)
+    # Utitilities.printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given)
     # Utitilities.printKillChainPhases(enterprise_asset_list_given)
     # Utitilities.printThreatAction(risk_threat,risk_threat_action,prob_threat_experience,prob_threat_action_threat_experience)
 

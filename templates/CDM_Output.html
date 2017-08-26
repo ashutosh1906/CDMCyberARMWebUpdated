@@ -19,7 +19,7 @@
                 <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
     </div>
-    <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="position:relative;">
+    <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="">
         <div id="threat_action_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
         </div>
           <!--button id="edit_button_cdm_row">Edit</button-->
@@ -31,6 +31,7 @@
     <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
     <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
+
     <script type="text/javascript">
         $(document).ready(function () {
             /************************ Initialize the grid *****************************************/
@@ -67,7 +68,7 @@
                     { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
 
                 ],
-                groups: ['asset_name']
+{#                groups: ['asset_name']#}
             });
             $('#cdm_grid').jqxGrid({ pagesize: 200});
             /************************ End of the initialization **********************************/

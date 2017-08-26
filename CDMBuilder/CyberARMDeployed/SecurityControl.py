@@ -32,7 +32,7 @@ class SecurityControl(object):
         self.asset_threat_action_list.append(threat_action_entity_id)
 
     def addThreatAction(self,threat_action_entity_id,effectiveness):
-        print "Threat Actin Entity ID %s" % (threat_action_entity_id)
+        # print "Threat Actin Entity ID %s" % (threat_action_entity_id)
         if threat_action_entity_id in self.threat_action:
             return
         self.threat_action.append(threat_action_entity_id)
