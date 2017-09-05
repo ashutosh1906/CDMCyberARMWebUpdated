@@ -51,6 +51,8 @@ def loginPost(request):
         return redirect('cyberARM')
     if action_name == 'CSC Mapping':
         return redirect('csc_classification')
+    if action_name == 'Threat-KC Phase Mapping':
+        return redirect('threatActionKillChainPhaseMapping')
 
 def developQueryModel(all_cdm_row):
     # print "Number of rows %s" % (all_cdm_row.count())
@@ -124,6 +126,59 @@ def insertThreatActions(request):
         ta_sc.threat_action = threat_action
         ta_sc.save()
         return redirect('threatAction')
+
+
+#################################################################### Threat Action To KIll Chain Phase Mapping ############################################
+def createGridInputThreatActionKCPhase():
+    ta_kc_objects_list = model.threat_action_kc_phase.objects.all()
+    ta_kc_list = []
+    for ta_kc_object in ta_kc_objects_list:
+        ta_kc_list_row = {}
+        ta_kc_list_row['threat_action'] = ta_kc_object.threat_action_name
+        ta_kc_list_row['kc_phase'] = ta_kc_object.kc_phase
+        ta_kc_list.append(ta_kc_list_row)
+    return ta_kc_list
+
+def ThreatActionKCPhaseMapping(request):
+    if request.method == 'GET':
+        ta_kc_list = createGridInputThreatActionKCPhase()
+        send_data = {}
+        threat_action_list = model.Threat_Action.objects.all()
+        threat_action_name = []
+        for threat_action in threat_action_list:
+            threat_action_name.append(threat_action.threat_action_name)
+        threat_action_name = sorted(threat_action_name)
+        send_data['threat_action_source'] = json.dumps(threat_action_name)
+        print "Threat Action Name List %s" % (threat_action_name)
+
+        kill_chain_phase_list = []
+        kill_chain_phase_objects = model.kill_chain_phase.objects.all()
+        for kill_chain_phase in kill_chain_phase_objects:
+            kill_chain_phase_list.append(kill_chain_phase.kc_phase)
+        # kill_chain_phase_list = sorted(kill_chain_phase_list)
+        send_data['kill_chain_phase_list'] = json.dumps(kill_chain_phase_list)
+        send_data['grid_src'] = json.dumps(ta_kc_list)
+        print "Kill Chain Phase %s" % (kill_chain_phase_list)
+        return render(request,'ThreatActionKillChainPhase.html',send_data)
+
+    if request.method=='POST':
+        json_loads = json.loads(request.body.decode("utf-8"))
+        kc_phase = json_loads['kc_phase']
+        print ":( :( :( :( %s"%(kc_phase)
+        threat_action = json_loads['threat_action']
+        print kc_phase, " ---> ", threat_action
+        # print request.POST['sc_name_current']," :::: ",request.POST['threat_action_current']
+        ta_kc = model.threat_action_kc_phase()
+        ta_kc.kc_phase = kc_phase
+        ta_kc.threat_action_name = threat_action
+        ta_kc.save()
+        send_data = {}
+        ta_kc_list = createGridInputThreatActionKCPhase()
+        send_data['grid_src'] = json.dumps(ta_kc_list)
+        return HttpResponse(
+            send_data['grid_src'],
+            content_type="application/json"
+        )
 
 def cdmDisplaySecurityControl(request):
     if request.method=='GET':
@@ -423,6 +478,8 @@ def cyberARM_request_old(request):
         return render(request,'CyberDefenseMatrixList.html',{'asset_name':asset_dict,'asset_name_js':json.dumps(asset_dict),
                                                              'send_data':json.dumps(send_data),'k_c_phase':GlobalVariables.kill_chain_phase})
 
+
 def cyberARM_BackProcess():
     for i in range(10):
         print "Process ",i
+

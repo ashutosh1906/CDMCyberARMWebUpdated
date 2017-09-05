@@ -74,6 +74,11 @@ function init_insert_cyber_defense_matrix_form(){
     $("#explanation").val("");
 }
 
+function init_threat_action_kc_phase_mapping(){
+    $("#kc_phase").val("");
+    $("#threat_action").val("");
+}
+
 function ajaxInsertCDMRow(form_data,url) {
     console.log(form_data);
     console.log("URL "+url);
@@ -94,6 +99,35 @@ function ajaxInsertCDMRow(form_data,url) {
         success: function (data_received) {
             loadDataGridUpdated(data_received);
             init_insert_cyber_defense_matrix_form();
+
+        },
+        error: function () {
+            alert("Error");
+        }
+    });
+
+}
+
+function ajaxInsertThreatActionKCPhase(form_data,url) {
+    console.log(form_data);
+    console.log("URL "+url);
+    form_data['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+    var sc_row = JSON.stringify(form_data);
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: 'application/json',
+        dataType: 'json',
+        data:sc_row,
+        "beforeSend": function(xhr, settings) {
+            console.log("Before Send");
+            $.ajaxSettings.beforeSend(xhr, settings);
+
+        },
+
+        success: function (data_received) {
+            loadDataGridThreatActionKCPhase(data_received);
+            // init_threat_action_kc_phase_mapping();
 
         },
         error: function () {
@@ -237,6 +271,39 @@ function loadDataGrid(dataLoad){
                 ]
             });
     }
+
+    /////////////////////////////////////////////////// Threat Action To Kill Chain Phase Mapping ///////////////////////////////////////////////////////////////////
+    function loadDataGridThreatActionKCPhase(dataLoad){
+                console.log(dataLoad);
+                var source =
+                {
+                    localdata: dataLoad,
+                    datatype: "array",
+                    datafields: [{ name: 'threat_action'},
+                      { name: 'kc_phase'},
+               ] };
+
+                var dataAdapter = new $.jqx.dataAdapter(source, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#jqxgrid").jqxGrid(
+                {
+                    source: dataAdapter,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    filterable: true,
+        // cellValue - cell's current value, row data - row's data, data field - column's data field, filterGroup - group of filters, defaultFilterResult - the built-in boolean evaluated result-
+
+                    columns: [
+                        {text: 'Threat Action', datafield: 'threat_action', width:350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width:350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    ]
+                });
+        }
+
 
     function loadDataGridWithName(dataLoad,name){
             console.log("(...)(..)(..)(..)"+dataLoad);

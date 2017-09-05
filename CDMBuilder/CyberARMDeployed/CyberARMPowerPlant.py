@@ -75,7 +75,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printRiskThreatThreatAction(risk_threat_action,risk_threat,enterprise_asset_list_given)
     # Utitilities.printKillChainPhases(enterprise_asset_list_given)
     # Utitilities.printThreatAction(risk_threat,risk_threat_action,prob_threat_experience,prob_threat_action_threat_experience)
-    Utitilities.printRiskThreatAction(risk_threat_action,asset_enterprise_list)
+    # Utitilities.printRiskThreatAction(risk_threat_action,asset_enterprise_list)
 
     ########################################################## List of Security Controls, Threat Action and Mappings ##########################################
     ThreatActionToSecurityControl.parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given)
@@ -86,7 +86,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printSecurityControlThreatmapping(security_control_list,security_control_version_to_id,threat_action_list)
     # Utitilities.printThreatSecurityControlMapping(threat_action_list,threat_action_name_to_id,security_control_list,risk_threat_action,enterprise_asset_list_given)
     recommendedCDM = []
-    affordable_risk = 916682
+    affordable_risk = 800000
     recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget)
     # write_output_file.close()
     return recommendedCDM

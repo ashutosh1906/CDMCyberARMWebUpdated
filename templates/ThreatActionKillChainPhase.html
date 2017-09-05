@@ -1,17 +1,18 @@
 {% extends "cdmDisplay.html" %}
-{% block titlename %} Threat Action {% endblock %}
+{% block titlename %} Threat-KC Phase Mapping {% endblock %}
 
 {% block scriptBlock %}
         <script type="text/javascript" src="../static/utilities_Custom.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#jqxlistbox").jqxListBox({ source:JSON.parse("{{ sc_source | escapejs}}"), width: '500px', height: '200px' });
+                $("#jqxlistbox").jqxListBox({ source:JSON.parse("{{ kill_chain_phase_list | escapejs}}"), width: '500px', height: '200px' });
                 $("#jqxlistboxTA").jqxListBox({ source:JSON.parse("{{ threat_action_source | escapejs }}"), width: '500px', height: '200px' });
 
                 $('#jqxlistbox').bind('select', function (event) {
                     var args = event.args;
                     var item = $('#jqxlistbox').jqxListBox('getItem', args.index);
-                    $("#sc_name").val(item.label);
+{#                    console.log(item);#}
+                    $("#kc_phase").val(item.label);
 {#                    console.log($("#jqxlistbox").jqxListBox('getItem',$("#jqxlistbox").jqxListBox('getSelectedIndex')).value);#}
                 });
                 $('#jqxlistboxTA').bind('select', function (event) {
@@ -31,8 +32,18 @@
                 $('#jqxgrid').jqxGrid({ pagesizeoptions: ['10', '20', '30','40','50','100','200']});
                 $('#jqxgrid').jqxGrid({ pagesize: 150});
                 var data = JSON.parse("{{ grid_src | escapejs}}");
-                loadDataGridThreatAction(data);
+                loadDataGridThreatActionKCPhase(data);
                 var filter = $('#jqxgrid').jqxGrid('filter');
+
+                ///////////////////////// Form Submission ////////////////////////////
+                $("#map_button").click(function () {
+                   form_data = {};
+                   form_data['kc_phase'] = $("#kc_phase").val();
+                   form_data['threat_action'] =  $("#threat_action").val();
+                   console.log(form_data);
+                   ajaxInsertThreatActionKCPhase(form_data,"/threatActionKillChainPhaseMapping/")
+                });
+
 
             });
 
@@ -40,33 +51,37 @@
 {% endblock %}
 {% block content %}
     <div class="container-fluid col-md-10 col-md-offset-1" style="padding: 10px;">
-     <form method="post" action="">
-         {% csrf_token %}
-        <div class="row">
-                <div class="col-xs-6">
-                    <label for="sc_name">Security Control Name</label>
 
-                </div>
+         <div class="row">
                 <div class="col-xs-6">
                     <label for="threat_action">Threat Action</label>
                 </div>
-                 <div class="col-xs-6">
-                    <input type="text" class="form-control" name="sc_name" id="sc_name" placeholder="Security Control Name"/>
+                <div class="col-xs-6">
+                    <label for="sc_name">Kill Chain Phase</label>
                 </div>
+
                 <div class="col-xs-6">
                     <input type="text" class="form-control" name="threat_action" id="threat_action" placeholder="Threat Action"/>
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" name="kc_phase" id="kc_phase" placeholder="Kill Chain Phase"/>
+                </div>
+
+                <div class="col-xs-6" style="padding-top: 10px;">
+                    <div id='jqxlistboxTA'>
+                    </div>
                 </div>
                 <div class="col-xs-6" style="padding-top: 10px;">
                     <div id='jqxlistbox'>
                     </div>
                 </div>
-                <div class="col-xs-6" style="padding-top: 10px;">
-                    <div id='jqxlistboxTA'>
-                    </div>
-                </div></div>
 
-             <div style="text-align:center;margin-top:20px;"><button type="submit" class="btn btn-primary">Map CSC to Threat Action</button></div>
-    </form>
+         </div>
+
+         <div style="text-align:center;margin-top:20px;">
+             <button class="btn btn-primary" id="map_button">Map Threat Action to Kill Chain Phase</button>
+         </div>
+
      </div>
      <div style="padding-top: 20px;">
             <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>

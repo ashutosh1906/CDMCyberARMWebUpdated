@@ -76,3 +76,10 @@ class cyber_defense_matrix_norm(models.Model):
     explanation = models.CharField(max_length=500)
     class Meta:
         db_table = 'cyber_defense_matrix_norm'
+
+class threat_action_kc_phase(models.Model):
+    kc_phase = models.CharField(max_length=200,)
+    threat_action_name = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'threat_action_kc_phase'
+        unique_together=(('kc_phase','threat_action_name'),)
