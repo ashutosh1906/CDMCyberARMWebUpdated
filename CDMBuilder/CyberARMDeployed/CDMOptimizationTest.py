@@ -111,6 +111,10 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                                                                           threat_list[threat_id].threat_impact_asset[asset_index]
             minimum_affordable_risk[asset_index] = sum(minimum_threat_specific_risk[asset_index])
             asset_index += 1
+    global_min_risk = sum(minimum_affordable_risk)
+    print "Global Minimum Risk %s" % (global_min_risk)
+    if global_min_risk > affordable_risk:
+        return [[] for i in range(2)]
 
     asset_index = 0
     for i in range(len(asset_enterprise_list)):
@@ -118,7 +122,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             # print "Minimum Threat Specific Risk %s" % (minimum_threat_specific_risk[asset_index])
             # print "Minimum Affordable Risk %s" % (minimum_affordable_risk[asset_index])
             asset_index += 1
-    print "Global Minimum Risk %s" % (sum(minimum_affordable_risk))
+
 
     asset_list_for_smt = []
     for i in range(len(asset_enterprise_list)):
@@ -138,8 +142,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     ############################################################ End SMT Environment ####################################################
 
     ############################################################ Declare SMT Solver #####################################################
-    # cyberARM = Solver()
-    cyberARM = Optimize()
+    cyberARM = Solver()
+    # cyberARM = Optimize()
     ############################################################ End Declare SMT Solver #################################################
 
     ############################################################ 1. Declare the variables #################################################
@@ -272,10 +276,15 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     cyberARM.add([smt_Total_Security_Control_Cost[asset_index]==sum(smt_Security_Control_Cost[asset_index]) for asset_index in range(len(asset_list_for_smt))])
     cyberARM.add(smt_Global_Security_Control_Cost==sum(smt_Total_Security_Control_Cost))
     cyberARM.add(smt_Global_Security_Control_Cost <= budget)
+
+    ############################################################ 2.6 Add The Total Residual Risk #############################################
+    print "***** Affordable Risk %s *********" % (affordable_risk)
+    cyberARM.add(smt_Global_Residual_Risk <= affordable_risk)
     ############################################################ End Constrainst Development #################################################
 
     ############################################################ 3. Check the model ##########################################################
-    cyberARM.minimize(smt_Global_Residual_Risk)
+    # cyberARM.minimize(smt_Global_Residual_Risk)
+    # cyberARM.solve()
     satisfiability = cyberARM.check()
 
     ############################################################ 4. Get The Model ############################################################

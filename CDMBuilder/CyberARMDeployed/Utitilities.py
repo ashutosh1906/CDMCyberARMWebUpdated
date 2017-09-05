@@ -231,7 +231,9 @@ def printThreatActionNameListIter(threat_action_name_list):
     print "Threat Action List"
     for i in range(len(threat_action_name_list)):
         print "Asset Index %s" % (i)
-        print "Threat Action List\n %s" % (threat_action_name_list[i])
+        # print "Threat Action List\n %s" % (threat_action_name_list[i])
+        for j in range(len(threat_action_name_list[i])):
+            print "Threat Action %s ----> %s" % (j,threat_action_name_list[i][j])
 
 def printThreatIdForAllAssets(threat_id_for_all_assets,threat_list):
     for i in threat_list:
@@ -252,6 +254,12 @@ def printRiskPerThreatStatistics(risk):
             print "Implementation Cost %s" % (risk_row['imp_cost'])
             print "Threat Action %s" % (risk_row['threat_list'])
 
+def printRiskThreatAction(risk_threat_action,asset_enterprise_list):
+    for i in range(len(asset_enterprise_list)):
+        for j in range(len(asset_enterprise_list[i])):
+            print "Asset Name : %s" % (asset_enterprise_list[i][j])
+            for threat_action in risk_threat_action[i][j].keys():
+                print "    Threat Action %s ----> %s" % (threat_action,risk_threat_action[i][j][threat_action])
 
 
 
