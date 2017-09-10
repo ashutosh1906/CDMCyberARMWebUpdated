@@ -135,6 +135,22 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     print "Selected Security Controls %s" % (selected_security_controls)
     print "Selected Threat %s" % (threat_id_for_all_assets)
     print "Threat Roll %s" % (threat_id_to_position_roll)
+
+    ################################################# Min Security Control Cost #############################################################
+    min_sec_control_cost = -1
+    max_sec_control_cost = -1
+    for i in range(len(selected_security_controls)):
+        for sec_control in selected_security_controls[i]:
+            if security_control_list[sec_control].investment_cost > max_sec_control_cost:
+                max_sec_control_cost = security_control_list[sec_control].investment_cost
+            if min_sec_control_cost < 0:
+                min_sec_control_cost = security_control_list[sec_control].investment_cost
+            if security_control_list[sec_control].investment_cost < min_sec_control_cost:
+                min_sec_control_cost = security_control_list[sec_control].investment_cost
+    print "Min Security Control Cost %s" % (min_sec_control_cost)
+    print "Max Security Control Cost %s" % (max_sec_control_cost)
+    ################################################# Max Security Control Cost #############################################################
+
     ###################################################### End of Design of All Heuristics Here ############################################
     ############################################################ Set SMT Environment ####################################################
     set_option(rational_to_decimal=True)
@@ -350,7 +366,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         except:
             # print "Remove the last character"
             risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3)[:-1])
-
+        risk_All[i]['max_risk'] = round(risk_All[i]['max_risk'],3)
         risk_All[i]['threat_list']=threat_specific_risk_list
         # print "Total Residual Risk for Asset %s" % (recommended_CDM[smt_Residual_Risk_Asset[i]])
         # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])

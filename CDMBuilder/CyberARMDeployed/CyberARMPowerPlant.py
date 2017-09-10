@@ -86,7 +86,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # Utitilities.printSecurityControlThreatmapping(security_control_list,security_control_version_to_id,threat_action_list)
     # Utitilities.printThreatSecurityControlMapping(threat_action_list,threat_action_name_to_id,security_control_list,risk_threat_action,enterprise_asset_list_given)
     recommendedCDM = []
-    affordable_risk = 800000
+    affordable_risk = 910000
     recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget)
     # write_output_file.close()
     return recommendedCDM
