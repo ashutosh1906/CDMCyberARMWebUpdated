@@ -115,7 +115,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     global_min_risk = sum(minimum_affordable_risk)
     print "Global Minimum Risk %s" % (global_min_risk)
     if global_min_risk > affordable_risk:
-        return [[] for i in range(ProjectConfigFile.NUMBER_OF_CYBERARM_OUTPUT)]
+        return [[] for i in range(2)]
 
     asset_index = 0
     for i in range(len(asset_enterprise_list)):
@@ -130,7 +130,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for j in range(len(asset_enterprise_list[i])):
             asset_list_for_smt.append(asset_enterprise_list[i][j])
 
-    # Utitilities.printAssetList(asset_list_for_smt)
+    Utitilities.printAssetList(asset_list_for_smt)
     print "Selected Threat Action %s" % (threat_action_id_list_for_all_assets)
     print "Threat Action Roll %s" % (threat_action_id_to_position_roll)
     print "Selected Security Controls %s" % (selected_security_controls)
@@ -151,7 +151,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     print "Min Security Control Cost %s" % (min_sec_control_cost)
     print "Max Security Control Cost %s" % (max_sec_control_cost)
     print "Budegt Value %s Budget Type %s" % (budget,type(budget))
-    max_security_control_number = int(budget/min_sec_control_cost)
+    max_security_control_number = budget/float(min_sec_control_cost)
     print "Max Number of Security Controls %s" % (max_security_control_number)
     ################################################# Max Security Control Cost #############################################################
 
@@ -175,7 +175,6 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     # print "SMT Security Controls Cost %s" % (smt_Security_Control_Cost)
     smt_Total_Security_Control_Cost = [Real('smt_total_sc_cost_%s'%(asset[0])) for asset in asset_list_for_smt]
     smt_Global_Security_Control_Cost = Real('smt_Global_Security_Control_Cost')
-    smt_Security_Control_Flag = [[Int('smt_Security_Control_Flag_%s_%s'%(asset_roll,sec_index)) for sec_index in range(len(selected_security_controls[asset_roll]))] for asset_roll in range(len(selected_security_controls))]
     ############################################################ 1.2 Declare the threat variables #######################################
     smt_Threat = [[Real('Th_%s_%s'%(i,j)) for j in threat_id_for_all_assets[i]] for i in range(len(threat_id_for_all_assets))]
     # print "SMT Threat %s" % (smt_Threat)
@@ -237,10 +236,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 cost_cons = (smt_Security_Control_Cost[asset_index][sec_index]==
                              If(smt_Security_Control_Bool[asset_index][sec_index],
                               security_control_list[sec_control].investment_cost,0))
-                security_control_flag_cons = (smt_Security_Control_Flag[asset_index][sec_index]==If(smt_Security_Control_Bool[asset_index][sec_index],1,0))
                 cyberARM.add(cons)
                 cyberARM.add(cost_cons)
-                cyberARM.add(security_control_flag_cons)
             sec_index += 1
 
     ############################################################# 2.2 Threat Action Success Constraint #####################################
@@ -304,8 +301,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     cyberARM.add(smt_Global_Security_Control_Cost <= budget)
 
     ########################################################### 2.6 Maximum Number of Security Controls ############################################
-    cyberARM.add(smt_Maximum_Number_Security_Control == sum([sum([smt_Security_Control_Flag[asset_index][sec_index] for sec_index in range(len(selected_security_controls[asset_index]))]) for asset_index in range(len(selected_security_controls))]))
-    cyberARM.add(smt_Maximum_Number_Security_Control <= max_security_control_number)
+    # cyberARM.add(smt_Maximum_Number_Security_Control <= max_security_control_number)
 
     ############################################################ 2.6 Add The Total Residual Risk #############################################
     print "***** Affordable Risk %s *********" % (affordable_risk)
@@ -333,10 +329,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             print "Total Asset Security Control Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
             # for sec_control_id in selected_security_controls[i]:
             #     print "Cost %s: %s" % (security_control_list[sec_control_id].sc_name,security_control_list[sec_control_id].investment_cost)
-        print "Number of Selected Security Controls %s" % (recommended_CDM[smt_Maximum_Number_Security_Control])
     else:
         print "There is no satisfiable model"
-        return [[] for i in range(ProjectConfigFile.NUMBER_OF_CYBERARM_OUTPUT)]
     ################################################################## Prepare the output ###################################################
     CDM_Global_id = []
     for asset_index in range(len(asset_list_for_smt)):
@@ -353,10 +347,6 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     # print CDM_Global_id
     ############################################### Capture The Risk ###############################################################
     risk_All = []
-    roi_row = {}
-    roi_row_key = [ProjectConfigFile.IMPOSED_RISK,ProjectConfigFile.RESIDUAL_RISK,ProjectConfigFile.TOTAL_IMPLEMENTATION_COST,ProjectConfigFile.MITIGATED_RISK,ProjectConfigFile.ROI]
-    for keys in roi_row_key:
-        roi_row[keys] = 0
     for i in range(len(threat_id_for_all_assets)):
         # print "Asset Name : %s" % (asset_list_for_smt[i])
         risk_All.append({})
@@ -373,7 +363,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             except:
                 # print "Remove the last character"
                 threat_specific_risk['risk_ta'] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3)[:-1])
-            threat_specific_risk['prev_risk'] = round(threat_list[threat_id].maximum_risk[i],3)
+            threat_specific_risk['prev_risk'] = threat_list[threat_id].maximum_risk[i]
             # print type(recommended_CDM[smt_Threat[i][j]])
             risk_All[i]['max_risk'] += threat_list[threat_id].maximum_risk[i]
             threat_specific_risk_list.append(threat_specific_risk)
@@ -390,13 +380,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3)[:-1])
         risk_All[i]['max_risk'] = round(risk_All[i]['max_risk'],3)
         risk_All[i]['threat_list']=threat_specific_risk_list
-        roi_row[ProjectConfigFile.IMPOSED_RISK] += risk_All[i]['max_risk']
-        roi_row[ProjectConfigFile.RESIDUAL_RISK] += risk_All[i]['res_risk']
-        roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] += risk_All[i]['imp_cost']
         # print "Total Residual Risk for Asset %s" % (recommended_CDM[smt_Residual_Risk_Asset[i]])
         # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
-    roi_row[ProjectConfigFile.MITIGATED_RISK] = round(roi_row[ProjectConfigFile.IMPOSED_RISK] - roi_row[ProjectConfigFile.RESIDUAL_RISK],3)
-    roi_row[ProjectConfigFile.ROI] = round((roi_row[ProjectConfigFile.MITIGATED_RISK] - roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST])/float(roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST]),3)
     Utitilities.printRiskPerThreatStatistics(risk_All)
 
     ############################################################ Prepare the dataset for the grid view ##############################
@@ -418,5 +403,4 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     CDM_Global_All_Statistice = []
     CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX,CDM_Global)
     CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK,risk_All)
-    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_ROI,roi_row)
     return CDM_Global_All_Statistice

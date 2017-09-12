@@ -17,7 +17,7 @@ import UtilityFunctions
 threat_threat_action_map = {}
 ####################### End Global #############################
 
-from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK
+from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK,CYBERARM_ROI
 
 
 def login(request):
@@ -402,6 +402,7 @@ def cyberARM_request_updated(request):
         print recommendedCDM
         send_data['cdm_list'] = json.dumps(recommendedCDM[CYBERARM_CDM_MATRIX])
         send_data['risk_list'] = json.dumps(recommendedCDM[CYBERARM_RISK])
+        send_data['roi'] = json.dumps(recommendedCDM[CYBERARM_ROI])
         return render(request,'CDM_Output.html',send_data)
 
 #################################################################### End Calling CyberARM #############################################

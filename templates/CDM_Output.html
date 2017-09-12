@@ -10,14 +10,50 @@
                 <div id="cdm_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
     </div>
+
     <div class="container-fluid" style="margin-top: 30px;">
         <div style="text-align: center">
             <a id="risk_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Risk Statistics</a>
         </div>
     </div>
      <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
+
+         <div class="container-fluid" style="margin-top: 30px;font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="imposed_risk">Imposed Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0" style="margin-right: auto;">
+                    <a id="imposed_risk"></a>
+                </div>
+          </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="residual_risk">Residual Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="residual_risk"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="mitigated_risk">Mitigated Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="mitigated_risk"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="roi">ROI</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="roi"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="margin-top: 30px;">
                 <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
+         </div>
     </div>
     <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="">
         <div id="threat_action_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
@@ -74,7 +110,17 @@
             /************************ End of the initialization **********************************/
 
             /************************ Initialize the risk grid *****************************************/
-            var dataLoadRisk = JSON.parse("{{ risk_list | escapejs }}");;
+            var dataLoadRisk = JSON.parse("{{ risk_list | escapejs }}");
+            var dataROI = JSON.parse("{{ roi | escapejs }}");
+{#            console.log(dataROI);#}
+            loadROIStatistics()
+            function loadROIStatistics() {
+                 $("#imposed_risk").text(dataROI['Imposed Risk']);
+                 $("#residual_risk").text(dataROI['Residual Risk']);
+                 $("#mitigated_risk").text(dataROI['Mitigated Risk']);
+                 $("#roi").text(dataROI['ROI']);
+            }
+
             var sourceAssetRisk =
             {
                 localdata: dataLoadRisk,
