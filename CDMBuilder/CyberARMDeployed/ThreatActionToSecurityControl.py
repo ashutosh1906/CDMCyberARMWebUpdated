@@ -18,6 +18,10 @@ def security_controls_list_builder(security_control_list,security_control_versio
         start_index += 1
     sc_file.close()
 
+def reinitialize_security_control_list(security_control_list):
+    for security_control in security_control_list:
+        security_control.re_init()
+
 def threat_action_security_controls_builder(security_control_version_to_id,security_control_list,threat_action_list,threat_action_name_to_id):
     ta_sc_file = open(THREAT_ACTION_SECURITY_CONTROL_FILE,'r+')
     for line in ta_sc_file:
@@ -95,7 +99,8 @@ def prepare_threat_action_for_threat(threat_list,prob_threat_action_threat,prob_
         threat.determine_maximum_risk()
 
 def parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given):
-    security_controls_list_builder(security_control_list,security_control_version_to_id)
+    # security_controls_list_builder(security_control_list,security_control_version_to_id)
+    reinitialize_security_control_list(security_control_list)
     threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,enterprise_asset_list_given)
     threat_action_security_controls_builder(security_control_version_to_id,security_control_list,threat_action_list,threat_action_name_to_id)
     threat_builder(risk_threat,threat_list,threat_name_to_id,len(enterprise_asset_list_given))

@@ -8,6 +8,8 @@ threat_threat_action_possible_pair = {}
 prob_threat_action_threat = {}
 prob_threat_threat_action = {}
 prob_threat = {}
+security_control_list = []
+security_control_version_to_id = {}
 
 def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
     for i in range(len(asset_enterprise_list)):
@@ -15,7 +17,7 @@ def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
             asset_name = asset[0]
             if asset_name not in enterprise_asset_list_given:
                 enterprise_asset_list_given.append(asset_name)
-    ProjectConfigFile.init_conf()
+    # ProjectConfigFile.init_conf()
 
 def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     print "The Power Plant has started :: Affordable Risk --> %s Budget --> %s" % (affordable_risk,budget)
@@ -25,8 +27,6 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     prob_threat_threat_action_alternative = {}
     risk_threat = [[] for i in range(2)]
     risk_threat_action = [[] for i in range(2)]
-    security_control_list = []
-    security_control_version_to_id = {}
     threat_action_list = []
     threat_action_name_to_id = {}
     threat_list = []

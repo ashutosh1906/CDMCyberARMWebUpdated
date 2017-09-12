@@ -16,6 +16,9 @@
                         <input type="text" id="affordable_risk" placeholder="Enter Affordable Risk"/>
                     </div>
          </div>
+        <div class="container-fluid" style="text-align: center;">
+            <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;">Please Fill The Affordable Risk & Budget Input</p>
+        </div>
         <div class="container-fluid ">
             <div class="col">
                     <label for="Threat Data Source">Threat Data Source</label>
@@ -346,6 +349,14 @@
                 data_input['budget'] = $("#budget").val();
                 data_input['affordable_risk'] = $("#affordable_risk").val();
                 data_input['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+                if (data_input['budget']==""){
+                    $("#risk_budget_label").toggle();
+                    return;
+                }
+                if (data_input['affordable_risk']==""){
+                    $("#risk_budget_label").toggle();
+                    return;
+                }
                 data_string_send = JSON.stringify(data_input);
                 console.log(data_string_send);
                 console.log(data_input);

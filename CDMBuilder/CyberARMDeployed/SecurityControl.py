@@ -15,6 +15,13 @@ class SecurityControl(object):
         self.global_asset_threat_action_list = []
         self.investment_cost = random.randint(1000,5000)
 
+    def re_init(self):
+        del self.threat_action[:]
+        self.threat_action_effectiveness.clear()
+        self.number_threat_action = 0
+        del self.asset_threat_action_list[:]
+        del self.global_asset_threat_action_list[:]
+
     def prepare_global_asset_threat_action_list(self,threat_action_id_list_for_all_assets):
         if len(self.global_asset_threat_action_list) > 0:
             return
