@@ -44,6 +44,14 @@
          </div>
          <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
                 <div class="col-md-2 col-md-offset-4">
+                    <label for="imp_cost">CDM Cost</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="imp_cost"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
                     <label for="roi">ROI</label>
                 </div>
                 <div class="col-md-2  col-md-offset-0">
@@ -119,6 +127,7 @@
                  $("#residual_risk").text(dataROI['Residual Risk']);
                  $("#mitigated_risk").text(dataROI['Mitigated Risk']);
                  $("#roi").text(dataROI['ROI']);
+                 $("#imp_cost").text(dataROI['Total Implementation Cost']);
             }
 
             var sourceAssetRisk =
