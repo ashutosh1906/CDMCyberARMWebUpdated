@@ -157,6 +157,12 @@
                     <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
          </div>
 
+        <div id="ta_dialouge" class="ui-front" style="">
+            <div id="threat_action_stat" style="text-align:center;margin-left:auto;margin-right: auto;">
+            </div>
+              <!--button id="edit_button_cdm_row">Edit</button-->
+        </div>
+
     </div>
 
 
@@ -229,6 +235,7 @@
               <!--button id="edit_button_cdm_row">Edit</button-->
         </div>
 
+
     </div>
 
 {% endblock %}
@@ -278,6 +285,79 @@
 
                 ]
             });
+
+
+            /*************************************** Load Threat Action Dialouge Message *************************************/
+
+            function loadInputThreatActionGrid(threat_action_list_specific_asset){
+                var dataLoadInputThreatAction = threat_action_list_specific_asset;
+                var sourceAssetTAI =
+                {
+                    localdata: dataLoadInputThreatAction,
+                    datatype: "array",
+                    datafields: [{ name: 'threat_action_name_id'},
+                        {name:'frequency'},
+                    ]
+                };
+
+                var dataAdapterThreatActionInput= new $.jqx.dataAdapter(sourceAssetTAI, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#threat_action_stat").jqxGrid(
+                {
+                    source: dataAdapterThreatActionInput,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    columns: [
+                      { text: 'Threat Action', datafield: 'threat_action_name_id', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                         { text: 'Occurrence', datafield: 'frequency', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    ],
+
+                });
+                $("#threat_action_stat").jqxGrid({ pagesize: 200});
+
+            }
+
+
+
+
+            $('#asset_grid_list').on('celldoubleclick', function (event)
+            {
+                var dataRow = $('#asset_grid_list').jqxGrid('getrowdata',event.args.rowindex);
+                var asset_name = dataRow['asset_name'];
+                console.log(asset_name);
+                if(dataRow['data_source']=='Experience')
+                {
+                    /********************** Dialog Box ***********************************/
+                    var threat_action_list_input_specific = [];
+                    for(var i = 0;i<asset_list_given.length;i++){
+                        if(asset_list_given[i]['data_source']=='Experience'){
+                            if(asset_list_given[i]['asset_name'] == asset_name){
+                                threat_action_list_input_specific = asset_list_given[i]['threat_list'];
+                                break;
+                            }
+                        }
+                    }
+                    loadInputThreatActionGrid(threat_action_list_input_specific);
+                    var titleDialouge = "Threat Action Statistics: "+asset_name;
+                    $("#ta_dialouge").dialog({
+                        modal: true,
+                        title:titleDialouge,
+                        position: {my: "center top", at: "center top"},
+                        width: 800,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            },
+                        }
+                    });
+                }
+
+            });
+                /*************************************** End Load Dialouge Message *********************************/
            /****************************************************** End Asset List ************************************/
 
             var threat_action_data = JSON.parse("{{ threat_action|escapejs }}");
@@ -411,20 +491,27 @@
            /********************************* End of adding asset in the list **************/
 
            /*  ###################################### Submit Button Action ########################################### */
-            $("#generate_cdm").click(function () {
+           var box_flag = 0;
+           $("#generate_cdm").click(function () {
                 var data_input = {};
                 data_input['real_data'] = asset_list_given;
                 data_input['budget'] = $("#budget").val();
                 data_input['affordable_risk'] = $("#affordable_risk").val();
                 if (data_input['budget']==""){
                     $("#risk_budget_label").toggle();
+                    box_flag = 1;
                     return;
                 }
                 if (data_input['affordable_risk']==""){
                     $("#risk_budget_label").toggle();
+                    box_flag = 1;
                     return;
                 }
                 initROIStatistics();
+                if(box_flag){
+                    $("#risk_budget_label").toggle();
+                    box_flag = 0;
+                }
                 ajaxCDMInsert(data_input,'/cyberARM/');
             });
 
