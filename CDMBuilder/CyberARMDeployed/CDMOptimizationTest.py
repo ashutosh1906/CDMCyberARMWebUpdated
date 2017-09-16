@@ -115,7 +115,15 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     global_min_risk = sum(minimum_affordable_risk)
     print "Global Minimum Risk %s" % (global_min_risk)
     if global_min_risk > affordable_risk:
-        return [[] for i in range(ProjectConfigFile.NUMBER_OF_CYBERARM_OUTPUT)]
+        max_risk_initial = 0
+        for i in range(len(threat_id_for_all_assets)):
+            for threat_id in threat_id_for_all_assets[i]:
+                max_risk_initial += threat_list[threat_id].maximum_risk[i]
+        recommended_CDM = []
+        recommended_CDM.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX, [])
+        recommended_CDM.insert(ProjectConfigFile.CYBERARM_RISK, [])
+        recommended_CDM.insert(ProjectConfigFile.CYBERARM_ROI, max_risk_initial)
+        return recommended_CDM
 
     asset_index = 0
     for i in range(len(asset_enterprise_list)):
@@ -397,6 +405,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
     roi_row[ProjectConfigFile.MITIGATED_RISK] = round(roi_row[ProjectConfigFile.IMPOSED_RISK] - roi_row[ProjectConfigFile.RESIDUAL_RISK],3)
     roi_row[ProjectConfigFile.ROI] = round((roi_row[ProjectConfigFile.MITIGATED_RISK] - roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST])/float(roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST]),3)
+    roi_row[ProjectConfigFile.IMPOSED_RISK] = round(roi_row[ProjectConfigFile.IMPOSED_RISK],3)
+    roi_row[ProjectConfigFile.RESIDUAL_RISK] = round(roi_row[ProjectConfigFile.RESIDUAL_RISK],3)
+    roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] = round(roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST],3)
     Utitilities.printRiskPerThreatStatistics(risk_All)
 
     ############################################################ Prepare the dataset for the grid view ##############################
@@ -420,3 +431,5 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK,risk_All)
     CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_ROI,roi_row)
     return CDM_Global_All_Statistice
+
+

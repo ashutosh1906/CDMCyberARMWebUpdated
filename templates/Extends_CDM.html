@@ -1,0 +1,84 @@
+{% extends "cdmDisplay.html" %}
+{% block titlename %} Cyber Defense Matrix {% endblock %}
+{% block content %}
+    {% block inputCyberARM %}
+    {% endblock %}
+    <div class="container-fluid">
+        <div style="text-align: center">
+            <a id="cdm_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Cyber Defense Matrix</a>
+        </div>
+    </div>
+    <div class="container-fluid" id="cdm_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px ;">
+                <div id="cdm_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+    </div>
+
+    <div class="container-fluid" style="margin-top: 30px;">
+        <div style="text-align: center">
+            <a id="risk_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Risk Statistics</a>
+        </div>
+    </div>
+     <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
+
+         <div class="container-fluid" style="margin-top: 30px;font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="imposed_risk">Imposed Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0" style="margin-right: auto;">
+                    <a id="imposed_risk"></a>
+                </div>
+          </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="residual_risk">Residual Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="residual_risk"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="mitigated_risk">Mitigated Risk</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="mitigated_risk"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="imp_cost">CDM Cost</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="imp_cost"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                <div class="col-md-2 col-md-offset-4">
+                    <label for="roi">ROI</label>
+                </div>
+                <div class="col-md-2  col-md-offset-0">
+                    <a id="roi"></a>
+                </div>
+         </div>
+         <div class="container-fluid" style="margin-top: 30px;">
+                <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+         </div>
+    </div>
+    <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="">
+        <div id="threat_action_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+        </div>
+          <!--button id="edit_button_cdm_row">Edit</button-->
+    </div>
+{% endblock %}
+{% block scriptPageContent %}
+    {% load static %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
+    <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
+    {% block inputCyberARMScripts %}
+
+    {% endblock %}
+
+{% endblock %}

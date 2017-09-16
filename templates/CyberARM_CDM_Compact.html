@@ -1,0 +1,678 @@
+{% extends "cdmDisplay.html" %}
+{% block titlename %} Cyber ARM {% endblock %}
+{% block content %}
+    <div class="container-fluid" style="border:3px solid #2b85a2;padding:20px;padding-top:30px;width: 90%;border-radius: 20px;">
+         <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="budget">Budget</label>
+                   </div>
+                    <div class="col-sm-2" style="text-align: right">
+                        <input type="text" id="budget" placeholder="Enter the Budget"/>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="affordable_risk">Affordable Risk</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="affordable_risk" placeholder="Enter Affordable Risk"/>
+                    </div>
+         </div>
+        <div class="container-fluid" style="text-align: center;">
+            <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;">Please Fill The Affordable Risk & Budget Input</p>
+        </div>
+        <div class="container-fluid ">
+            <div class="col">
+                    <label for="Threat Data Source">Threat Data Source</label>
+            </div>
+            <div class="dropdown" name="Threat Data Source" id="threat_data_source">
+                    <input type="text" name="threat_data_source" id="threat_data_source" class="drop-text" style="display: none"/>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Threat Data Source
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                         <li><a>VERIS</a></li>
+                         <li><a>Threat History</a></li>
+{#                      <li><a href="#">Execute</a></li>#}
+                    </ul>
+            </div>
+        </div>
+        <div class="container-fluid search_specific_div form-inline" id="veris_source" style="margin-top:20px;display: none;box-shadow:3px 3px 3px 3px ;padding:40px;">
+            <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="Asset Name">Asset Name</label>
+                   </div>
+                    <div class="col-sm-2" style="text-align: right">
+                        <div id='asset_name_veris'></div>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="Number of Asset">Number of Asset</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="number_asset_veris"/>
+                    </div>
+            </div>
+
+            <div class="container-fluid"  style="margin-top:25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="confidentiality">Confidentiality</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="confidentiality_veris"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="integrity">Integrity</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="integrity_veris"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="availability">Availability</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="availability_veris"/>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;text-align: center;">
+                    <button type="button" class="btn btn-primary add_asset">Add Asset</button>
+            </div>
+
+
+        </div>
+
+        <div class="container-fluid search_specific_div" id="other_source" style="margin-top:20px;display:none;box-shadow:3px 3px 3px 3px ;padding:40px;">
+            <div class="container-fluid">
+                  <div class="col-sm-2" style="text-align: right">
+                     <label for="Asset Name">Asset Name</label>
+                   </div>
+                    <div class="col-sm-2" >
+                        <input type="text" id="asset_name_other_source"/>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                         <label for="Number of Asset">Number of Asset</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="number_asset"/>
+                    </div>
+            </div>
+
+            <div class="container-fluid"  style="margin-top:25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="confidentiality">Confidentiality</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="confidentiality"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="integrity">Integrity</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="integrity"/>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="availability">Availability</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" id="availability"/>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="margin-top: 15px;padding-right: 20px;">
+                <a style="color: red;text-decoration: underline;"> Recursively Add Threat Action</a>
+            </div>
+            <div class="container-fluid" style="margin-top: 15px;text-align: center;">
+                <div id="threat_action_list" style="text-align: center;margin-left: auto;margin-right: auto;">
+                </div>
+            </div>
+
+            <div class="container-fluid" style="margin-top: 25px;">
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="threat_action_name">Threat Action</label>
+                    <label style="color: red;display: none;" id="threat_action_error">Please Choose a Threat Action</label>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <div id='threat_action_drop_down_list'></div>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <label for="occurrence">Occurrence</label>
+                    <label style="color: red;display: none;" id="threat_action_occur">Please Give Occurrence</label>
+                </div>
+                <div class="col-sm-2" style="text-align: right">
+                    <input type="text" name="occurrence" id="occurrence"/>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary what" id="add_threat_action">ADD</button>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 25px;text-align: center;">
+                    <button type="button" class="btn btn-primary add_asset">Add Asset</button>
+            </div>
+
+        </div>
+         <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+                <div id="asset_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
+                </div>
+         </div>
+         <div style="margin-top:10px;text-align: center;">
+                    <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
+         </div>
+
+    </div>
+
+
+    <div class="container-fluid" id='CDM_output' style="display: none;margin-top: 25px;">
+        <div class="container-fluid">
+            <div style="text-align: center">
+                <a id="cdm_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Cyber Defense Matrix</a>
+            </div>
+        </div>
+        <div class="container-fluid" id="cdm_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px ;">
+                    <div id="cdm_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                    </div>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 30px;">
+            <div style="text-align: center">
+                <a id="risk_box_label" class="box_label" style="color:darkblue;font-size: 20px;text-decoration:underline;">Risk Statistics</a>
+            </div>
+        </div>
+         <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
+
+             <div class="container-fluid" style="margin-top: 30px;font-size: 22px;font-family: 'Comic Sans MS'">
+                    <div class="col-md-2 col-md-offset-4">
+                        <label for="imposed_risk">Imposed Risk</label>
+                    </div>
+                    <div class="col-md-2  col-md-offset-0" style="margin-right: auto;">
+                        <a id="imposed_risk"></a>
+                    </div>
+              </div>
+             <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                    <div class="col-md-2 col-md-offset-4">
+                        <label for="residual_risk">Residual Risk</label>
+                    </div>
+                    <div class="col-md-2  col-md-offset-0">
+                        <a id="residual_risk"></a>
+                    </div>
+             </div>
+             <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                    <div class="col-md-2 col-md-offset-4">
+                        <label for="mitigated_risk">Mitigated Risk</label>
+                    </div>
+                    <div class="col-md-2  col-md-offset-0">
+                        <a id="mitigated_risk"></a>
+                    </div>
+             </div>
+             <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                    <div class="col-md-2 col-md-offset-4">
+                        <label for="imp_cost">CDM Cost</label>
+                    </div>
+                    <div class="col-md-2  col-md-offset-0">
+                        <a id="imp_cost"></a>
+                    </div>
+             </div>
+             <div class="container-fluid" style="font-size: 22px;font-family: 'Comic Sans MS'">
+                    <div class="col-md-2 col-md-offset-4">
+                        <label for="roi">ROI</label>
+                    </div>
+                    <div class="col-md-2  col-md-offset-0">
+                        <a id="roi"></a>
+                    </div>
+             </div>
+             <div class="container-fluid" style="margin-top: 30px;">
+                    <div id="risk_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+                    </div>
+             </div>
+        </div>
+        <div id="dialog-message" class="ui-front" title="Threat Action Risk" style="">
+            <div id="threat_action_grid" style="text-align:center;margin-left:auto;margin-right: auto;">
+            </div>
+              <!--button id="edit_button_cdm_row">Edit</button-->
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block scriptPageContent %}
+    {% load static %}
+    <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
+    <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //////////////////////////////////////////// Data sent from the backend ////////////////////////////
+            var cdmStatisticsDisplay = 0;
+            /****************************************************** Asset List ****************************************/
+            var dataLoad = [];
+            var sourceAsset =
+            {
+                localdata: dataLoad,
+                datatype: "array",
+                datafields: [{ name: 'asset_name'},
+                  { name: 'frequency',type:'float'},
+                  { name: 'confidentiality'},
+                  { name: 'integrity'},
+                  { name: 'availability'},
+                    {name:'data_source'}
+
+                ] };
+
+            var dataAdapterAsset = new $.jqx.dataAdapter(sourceAsset, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#asset_grid_list").jqxGrid(
+            {
+                source: dataAdapterAsset,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                columns: [
+                  { text: 'Asset Name', datafield: 'asset_name', width: 350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Number', datafield:'frequency', width:  120,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Confidentiality', datafield: 'confidentiality', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Integrity', datafield: 'integrity', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Availability', datafield: 'availability', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    { text: 'Threat Source', datafield: 'data_source', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+
+                ]
+            });
+           /****************************************************** End Asset List ************************************/
+
+            var threat_action_data = JSON.parse("{{ threat_action|escapejs }}");
+{#            threat_action_data = JSON.parse(threat_action_data);#}
+            console.log(threat_action_data);
+            var index = 0;
+            for(index=0;index < 10;index++){
+                console.log(threat_action_data[index]);
+            }
+            console.log("Threat Action Data Below:");
+
+            /////////////////////////////////////////// end of the data module //////////////////////
+
+            //////////////////////////////////////////// Global Data ////////////////////////////////////
+            var asset_list_given = [];
+            var threat_action_list_specific_asset = [];
+            var added_number_of_asset = 0;
+            var veris_selected = 0;
+            var number_threat_action = 0
+            var asset_veris;
+            /////////////////////////////////////// End of the Global Data //////////////////////////////
+            asset_veris = JSON.parse("{{ asset_list | escapejs }}");
+            $("#asset_name_veris").jqxDropDownList({ source: asset_veris, width: '200px', height: '25px'});
+
+            $("#threat_action_drop_down_list").jqxDropDownList({ source: threat_action_data, width: '200px', height: '25px'});
+
+           $(".dropdown-menu li a").click(function(){
+                var selText = $(this).text();
+                $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+                $(this).parents('.dropdown').find('.drop-text').val(selText);
+                if(selText == THREAT_DATA_VERIS){
+                      $(".search_specific_div").hide();
+                      $("#veris_source").show();
+                      veris_selected = 1;
+                }
+                else{
+                      $(".search_specific_div").hide();
+                      $("#other_source").show();
+                      veris_selected = 0;
+                }
+            });
+
+           $("#add_threat_action").click(function () {
+               var threat_action_value = $("#threat_action_drop_down_list").val();
+               var occurrence_value = $("#occurrence").val();
+               console.log("great "+threat_action_value+" "+occurrence_value);
+               com_flag = 0;
+               if(threat_action_value == ""){
+                   $("#threat_action_error").show();
+               }
+               else{
+                   $("#threat_action_error").hide();
+                   com_flag = 1;
+               }
+               if(occurrence_value==""){
+                    $("#threat_action_occur").show();
+                    com_flag = 0;
+               }
+               else{
+                   $("#threat_action_occur").hide();
+               }
+               if(com_flag){
+                   $("#threat_action_list").jqxGrid('addrow', number_threat_action, {'threat_action_name_id':threat_action_value,'frequency':occurrence_value});
+                   threat_action_list_specific_asset[number_threat_action] = {'threat_action_name_id':threat_action_value,'frequency':occurrence_value};
+                   number_threat_action += 1;
+                   $("#occurrence").val("");
+                   $("#threat_action_drop_down_list").jqxDropDownList('clearSelection');
+               }
+
+           });
+
+           /********************************* Add Asset in the list ************************/
+
+           $(".add_asset").click(function() {
+               row_asset_list = {};
+               if(veris_selected){
+                   console.log("VERIS Selected");
+                   row_asset_list['asset_name'] = $("#asset_name_veris").val();
+                    row_asset_list['frequency'] = $("#number_asset_veris").val();
+                    row_asset_list['confidentiality'] = $("#confidentiality_veris").val();
+                    row_asset_list['integrity'] = $("#integrity_veris").val();
+                    row_asset_list['availability'] = $("#availability_veris").val();
+                    row_asset_list['data_source'] = "VERIS";
+                    row_asset_list['threat_list'] = {};
+                    empty_list_veris();
+               }
+               else{
+                    row_asset_list['asset_name'] = $("#asset_name_other_source").val();
+                    row_asset_list['frequency'] = $("#number_asset").val();
+                    row_asset_list['confidentiality'] = $("#confidentiality").val();
+                    row_asset_list['integrity'] = $("#integrity").val();
+                    row_asset_list['availability'] = $("#availability").val();
+                    row_asset_list['data_source'] = "Experience";
+                    row_asset_list['threat_list'] = threat_action_list_specific_asset;
+                    empty_list_other_source();
+               }
+               asset_list_given[added_number_of_asset] = row_asset_list;
+               console.log("Asset List:");
+               console.log(row_asset_list);
+               $("#asset_grid_list").jqxGrid('addrow', null,row_asset_list);
+               added_number_of_asset += 1;
+               console.log("Added Number Of Assets "+added_number_of_asset);
+               console.log(asset_list_given);
+
+           });
+
+           function empty_list_veris(){
+                $("#asset_name_veris").jqxDropDownList('clearSelection');
+                $("#number_asset_veris").val("");
+                $("#confidentiality_veris").val("");
+                $("#integrity_veris").val("");
+                $("#availability_veris").val("");
+
+           }
+
+           function empty_list_other_source(){
+                $("#asset_name_other_source").val("");
+                $("#number_asset").val("");
+                $("#confidentiality").val("");
+                $("#integrity").val("");
+                $("#availability").val("");
+                for(var i = 0;i<number_threat_action;i++){
+                    $("#threat_action_list").jqxGrid('deleterow', i);
+                }
+                number_threat_action = 0;
+                threat_action_list_specific_asset = [];
+           }
+
+
+
+           /********************************* End of adding asset in the list **************/
+
+           /*  ###################################### Submit Button Action ########################################### */
+            $("#generate_cdm").click(function () {
+                var data_input = {};
+                data_input['real_data'] = asset_list_given;
+                data_input['budget'] = $("#budget").val();
+                data_input['affordable_risk'] = $("#affordable_risk").val();
+                if (data_input['budget']==""){
+                    $("#risk_budget_label").toggle();
+                    return;
+                }
+                if (data_input['affordable_risk']==""){
+                    $("#risk_budget_label").toggle();
+                    return;
+                }
+                initROIStatistics();
+                ajaxCDMInsert(data_input,'/cyberARM/');
+            });
+
+
+            /* ####################################### End of Submit Button Action ############################################ */
+
+            /************************************** Load The CDM Grid ***************************************************/
+             function loadCDMGrid(dataCDM){
+                var dataLoadCDM = dataCDM;
+                var sourceAssetCDM =
+                {
+                    localdata: dataLoadCDM,
+                    datatype: "array",
+                    datafields: [{ name: 'asset_name'},
+                      { name: 'sc_name'},
+                      { name: 'sc_function'},
+                      { name: 'en_level'},
+                      { name: 'kc_phase'},
+                    ] };
+
+                var dataAdapterCDM = new $.jqx.dataAdapter(sourceAssetCDM, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#cdm_grid").jqxGrid(
+                {
+                    source: dataAdapterCDM,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    groupable: true,
+                    theme: 'energyblue',
+                    columns: [
+                        { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Security Function', datafield: 'sc_function', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Enforcement Level', datafield: 'en_level', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+
+                    ],
+    {#                groups: ['asset_name']#}
+                });
+            }
+            //var dataCDM = JSON.parse("{{ cdm_list | escapejs }}");
+
+
+
+            /************************************** End Load of The CDM Grid ***************************************************/
+
+            /**************************************** Risk Statistics Box ********************************************************/
+            var dataLoadRisk = [];
+            function loadRisk(riskData){
+                var dataLoadRisk = riskData;
+                var sourceAssetRisk =
+                {
+                    localdata: dataLoadRisk,
+                    datatype: "array",
+                    datafields: [{ name: 'asset_name'},
+                        { name: 'max_risk'},
+                      { name: 'res_risk'},
+                      { name: 'imp_cost'},
+                    ] };
+
+                var dataAdapterAssetRisk = new $.jqx.dataAdapter(sourceAssetRisk, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#risk_grid").jqxGrid(
+                {
+                    source: dataAdapterAssetRisk,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    theme: 'energyblue',
+                    columns: [
+                      { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Risk', datafield: 'max_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Residual Risk', datafield: 'res_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                      { text: 'Implementation Cost', datafield: 'imp_cost', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    ],
+                });
+            }
+
+            function initROIStatistics() {
+                if(cdmStatisticsDisplay==0) return;
+                $("#imposed_risk").text("");
+                $("#residual_risk").text("");
+                $("#mitigated_risk").text("");
+                $("#roi").text("");
+                $("#imp_cost").text("");
+            }
+
+            function loadROIStatistics(dataROI) {
+                 $("#imposed_risk").text(dataROI['Imposed Risk']);
+                 $("#residual_risk").text(dataROI['Residual Risk']);
+                 $("#mitigated_risk").text(dataROI['Mitigated Risk']);
+                 $("#roi").text(dataROI['ROI']);
+                 $("#imp_cost").text(dataROI['Total Implementation Cost']);
+            }
+
+            function loadRiskStatisticsBox(dataRisk,roi) {
+                loadROIStatistics(roi);
+                loadRisk(dataRisk);
+            }
+
+            function threatActionList(asset_name){
+                for(var i = 0;i<dataLoadRisk.length;i++){
+                    if (asset_name==dataLoadRisk[i]['asset_name']){
+                        return dataLoadRisk[i]['threat_list'];
+                    }
+                }
+            }
+
+            function loadAllHiddenGridProperties(){
+                $('#cdm_grid').jqxGrid({ pagesize: 200});
+                $('#risk_grid').jqxGrid({ pagesize: 200});
+
+                /*************************************** Load Dialouge Message *************************************/
+                $('#risk_grid').on('celldoubleclick', function (event)
+                {
+                    var dataRow = $('#risk_grid').jqxGrid('getrowdata',event.args.rowindex);
+                    var asset_name = dataRow['asset_name'];
+                    console.log(asset_name);
+                    /********************** Dialog Box ***********************************/
+                    loadThreatActionGrid(threatActionList(asset_name));
+                    $("#dialog-message").dialog({
+                        modal: true,
+                        position: {my: "center top", at: "center top"},
+                        width: 1000,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            },
+                        }
+                    });
+
+                });
+                /*************************************** End Load Dialouge Message *********************************/
+
+            }
+
+             /****************************************** Threat Action Grid ***************************************/
+            function loadThreatActionGrid(threat_action_list_specific_asset){
+                var dataLoadThreatAction = threat_action_list_specific_asset;
+                var sourceAssetTA =
+                {
+                    localdata: dataLoadThreatAction,
+                    datatype: "array",
+                    datafields: [{ name: 'threat_action_name'},
+                      { name: 'risk_ta'},
+                        {name:'prev_risk'},
+                    ]
+                };
+
+                var dataAdapterThreatAction= new $.jqx.dataAdapter(sourceAssetTA, {
+                    loadComplete: function (data) { },
+                    loadError: function (xhr, status, error) { }
+                });
+                $("#threat_action_grid").jqxGrid(
+                {
+                    source: dataAdapterThreatAction,
+                    autowidth: true,
+                    autoheight:true,
+                    pageable:true,
+                    sortable: true,
+                    columns: [
+                      { text: 'Threat Action Name', datafield: 'threat_action_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                         { text: 'Risk', datafield: 'prev_risk', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Residual Risk', datafield: 'risk_ta', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    ],
+
+                });
+                $("#threat_action_grid").jqxGrid({ pagesize: 200});
+
+            }
+
+            /**************************************** End Risk Statistics Box ********************************************************/
+
+            /******************************************************** Ajax Call ****************************************/
+            function ajaxCDMInsert(form_data,url) {
+                    console.log(form_data);
+                    console.log("URL "+url);
+                    form_data['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+                    var sc_row = JSON.stringify(form_data);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data:sc_row,
+                        "beforeSend": function(xhr, settings) {
+                            console.log("Before Send");
+                            $.ajaxSettings.beforeSend(xhr, settings);
+
+                        },
+
+                        success: function (data_received) {
+{#                            console.log(data_received);#}
+                              if(cdmStatisticsDisplay==0){
+                                  cdmStatisticsDisplay = 1;
+                                  $("#CDM_output").toggle();
+                                  loadAllHiddenGridProperties();
+                              }
+                              dataLoadRisk = data_received['risk_list'];
+                              loadCDMGrid(data_received['cdm_list']);
+                              loadRiskStatisticsBox(dataLoadRisk,data_received['roi']);
+                        },
+                        error: function () {
+                            alert("Error");
+                        }
+                    });
+            }
+            /******************************************************** End of Ajax Call *********************************/
+
+
+           /* ############################################### Threat Actions List ################################# */
+            var dataThreatAction = [];
+            var source =
+            {
+                localdata: dataThreatAction,
+                datatype: "array",
+                datafields: [{ name: 'threat_action_name_id'},
+                  { name: 'frequency'},
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (dataThreatAction) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#threat_action_list").jqxGrid(
+            {
+                source: dataAdapter,
+                autowidth: true,
+                autoheight:true,
+                columns: [
+                    { text: 'Threat Action', datafield: 'threat_action_name_id', width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                    { text: 'Occurrence', datafield: 'frequency', width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                ]
+            });
+
+
+
+           /* ############################################### End Threat Action List ############################### */
+
+
+
+        });
+    </script>
+{% endblock %}

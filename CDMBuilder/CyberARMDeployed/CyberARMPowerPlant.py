@@ -90,4 +90,12 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,float(affordable_risk),float(budget))
     # write_output_file.close()
     print "ROI %s" % (recommendedCDM[2])
+    if len(recommendedCDM[ProjectConfigFile.CYBERARM_CDM_MATRIX]) == 0:
+        roi_row = {}
+        roi_row[ProjectConfigFile.MITIGATED_RISK] = 0
+        roi_row[ProjectConfigFile.ROI] = 0
+        roi_row[ProjectConfigFile.IMPOSED_RISK] = round(recommendedCDM[ProjectConfigFile.CYBERARM_ROI],3)
+        roi_row[ProjectConfigFile.RESIDUAL_RISK] = roi_row[ProjectConfigFile.IMPOSED_RISK]
+        roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] = 0
+        recommendedCDM.insert(ProjectConfigFile.CYBERARM_ROI, roi_row)
     return recommendedCDM

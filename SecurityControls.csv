@@ -136,14 +136,14 @@
 18.1;Vendor Supported & Updated Application Software;Recon;Application;Protect
 18.2;Web Application Firewall;Execute;Network;Detect
 18.2.2;Application Firewall;Execute;Application;Detect
-18.3;Explicit Error Checking;Exploit;Data;Protect
+18.3;Explicit Error Checking;Exploit;Application;Protect
 18.4;Test In-House Softwares;Recon;Application;Protect
 18.5;Stop System Error Message;Recon;Application;Protect
 18.6;Production and Non-production Environment;Exploit;Application;Protect
 18.7;Standard Hardening Configuration for Application Accessing Databases;Deliver;Application;Protect
 18.8;Secure Development Training;Exploit;People;Protect
 18.9;Remove Artifacts of In-House Software in Production Environment;Exploit;Application;Protect
-19.1;Incident Responf Procedures;Maintain;People;Respond
+19.1;Incident Response Procedures;Maintain;People;Respond
 19.2;Job Duties for Response;Maintain;People;Respond
 19.3;Incident Response Manager;Maintain;People;Respond
 19.4;Notify Anomalous Event;Maintain;People;Respond
