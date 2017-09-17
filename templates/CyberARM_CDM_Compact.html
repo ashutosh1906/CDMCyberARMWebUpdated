@@ -164,6 +164,10 @@
         </div>
 
     </div>
+    <div class="container-fluid" id="wait_loading_div" style="display: none;">
+        <div class="result_loader col-lg-6 col-lg-offset-5"></div>
+        <div class="col-lg-6 col-lg-offset-0"><a style="font-size: 22px;color: #0d3349">Processing The Recent Request</a></div>
+    </div>
 
 
     <div class="container-fluid" id='CDM_output' style="display: none;margin-top: 25px;">
@@ -243,6 +247,7 @@
     {% load static %}
     <script type="text/javascript" src="../static/utilities_Custom.js"></script>
     <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "styles/CustomDesign.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
     <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
     <script type="text/javascript">
@@ -512,6 +517,7 @@
                     $("#risk_budget_label").toggle();
                     box_flag = 0;
                 }
+                $("#wait_loading_div").toggle();
                 ajaxCDMInsert(data_input,'/cyberARM/');
             });
 
@@ -718,11 +724,14 @@
                                   loadAllHiddenGridProperties();
                               }
                               dataLoadRisk = data_received['risk_list'];
+                              $("#wait_loading_div").toggle();
                               loadCDMGrid(data_received['cdm_list']);
                               loadRiskStatisticsBox(dataLoadRisk,data_received['roi']);
+
                         },
                         error: function () {
                             alert("Error");
+                            $("#wait_loading_div").toggle();
                         }
                     });
             }
