@@ -433,12 +433,22 @@
 
                 function change_asset_grid_row(){
                     var new_row = {};
-                    new_row['asset_name'] = $("#asset_name_veris").val();
-                    new_row['frequency'] = $("#number_asset_veris").val();
-                    new_row['confidentiality'] = $("#confidentiality_veris").val();
-                    new_row['integrity'] = $("#integrity_veris").val();
-                    new_row['availability'] = $("#availability_veris").val();
                     new_row['data_source'] = selectedDataRow["data_source"];
+                    if(selectedDataRow['data_source']=='Experience'){
+                        new_row['asset_name'] = $("#asset_name_desc_exp").val();
+                        new_row['frequency'] = $("#frequency_desc_exp").val();
+                        new_row['confidentiality'] = $("#confidentiality_desc_exp").val();
+                        new_row['integrity'] = $("#integrity_desc_exp").val();
+                        new_row['availability'] = $("#availability_desc_exp").val();
+                    }
+                    else{
+                        new_row['asset_name'] = $("#asset_name_desc").val();
+                        new_row['frequency'] = $("#frequency_desc").val();
+                        new_row['confidentiality'] = $("#confidentiality_desc").val();
+                        new_row['integrity'] = $("#integrity_desc").val();
+                        new_row['availability'] = $("#availability_desc").val();
+                    }
+
                     $('#asset_grid_list').jqxGrid('deleterow',selectedRowID);
                     $('#asset_grid_list').jqxGrid('addrow',null,new_row);
                 }
