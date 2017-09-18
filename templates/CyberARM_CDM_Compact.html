@@ -162,9 +162,68 @@
             </div>
               <!--button id="edit_button_cdm_row">Edit</button-->
         </div>
+        <div id="action_dialouge" class="ui-front">
+            <div class="container-fluid" style="text-align: center;">
+                <div class="row asset_list_modifier" id="modify_asset_div" style="display: none;"><a id="modify_asset">Modify</a></div>
+                <div class="row asset_list_modifier" id="remove_asset_div" style="display: none;"><a id="remove_asset">Remove</a></div>
+                <div class="row asset_list_modifier" id="ta_statistics_asset_div" style="display: none;"><a id="ta_statistics_asset">Threat Action Statistics</a></div>
+            </div>
+        </div>
+        <!---- Dialouge Box for VERIS Asset Edit ---------------------------------------------->
+
+        <div id="asset_description_dialouge" class="ui-front" style="display:none;">
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Asset Name</label></div>
+                    <div id="asset_name_desc">
+                    </div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Number of Asset</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="frequency_desc"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Confidentiality</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="confidentiality_desc"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Integrity</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="integrity_desc"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Availability</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="availability_desc"></div>
+            </div>
+
+        </div>
+
+        <!---- Dialouge Box for EXPERIENCE Asset Edit ---------------------------------------------->
+
+        <div id="asset_description_dialouge_exp" class="ui-front" style="display:none;">
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Asset Name</label></div>
+                    <div class="col-sm-4 col-sm-offset-0" id="asset_name_desc_experience_div"><input type="text" id="asset_name_desc_exp"></div>
+
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Number of Asset</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="frequency_desc_exp"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Confidentiality</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="confidentiality_desc_exp"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Integrity</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="integrity_desc_exp"></div>
+            </div>
+            <div class="container-fluid dialouge_box" style="text-align: center;">
+                    <div class="col-sm-6 col-sm-offset-2"><label for="">Availability</label></div>
+                    <div class="col-sm-4 col-sm-offset-0"><input type="text" id="availability_desc_exp"></div>
+            </div>
+        </div>
 
     </div>
-    <div class="container-fluid" id="wait_loading_div" style="display: none;">
+    <div class="container-fluid" id="wait_loading_div" style="display: none;margin:15px;">
         <div class="result_loader col-lg-6 col-lg-offset-5"></div>
         <div class="col-lg-6 col-lg-offset-0"><a style="font-size: 22px;color: #0d3349">Processing The Recent Request</a></div>
     </div>
@@ -328,26 +387,96 @@
 
 
 
+            var selectedDataRow,selectedAssetName,selectedRowID;
+            var edit_row = ['asset_name','frequency','confidentiality','availability','integrity'];
+            $("#remove_asset").click(function () {
+                $("#asset_grid_list").jqxGrid('deleterow',selectedRowID);
+                $("#action_dialouge").dialog("close");
+            });
 
-            $('#asset_grid_list').on('celldoubleclick', function (event)
-            {
-                var dataRow = $('#asset_grid_list').jqxGrid('getrowdata',event.args.rowindex);
-                var asset_name = dataRow['asset_name'];
-                console.log(asset_name);
-                if(dataRow['data_source']=='Experience')
-                {
-                    /********************** Dialog Box ***********************************/
+            function loadModifyBox(){
+                if(selectedDataRow['data_source']=='Experience'){
+                    for(var i = 0;i<edit_row.length;i++){
+                        $("#"+edit_row[i]+"_desc_exp").val(selectedDataRow[edit_row[i]]);
+                    }
+                    return;
+                }
+                for(var i = 0;i<edit_row.length;i++){
+                    $("#"+edit_row[i]+"_desc").val(selectedDataRow[edit_row[i]]);
+                }
+
+            }
+
+            $("#modify_asset").click(function () {
+                $("#action_dialouge").dialog("close");
+                loadModifyBox();
+                var titleDialouge = "Description "+selectedAssetName;
+                if(selectedDataRow['data_source']=='Experience'){
+                    $("#asset_description_dialouge_exp").dialog({
+                        modal: true,
+                        title:titleDialouge,
+                        position: {my: "center center", at: "center top"},
+                        width: 700,
+                        buttons: {
+                                Edit: function () {
+                                    change_asset_grid_row();
+                                    $(this).dialog("close");
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                },
+                        }
+
+                    });
+                    return;
+                }
+
+                function change_asset_grid_row(){
+                    var new_row = {};
+                    new_row['asset_name'] = $("#asset_name_veris").val();
+                    new_row['frequency'] = $("#number_asset_veris").val();
+                    new_row['confidentiality'] = $("#confidentiality_veris").val();
+                    new_row['integrity'] = $("#integrity_veris").val();
+                    new_row['availability'] = $("#availability_veris").val();
+                    new_row['data_source'] = selectedDataRow["data_source"];
+                    $('#asset_grid_list').jqxGrid('deleterow',selectedRowID);
+                    $('#asset_grid_list').jqxGrid('addrow',null,new_row);
+                }
+
+                $("#asset_description_dialouge").dialog({
+                        modal: true,
+                        title:titleDialouge,
+                        position: {my: "center center", at: "center top"},
+                        width: 700,
+                        buttons: {
+                                Edit: function () {
+                                    change_asset_grid_row();
+                                    $(this).dialog("close");
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                },
+                        }
+
+                });
+
+            });
+
+            $("#ta_statistics_asset").click(function () {
+                $(".asset_list_modifier").hide();
+                $("#action_dialouge").dialog("close");
+                 /********************** Dialog Box ***********************************/
                     var threat_action_list_input_specific = [];
                     for(var i = 0;i<asset_list_given.length;i++){
                         if(asset_list_given[i]['data_source']=='Experience'){
-                            if(asset_list_given[i]['asset_name'] == asset_name){
+                            if(asset_list_given[i]['asset_name'] == selectedAssetName){
                                 threat_action_list_input_specific = asset_list_given[i]['threat_list'];
                                 break;
                             }
                         }
                     }
                     loadInputThreatActionGrid(threat_action_list_input_specific);
-                    var titleDialouge = "Threat Action Statistics: "+asset_name;
+                    var titleDialouge = "Threat Action Statistics: "+selectedAssetName;
                     $("#ta_dialouge").dialog({
                         modal: true,
                         title:titleDialouge,
@@ -359,6 +488,32 @@
                             },
                         }
                     });
+            });
+
+            $('#asset_grid_list').on('celldoubleclick', function (event)
+            {
+                $(".asset_list_modifier").hide();
+                selectedDataRow = $('#asset_grid_list').jqxGrid('getrowdata',event.args.rowindex);
+                console.log(selectedDataRow);
+                selectedAssetName = selectedDataRow['asset_name'];
+                selectedRowID = event.args.rowindex;
+                var titleDialouge = "Action: "+selectedAssetName;
+                $("#action_dialouge").dialog({
+                        modal: true,
+                        title:titleDialouge,
+                        position: {my: "center top", at: "center top"},
+                        width: 450,
+
+                });
+                if(selectedDataRow['data_source']=='Experience')
+                {
+                    console.log(selectedDataRow['data_source']);
+                    $(".asset_list_modifier").show();
+
+                }
+                else{
+                    $("#modify_asset_div").show();
+                    $("#remove_asset_div").show();
                 }
 
             });
@@ -386,6 +541,7 @@
             /////////////////////////////////////// End of the Global Data //////////////////////////////
             asset_veris = JSON.parse("{{ asset_list | escapejs }}");
             $("#asset_name_veris").jqxDropDownList({ source: asset_veris, width: '200px', height: '25px'});
+            $("#asset_name_desc").jqxDropDownList({ source: asset_veris, width: '200px', height: '25px'});
 
             $("#threat_action_drop_down_list").jqxDropDownList({ source: threat_action_data, width: '200px', height: '25px'});
 

@@ -19,3 +19,25 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.asset_list_modifier a{
+    text-decoration: underline;
+    font-style: normal;
+    font-size: 25px;
+    font-family: cursive;
+}
+
+.asset_list_modifier a:hover{
+    font-size: 31px;
+    font-weight: bold;
+    color: #5f3f3f;
+}
+
+.dialouge_box{
+    padding-top: 15px;
+}
+.dialouge_box label{
+    font-style: normal;
+    font-size: 20px;
+    font-family: cursive;
+}

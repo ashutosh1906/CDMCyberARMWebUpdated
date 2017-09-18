@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a164e12-9212-4c75-9776-58561a96aa29" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/styles/CustomDesign.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" afterPath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/styles/CustomDesign.css" afterPath="$PROJECT_DIR$/static/styles/CustomDesign.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" afterPath="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +21,7 @@
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$DatabaseMysql.coverage" NAME="DatabaseMysql Coverage Results" MODIFIED="1499294628105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../CustomUtilities" />
     <SUITE FILE_PATH="coverage/CDMBuilder$Test__CDMBuilder.coverage" NAME="Test: CDMBuilder Coverage Results" MODIFIED="1485817047562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/CDMBuilder$CyberARMEngine.coverage" NAME="CyberARMEngine Coverage Results" MODIFIED="1494878397701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects_prev/CyberARMFinalCCAA" />
-    <SUITE FILE_PATH="coverage/CDMCyberARMWebUpdated$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1505609292331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CDMCyberARMWebUpdated$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1505697968252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$PowerPlant.coverage" NAME="PowerPlant Coverage Results" MODIFIED="1497394378147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../ComplexAdaptiveSystem/javaapplicationcas/ProjectFinal" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$CyberARMPowerPlant.coverage" NAME="CyberARMPowerPlant Coverage Results" MODIFIED="1497412511722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../CyberARMDeployedTest" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$Machine.coverage" NAME="Machine Coverage Results" MODIFIED="1496359422431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Google Drive/Meeting_6_1_2017" />
@@ -89,33 +87,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CyberARM_CDM_Compact.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CyberARM_CDM_Compact.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="733" column="60" lean-forward="false" selection-start-line="733" selection-start-column="60" selection-end-line="733" selection-end-column="60" />
+            <state relative-caret-position="538">
+              <caret line="456" column="60" lean-forward="true" selection-start-line="456" selection-start-column="60" selection-end-line="456" selection-end-column="60" />
               <folding>
                 <element signature="e#132#226#0#HTML" expanded="true" />
                 <element signature="e#4072#4150#0#HTML" expanded="true" />
                 <element signature="e#8031#8093#0#HTML" expanded="true" />
-                <element signature="e#8262#8284#0#HTML" expanded="true" />
-                <element signature="e#8402#8440#0#HTML" expanded="true" />
-                <element signature="e#8543#8582#0#HTML" expanded="true" />
-                <element signature="e#8639#8665#0#HTML" expanded="true" />
-                <element signature="e#8723#8788#0#HTML" expanded="true" />
-                <element signature="e#8898#8992#0#HTML" expanded="true" />
-                <element signature="e#9478#9597#0#HTML" expanded="true" />
-                <element signature="e#12029#12091#0#HTML" expanded="true" />
+                <element signature="e#8288#8315#0#HTML" expanded="true" />
+                <element signature="e#8392#8414#0#HTML" expanded="true" />
+                <element signature="e#8528#8550#0#HTML" expanded="true" />
+                <element signature="e#8671#8693#0#HTML" expanded="true" />
+                <element signature="e#8951#8972#0#HTML" expanded="true" />
+                <element signature="e#9028#9055#0#HTML" expanded="true" />
+                <element signature="e#9301#9328#0#HTML" expanded="true" />
+                <element signature="e#9609#9636#0#HTML" expanded="true" />
+                <element signature="e#9923#9950#0#HTML" expanded="true" />
+                <element signature="e#10225#10252#0#HTML" expanded="true" />
+                <element signature="e#10665#10686#0#HTML" expanded="true" />
+                <element signature="e#10742#10769#0#HTML" expanded="true" />
+                <element signature="e#11087#11114#0#HTML" expanded="true" />
+                <element signature="e#11399#11426#0#HTML" expanded="true" />
+                <element signature="e#11717#11744#0#HTML" expanded="true" />
+                <element signature="e#12023#12050#0#HTML" expanded="true" />
+                <element signature="e#12363#12397#0#HTML" expanded="true" />
+                <element signature="e#12515#12553#0#HTML" expanded="true" />
+                <element signature="e#12656#12695#0#HTML" expanded="true" />
+                <element signature="e#12752#12778#0#HTML" expanded="true" />
+                <element signature="e#12836#12901#0#HTML" expanded="true" />
+                <element signature="e#13011#13105#0#HTML" expanded="true" />
+                <element signature="e#13591#13710#0#HTML" expanded="true" />
+                <element signature="e#16142#16204#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomDesign.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="insertCDMUpdated.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="42" column="26" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="42" selection-end-column="26" />
+              <folding>
+                <element signature="e#373#413#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomDesign.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/styles/CustomDesign.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            <state relative-caret-position="514">
+              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -251,8 +277,8 @@
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTest.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
-        <option value="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" />
         <option value="$PROJECT_DIR$/static/styles/CustomDesign.css" />
+        <option value="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" />
       </list>
     </option>
   </component>
@@ -883,7 +909,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32521087" sideWeight="0.33177084" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33016175" sideWeight="0.66822916" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33016175" sideWeight="0.66822916" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.4969743" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2767857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1201,14 +1227,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1355">
-          <caret line="291" column="14" lean-forward="true" selection-start-line="291" selection-start-column="14" selection-end-line="291" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/MiddlewareScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1298,31 +1316,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html">
+    <entry file="file://$PROJECT_DIR$/static/styles/CustomDesign.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="733" column="60" lean-forward="false" selection-start-line="733" selection-start-column="60" selection-end-line="733" selection-end-column="60" />
+        <state relative-caret-position="514">
+          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="42" column="26" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="42" selection-end-column="26" />
           <folding>
-            <element signature="e#132#226#0#HTML" expanded="true" />
-            <element signature="e#4072#4150#0#HTML" expanded="true" />
-            <element signature="e#8031#8093#0#HTML" expanded="true" />
-            <element signature="e#8262#8284#0#HTML" expanded="true" />
-            <element signature="e#8402#8440#0#HTML" expanded="true" />
-            <element signature="e#8543#8582#0#HTML" expanded="true" />
-            <element signature="e#8639#8665#0#HTML" expanded="true" />
-            <element signature="e#8723#8788#0#HTML" expanded="true" />
-            <element signature="e#8898#8992#0#HTML" expanded="true" />
-            <element signature="e#9478#9597#0#HTML" expanded="true" />
-            <element signature="e#12029#12091#0#HTML" expanded="true" />
+            <element signature="e#373#413#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/styles/CustomDesign.css">
+    <entry file="file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-          <folding />
+        <state relative-caret-position="538">
+          <caret line="456" column="60" lean-forward="true" selection-start-line="456" selection-start-column="60" selection-end-line="456" selection-end-column="60" />
+          <folding>
+            <element signature="e#132#226#0#HTML" expanded="true" />
+            <element signature="e#4072#4150#0#HTML" expanded="true" />
+            <element signature="e#8031#8093#0#HTML" expanded="true" />
+            <element signature="e#8288#8315#0#HTML" expanded="true" />
+            <element signature="e#8392#8414#0#HTML" expanded="true" />
+            <element signature="e#8528#8550#0#HTML" expanded="true" />
+            <element signature="e#8671#8693#0#HTML" expanded="true" />
+            <element signature="e#8951#8972#0#HTML" expanded="true" />
+            <element signature="e#9028#9055#0#HTML" expanded="true" />
+            <element signature="e#9301#9328#0#HTML" expanded="true" />
+            <element signature="e#9609#9636#0#HTML" expanded="true" />
+            <element signature="e#9923#9950#0#HTML" expanded="true" />
+            <element signature="e#10225#10252#0#HTML" expanded="true" />
+            <element signature="e#10665#10686#0#HTML" expanded="true" />
+            <element signature="e#10742#10769#0#HTML" expanded="true" />
+            <element signature="e#11087#11114#0#HTML" expanded="true" />
+            <element signature="e#11399#11426#0#HTML" expanded="true" />
+            <element signature="e#11717#11744#0#HTML" expanded="true" />
+            <element signature="e#12023#12050#0#HTML" expanded="true" />
+            <element signature="e#12363#12397#0#HTML" expanded="true" />
+            <element signature="e#12515#12553#0#HTML" expanded="true" />
+            <element signature="e#12656#12695#0#HTML" expanded="true" />
+            <element signature="e#12752#12778#0#HTML" expanded="true" />
+            <element signature="e#12836#12901#0#HTML" expanded="true" />
+            <element signature="e#13011#13105#0#HTML" expanded="true" />
+            <element signature="e#13591#13710#0#HTML" expanded="true" />
+            <element signature="e#16142#16204#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
