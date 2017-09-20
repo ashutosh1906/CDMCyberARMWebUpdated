@@ -388,51 +388,21 @@
 
 
             var selectedDataRow,selectedAssetName,selectedRowID;
+            var modifiedData;
             var edit_row = ['asset_name','frequency','confidentiality','availability','integrity'];
+            function RemoveAsset(){
+                var id = $("#asset_grid_list").jqxGrid('getrowid',selectedRowID);
+                var commit = $("#asset_grid_list").jqxGrid('deleterow',id);
+            }
+
             $("#remove_asset").click(function () {
-                $("#asset_grid_list").jqxGrid('deleterow',selectedRowID);
+                RemoveAsset();
                 $("#action_dialouge").dialog("close");
             });
 
-            function loadModifyBox(){
-                if(selectedDataRow['data_source']=='Experience'){
-                    for(var i = 0;i<edit_row.length;i++){
-                        $("#"+edit_row[i]+"_desc_exp").val(selectedDataRow[edit_row[i]]);
-                    }
-                    return;
-                }
-                for(var i = 0;i<edit_row.length;i++){
-                    $("#"+edit_row[i]+"_desc").val(selectedDataRow[edit_row[i]]);
-                }
-
-            }
-
-            $("#modify_asset").click(function () {
-                $("#action_dialouge").dialog("close");
-                loadModifyBox();
-                var titleDialouge = "Description "+selectedAssetName;
-                if(selectedDataRow['data_source']=='Experience'){
-                    $("#asset_description_dialouge_exp").dialog({
-                        modal: true,
-                        title:titleDialouge,
-                        position: {my: "center center", at: "center top"},
-                        width: 700,
-                        buttons: {
-                                Edit: function () {
-                                    change_asset_grid_row();
-                                    $(this).dialog("close");
-                                },
-                                Cancel: function () {
-                                    $(this).dialog("close");
-                                },
-                        }
-
-                    });
-                    return;
-                }
-
-                function change_asset_grid_row(){
+            function change_asset_grid_row(){
                     var new_row = {};
+                    new_row['threat_list'] = modifiedData['threat_list'];
                     new_row['data_source'] = selectedDataRow["data_source"];
                     if(selectedDataRow['data_source']=='Experience'){
                         new_row['asset_name'] = $("#asset_name_desc_exp").val();
@@ -449,17 +419,38 @@
                         new_row['availability'] = $("#availability_desc").val();
                     }
 
-                    $('#asset_grid_list').jqxGrid('deleterow',selectedRowID);
-                    $('#asset_grid_list').jqxGrid('addrow',null,new_row);
+                    $('#asset_grid_list').jqxGrid('addrow',selectedRowID,new_row);
+            }
+
+            function loadModifyBox(){
+                if(selectedDataRow['data_source']=='Experience'){
+                    for(var i = 0;i<edit_row.length;i++){
+                        $("#"+edit_row[i]+"_desc_exp").val(selectedDataRow[edit_row[i]]);
+                    }
+                    return;
+                }
+                for(var i = 0;i<edit_row.length;i++){
+                    $("#"+edit_row[i]+"_desc").val(selectedDataRow[edit_row[i]]);
                 }
 
-                $("#asset_description_dialouge").dialog({
+            }
+
+            $("#modify_asset").click(function () {
+                $("#action_dialouge").dialog("close");
+                modifiedData = $('#asset_grid_list').jqxGrid('getrowdata',selectedRowID);
+{#                modifiedData = $('#asset_grid_list').jqxGrid('getrowdata',selectedRowID);#}
+{#                $('#asset_grid_list').jqxGrid('deleterow',selectedRowID);#}
+                loadModifyBox();
+                var titleDialouge = "Description "+selectedAssetName;
+                if(selectedDataRow['data_source']=='Experience'){
+                    $("#asset_description_dialouge_exp").dialog({
                         modal: true,
                         title:titleDialouge,
                         position: {my: "center center", at: "center top"},
                         width: 700,
                         buttons: {
                                 Edit: function () {
+                                    RemoveAsset();
                                     change_asset_grid_row();
                                     $(this).dialog("close");
                                 },
@@ -468,23 +459,43 @@
                                 },
                         }
 
-                });
+                    });
+                }
+                else{
+                     $("#asset_description_dialouge").dialog({
+                        modal: true,
+                        title:titleDialouge,
+                        position: {my: "center center", at: "center top"},
+                        width: 700,
+                        buttons: {
+                                Edit: function () {
+                                    RemoveAsset();
+                                    change_asset_grid_row();
+                                    $(this).dialog("close");
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                },
+                        }
 
+                     });
+                }
             });
 
             $("#ta_statistics_asset").click(function () {
                 $(".asset_list_modifier").hide();
                 $("#action_dialouge").dialog("close");
                  /********************** Dialog Box ***********************************/
-                    var threat_action_list_input_specific = [];
-                    for(var i = 0;i<asset_list_given.length;i++){
-                        if(asset_list_given[i]['data_source']=='Experience'){
-                            if(asset_list_given[i]['asset_name'] == selectedAssetName){
-                                threat_action_list_input_specific = asset_list_given[i]['threat_list'];
-                                break;
-                            }
-                        }
-                    }
+{#                    var threat_action_list_input_specific = [];#}
+{#                    for(var i = 0;i<asset_list_given.length;i++){#}
+{#                        if(asset_list_given[i]['data_source']=='Experience'){#}
+{#                            if(asset_list_given[i]['asset_name'] == selectedAssetName){#}
+{#                                threat_action_list_input_specific = selectedDataRow['threat_list'];#}
+{#                                break;#}
+{#                            }#}
+{#                        }#}
+{#                    }#}
+                    threat_action_list_input_specific = selectedDataRow['threat_list'];
                     loadInputThreatActionGrid(threat_action_list_input_specific);
                     var titleDialouge = "Threat Action Statistics: "+selectedAssetName;
                     $("#ta_dialouge").dialog({
@@ -500,13 +511,16 @@
                     });
             });
 
-            $('#asset_grid_list').on('celldoubleclick', function (event)
+            $("#asset_grid_list").on('celldoubleclick', function (event)
             {
                 $(".asset_list_modifier").hide();
-                selectedDataRow = $('#asset_grid_list').jqxGrid('getrowdata',event.args.rowindex);
+                selectedDataRow = $("#asset_grid_list").jqxGrid('getrowdata',event.args.rowindex);
                 console.log(selectedDataRow);
                 selectedAssetName = selectedDataRow['asset_name'];
                 selectedRowID = event.args.rowindex;
+                console.log(selectedRowID);
+                var selectedrowindex = $('#asset_grid_list').jqxGrid('selectedrowindex');
+                console.log(selectedrowindex);
                 var titleDialouge = "Action: "+selectedAssetName;
                 $("#action_dialouge").dialog({
                         modal: true,
@@ -543,6 +557,7 @@
 
             //////////////////////////////////////////// Global Data ////////////////////////////////////
             var asset_list_given = [];
+            var threat_action_asset_list_experience = {};
             var threat_action_list_specific_asset = [];
             var added_number_of_asset = 0;
             var veris_selected = 0;
@@ -623,15 +638,17 @@
                     row_asset_list['availability'] = $("#availability").val();
                     row_asset_list['data_source'] = "Experience";
                     row_asset_list['threat_list'] = threat_action_list_specific_asset;
+                    threat_action_asset_list_experience[row_asset_list['asset_name']] = threat_action_list_specific_asset;
                     empty_list_other_source();
                }
-               asset_list_given[added_number_of_asset] = row_asset_list;
-               console.log("Asset List:");
+
+{#               asset_list_given[added_number_of_asset] = row_asset_list;#}
+{#               console.log("Asset List:");#}
                console.log(row_asset_list);
-               $("#asset_grid_list").jqxGrid('addrow', null,row_asset_list);
+               $("#asset_grid_list").jqxGrid('addrow',added_number_of_asset,row_asset_list);
                added_number_of_asset += 1;
-               console.log("Added Number Of Assets "+added_number_of_asset);
-               console.log(asset_list_given);
+{#               console.log("Added Number Of Assets "+added_number_of_asset);#}
+{#               console.log(asset_list_given);#}
 
            });
 
@@ -662,8 +679,15 @@
            /********************************* End of adding asset in the list **************/
 
            /*  ###################################### Submit Button Action ########################################### */
+           function loadDataFromAssetGRID(){
+                asset_list_given = $('#asset_grid_list').jqxGrid('getrows');
+                console.log("These are the current assets list");
+                console.log(asset_list_given);
+           }
+
            var box_flag = 0;
            $("#generate_cdm").click(function () {
+                loadDataFromAssetGRID();
                 var data_input = {};
                 data_input['real_data'] = asset_list_given;
                 data_input['budget'] = $("#budget").val();

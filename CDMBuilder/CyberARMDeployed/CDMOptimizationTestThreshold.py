@@ -7,6 +7,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     # print threat_action_name_list
     # print threat_action_id_list_for_all_assets
     # print threat_id_for_all_assets
+    ############################################### Risk List ############################################################################
+    risk_list = []
 
     #########################################  Create the environment for all the selected security controls ##############################
     for asset_index in range(len(selected_security_controls)):
@@ -67,6 +69,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         for asset_index in range(len(threat.maximum_risk)):
             global_estimated_risk += threat.maximum_risk[asset_index]
     print "Estimated Risk %s" % (global_estimated_risk)
+
 
     ###################################################### Design All Heuristics Here ############################################
     ###################################################### 1.1 Minimum Affordable Risk ###########################################
@@ -170,6 +173,14 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     else:
         probable_risk_threshold =  global_estimated_risk-(highest_risk_mitigation * budget/global_Total_Cost)
     print "Would be Risk Threshold %s" % (probable_risk_threshold)
+
+    ################################################# Append All The Risks ##########################################################################
+    risk_list.append(global_estimated_risk)
+    risk_list.append(global_min_risk)
+    risk_list.append(affordable_risk)
+    risk_list.append(probable_risk_threshold)
+    risk_list.sort()
+    print "Risk List : %s" % (risk_list)
     ################################################# Max Security Control Cost #############################################################
 
     ###################################################### End of Design of All Heuristics Here ############################################
@@ -326,12 +337,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
 
     ############################################################ 2.6 Add The Total Residual Risk #############################################
     print "***** Affordable Risk %s *********" % (affordable_risk)
-    if probable_risk_threshold < affordable_risk:
-        risk_apetitie = probable_risk_threshold
-    else:
-        risk_apetitie = affordable_risk
-    cyberARM.push()
-    cyberARM.add(smt_Global_Residual_Risk <= risk_apetitie)
+    cyberARM.add(smt_Global_Residual_Risk <= affordable_risk)
     ############################################################ End Constrainst Development #################################################
 
     ############################################################ 3. Check the model ##########################################################
@@ -359,14 +365,6 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         print "Number of Selected Security Controls %s" % (recommended_CDM[smt_Maximum_Number_Security_Control])
     else:
         print "There is no satisfiable model"
-        print "Risk Appetitie %s Probable Risk Threshold %s" % (risk_apetitie,probable_risk_threshold)
-        cyberARM.pop()
-        cyberARM.push()
-        cyberARM.add(smt_Global_Residual_Risk <= probable_risk_threshold)
-        start_time = time.time()
-        satisfiability = cyberARM.check()
-        print "Time Required for Solution %s" % (time.time() - start_time)
-        print "The satisfiability Model %s" % (satisfiability)
         recommended_CDM = []
         recommended_CDM.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX, [])
         recommended_CDM.insert(ProjectConfigFile.CYBERARM_RISK, [])
