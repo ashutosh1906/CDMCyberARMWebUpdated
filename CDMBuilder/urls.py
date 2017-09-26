@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^csc_classification/',DatabaseFunctions.CSC_Classification,name='csc_classification'),
     url(r'^edit_csc_classification/',DatabaseFunctions.edit_CSC_Classification,name='edit_csc_classification'),
     url(r'^threatActionKillChainPhaseMapping/',Login.ThreatActionKCPhaseMapping,name='threatActionKillChainPhaseMapping'),
+    url(r'^ta_distribution/',Login.threat_action_distribution,name='Threat Action Distribution'),
     url(r'',Login.login,name='login'),
 ]

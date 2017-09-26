@@ -153,7 +153,12 @@
                 <div id="asset_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
          </div>
-         <div style="margin-top:10px;text-align: center;">
+         <div class="container-fluid">
+             <div class="col-lg-6 col-lg-offset-2">
+                 <a name="threat_action_distribution" id="threat_action_distribution" class="clickable_a">Click to Generate Threat Action Distribution</a>
+             </div>
+         </div>
+         <div style="margin-top:16px;text-align: center;">
                     <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
          </div>
 
@@ -927,6 +932,41 @@
             }
             /******************************************************** End of Ajax Call *********************************/
 
+            /*********************************************** Threat Action Distribution **********************************/
+            $("#threat_action_distribution").click(function () {
+                var asset_list_threat_action = {};
+                loadDataFromAssetGRID();
+                if(asset_list_given.length ==0 ){
+                    alert("Insert Asset List first");
+                    return;
+                }
+                asset_list_threat_action['asset_list'] = asset_list_given;
+                ajaxTADistribution(asset_list_threat_action,"/ta_distribution/")
+            });
+
+            function ajaxTADistribution(asset_list,url) {
+                asset_list['csrfmiddlewaretoken'] = '{{ csrf_token }}';
+                var sc_row = JSON.stringify(asset_list);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data:sc_row,
+                    "beforeSend": function(xhr, settings) {
+                        console.log("Before Send");
+                        $.ajaxSettings.beforeSend(xhr, settings);
+                    },
+
+                    success: function (data_received) {
+                        console.log(data_received);
+                    },
+                    error: function () {
+                        alert("Ooops didn't work");
+                    }
+                });
+            }
+            /*********************************************** End of Threat Action Distribution ***************************/
 
            /* ############################################### Threat Actions List ################################# */
             var dataThreatAction = [];

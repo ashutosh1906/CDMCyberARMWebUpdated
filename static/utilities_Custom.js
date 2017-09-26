@@ -198,6 +198,7 @@ function loadDataGridUpdated(dataLoad){
                     { text: 'Explanation', datafield: 'explanation_row', width: 330, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                 ]
             });
+            $("#jqxgrid").jqxGrid('sortby','sc_version','asc');
 }
 
 
@@ -339,4 +340,15 @@ function loadDataGrid(dataLoad){
 
                 ]
             });
+    }
+
+    function downloadFile(filename, text) {
+        console.log("Trying to download the file");
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }

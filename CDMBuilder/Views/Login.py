@@ -487,6 +487,62 @@ def cyberARM_request_updated_compact(request):
 
 #################################################################### End Calling CyberARM Compact#############################################
 
+##################################################################### Threat Action Distribution ##############################################
+def threat_action_distribution(request):
+    print "In Threat Action Distribution Generation"
+    json_loads = json.loads(request.body.decode("utf-8"))
+    send_data = {}
+    asset_list_given = json_loads['asset_list']
+    print asset_list_given
+    veris_list = []
+    experience_list = []
+    for asset_given in asset_list_given:
+        if asset_given['data_source'] == 'VERIS':
+            veris_list.append([asset_given['asset_name'],
+                               [float(asset_given['confidentiality']), float(asset_given['integrity']),
+                                float(asset_given['availability'])]])
+        else:
+            threat_threat_action_asset_experience = {}
+            ####################################### Prepare the list of threat statistics from the experience ######################################
+            for threat_action in asset_given['threat_list']:
+                threat_action_name = threat_action['threat_action_name_id'].lower()
+                threat_list = threat_threat_action_map[threat_action_name]
+                for threat in threat_list:
+                    if threat not in threat_threat_action_asset_experience.keys():
+                        threat_threat_action_asset_experience[threat] = {}
+                    threat_threat_action_asset_experience[threat][threat_action_name] = threat_action['frequency']
+
+            ####################################### End Preparation the list of threat statistics from the experience ######################################
+            experience_list.append([('%s_exp' % (asset_given['asset_name'])),
+                                    [float(asset_given['confidentiality']), float(asset_given['integrity']),
+                                     float(asset_given['availability'])], threat_threat_action_asset_experience])
+    print veris_list
+    print "******************************* Given the asset experience list **********************"
+    for i in range(len(experience_list)):
+        print experience_list[i]
+
+    ############################################## Just for Testing ###############################################
+    # experience_list = []
+    # experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
+    # experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
+    ############################################## End of Testing #################################################
+
+    # veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]]]#,['end-user',[100000,100000,100000]]]
+    asset_enterprise_list_input = [[] for i in range(2)]
+    asset_enterprise_list_input[VERIS_LIST] = veris_list
+    asset_enterprise_list_input[EXPERIENCE_LIST] = experience_list
+
+    print " ***************************** All the CyberARM Asset ************************************"
+    print asset_enterprise_list_input
+    from CDMBuilder.CyberARMDeployed import CyberARMEngineUpdated
+    CyberARMEngineUpdated.generate_risk_distribution(asset_enterprise_list_input)
+    return HttpResponse(
+        json.dumps(send_data),
+        content_type="application/json"
+    )
+
+##################################################################### End of Threat Action Distribution ##############################################
+
 def cyberARM_request(request):
     if request.method=='GET':
         print "Cyber ARm Generate"

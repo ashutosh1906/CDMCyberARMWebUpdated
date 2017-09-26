@@ -68,10 +68,10 @@
                 <a style="text-decoration: underline;color: red;" id="exp_error">Please Enter the Explanation Before Editing</a>
             </div>
             <div class="col">
-                <label for="sc_version">Explanation</label>
+                <label for="sc_version">New Explanation</label>
             </div>
             <div class="col">
-                <input type="text" class="form-control" name="explantion_edit" id="explanation_edit" placeholder="Please Enter Explanation"/>
+                <textarea class="form-control" name="explantion_edit" id="explanation_edit" placeholder="Please Enter Explanation"></textarea>
             </div>
       </div>
 
@@ -137,12 +137,11 @@
      <div style="padding-top: 10px;">
             <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
      </div>
-        <form method="post" action="/generateCDM/">
-            {% csrf_token %}
-            <div class="row" style="text-align: center;padding-top: 10px;">
-               <button type="submit" class="btn btn-primary">Generate Security Controls</button>
-            </div>
-        </form>
+
+    <div class="row" style="text-align: center;padding-top: 10px;">
+       <button class="btn btn-primary" id="gen_sec_control_csv">Generate Security Controls</button>
+    </div>
+
 
     </div>
 
@@ -172,6 +171,7 @@
         loadDataGridUpdated(cdm_entries);
         $('#jqxgrid').jqxGrid({pagesizeoptions: ['10', '20', '30', '40', '50', '100', '200']});
         $('#jqxgrid').jqxGrid({pagesize: 50});
+        $("#jqxgrid").jqxGrid('sortby','sc_version','asc');
         $("#security_control_name").jqxDropDownList({source: sc_name, width: '680px', height: '30px'});
         $("#kill_chain_phase_list").jqxDropDownList({source: kc_phase, width: '240px', height: '30px'});
         $("#kill_chain_phase_list").jqxDropDownList({autoDropDownHeight: true});
@@ -232,7 +232,7 @@
             $("#explanation_box").text(dataRow['explanation_row']);
             $("#dialog-message").dialog({
                 modal: true,
-                position: {my: "center top", at: "center top"},
+                position: {my: "center center", at: "center top"},
                 width:600,
                 buttons: {
                     Ok: function () {
@@ -246,11 +246,11 @@
                         $("#security_function_list_edit").jqxDropDownList('selectItem',dataRow["sc_func"]);
                         $("#enforcement_level_list_edit").jqxDropDownList('selectItem',dataRow["en_level_name"]);
                         $("#explanation_edit_old").text(dataRow["explanation_row"]);
-                        $("#explanation_edit").val("");
+                        $("#explanation_edit").val(dataRow["explanation_row"]);
                         $("#edit_box").dialog({
                             modal: true,
                             width: 800,
-                            position: {my: "center top", at: "center top"},
+                            position: {my: "center top", at: "center center"},
                             buttons: {
                                 Submit: function () {
                                      var new_exp = $("#explanation_edit").val()
@@ -285,6 +285,25 @@
         /******************************************** Edit the explanation box ******************************************/
 
         /******************************************** End of edit of the explanation box ********************************/
+        /******************************************** Show the generated File***************************************/
+        var dataFieldName = ['sc_name','sc_version','sc_func','kc_phase_name','en_level_name','explanation'];
+        function generateCDMCSV(){
+            console.log("Download the grid as file");
+            var rows = $('#jqxgrid').jqxGrid('getrows');
+            var fileContent = "";
+            for(var i = 0;i<rows.length;i++){
+               for(var j = 0;j<dataFieldName.length-1;j++){
+                   fileContent += rows[i][dataFieldName[j]];
+                   if(j<dataFieldName.length-2) fileContent += ',';
+               }
+               fileContent += '\n';
+            }
+            downloadFile("text.txt",fileContent);
+        }
+        $("#gen_sec_control_csv").click(function () {
+            generateCDMCSV();
+        });
+        /******************************************** End of the generation of the file***************************************/
 
     });
 
