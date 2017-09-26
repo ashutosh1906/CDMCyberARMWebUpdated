@@ -15,6 +15,7 @@ import UtilityFunctions
 
 ######################## Global ################################
 threat_threat_action_map = {}
+USER_NAME_KEY = 'user_name'
 ####################### End Global #############################
 
 from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK,CYBERARM_ROI
@@ -29,10 +30,16 @@ def login(request):
     reg_flag = request.POST["registerFlag"]
     # person = model.Person(user_name=user_name,user_password=user_pwd)
     # person.save()
-    print('Thanks for the patient %s : %s --> %s' % (user_name, user_pwd, reg_flag))
-    return redirect('home')
+    if user_name=='ccaa' and user_pwd=='ccaa2018':
+        print('Thanks for the patient %s : %s --> %s' % (user_name, user_pwd, reg_flag))
+        request.session[USER_NAME_KEY]=user_name
+        return redirect('home')
+    else:
+        return redirect('login')
 
 def loginPost(request):
+    if USER_NAME_KEY not in request.session.keys():
+        return redirect('login')
     if request.method=='GET':
         # print "*********************In the login Post function******************************"
         return render(request, "cdmDisplay.html")
@@ -53,6 +60,17 @@ def loginPost(request):
         return redirect('csc_classification')
     if action_name == 'Threat-KC Phase Mapping':
         return redirect('threatActionKillChainPhaseMapping')
+    if action_name == 'Log out':
+        if USER_NAME_KEY in request.session.keys():
+            del request.session[USER_NAME_KEY]
+        return redirect('login')
+
+def authenticate(request):
+    if USER_NAME_KEY not in request.session.keys():
+        return redirect('login')
+    print "User Name %s" % (request.session[USER_NAME_KEY])
+    if request.session[USER_NAME_KEY] == 'void':
+        return redirect('login')
 
 def developQueryModel(all_cdm_row):
     # print "Number of rows %s" % (all_cdm_row.count())
@@ -86,6 +104,8 @@ def createCDMSCName(cdm_dict):
     return sc_rows
 
 def insertThreatActions(request):
+    if USER_NAME_KEY not in request.session.keys():
+        return redirect('login')
     if request.method == 'GET':
         a = Real('a')
         threat_action_list = model.Threat_Action.objects.all()
@@ -410,6 +430,8 @@ def cyberARM_request_updated(request):
 
 ################################################################# Call CyberARM Compact#######################################################
 def cyberARM_request_updated_compact(request):
+    if USER_NAME_KEY not in request.session.keys():
+        return redirect('login')
     if request.method == "GET":
         print "CyberARM Updated Generation"
         print "Threat Threat Action Map %s" % (threat_threat_action_map)

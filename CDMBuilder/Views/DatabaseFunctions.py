@@ -5,6 +5,8 @@ from CDMBuilder.Models import model
 from CDMBuilder.Utilities import GlobalVariables
 from django.db import connection
 import json
+from django.shortcuts import render,redirect
+from Login import authenticate,USER_NAME_KEY
 
 def insertMapThreatThreatAction(request):
     print "Insert The Threat Threat Action Relationship"
@@ -48,6 +50,8 @@ def objectToArrayOfDict():
     return cdm_entries_grid_list
 
 def CSC_Classification(request):
+    if USER_NAME_KEY not in request.session.keys():
+        return redirect('login')
     if request.method == "GET":
         send_data = {}
         send_data['kc_phase'] = json.dumps(GlobalVariables.DATABASE_KILL_CHAIN_PHASE.keys())

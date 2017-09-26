@@ -133,6 +133,81 @@
 
     <div style="text-align:center;padding-top:10px;"><button class="btn btn-primary" id="insert_cdm_row">Insert Security Control</button></div>
 
+    <div class="container">
+        <div class="row"><a id="desc_table" class="clickable_red">Descritption About Table</a></div>
+    </div>
+
+    <!-- Dialouge Box for Table Description -->
+    <div class="container" id="dialouge_table_desc" style="display: none;padding:20px;padding-right: 30px;font-family: Calibri, sans-serif;">
+        <div class="row"><label style="text-decoration: underline;font-size: 22px;color: #0b559b;"> CSC Security Control:</label></div>
+        <div class="row">
+            <p class="desc_table_p">
+                The CIS Critical Security Controls (CSC), created by top experts from many organizations recommends set of actions to provide an efficient defense
+                against pervasive and advanced attacks. CIS has combined attack patterns derived from threat reports with experts' defense knowledge to form a
+                synthesized list of security controls.
+            </p>
+        </div>
+
+        <div class="row"><label style="text-decoration: underline;font-size: 25px;margin-top: 10px;color: #0b559b;"> Security Function:</label></div>
+        <div class="row">
+            <p class="desc_table_p">
+                Security function is the exact action executed by the security controls against threats.
+            </p>
+        </div>
+
+        <div class="row"><label style="text-decoration: underline;font-size: 25px;margin-top: 10px;color: #0b559b;"> Enforcement level:</label></div>
+        <div class="row">
+            <p class="desc_table_p">
+                The entities on which the security controls operate.
+            </p>
+        </div>
+
+        <div class="row"><label style="text-decoration: underline;font-size: 25px;margin-top: 10px;color: #0b559b;"> CCAA Cyber Kill Chain :</label></div>
+        <div class="row">
+            <p class="desc_table_p">
+                CCAA has generated <b>CCAA Cyber Kill Chain</b> by combining Cyber Kill Chain of <b>Lockheed Martin </b> and <b>The Mitre Corporation</b> which divides the adversary's
+                Tactic, Technique and Procedure into eight different steps or phases for better understanding and analyzing. These phases are described as follows:
+            </p>
+            <div class="container" style="padding-left:40px;">
+                <div class="row">
+                    <p class="desc_table_p">
+                        <b style="color: red;">Reconnaissance: </b>The intruders performs scanning, crawlong etc. to identify the target and also to
+                        discover the vulnerabilities of that victim target.
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p">
+                        <b style="color: red;">Weaponization: </b>The intruder develops or prepares the weapon such as remote access malware to exploit
+                        the vulnerabilities of the target.</p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p">
+                        <b style="color: red;">Delivery: </b> The attacker delivers the weapon to the target via email, removable disk etc.
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p"><b style="color: red;">Exploit: </b>The attacker exploits the identified vulnerabilities by executing the malicious code on target system.</p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p"><b style="color: red;">Installation: </b>The attacker installs malware,access point etc. on the victim machine.</p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p"><b style="color: red;">Command & Control(C2): </b>The attcker establishes a communication channel with the remote master server to
+                        enable the instruder to manipulate the target machine.</p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p"><b style="color: red;">Execiute: </b>The attackers execute action to achieve the goals such as data exfiltration, attack propagation etc. </p>
+                </div>
+                <div class="row">
+                    <p class="desc_table_p"><b style="color: red;">Maintain: </b>This can come at any phase after the exploitation. In this phase, the attacker performs actions to maintain its
+                        presence.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- End of the Dialouge Box -->
 
      <div style="padding-top: 10px;">
             <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
@@ -152,6 +227,7 @@
     <script type="text/javascript" src="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
     <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+    <link rel="stylesheet" href="{% static "styles/CustomDesign.css" %}">
     <script type="text/javascript">
     $(document).ready(function () {
         {#        var data = JSON.parse("{{ cdmList | escapejs}}");#}
@@ -298,12 +374,24 @@
                }
                fileContent += '\n';
             }
-            downloadFile("text.txt",fileContent);
+            downloadFile("CSCMapping.csv",fileContent);
         }
         $("#gen_sec_control_csv").click(function () {
             generateCDMCSV();
         });
         /******************************************** End of the generation of the file***************************************/
+
+        /******************************************** Dialouge box for the Table Description *********************************/
+        $("#desc_table").click(function () {
+             $("#dialouge_table_desc").dialog({
+                modal: true,
+                position: {my: "center center", at: "center top"},
+                width:900,
+                title:"Cyber Defense Matrix Attribute Description"
+
+             });
+        });
+        /********************************************* End of the description of the dialouge box ***************************/
 
     });
 

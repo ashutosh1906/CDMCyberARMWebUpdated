@@ -190,8 +190,8 @@ function loadDataGridUpdated(dataLoad){
                 sortable: true,
                 columns: [
                   { text: 'Id', datafield: 'id', width:50,renderer:columnrenderer,cellsrenderer:cellsrenderer,hidden:true},
-                  { text: 'Security Control', datafield: 'sc_name', width: 450,renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                  { text: 'Version', datafield:'sc_version', width:70,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'CSC Security Control', datafield: 'sc_name', width: 450,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Subcontrol', datafield:'sc_version', width:120,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                   { text: 'Security Function', datafield: 'sc_func', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Enforcement Level', datafield: 'en_level_name', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                   { text: 'Kill Chain Phase', datafield: 'kc_phase_name', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
