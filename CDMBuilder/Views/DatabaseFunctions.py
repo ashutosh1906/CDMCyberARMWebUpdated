@@ -100,3 +100,13 @@ def edit_CSC_Classification(request):
         json.dumps(objectToArrayOfDict()),
         content_type="application/json"
     )
+
+def removeCSCClassification(request):
+    csc_key = json.loads(request.body.decode("utf-8"))
+    print "Got the Delete request %s" % (csc_key)
+    csc_row = model.cyber_defense_matrix_norm.objects.get(id=csc_key)
+    csc_row.delete()
+    return HttpResponse(
+        json.dumps(objectToArrayOfDict()),
+        content_type="application/json"
+    )

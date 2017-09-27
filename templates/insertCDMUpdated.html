@@ -345,6 +345,10 @@
                                     ajaxInsertCDMRow(dataEdit,"/edit_csc_classification/");
                                     $(this).dialog("close");
                                 },
+                                Delete: function () {
+                                    ajaxInsertCDMRow(prim_key,"/remove_csc_classification/");
+                                    $(this).dialog("close");
+                                },
                                 Cancel: function () {
                                     $(this).dialog("close");
                                 }
