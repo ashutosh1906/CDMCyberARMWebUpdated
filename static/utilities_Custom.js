@@ -168,8 +168,9 @@ function loadDataGridUpdated(dataLoad){
             {
                 localdata: dataLoad,
                 datatype: "array",
+                // sort: customsortfunc,
                 datafields: [{ name: 'sc_name'},
-                  { name: 'sc_version',type:'float'},
+                  { name: 'sc_version'},
                   { name: 'sc_func',},
                   { name: 'en_level_name',},
                   { name: 'kc_phase_name', },
@@ -352,3 +353,6 @@ function loadDataGrid(dataLoad){
         element.click();
         document.body.removeChild(element);
     }
+
+
+    
