@@ -15,7 +15,7 @@
                     <div class="col-sm-2">
                         <input type="text" id="affordable_risk" placeholder="Enter Affordable Risk"/>
                     </div>
-         </div>
+        </div>
         <div class="container-fluid" style="text-align: center;">
             <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;">Please Fill The Affordable Risk & Budget Input</p>
         </div>
@@ -149,15 +149,37 @@
             </div>
 
         </div>
-         <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+
+         <div class="container" style="margin-top:15px;text-align:center;padding: 30px;">
                 <div id="asset_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
                 </div>
          </div>
+
          <div class="container-fluid">
              <div class="col-lg-6 col-lg-offset-2">
                  <a name="threat_action_distribution" id="threat_action_distribution" class="clickable_a">Click to Generate Threat Action Distribution</a>
              </div>
          </div>
+
+         <div class="container-fluid" style="margin-top:15px;text-align:center;padding: 30px;">
+                 <div id="ta_distribution_grid_list" style="text-align:center;margin-left:auto;margin-right: auto;">
+                 </div>
+         </div>
+
+        <div class="row" id="ta_elimination_div" style="display:none;margin-top: 10px;padding-left: 20px;">
+            <div class="col-sm-4 col-sm-offset-1"><label class="label_value" id="ta_elm">Threat Actoin Elimination (%): 0</label></div>
+            <div class="col-sm-6 col-sm-offset-2">
+                 <div id='jqxsliderTA'></div>
+             </div>
+        </div>
+
+        <div class="row" id="risk_elimination_div" style="display:none;margin-top: 10px;padding-left: 20px;">
+            <div class="col-sm-4 col-sm-offset-1"><label class="label_value" id="risk_elm">Risk Elimination (%): 0</label></div>
+            <div class="col-sm-6 col-sm-offset-2">
+                 <div id='jqxsliderRisk'></div>
+             </div>
+        </div>
+
          <div style="margin-top:16px;text-align: center;">
                     <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
          </div>
@@ -314,6 +336,8 @@
     <link rel="stylesheet" href="{% static "styles/CustomDesign.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui-1.12.1.custom/jquery-ui.min.css" %}">
     <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.energyblue.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.darkblue.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "jqwidgets/styles/jqx.summer.css" %}" type="text/css"/>
     <script type="text/javascript">
         $(document).ready(function () {
             //////////////////////////////////////////// Data sent from the backend ////////////////////////////
@@ -379,7 +403,6 @@
                     autowidth: true,
                     autoheight:true,
                     pageable:true,
-                    sortable: true,
                     columns: [
                       { text: 'Threat Action', datafield: 'threat_action_name_id', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                          { text: 'Occurrence', datafield: 'frequency', width: 280,renderer:columnrenderer,cellsrenderer:cellsrenderer },
@@ -944,6 +967,9 @@
                 ajaxTADistribution(asset_list_threat_action,"/ta_distribution/")
             });
 
+            var ta_elm = "Threat Actoin Elimination (%):";
+            var risk_elm = "Risk Elimination (%):";
+
             function ajaxTADistribution(asset_list,url) {
                 asset_list['csrfmiddlewaretoken'] = '{{ csrf_token }}';
                 var sc_row = JSON.stringify(asset_list);
@@ -960,12 +986,26 @@
 
                     success: function (data_received) {
                         console.log(data_received);
+                        threatDistributionGrid("ta_distribution_grid_list",data_received['percentage'])
+                        $("#ta_elimination_div").show();
+                        $("#risk_elimination_div").show();
+                        $("#jqxsliderTA").jqxSlider({theme:'summer',value:1,mode:"fixed",min:0,max:100,ticksFrequency:10,width:"400px"});
+                        $("#jqxsliderRisk").jqxSlider({theme:'summer',value:1,mode:"fixed",min:0,max:100,ticksFrequency:10,width:"400px"});
                     },
                     error: function () {
                         alert("Ooops didn't work");
                     }
                 });
             }
+            $('#jqxsliderTA').bind('change', function (event) {
+              $('#ta_elm').html(ta_elm + event.args.value);
+              $('#jqxsliderRisk').jqxSlider('setValue',0);
+            });
+
+             $('#jqxsliderRisk').bind('change', function (event) {
+              $('#risk_elm').html(risk_elm + event.args.value);
+              $('#jqxsliderTA').jqxSlider('setValue',0);
+            });
             /*********************************************** End of Threat Action Distribution ***************************/
 
            /* ############################################### Threat Actions List ################################# */

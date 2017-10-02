@@ -354,5 +354,38 @@ function loadDataGrid(dataLoad){
         document.body.removeChild(element);
     }
 
+    function threatDistributionGrid(name,dataLoad){
+        console.log("Threat Distribution Table");
+        console.log(dataLoad);
+        var source =
+            {
+                localdata: dataLoad,
+                datatype: "array",
+                datafields: [{ name: 'threat_action'},
+                  { name: 'risk',type:'float'},
+
+           ] };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+            $("#"+name).jqxGrid(
+            {
+                source: dataAdapter,
+                autowidth: true,
+                autoheight:true,
+                pageable:true,
+                sortable: true,
+                theme:'darkblue',
+                columns: [
+                  { text: 'Threat Action Distribiution (%)', datafield: 'threat_action', width:250,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Risk Distribution (%)', datafield:'risk', width:250,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+
+                ]
+            });
+            $("#"+name).jqxGrid({ pagesize:20});
+    }
+
 
 

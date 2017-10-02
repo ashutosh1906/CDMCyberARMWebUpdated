@@ -67,3 +67,10 @@
 .desc_table_p{
     font-size: 18px;
 }
+
+.label_value{
+    font-style: normal;
+    font-size: 22px;
+    font-family: cursive;
+    color: darkblue;
+}

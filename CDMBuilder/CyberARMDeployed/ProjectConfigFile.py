@@ -23,7 +23,7 @@ CYBERARM_CDM_MATRIX = 0
 CYBERARM_RISK = 1
 CYBERARM_ROI = 2
 NUMBER_OF_CYBERARM_OUTPUT = 3
-TIMEOUT_DURATION = 120000
+TIMEOUT_DURATION = 60*1000
 
 ######################################### ROI Stattistics #####################################################
 IMPOSED_RISK = 'Imposed Risk'

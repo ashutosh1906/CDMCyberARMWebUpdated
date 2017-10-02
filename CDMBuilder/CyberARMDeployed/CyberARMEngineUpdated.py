@@ -15,7 +15,7 @@ def make_comparator(less_than):
     return compare
 
 
-def generate_risk_distribution(asset_enterprise_list):
+def generate_risk_distribution(asset_enterprise_list,send_data):
     global_risk_threat_action = []
     risk_threat_action_distribution = [[] for i in range(2)]
     risk_threat_distribution = [[] for i in range(2)]
@@ -39,9 +39,13 @@ def generate_risk_distribution(asset_enterprise_list):
     sum_percentage = []
     start_index = 0
     distance_percentage = risk_length/10
+    rest_element = risk_length - distance_percentage*10
     init_sum = 0
+    outer_loop_index = 0
     while start_index < risk_length:
         last_index = start_index + distance_percentage
+        if outer_loop_index < rest_element:
+            last_index += 1
         if last_index > risk_length:
             last_index = risk_length
         print "Start Index %s : End Index %s" % (start_index,last_index)
@@ -49,5 +53,8 @@ def generate_risk_distribution(asset_enterprise_list):
             init_sum += global_risk_threat_action[start_index][0]
             start_index += 1
         percentage_sum = round(init_sum/float(total_risk_value)*100,3)
-        sum_percentage.append([percentage_sum,round(start_index/float(risk_length)*100,3)])
+        sum_percentage.append({'risk':percentage_sum,'threat_action':round(start_index/float(risk_length)*100,3)})
+        outer_loop_index += 1
     print "This is the percentage %s" % (sum_percentage)
+    send_data['percentage'] = sum_percentage
+    send_data['global_risk_threat_action'] = global_risk_threat_action

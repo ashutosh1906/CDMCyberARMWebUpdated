@@ -557,7 +557,7 @@ def threat_action_distribution(request):
     print " ***************************** All the CyberARM Asset ************************************"
     print asset_enterprise_list_input
     from CDMBuilder.CyberARMDeployed import CyberARMEngineUpdated
-    CyberARMEngineUpdated.generate_risk_distribution(asset_enterprise_list_input)
+    CyberARMEngineUpdated.generate_risk_distribution(asset_enterprise_list_input,send_data)
     return HttpResponse(
         json.dumps(send_data),
         content_type="application/json"
