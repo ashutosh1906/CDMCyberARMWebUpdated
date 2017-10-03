@@ -2,7 +2,7 @@ import os
 import SecurityControl,ThreatAction,Threat
 import ProjectConfigFile,Utitilities
 SECURITY_CONTROL_FILE = '%s/%s/SecurityControls.csv' % (os.path.abspath(os.path.dirname(__file__)),ProjectConfigFile.RESOURCE_FOLDER)
-THREAT_ACTION_SECURITY_CONTROL_FILE = '%s/%s/ThreatActionSecurityControlNew.csv' % (os.path.abspath(os.path.dirname(__file__)),ProjectConfigFile.RESOURCE_FOLDER)
+THREAT_ACTION_SECURITY_CONTROL_FILE = '%s/%s/ThreatActionSecurityControldistribution.csv' % (os.path.abspath(os.path.dirname(__file__)),ProjectConfigFile.RESOURCE_FOLDER)
 SECURITY_CONTROL_FILE_PARSER_CHARACTER = ';'
 THREAT_ACTION_SECURITY_CONTROL_FILE_PARSER_CHARACTER = ';'
 
