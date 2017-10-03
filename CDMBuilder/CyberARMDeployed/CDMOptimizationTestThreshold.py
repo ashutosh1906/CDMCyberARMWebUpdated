@@ -448,6 +448,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             row['sc_function'] =ProjectConfigFile.ID_TO_SECURITY_FUNCTION[security_control_obj.sc_function]
             row['en_level'] =ProjectConfigFile.ID_TO_ENFORCEMENT_LEVEL[security_control_obj.en_level]
             row['kc_phase'] =ProjectConfigFile.ID_TO_KILL_CHAIN_PHASE[security_control_obj.kc_phase]
+            row['sc_version'] = security_control_obj.sc_version
             CDM_Global.append(row)
     ########################################################### End of the dataset of the grid view #################################
 

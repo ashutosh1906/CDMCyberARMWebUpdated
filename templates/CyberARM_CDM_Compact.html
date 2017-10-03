@@ -757,6 +757,7 @@
                     datatype: "array",
                     datafields: [{ name: 'asset_name'},
                       { name: 'sc_name'},
+                        {name:'sc_version'},
                       { name: 'sc_function'},
                       { name: 'en_level'},
                       { name: 'kc_phase'},
@@ -778,6 +779,7 @@
                     columns: [
                         { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
                         { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Sub CSC', datafield: 'sc_version', width: 80,renderer:columnrenderer,cellsrenderer:cellsrenderer },
                         { text: 'Security Function', datafield: 'sc_function', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                         { text: 'Enforcement Level', datafield: 'en_level', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                         { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
@@ -1066,3 +1068,5 @@
         });
     </script>
 {% endblock %}
+
+

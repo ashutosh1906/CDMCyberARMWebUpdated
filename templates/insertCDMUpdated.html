@@ -366,7 +366,7 @@
 
         /******************************************** End of edit of the explanation box ********************************/
         /******************************************** Show the generated File***************************************/
-        var dataFieldName = ['sc_name','sc_version','sc_func','kc_phase_name','en_level_name','explanation'];
+        var dataFieldName = ['sc_version','sc_name','sc_func','kc_phase_name','en_level_name','explanation'];
         function generateCDMCSV(){
             console.log("Download the grid as file");
             var rows = $('#jqxgrid').jqxGrid('getrows');
@@ -374,7 +374,7 @@
             for(var i = 0;i<rows.length;i++){
                for(var j = 0;j<dataFieldName.length-1;j++){
                    fileContent += rows[i][dataFieldName[j]];
-                   if(j<dataFieldName.length-2) fileContent += ',';
+                   if(j<dataFieldName.length-2) fileContent += ';';
                }
                fileContent += '\n';
             }

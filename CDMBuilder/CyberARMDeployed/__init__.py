@@ -4,6 +4,7 @@ from CyberARMPowerPlant import threat_threat_action_possible_pair,asset_name_lis
 import ThreatStatisticsSingle
 import ThreatPrioritization,ThreatActionToSecurityControl
 
+
 def draw_threat_threat_action_map():
     print "Init Threat Threat Action Map"
     threat_ta_entities = model.threat_threat_action.objects.all()
@@ -19,6 +20,9 @@ def read_threat_reports():
     ThreatPrioritization.calculate_threatAction_threat_prob_distribution(prob_threat, prob_threat_action_threat, threat_threatAction_asset_veris)
     ThreatPrioritization.calculate_threat_threatAction_prob_distribution(prob_threat_threat_action, threat_threatAction_asset_veris)
 
+def effectivenessDistribution():
+    # file = open('')
+    pass
 
 draw_threat_threat_action_map()
 print "Threat Threat Action Map %s" % (threat_threat_action_map)
