@@ -74,3 +74,6 @@
     font-family: cursive;
     color: darkblue;
 }
+.clickable_custom_a{
+    cursor: pointer;
+}

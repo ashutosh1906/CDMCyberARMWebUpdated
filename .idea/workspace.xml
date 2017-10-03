@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a164e12-9212-4c75-9776-58561a96aa29" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThresholdTactic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" afterPath="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" afterPath="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/styles/CustomDesign.css" afterPath="$PROJECT_DIR$/static/styles/CustomDesign.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/utilities_Custom.js" afterPath="$PROJECT_DIR$/static/utilities_Custom.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" afterPath="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" />
@@ -28,7 +23,7 @@
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$DatabaseMysql.coverage" NAME="DatabaseMysql Coverage Results" MODIFIED="1499294628105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../CustomUtilities" />
     <SUITE FILE_PATH="coverage/CDMBuilder$Test__CDMBuilder.coverage" NAME="Test: CDMBuilder Coverage Results" MODIFIED="1485817047562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/CDMBuilder$CyberARMEngine.coverage" NAME="CyberARMEngine Coverage Results" MODIFIED="1494878397701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects_prev/CyberARMFinalCCAA" />
-    <SUITE FILE_PATH="coverage/CDMCyberARMWebUpdated$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1506907778404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CDMCyberARMWebUpdated$CDMBuilder.coverage" NAME="CDMBuilder Coverage Results" MODIFIED="1507001992866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$PowerPlant.coverage" NAME="PowerPlant Coverage Results" MODIFIED="1497394378147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../ComplexAdaptiveSystem/javaapplicationcas/ProjectFinal" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$CyberARMPowerPlant.coverage" NAME="CyberARMPowerPlant Coverage Results" MODIFIED="1497412511722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../CyberARMDeployedTest" />
     <SUITE FILE_PATH="coverage/CDMCyberARMWeb$Machine.coverage" NAME="Machine Coverage Results" MODIFIED="1496359422431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Google Drive/Meeting_6_1_2017" />
@@ -53,68 +48,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectConfigFile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CDMBuilder/Views/Login.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3837">
-              <caret line="641" column="23" lean-forward="true" selection-start-line="641" selection-start-column="23" selection-end-line="641" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-                <element signature="e#2880#3477#0" expanded="false" />
-                <element signature="e#14852#15744#0" expanded="false" />
-                <element signature="e#15790#16801#0" expanded="false" />
-                <element signature="e#30568#31115#0" expanded="false" />
-                <element signature="e#31157#34042#0" expanded="false" />
-                <marker date="1506898954963" expanded="true" signature="4586:4719" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1506898954963" expanded="true" signature="4994:5265" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1506898954963" expanded="true" signature="9273:9406" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1506898954963" expanded="true" signature="10254:10393" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1506898954963" expanded="true" signature="13298:13431" ph="SELECT * FRO... sc_to_enforcement_level" />
-                <marker date="1506898954963" expanded="true" signature="14946:15081" ph="SELECT * FRO... cyber_defense_matrix" />
-                <marker date="1506898954963" expanded="true" signature="15908:16068" ph="SELECT * fro... sc_to_enforcement_level" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CyberARM_CDM_Compact.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CyberARM_CDM_Compact.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="997" column="19" lean-forward="true" selection-start-line="997" selection-start-column="19" selection-end-line="997" selection-end-column="19" />
+            <state relative-caret-position="373">
+              <caret line="1025" column="53" lean-forward="false" selection-start-line="1025" selection-start-column="53" selection-end-line="1025" selection-end-column="53" />
               <folding>
-                <element signature="e#1359#1997#0#HTML" expanded="false" />
-                <element signature="e#2021#3994#0#HTML" expanded="false" />
-                <element signature="e#2879#3799#0#HTML" expanded="false" />
-                <element signature="e#4004#7508#0#HTML" expanded="false" />
-                <element signature="e#4834#5736#0#HTML" expanded="false" />
-                <element signature="e#5750#5945#0#HTML" expanded="false" />
-                <element signature="e#5958#6185#0#HTML" expanded="false" />
-                <element signature="e#6199#7314#0#HTML" expanded="false" />
-                <element signature="e#7542#7598#0#HTML" expanded="true" />
-                <element signature="e#7642#7704#0#HTML" expanded="true" />
-                <element signature="e#8067#8123#0#HTML" expanded="true" />
-                <element signature="e#8178#8240#0#HTML" expanded="true" />
-                <element signature="e#8332#8389#0#HTML" expanded="true" />
-                <element signature="e#8711#8768#0#HTML" expanded="true" />
-                <element signature="e#9043#9214#0#HTML" expanded="false" />
-                <element signature="e#9224#9477#0#HTML" expanded="false" />
-                <element signature="e#9486#10073#0#HTML" expanded="false" />
-                <element signature="e#10180#11777#0#HTML" expanded="false" />
-                <element signature="e#11890#13578#0#HTML" expanded="false" />
-                <element signature="e#13595#13887#0#HTML" expanded="false" />
-                <element signature="e#13894#17601#0#HTML" expanded="false" />
+                <element signature="e#7574#7630#0#HTML" expanded="true" />
+                <element signature="e#7674#7736#0#HTML" expanded="true" />
+                <element signature="e#8099#8155#0#HTML" expanded="true" />
+                <element signature="e#8210#8272#0#HTML" expanded="true" />
+                <element signature="e#8364#8421#0#HTML" expanded="true" />
+                <element signature="e#8743#8800#0#HTML" expanded="true" />
+                <element signature="e#9207#9253#0#HTML" expanded="true" />
+                <element signature="e#9499#9752#0#HTML" expanded="false" />
+                <element signature="e#9761#10348#0#HTML" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="insertCDMUpdated.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="490">
+              <caret line="297" column="20" lean-forward="true" selection-start-line="297" selection-start-column="20" selection-end-line="297" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,18 +81,18 @@
       <file leaf-file-name="CustomDesign.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/styles/CustomDesign.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
-              <caret line="72" column="17" lean-forward="false" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+            <state relative-caret-position="226">
+              <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities_Custom.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="utilities_Custom.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/utilities_Custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="376" column="32" lean-forward="true" selection-start-line="376" selection-start-column="16" selection-end-line="376" selection-end-column="32" />
+            <state relative-caret-position="442">
+              <caret line="415" column="45" lean-forward="false" selection-start-line="415" selection-start-column="45" selection-end-line="415" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -142,40 +101,28 @@
       <file leaf-file-name="CyberARMEngineUpdated.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+            <state relative-caret-position="287">
+              <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CDMOptimizationTest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTest.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5557">
-              <caret line="463" column="0" lean-forward="true" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
+            <state relative-caret-position="459">
+              <caret line="31" column="52" lean-forward="false" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CDMOptimizationTestThresholdTactic.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThresholdTactic.py">
+      <file leaf-file-name="ThreatActionToSecurityControl.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatActionToSecurityControl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1562">
-              <caret line="366" column="51" lean-forward="false" selection-start-line="366" selection-start-column="51" selection-end-line="366" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CyberARMPowerPlant.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMPowerPlant.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+            <state relative-caret-position="221">
+              <caret line="15" column="61" lean-forward="true" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -184,11 +131,31 @@
       <file leaf-file-name="CyberARMEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="68" column="51" lean-forward="false" selection-start-line="68" selection-start-column="51" selection-end-line="68" selection-end-column="51" />
+            <state relative-caret-position="391">
+              <caret line="68" column="27" lean-forward="true" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
               <folding>
                 <element signature="e#0#144#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SecurityControl.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/SecurityControl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CDMOptimizationTestThreshold.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThreshold.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="559">
+              <caret line="389" column="16" lean-forward="true" selection-start-line="389" selection-start-column="16" selection-end-line="389" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -219,14 +186,17 @@
       <find>print</find>
       <find>z-index</find>
       <find>Threat Actin Entity ID</find>
-      <find>threat_action_grid</find>
       <find>threat_action_list</find>
-      <find>generate_cdm</find>
       <find>generate_cd</find>
       <find>gen</find>
       <find>explanation_edit</find>
       <find>desc_table</find>
       <find>cyberARM</find>
+      <find>asset_grid_list</find>
+      <find>threat_action_grid</find>
+      <find>risk_grid</find>
+      <find>threat_action_distribution</find>
+      <find>generate_cdm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -278,14 +248,14 @@
         <option value="$PROJECT_DIR$/CDMBuilder/urls.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/Views/DatabaseFunctions.py" />
         <option value="$PROJECT_DIR$/templates/insertCDMUpdated.html" />
-        <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/Views/Login.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThresholdTactic.py" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py" />
-        <option value="$PROJECT_DIR$/static/utilities_Custom.js" />
         <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py" />
+        <option value="$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py" />
         <option value="$PROJECT_DIR$/static/styles/CustomDesign.css" />
         <option value="$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html" />
+        <option value="$PROJECT_DIR$/static/utilities_Custom.js" />
       </list>
     </option>
   </component>
@@ -354,46 +324,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CDMCyberARMWebUpdated" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CDMCyberARMWebUpdated" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jqwidgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CDMCyberARMWebUpdated" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CDMCyberARMWebUpdated" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jqwidgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -994,12 +924,6 @@
           <line>91</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html</url>
-          <line>823</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
       </breakpoints>
       <option name="time" value="5" />
     </breakpoint-manager>
@@ -1217,21 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatActionToSecurityControl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="60" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/SecurityControl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cdmDisplay.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1262,63 +1171,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="399" column="0" lean-forward="false" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
-          <folding>
-            <element signature="e#373#413#0#HTML" expanded="false" />
-            <element signature="e#5720#5808#0#HTML" expanded="false" />
-            <element signature="e#5842#5908#0#HTML" expanded="false" />
-            <element signature="e#6451#6534#0#HTML" expanded="false" />
-            <element signature="e#6802#6885#0#HTML" expanded="false" />
-            <element signature="e#7117#7200#0#HTML" expanded="false" />
-            <element signature="e#7703#7729#0#HTML" expanded="false" />
-            <element signature="e#7837#7856#0#HTML" expanded="false" />
-            <element signature="e#8188#8207#0#HTML" expanded="false" />
-            <element signature="e#8505#8524#0#HTML" expanded="false" />
-            <element signature="e#8747#8766#0#HTML" expanded="false" />
-            <element signature="e#8991#9010#0#HTML" expanded="false" />
-            <element signature="e#9208#9227#0#HTML" expanded="false" />
-            <element signature="e#9523#9542#0#HTML" expanded="false" />
-            <element signature="e#9767#9786#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="44" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThreshold.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="347" column="52" lean-forward="false" selection-start-line="347" selection-start-column="52" selection-end-line="347" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="68" column="51" lean-forward="false" selection-start-line="68" selection-start-column="51" selection-end-line="68" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1333,7 +1190,7 @@
     <entry file="file://$PROJECT_DIR$/CDMBuilder/Views/Login.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3837">
-          <caret line="641" column="23" lean-forward="true" selection-start-line="641" selection-start-column="23" selection-end-line="641" selection-end-column="23" />
+          <caret line="641" column="23" lean-forward="false" selection-start-line="641" selection-start-column="23" selection-end-line="641" selection-end-column="23" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
             <element signature="e#2880#3477#0" expanded="false" />
@@ -1355,7 +1212,7 @@
     <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ProjectConfigFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
-          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1363,7 +1220,7 @@
     <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5557">
-          <caret line="463" column="0" lean-forward="true" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
+          <caret line="463" column="0" lean-forward="false" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1378,57 +1235,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py">
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+        <state relative-caret-position="459">
+          <caret line="31" column="52" lean-forward="false" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/utilities_Custom.js">
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/ThreatActionToSecurityControl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="376" column="32" lean-forward="true" selection-start-line="376" selection-start-column="16" selection-end-line="376" selection-end-column="32" />
+        <state relative-caret-position="221">
+          <caret line="15" column="61" lean-forward="true" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/SecurityControl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/insertCDMUpdated.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="297" column="20" lean-forward="true" selection-start-line="297" selection-start-column="20" selection-end-line="297" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngineUpdated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CyberARMEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="68" column="27" lean-forward="true" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CDMBuilder/CyberARMDeployed/CDMOptimizationTestThreshold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="389" column="16" lean-forward="true" selection-start-line="389" selection-start-column="16" selection-end-line="389" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/styles/CustomDesign.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="72" column="17" lean-forward="false" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+        <state relative-caret-position="226">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/CyberARM_CDM_Compact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="997" column="19" lean-forward="true" selection-start-line="997" selection-start-column="19" selection-end-line="997" selection-end-column="19" />
+        <state relative-caret-position="373">
+          <caret line="1025" column="53" lean-forward="false" selection-start-line="1025" selection-start-column="53" selection-end-line="1025" selection-end-column="53" />
           <folding>
-            <element signature="e#1359#1997#0#HTML" expanded="false" />
-            <element signature="e#2021#3994#0#HTML" expanded="false" />
-            <element signature="e#2879#3799#0#HTML" expanded="false" />
-            <element signature="e#4004#7508#0#HTML" expanded="false" />
-            <element signature="e#4834#5736#0#HTML" expanded="false" />
-            <element signature="e#5750#5945#0#HTML" expanded="false" />
-            <element signature="e#5958#6185#0#HTML" expanded="false" />
-            <element signature="e#6199#7314#0#HTML" expanded="false" />
-            <element signature="e#7542#7598#0#HTML" expanded="true" />
-            <element signature="e#7642#7704#0#HTML" expanded="true" />
-            <element signature="e#8067#8123#0#HTML" expanded="true" />
-            <element signature="e#8178#8240#0#HTML" expanded="true" />
-            <element signature="e#8332#8389#0#HTML" expanded="true" />
-            <element signature="e#8711#8768#0#HTML" expanded="true" />
-            <element signature="e#9043#9214#0#HTML" expanded="false" />
-            <element signature="e#9224#9477#0#HTML" expanded="false" />
-            <element signature="e#9486#10073#0#HTML" expanded="false" />
-            <element signature="e#10180#11777#0#HTML" expanded="false" />
-            <element signature="e#11890#13578#0#HTML" expanded="false" />
-            <element signature="e#13595#13887#0#HTML" expanded="false" />
-            <element signature="e#13894#17601#0#HTML" expanded="false" />
+            <element signature="e#7574#7630#0#HTML" expanded="true" />
+            <element signature="e#7674#7736#0#HTML" expanded="true" />
+            <element signature="e#8099#8155#0#HTML" expanded="true" />
+            <element signature="e#8210#8272#0#HTML" expanded="true" />
+            <element signature="e#8364#8421#0#HTML" expanded="true" />
+            <element signature="e#8743#8800#0#HTML" expanded="true" />
+            <element signature="e#9207#9253#0#HTML" expanded="true" />
+            <element signature="e#9499#9752#0#HTML" expanded="false" />
+            <element signature="e#9761#10348#0#HTML" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/utilities_Custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="415" column="45" lean-forward="false" selection-start-line="415" selection-start-column="45" selection-end-line="415" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
