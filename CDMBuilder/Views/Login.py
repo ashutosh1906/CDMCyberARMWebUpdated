@@ -18,7 +18,8 @@ threat_threat_action_map = {}
 USER_NAME_KEY = 'user_name'
 ####################### End Global #############################
 
-from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK,CYBERARM_ROI
+from CDMBuilder.CyberARMDeployed.ProjectConfigFile import VERIS_LIST,EXPERIENCE_LIST,CYBERARM_CDM_MATRIX,CYBERARM_RISK,CYBERARM_ROI,uploadFiles
+
 
 
 def login(request):
@@ -443,6 +444,7 @@ def cyberARM_request_updated_compact(request):
         asset_list = model.Asset_VERIS.objects.all()
         asset_list = UtilityFunctions.asset_list_as_dict(asset_list)
         print asset_list
+        send_data['saved_file_list'] = json.dumps(uploadFiles())
         send_data['asset_list'] = json.dumps(asset_list)
         return render(request,'CyberARM_CDM_Compact.html',send_data)
 
@@ -641,4 +643,6 @@ def cyberARM_request_old(request):
 def cyberARM_BackProcess():
     for i in range(10):
         print "Process ",i
+
+
 

@@ -1,3 +1,4 @@
+import os
 ################################################################## File Names #############################################
 
 ############################################################## Global Variables #############################################
@@ -17,6 +18,7 @@ THREAT_MAP_COST = {}
 THREAT_PRIORITIZATION_THRESHOLD = 0.05
 CHOSEN_NUMBER_THREAT_ACTION = 6
 RESOURCE_FOLDER = 'ResourceFolder'
+INPUT_FILE_PATH = 'CyberARMInputFile'
 VERIS_LIST = 0
 EXPERIENCE_LIST = 1
 CYBERARM_CDM_MATRIX = 0
@@ -84,4 +86,14 @@ def init_conf():
         SECURITY_FUNCTION_TO_ID[SECURITY_FUNCTION_LIST[i]] = i
         ID_TO_SECURITY_FUNCTION[i] = SECURITY_FUNCTION_LIST[i]
 
+def uploadFiles():
+    PROJECT_ROOT = "%s/%s/%s" % (
+        os.path.abspath(os.path.dirname(__file__)),RESOURCE_FOLDER,INPUT_FILE_PATH)
+    print "Aleadry Saved File"
+    file_list = []
+    for root, dir, files in os.walk(PROJECT_ROOT, topdown=False):
+        for filename in files:
+            print filename
+            file_list.append(filename)
+    return file_list
 

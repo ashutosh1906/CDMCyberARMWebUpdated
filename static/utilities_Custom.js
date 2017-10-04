@@ -413,7 +413,7 @@ function generateInputFiles(asset_list){
         writeFile += asset_name_tag_end + '\n\n';
     }
     console.log(writeFile);
-    downloadFile("InputFile.txt", writeFile);
+    downloadFile("CyberARMInputFile.txt", writeFile);
 
 }
 
