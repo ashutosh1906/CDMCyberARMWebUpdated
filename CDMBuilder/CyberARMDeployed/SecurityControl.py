@@ -30,6 +30,7 @@ class SecurityControl(object):
             for threat_action in threat_action_id_list_for_all_assets[i]:
                 if threat_action in self.threat_action:
                     if threat_action not in self.global_asset_threat_action_list[i]:
+                        # print "Threat Action ID %s" % (threat_action)
                         self.global_asset_threat_action_list[i].append(threat_action)
 
     def clearAllThreatActions(self):
