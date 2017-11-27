@@ -428,7 +428,59 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             sec_control_index += 1
     print "Threat Action Effectiveness %s" % (threat_action_effectiveness_enforced)
     # print CDM_Global_id
-
+    ############################################### Capture The Risk ###############################################################
+    # risk_All = []
+    # roi_row = {}
+    # roi_row_key = [ProjectConfigFile.IMPOSED_RISK,ProjectConfigFile.RESIDUAL_RISK,ProjectConfigFile.TOTAL_IMPLEMENTATION_COST,ProjectConfigFile.MITIGATED_RISK,ProjectConfigFile.ROI]
+    # for keys in roi_row_key:
+    #     roi_row[keys] = 0
+    # for i in range(len(threat_id_for_all_assets)):
+    #     # print "Asset Name : %s" % (asset_list_for_smt[i])
+    #     risk_All.append({})
+    #     risk_All[i]['asset_name']=asset_list_for_smt[i][0]
+    #     threat_specific_risk_list = []
+    #     risk_All[i]['max_risk'] = 0
+    #     for j in range(len(threat_id_for_all_assets[i])):
+    #         threat_specific_risk = {}
+    #         threat_id = threat_id_for_all_assets[i][j]
+    #         # print "Risk Id: %s Name: %s Values: %s" % (threat_id,threat_list[threat_id].threat_name,recommended_CDM[smt_Threat[i][j]])
+    #         threat_specific_risk['threat_action_name'] = threat_list[threat_id].threat_name
+    #         print "Threat Specific Risk %s" % (recommended_CDM[smt_Threat[i][j]])
+    #         try:
+    #             threat_specific_risk['risk_ta'] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3))
+    #         except:
+    #             # print "Remove the last character"
+    #             threat_specific_risk['risk_ta'] = float(recommended_CDM[smt_Threat[i][j]].as_decimal(3)[:-1])
+    #         threat_specific_risk['prev_risk'] = round(threat_list[threat_id].maximum_risk[i],3)
+    #         # print type(recommended_CDM[smt_Threat[i][j]])
+    #         risk_All[i]['max_risk'] += threat_list[threat_id].maximum_risk[i]
+    #         threat_specific_risk_list.append(threat_specific_risk)
+    #     try:
+    #         risk_All[i]['res_risk'] = float(recommended_CDM[smt_Residual_Risk_Asset[i]].as_decimal(3))
+    #     except:
+    #         # print "Remove the last character"
+    #         risk_All[i]['res_risk'] = float(recommended_CDM[smt_Residual_Risk_Asset[i]].as_decimal(3)[:-1])
+    #
+    #     try:
+    #         risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3))
+    #     except:
+    #         # print "Remove the last character"
+    #         risk_All[i]['imp_cost'] = float(recommended_CDM[smt_Total_Security_Control_Cost[i]].as_decimal(3)[:-1])
+    #     risk_All[i]['max_risk'] = round(risk_All[i]['max_risk'],3)
+    #     risk_All[i]['threat_list']=threat_specific_risk_list
+    #     roi_row[ProjectConfigFile.IMPOSED_RISK] += risk_All[i]['max_risk']
+    #     roi_row[ProjectConfigFile.RESIDUAL_RISK] += risk_All[i]['res_risk']
+    #     roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] += risk_All[i]['imp_cost']
+    #     # print "Total Residual Risk for Asset %s" % (recommended_CDM[smt_Residual_Risk_Asset[i]])
+    #     # print "Total Implementation Cost %s" % (recommended_CDM[smt_Total_Security_Control_Cost[i]])
+    # roi_row[ProjectConfigFile.MITIGATED_RISK] = round(roi_row[ProjectConfigFile.IMPOSED_RISK] - roi_row[ProjectConfigFile.RESIDUAL_RISK],3)
+    # roi_row[ProjectConfigFile.ROI] = round((roi_row[ProjectConfigFile.MITIGATED_RISK] - roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST])/float(roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST]),3)
+    # roi_row[ProjectConfigFile.IMPOSED_RISK] = round(roi_row[ProjectConfigFile.IMPOSED_RISK],3)
+    # roi_row[ProjectConfigFile.RESIDUAL_RISK] = round(roi_row[ProjectConfigFile.RESIDUAL_RISK],3)
+    # roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] = round(roi_row[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST],3)
+    # Utitilities.printRiskPerThreatStatistics(risk_All)
+    #
+    # ############################################################ Prepare the dataset for the grid view ##############################
     CDM_Global = []
     for asset_index in range(len(CDM_Global_id)):
         # print CDM_Global.append([])
