@@ -409,6 +409,8 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
 
 
     print "Threat Action Effectiveness Enforced %s %s" % (threat_action_effectiveness_enforced,threat_action_id_to_position_roll)
+    global_enforcement_cost = 0.0
+    local_enforcement_cost = [0.0 for i in range(len(asset_list_for_smt))]
     for asset_index in range(len(asset_list_for_smt)):
         # print "******** >>>>>>>>>>>>>>> Asset Index %s" % (asset_index)
         CDM_Global_id.append([])
@@ -423,15 +425,17 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 for threat_action in security_control_list[sec_control].global_asset_threat_action_list[asset_index]:
                     print "Remedied Threat Action %s" % (threat_action)
                     threat_action_effectiveness_enforced[asset_index][threat_action_id_to_position_roll[asset_index][threat_action]] *= (1-security_control_list[sec_control].threat_action_effectiveness[threat_action])
+                local_enforcement_cost[asset_index] += security_control_list[sec_control].investment_cost
             else:
                 print " ----  Boolean (%s,%s,%s) : %s" % (smt_Security_Control_Bool[asset_index][sec_control_index],asset_index, sec_control_index, recommended_CDM[smt_Security_Control_Bool[asset_index][sec_control_index]])
             sec_control_index += 1
+    global_enforcement_cost = sum(local_enforcement_cost)
     print "Threat Action Effectiveness %s" % (threat_action_effectiveness_enforced)
     # print CDM_Global_id
 
     print "########################################### Prepare Threat Success #####################################################"
     threat_success_final = [[1 for j in range(len(threat_id_for_all_assets[i]))] for i in range(len(threat_id_for_all_assets))]
-    global_residual_risk_final = 0
+    global_residual_risk_final = 0.0
     for asset_index in range(len(threat_id_for_all_assets)):
         threat_id_index = 0
         for threat_id in threat_id_for_all_assets[asset_index]:
@@ -465,14 +469,48 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             CDM_Global.append(row)
     ########################################################### End of the dataset of the grid view #################################
 
+    ########################################################### Capture The ROI ####################################################
+    roi_statistics = {}
+    roi_statistics[ProjectConfigFile.IMPOSED_RISK] = round(global_estimated_risk,3)
+    roi_statistics[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST] = round(global_enforcement_cost,3)
+    roi_statistics[ProjectConfigFile.RESIDUAL_RISK] = round(global_residual_risk_final,3)
+    roi_statistics[ProjectConfigFile.MITIGATED_RISK] = (roi_statistics[ProjectConfigFile.IMPOSED_RISK] - roi_statistics[ProjectConfigFile.RESIDUAL_RISK])
+    roi_statistics[ProjectConfigFile.ROI] = (roi_statistics[ProjectConfigFile.MITIGATED_RISK]-roi_statistics[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST]
+                                             )/roi_statistics[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST]
+    ########################################################### End of Capture of The Risk ####################################################
+
+    ########################################################### Hold the Risk #######################################################
+    risk_all = []
+    for asset_index in range(len(threat_id_for_all_assets)):
+        risk_all.append({})
+        risk_all[asset_index]['asset_name'] = asset_list_for_smt[asset_index][0]
+        risk_all[asset_index]['max_risk'] = 0
+        risk_all[asset_index]['res_risk'] = 0
+        risk_all[asset_index]['imp_cost'] = round(local_enforcement_cost[asset_index],3)
+        threat_id_index = 0
+        all_threats = []
+        for threat in threat_id_for_all_assets[asset_index]:
+            specific_threat_information = {}
+            specific_threat_information['threat_action_name'] = threat_list[threat].threat_name
+            specific_threat_information['risk_ta'] = round(threat_success_final[asset_index][threat_id_index],3)
+            specific_threat_information['prev_risk'] = round(threat_list[threat].maximum_risk[asset_index],3)
+            risk_all[asset_index]['max_risk'] += threat_list[threat].maximum_risk[asset_index]
+            risk_all[asset_index]['res_risk'] += threat_success_final[asset_index][threat_id_index]
+            all_threats.append(specific_threat_information)
+            threat_id_index += 1
+        risk_all[asset_index]['max_risk'] = round(risk_all[asset_index]['max_risk'],3)
+        risk_all[asset_index]['res_risk'] = round(risk_all[asset_index]['res_risk'],3)
+        risk_all[asset_index]['threat_list'] = all_threats
+    ########################################################### End Hold Risk #######################################################
+
     ########################################################### Return Value ########################################################
     CDM_Global_All_Statistice = []
     # CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX,CDM_Global)
     # CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK,risk_All)
     # CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_ROI,roi_row)
     CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_CDM_MATRIX, CDM_Global)
-    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK, [])
-    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_ROI, {})
+    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_RISK,risk_all)
+    CDM_Global_All_Statistice.insert(ProjectConfigFile.CYBERARM_ROI,roi_statistics)
     return CDM_Global_All_Statistice
 
 
