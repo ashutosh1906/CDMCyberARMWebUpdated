@@ -1,5 +1,5 @@
 import ThreatStatisticsSingle,ThreatPrioritization,Utitilities,ProjectConfigFile, ThreatPrioritizationExperience
-import ThreatActionToSecurityControl,CyberARMEngine
+import ThreatActionToSecurityControl,CyberARMEngine,CyberARMEngineDistribution
 
 # write_output_file = open("CyberARMOutput",'w')
 threat_threatAction_asset_veris = {}
@@ -48,9 +48,13 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
 
     ######### ***************************************** Check the number of prioritized Threat Actions ****************************##############################################
-    from RiskThreatActionDistribution import generate_risk_distribution
-    threat_actions_frequency = generate_risk_distribution(asset_enterprise_list,risk_elimination)
+    from RiskThreatActionDistribution import generate_risk_distribution,printGlobalRiskThreatAction
+    threat_actions_frequency = -1
+    global_risk_threat_action = []
+    threat_actions_frequency = generate_risk_distribution(asset_enterprise_list,risk_elimination,global_risk_threat_action)
     print "Frequency Threat Actions %s" % (threat_actions_frequency)
+    global_risk_threat_action = global_risk_threat_action[0:threat_actions_frequency]
+    printGlobalRiskThreatAction(global_risk_threat_action)
     ######### ***************************************** end of Check the number of prioritized Threat Actions ****************************##############################################
 
     threat_threatAction_asset.append(threat_threatAction_asset_veris)
@@ -94,8 +98,14 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     # Utitilities.printThreatSecurityControlMapping(threat_action_list,threat_action_name_to_id,security_control_list,risk_threat_action,enterprise_asset_list_given)
     recommendedCDM = []
     # affordable_risk = 900000
-    recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,float(affordable_risk),float(budget))
+    if threat_actions_frequency == -1:
+        recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,float(affordable_risk),float(budget))
     # write_output_file.close()
+    else:
+        recommendedCDM = CyberARMEngineDistribution.select_security_controls(security_control_list, threat_action_list,
+                                                                 threat_action_name_to_id, risk_threat_action,
+                                                                 asset_enterprise_list, threat_list, threat_name_to_id,
+                                                                 float(affordable_risk), float(budget),global_risk_threat_action)
     print "ROI %s" % (recommendedCDM[2])
     if len(recommendedCDM[ProjectConfigFile.CYBERARM_CDM_MATRIX]) == 0:
         roi_row = {}

@@ -14,12 +14,15 @@ def make_comparator(less_than):
             return 0
     return compare
 
+def printGlobalRiskThreatAction(risk_threat_action_distribution):
+    for threat_action_row in risk_threat_action_distribution:
+        print threat_action_row
 
-def generate_risk_distribution(asset_enterprise_list,risk_elimination):
+def generate_risk_distribution(asset_enterprise_list,risk_elimination,global_risk_threat_action):
     print "Risk Elimination Value: %s"%(risk_elimination)
     if risk_elimination == 0:
-        return 0
-    global_risk_threat_action = []
+        return -1
+    # global_risk_threat_action = []
     risk_threat_action_distribution = [[] for i in range(2)]
     risk_threat_distribution = [[] for i in range(2)]
     ThreatPrioritization.calculateRisk(prob_threat,prob_threat_action_threat,asset_enterprise_list[ProjectConfigFile.VERIS_LIST],risk_threat_action_distribution[ProjectConfigFile.VERIS_LIST],risk_threat_distribution[ProjectConfigFile.VERIS_LIST])
@@ -28,13 +31,17 @@ def generate_risk_distribution(asset_enterprise_list,risk_elimination):
     prob_threat_threat_action_experience = {}
     prob_threat_experience = {}
     ThreatPrioritizationExperience.threat_prioritization_main(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,risk_threat_action_distribution[ProjectConfigFile.EXPERIENCE_LIST],risk_threat_distribution[ProjectConfigFile.EXPERIENCE_LIST],asset_enterprise_list[ProjectConfigFile.EXPERIENCE_LIST])
+    asset_index = 0
     for i in range(len(risk_threat_action_distribution)):
         for j in range(len(risk_threat_action_distribution[i])):
             print "Risk (%s,%s) : %s" % (i,j,risk_threat_action_distribution[i][j])
             for ta in risk_threat_action_distribution[i][j].keys():
-                global_risk_threat_action.append([risk_threat_action_distribution[i][j][ta],i,j])
+                global_risk_threat_action.append([risk_threat_action_distribution[i][j][ta],asset_index,ta])
+            asset_index += 1
+    # printGlobalRiskThreatAction(global_risk_threat_action)
     global_risk_threat_action.sort(reverse=True)
     print "Risk Threat Action %s" % (global_risk_threat_action)
+    printGlobalRiskThreatAction(global_risk_threat_action)
     risk_length = len(global_risk_threat_action)
     print "Length %s" % (risk_length)
     total_risk_value = sum([global_risk_threat_action[i][0] for i in range(risk_length)])

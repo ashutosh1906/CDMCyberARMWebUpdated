@@ -12,33 +12,38 @@ def select_threat(threat_list,asset_enterprise_list,threat_id_for_all_assets):
                 threat_id_for_all_assets[i].append(threat.primary_key)
 
 
-def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget):
+def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget,global_risk_threat_action):
     ################################################################################## Global Variables ################################################################
     threat_action_name_list = []
     selected_security_controls = []
     threat_id_for_all_assets = []
     threat_action_id_list_for_all_assets = []
-    affordable_budget = [200000, 200000]
-    # affordable_risk = [2000000, 180000]
     ################################################################################## End Global Variables ################################################################
-    for i in range(len(risk_threat_action)):
-        for threat_action_specific_asset_list in risk_threat_action[i]:
-            threat_action_name_list_specific_asset = []
-            for threat_action_specific_asset in threat_action_specific_asset_list.keys():
-                if threat_action_specific_asset_list[threat_action_specific_asset] > ProjectConfigFile.THREAT_PRIORITIZATION_THRESHOLD:
-                    ta_index = 0
-                    for ta in threat_action_name_list_specific_asset:
-                        if ta[1] < threat_action_specific_asset_list[threat_action_specific_asset]:
-                            break
-                        ta_index += 1
-                    threat_action_name_list_specific_asset.insert(ta_index,[threat_action_name_to_id[threat_action_specific_asset],threat_action_specific_asset_list[threat_action_specific_asset]])
-            threat_action_name_list.append(threat_action_name_list_specific_asset)
+    # for i in range(len(risk_threat_action)):
+    #     for threat_action_specific_asset_list in risk_threat_action[i]:
+    #         threat_action_name_list_specific_asset = []
+    #         for threat_action_specific_asset in threat_action_specific_asset_list.keys():
+    #             if threat_action_specific_asset_list[threat_action_specific_asset] > ProjectConfigFile.THREAT_PRIORITIZATION_THRESHOLD:
+    #                 ta_index = 0
+    #                 for ta in threat_action_name_list_specific_asset:
+    #                     if ta[1] < threat_action_specific_asset_list[threat_action_specific_asset]:
+    #                         break
+    #                     ta_index += 1
+    #                 threat_action_name_list_specific_asset.insert(ta_index,[threat_action_name_to_id[threat_action_specific_asset],threat_action_specific_asset_list[threat_action_specific_asset]])
+    #         threat_action_name_list.append(threat_action_name_list_specific_asset)
     # Utitilities.printThreatActionNameListIter(threat_action_name_list)
-    ######################################################################### Prune The Threat Action Name List Here ####################
-    for threat_action_list_specific_asset_index in range(len(threat_action_name_list)):
-        threat_action_name_list[threat_action_list_specific_asset_index] = threat_action_name_list[threat_action_list_specific_asset_index][0:ProjectConfigFile.CHOSEN_NUMBER_THREAT_ACTION]
-    ######################################################################### End of Pruning The Threat Action Name List Here ###################
-    # Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    # ######################################################################### Prune The Threat Action Name List Here ####################
+    # for threat_action_list_specific_asset_index in range(len(threat_action_name_list)):
+    #     threat_action_name_list[threat_action_list_specific_asset_index] = threat_action_name_list[threat_action_list_specific_asset_index][0:ProjectConfigFile.CHOSEN_NUMBER_THREAT_ACTION]
+    # ######################################################################### End of Pruning The Threat Action Name List Here ###################
+    # # Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    for i in range(len(asset_enterprise_list)):
+        for j in range(len(asset_enterprise_list[i])):
+            threat_action_name_list.append([])
+
+    for threat_action_row in global_risk_threat_action:
+        threat_action_name_list[threat_action_row[1]].append([threat_action_name_to_id[threat_action_row[2]],threat_action_row[0]])
+    Utitilities.printThreatActionNameListIter(threat_action_name_list)
 
     for i in range(len(threat_action_name_list)):
         threat_action_id_list_for_all_assets.append([])

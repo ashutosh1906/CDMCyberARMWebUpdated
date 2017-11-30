@@ -33,12 +33,12 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
                         ta_index += 1
                     threat_action_name_list_specific_asset.insert(ta_index,[threat_action_name_to_id[threat_action_specific_asset],threat_action_specific_asset_list[threat_action_specific_asset]])
             threat_action_name_list.append(threat_action_name_list_specific_asset)
-    # Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    Utitilities.printThreatActionNameListIter(threat_action_name_list)
     ######################################################################### Prune The Threat Action Name List Here ####################
     for threat_action_list_specific_asset_index in range(len(threat_action_name_list)):
         threat_action_name_list[threat_action_list_specific_asset_index] = threat_action_name_list[threat_action_list_specific_asset_index][0:ProjectConfigFile.CHOSEN_NUMBER_THREAT_ACTION]
     ######################################################################### End of Pruning The Threat Action Name List Here ###################
-    # Utitilities.printThreatActionNameListIter(threat_action_name_list)
+    Utitilities.printThreatActionNameListIter(threat_action_name_list)
 
     for i in range(len(threat_action_name_list)):
         threat_action_id_list_for_all_assets.append([])
