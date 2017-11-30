@@ -19,7 +19,7 @@ def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
                 enterprise_asset_list_given.append(asset_name)
     # ProjectConfigFile.init_conf()
 
-def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
+def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination):
     print "The Power Plant has started :: Affordable Risk --> %s Budget --> %s" % (affordable_risk,budget)
     asset_enterprise_list = asset_enterprise_list_input
     ###################################################################################### GLobal Variables ############################################################
@@ -46,6 +46,13 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget):
     # print "Threat Threat Action Asset Veris %s" % (threat_threatAction_asset_veris)
     # print "Asset List %s" % (asset_name_list)
     # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
+
+    ######### ***************************************** Check the number of prioritized Threat Actions ****************************##############################################
+    from RiskThreatActionDistribution import generate_risk_distribution
+    threat_actions_frequency = generate_risk_distribution(asset_enterprise_list,risk_elimination)
+    print "Frequency Threat Actions %s" % (threat_actions_frequency)
+    ######### ***************************************** end of Check the number of prioritized Threat Actions ****************************##############################################
+
     threat_threatAction_asset.append(threat_threatAction_asset_veris)
     # Utitilities.printNumberStatisticsThreatThreatAction(threat_threatAction_asset)
     # print "Asset Statistics %s" % (threat_threatAction_asset[0])

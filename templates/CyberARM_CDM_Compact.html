@@ -732,6 +732,9 @@
                 data_input['real_data'] = asset_list_given;
                 data_input['budget'] = $("#budget").val();
                 data_input['affordable_risk'] = $("#affordable_risk").val();
+                data_input['risk_elimination'] = risk_elimination_value;
+                data_input['threat_elimination'] = threat_elimination_value;
+                data_input['threat_action_distribution'] = threat_action_distribution_discovered;
                 if (data_input['budget']==""){
                     $("#risk_budget_label").toggle();
                     box_flag = 1;
@@ -983,7 +986,7 @@
 
             var ta_elm = "Threat Actoin Elimination (%):";
             var risk_elm = "Risk Elimination (%):";
-
+            var threat_action_distribution_discovered = 0;
             function ajaxTADistribution(asset_list,url) {
                 asset_list['csrfmiddlewaretoken'] = '{{ csrf_token }}';
                 var sc_row = JSON.stringify(asset_list);
@@ -1000,6 +1003,7 @@
 
                     success: function (data_received) {
                         console.log(data_received);
+                        threat_action_distribution_discovered = data_received['percentage'];
                         threatDistributionGrid("ta_distribution_grid_list",data_received['percentage'])
                         $("#ta_elimination_div").show();
                         $("#risk_elimination_div").show();
@@ -1011,13 +1015,16 @@
                     }
                 });
             }
+            var threat_elimination_value = 0, risk_elimination_value = 0;
             $('#jqxsliderTA').bind('change', function (event) {
               $('#ta_elm').html(ta_elm + event.args.value);
+              threat_elimination_value = event.args.value;
               $('#jqxsliderRisk').jqxSlider('setValue',0);
             });
 
              $('#jqxsliderRisk').bind('change', function (event) {
               $('#risk_elm').html(risk_elm + event.args.value);
+              risk_elimination_value = event.args.value;
               $('#jqxsliderTA').jqxSlider('setValue',0);
             });
             /*********************************************** End of Threat Action Distribution ***************************/

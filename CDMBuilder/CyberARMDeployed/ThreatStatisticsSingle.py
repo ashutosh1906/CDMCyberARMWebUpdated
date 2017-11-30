@@ -79,6 +79,7 @@ def read_json_threat_report(threat_report,file,asset_statistics,asset_type_enume
 
 
 def find_threat_statistics_all(asset_statistics,asset_type_enumeration,threat_threat_action_possible_pair):
+    total_reported_incidents = 0
     init_custome(asset_statistics,asset_type_enumeration)
     # search_directory = DATABASE_PATH
     # print "Search Directory %s" % (search_directory)
@@ -92,6 +93,7 @@ def find_threat_statistics_all(asset_statistics,asset_type_enumeration,threat_th
             try:
                 threat_report = json.load(current_file)
                 read_json_threat_report(threat_report,current_file,asset_statistics,asset_type_enumeration,threat_threat_action_possible_pair)
+                total_reported_incidents += 1
             except:
                 print "Here the culprit ",filename
                 continue
@@ -106,5 +108,5 @@ def find_threat_statistics_all(asset_statistics,asset_type_enumeration,threat_th
     #             # print "(%s,%s,%s) : %s" % (asset_name,threat,threat_action,asset_statistics[asset_name][threat][threat_action])
     #             threat_threat_action_file.write("%s,%s,%s : %s\n" % (asset_name,threat,threat_action,asset_statistics[asset_name][threat][threat_action]))
     # threat_threat_action_file.close()
-
+    return total_reported_incidents
 

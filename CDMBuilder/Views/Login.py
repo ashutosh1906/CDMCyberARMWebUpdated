@@ -458,6 +458,12 @@ def cyberARM_request_updated_compact(request):
         budget = json_loads['budget']
         asset_list_given = json_loads['real_data']
         print asset_list_given
+        risk_elimination = float(json_loads['risk_elimination'])/100.0
+        threat_elimination = json_loads['threat_elimination']
+        print "Risk Distribution: %s Threat Distribution: %s" % (risk_elimination,threat_elimination)
+        threat_action_distribution_discovered = json_loads['threat_action_distribution']
+        print "Threat Action Distribution %s" % (threat_action_distribution_discovered)
+
         veris_list = []
         experience_list = []
         for asset_given in asset_list_given:
@@ -498,7 +504,7 @@ def cyberARM_request_updated_compact(request):
         print asset_enterprise_list_input
 
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
-        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget)
+        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination)
         # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)
         print recommendedCDM
         send_data['cdm_list'] = recommendedCDM[CYBERARM_CDM_MATRIX]

@@ -31,6 +31,7 @@ class Threat(object):
             self.ignored_threat_action[i] = 1- self.ignored_threat_action[i]
 
     def addAssetThreatActionDistribution(self,prob_threat_action_threat_asset,threat_action_name_to_id,asset_index):
+        # print "Prob Threat Action Given Threat: %s And Asset: %s \n <><><> List %s" % (self.threat_name,asset_index,prob_threat_action_threat_asset)
         if len(self.asset_threat_action_distribution) <= asset_index:
             print "******** Asset Index is greater than the Threat Action Distribution Dictionary"
             return
@@ -41,10 +42,11 @@ class Threat(object):
 
     def determine_maximum_risk(self):
         for i in range(len(self.maximum_risk)):
-            global_risk_threat_action = 1
-            for threat_action_id in self.asset_threat_action_distribution[i].keys():
-                global_risk_threat_action *= (1-self.asset_threat_action_distribution[i][threat_action_id])
-            self.maximum_risk[i] = (1-global_risk_threat_action)*self.threat_impact_asset[i]
+            # global_risk_threat_action = 1
+            # for threat_action_id in self.asset_threat_action_distribution[i].keys():
+            #     global_risk_threat_action *= (1-self.asset_threat_action_distribution[i][threat_action_id])
+            # self.maximum_risk[i] = (1-global_risk_threat_action)*self.threat_impact_asset[i]
+            self.maximum_risk[i] = self.threat_impact_asset[i]
 
     def clearApplicableThreatActions(self):
         self.threat_action_id_to_place_map.clear()
