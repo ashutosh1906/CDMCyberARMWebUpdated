@@ -111,6 +111,7 @@ class Threat(object):
         print "\nThreat ID: %s, Name: %s" % (self.primary_key,self.threat_name)
         for index in range(len(self.global_asset_threat_action)):
             print "_________ For Asset Index %s" % (index)
+            print "                       Risk %s" % (self.threat_impact_asset[index])
             print "                       Maximum Risk %s" % (self.maximum_risk[index])
             print "                       All Threat Action %s" % (self.asset_threat_action_distribution[index])
             print "                       Threat Action %s" % (self.global_asset_threat_action[index])

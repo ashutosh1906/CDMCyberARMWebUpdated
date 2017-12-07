@@ -64,7 +64,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     # print "Threat Threat Action Possible Pair %s" % (threat_threat_action_possible_pair)
 
     ################################ Threat Prioritization ####################################################################
-    ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action[ProjectConfigFile.VERIS_LIST],risk_threat[ProjectConfigFile.VERIS_LIST],threat_threatAction_asset[0],asset_enterprise_list[0])
+    ThreatPrioritization.threat_prioritization_main(prob_threat,prob_threat_threat_action,prob_threat_threat_action_alternative,prob_threat_action_threat,risk_threat_action[ProjectConfigFile.VERIS_LIST],risk_threat[ProjectConfigFile.VERIS_LIST],threat_threatAction_asset[0],asset_enterprise_list[ProjectConfigFile.VERIS_LIST])
     # print "Threat Statistics %s" % (prob_threat_action_threat)
 
     ######################################## This is the experience part #######################################################
@@ -72,7 +72,9 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     # print "Threat Experience %s" % (prob_threat_experience)
     # print "Threat Action given Threat Experience %s" % (prob_threat_action_threat_experience)
     # print "Threat given Threat Action Experience %s" % (prob_threat_threat_action_experience)
-    # print "Risk Threat %s" % (risk_threat[1])
+    for asset_type in range(len(risk_threat)):
+        for i in range(len(risk_threat[asset_type])):
+            print " Risk of Asset (Type,Index) (%s,%s) :: %s" % (asset_type,i,risk_threat[asset_type][i])
     # print "Risk Threat Action %s" % (risk_threat_action[1])
     # Utitilities.printAssetProbThreatActionVeris(prob_threat,prob_threat_threat_action,prob_threat_action_threat,enterprise_asset_list_given)
     # Utitilities.printAssetProbThreatActionExperience(prob_threat_experience,prob_threat_threat_action_experience,prob_threat_action_threat_experience,enterprise_asset_list_given)
