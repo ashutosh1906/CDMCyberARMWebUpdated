@@ -15,10 +15,12 @@ class Threat(object):
         self.global_number_threat_action = 0
         self.maximum_risk = []
         self.ignored_threat_action = []
+        self.threat_effect = []
         for i in range(num_asset):
             self.asset_threat_action_distribution.append({})
             self.maximum_risk.append(0)
             self.ignored_threat_action.append(1)
+            self.threat_effect.append(1.0)
 
     def considerResidualThreatAction(self):
         for i in range(len(self.global_asset_threat_action)):
@@ -39,6 +41,8 @@ class Threat(object):
             if threat_action == ProjectConfigFile.THREAT_ACTION_UNKNOWN_TAG:
                 continue
             self.asset_threat_action_distribution[asset_index][threat_action_name_to_id[threat_action]] = prob_threat_action_threat_asset[threat_action]
+            self.threat_effect[asset_index] *= (1-prob_threat_action_threat_asset[threat_action])
+        self.threat_effect[asset_index] = self.threat_impact_asset[asset_index]/(1-self.threat_effect[asset_index])
 
     def determine_maximum_risk(self):
         for i in range(len(self.maximum_risk)):
@@ -114,6 +118,7 @@ class Threat(object):
             print "                       Risk %s" % (self.threat_impact_asset[index])
             print "                       Maximum Risk %s" % (self.maximum_risk[index])
             print "                       All Threat Action %s" % (self.asset_threat_action_distribution[index])
+            print "                       Threat Effect %s" % (self.threat_effect[index])
             print "                       Threat Action %s" % (self.global_asset_threat_action[index])
             print "                       Threat Action Prob %s" % (self.global_asset_threat_action_prob[index])
             print "                       Place of Threat Action %s" % (self.global_threat_action_id_to_place_map[index])

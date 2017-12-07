@@ -118,10 +118,17 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                         *= (1-threat_action_survive[threat_action_id_to_position_roll[asset_index][threat_action_id]]*
                             threat_list[threat_id].global_asset_threat_action_prob[asset_index][threat_list[threat_id].global_threat_action_id_to_place_map[asset_index][threat_action_id]])
                 minimum_threat_specific_risk[asset_index][threat_index] = (1-minimum_threat_specific_risk[asset_index][threat_index])*\
-                                                                          threat_list[threat_id].threat_impact_asset[asset_index]
+                                                                          threat_list[threat_id].threat_effect[asset_index]
             minimum_affordable_risk[asset_index] = sum(minimum_threat_specific_risk[asset_index])
             asset_index += 1
     global_min_risk = sum(minimum_affordable_risk)
+
+    ######################################################### Print the Minimum Affordable Risk ##################################
+    print "Mininum Risk for Selected Security Controls Candidate Set"
+    for i in range(number_of_unique_asset):
+        print "Asset Index : %s -------- Minimum Risk : %s Maximum Risk Proportion Risk %s" % (i,minimum_affordable_risk[i],affordable_risk * float(risk_asset_specific[i]))
+    ######################################################### End of Print the Minimum Affordable Risk ##################################
+
     print "Global Minimum Risk %s" % (global_min_risk)
     if global_min_risk > affordable_risk:
         max_risk_initial = 0
@@ -293,9 +300,9 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 cyberARMGoal.add(smt_Threat[asset_index][threat_id_index]==
                              (1-reduce(lambda x,y:x*y,smt_Threat_Threat_Action_Defense_Success[asset_index][threat_id_index])
                               *(1-threat_list[threat_id].ignored_threat_action[asset_index]))
-                             *threat_list[threat_id].threat_impact_asset[asset_index])
+                             *threat_list[threat_id].threat_effect[asset_index])
             else:
-                cyberARMGoal.add(smt_Threat[asset_index][threat_id_index]==threat_list[threat_id].ignored_threat_action[asset_index]*threat_list[threat_id].maximum_risk[asset_index])
+                cyberARMGoal.add(smt_Threat[asset_index][threat_id_index]==threat_list[threat_id].ignored_threat_action[asset_index]*threat_list[threat_id].threat_effect[asset_index])
             threat_id_index += 1
 
     ############################################################# 2.4 Residual Risk Constraints ##################################################
@@ -395,7 +402,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                                                                        threat_list[threat_id].global_asset_threat_action_prob[asset_index][threat_action_index]))
                 threat_action_index += 1
             threat_success_final[asset_index][threat_id_index] *= (1-threat_list[threat_id].ignored_threat_action[asset_index])
-            threat_success_final[asset_index][threat_id_index] = (1-threat_success_final[asset_index][threat_id_index])*threat_list[threat_id].threat_impact_asset[asset_index]
+            threat_success_final[asset_index][threat_id_index] = (1-threat_success_final[asset_index][threat_id_index])*threat_list[threat_id].threat_effect[asset_index]
             global_residual_risk_final += threat_success_final[asset_index][threat_id_index]
             print "****** Threat ID %s : %s **********" % (threat_id, threat_success_final[asset_index][threat_id_index])
             threat_id_index += 1
