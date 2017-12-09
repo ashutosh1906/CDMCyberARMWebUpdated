@@ -12,7 +12,8 @@ def select_threat(threat_list,asset_enterprise_list,threat_id_for_all_assets):
                 threat_id_for_all_assets[i].append(threat.primary_key)
 
 
-def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,affordable_risk,budget):
+def select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,
+                             threat_name_to_id,affordable_risk,budget,threat_action_id_to_name):
     ################################################################################## Global Variables ################################################################
     threat_action_name_list = []
     selected_security_controls = []
@@ -64,6 +65,14 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
     # TestCases.securityControlCoverage(security_control_list,selected_security_controls,threat_action_name_list)
     # startProcessing(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,asset_enterprise_list,risk_threat_action,threat_list,threat_name_to_id)
     ######################################################### STart of the test and alternative approach ###########################################
+
+    ################################################################### Determine Cost Effectiveness #######################################################
+    cost_effectiveness_sc = []
+    Utitilities.determineCostEffectiveness(selected_security_controls, security_control_list, risk_threat_action,
+                                           threat_action_id_list_for_all_assets, threat_action_id_to_name,
+                                           cost_effectiveness_sc)
+    ################################################################### End of Cost Effectiveness ##########################################################
+
     select_threat(threat_list, asset_enterprise_list,threat_id_for_all_assets)
     # Utitilities.printThreatIdForAllAssets(threat_id_for_all_assets,threat_list)
     return DistributedCDMOptimizationTestThresholdTactic.SMT_Environment(security_control_list, selected_security_controls, threat_action_name_list,

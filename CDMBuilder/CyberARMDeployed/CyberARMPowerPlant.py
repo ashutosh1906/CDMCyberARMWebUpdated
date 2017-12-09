@@ -29,6 +29,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     risk_threat_action = [[] for i in range(2)]
     threat_action_list = []
     threat_action_name_to_id = {}
+    threat_action_id_to_name = {}
     threat_list = []
     threat_name_to_id = {}
     prob_threat_action_threat_experience = {}
@@ -91,7 +92,9 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     # Utitilities.printRiskThreatAction(risk_threat_action,asset_enterprise_list)
 
     ########################################################## List of Security Controls, Threat Action and Mappings ##########################################
-    ThreatActionToSecurityControl.parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given)
+    ThreatActionToSecurityControl.parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,
+                                                       threat_action_list,threat_action_name_to_id,risk_threat,threat_list,
+                                                       threat_name_to_id,enterprise_asset_list_given,threat_action_id_to_name)
     # Utitilities.printThreatActionNameToId(threat_action_name_to_id)
     # Utitilities.printSecurityControls(security_control_list,security_control_version_to_id)
     # Utitilities.printThreatActionList(threat_action_list,threat_action_name_to_id)
@@ -101,13 +104,14 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     recommendedCDM = []
     # affordable_risk = 900000
     if threat_actions_frequency == -1:
-        recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,asset_enterprise_list,threat_list,threat_name_to_id,float(affordable_risk),float(budget))
+        recommendedCDM = CyberARMEngine.select_security_controls(security_control_list,threat_action_list,threat_action_name_to_id,risk_threat_action,
+                                                                 asset_enterprise_list,threat_list,threat_name_to_id,float(affordable_risk),float(budget),threat_action_id_to_name)
     # write_output_file.close()
     else:
         recommendedCDM = CyberARMEngineDistribution.select_security_controls(security_control_list, threat_action_list,
                                                                  threat_action_name_to_id, risk_threat_action,
                                                                  asset_enterprise_list, threat_list, threat_name_to_id,
-                                                                 float(affordable_risk), float(budget),global_risk_threat_action)
+                                                                 float(affordable_risk), float(budget),global_risk_threat_action,threat_action_id_to_name)
     print "ROI %s" % (recommendedCDM[2])
     if len(recommendedCDM[ProjectConfigFile.CYBERARM_CDM_MATRIX]) == 0:
         roi_row = {}

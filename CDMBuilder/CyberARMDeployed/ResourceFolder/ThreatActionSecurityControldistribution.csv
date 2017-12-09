@@ -1,173 +1,173 @@
-Unapproved Hardware;1.1;0.839
-Skimmer;1.1;0.712
-Unapproved Hardware;1.2;0.837
-Wiretapping;1.1;0.713
-Possession abuse;1.2;0.856
-Possession abuse;1.3;0.856
-Unapproved Hardware;1.3;0.964
-Skimmer;1.3;0.682
-Wiretapping;1.3;0.696
-Possession abuse;1.4;0.745
-Skimmer;1.4;0.602
-Unapproved Hardware;1.4;0.873
-Unapproved Hardware;1.5;0.838
-Skimmer;1.5;0.874
-Possession abuse;1.5;0.879
-Unapproved Hardware;1.6;0.616
-Possession abuse;1.6;0.707
-Unapproved Software;2.1;0.64
-Client Side Attack;2.1;0.725
-Exploit Vuln;2.1;0.721
-Downloader;2.2;0.668
-Adminware;2.2;0.784
-Packet Sniffer;2.2;0.739
-Client Side Attack;2.4;0.644
-Abuse of Functionality;2.4;0.937
-Bypassed Controls;3.1;0.86
-Misconfiguration;3.1;0.724
-Misconfiguration;3.2;0.786
-Exploit Vuln;3.2;0.962
-Packet Sniffer;3.4;0.659
-Snooping;3.4;0.743
-Wiretapping;3.4;0.982
-Use of Backdoor or C2;3.6;0.972
-Backdoor;3.6;0.85
-C2;3.6;0.761
-Connection;3.6;0.731
-Backdoor;3.7;0.638
-Disabled Controls;3.7;0.862
-Exploit Vuln;4.1;0.759
-Exploit Vuln;4.3;0.876
-Exploit Vuln;4.4;0.951
-Exploit Vuln;4.5;0.982
-Maintenance Error;4.7;0.645
-Exploit Vuln;4.7;0.615
-RFI;3.5;0.631
-Possession abuse;5.1;0.996
-Possession abuse;5.2;0.968
-Unapproved Workaround;5.1;0.648
-Brute Force;5.3;0.832
-Unapproved Workaround;5.4;0.956
-Brute Force;5.5;0.717
-Brute Force;5.6;0.693
-Spyware/keylogger;5.6;0.6
-Skimmer;5.6;0.912
-Brute Force;5.7;0.734
-Data Mishandling;5.9;0.836
-Rootkit;5.9;0.608
-Misinformation;6.2;0.814
-Misdelivery;6.4;0.616
-Net Misuse;6.4;0.76
-Disabled Controls;5.1;0.685
-Bypassed Controls;6.5;0.855
-Disabled Controls;6.5;0.938
-Bypassed Controls;6.6;0.896
-Disabled Controls;6.6;0.714
-Net Misuse;6.6;0.814
-Adware;7.1;0.98
-Downloader;7.1;0.944
-Adware;7.2;0.765
-Forced Browsing;7.2;0.632
-Client Side Attack;7.3;0.855
-SQLi;7.3;0.913
-SSI Injection;7.2;0.908
-Phishing;7.4;0.891
-C2;7.4;0.686
-XSS;7.3;0.893
-Connection;7.4;0.842
+Unapproved Hardware;1.1;0.952
+Skimmer;1.1;0.981
+Unapproved Hardware;1.2;0.668
+Wiretapping;1.1;0.941
+Possession abuse;1.2;0.863
+Possession abuse;1.3;0.954
+Unapproved Hardware;1.3;0.882
+Skimmer;1.3;0.937
+Wiretapping;1.3;0.858
+Possession abuse;1.4;0.938
+Skimmer;1.4;0.814
+Unapproved Hardware;1.4;0.704
+Unapproved Hardware;1.5;0.622
+Skimmer;1.5;0.97
+Possession abuse;1.5;0.934
+Unapproved Hardware;1.6;0.984
+Possession abuse;1.6;0.63
+Unapproved Software;2.1;0.624
+Client Side Attack;2.1;0.663
+Exploit Vuln;2.1;0.965
+Downloader;2.2;0.802
+Adminware;2.2;0.741
+Packet Sniffer;2.2;0.84
+Client Side Attack;2.4;0.674
+Abuse of Functionality;2.4;0.995
+Bypassed Controls;3.1;0.87
+Misconfiguration;3.1;0.857
+Misconfiguration;3.2;0.968
+Exploit Vuln;3.2;0.93
+Packet Sniffer;3.4;0.87
+Snooping;3.4;0.864
+Wiretapping;3.4;0.766
+Use of Backdoor or C2;3.6;0.791
+Backdoor;3.6;0.889
+C2;3.6;0.986
+Connection;3.6;0.828
+Backdoor;3.7;0.772
+Disabled Controls;3.7;0.653
+Exploit Vuln;4.1;0.973
+Exploit Vuln;4.3;0.825
+Exploit Vuln;4.4;0.869
+Exploit Vuln;4.5;0.942
+Maintenance Error;4.7;0.95
+Exploit Vuln;4.7;0.685
+RFI;3.5;0.625
+Possession abuse;5.1;0.81
+Possession abuse;5.2;0.996
+Unapproved Workaround;5.1;0.895
+Brute Force;5.3;0.703
+Unapproved Workaround;5.4;0.72
+Brute Force;5.5;0.601
+Brute Force;5.6;0.686
+Spyware/keylogger;5.6;0.885
+Skimmer;5.6;0.7
+Brute Force;5.7;0.738
+Data Mishandling;5.9;0.86
+Rootkit;5.9;0.798
+Misinformation;6.2;0.928
+Misdelivery;6.4;0.964
+Net Misuse;6.4;0.787
+Disabled Controls;5.1;0.795
+Bypassed Controls;6.5;0.762
+Disabled Controls;6.5;0.738
+Bypassed Controls;6.6;0.996
+Disabled Controls;6.6;0.612
+Net Misuse;6.6;0.666
+Adware;7.1;0.801
+Downloader;7.1;0.719
+Adware;7.2;0.688
+Forced Browsing;7.2;0.768
+Client Side Attack;7.3;0.784
+SQLi;7.3;0.929
+SSI Injection;7.2;0.677
+Phishing;7.4;0.827
+C2;7.4;0.777
+XSS;7.3;0.844
+Connection;7.4;0.735
 Mail Command Injection;7.1;0.636
-Spam;7.1;0.76
-URL Redirect or Abuse;7.4;0.928
-Connection;7.5;0.644
-C2;7.6;0.864
-Baiting;7.6;0.866
-Phishing;7.7;0.992
-Scam;7.7;0.782
-Phishing;7.8;0.61
-Use of Stolen Creds;5.6;0.868
-XSS;7.8;0.744
-Adminware;8.1;0.838
-Adware;8.1;0.774
-Password Dumper;8.1;0.866
-Ramscraper;8.1;0.704
-Ransomware;8.1;0.733
-Rootkit;8.1;0.855
-Spyware/keylogger;8.1;0.624
-Worm;8.1;0.862
-Adminware;8.2;0.814
-Adware;8.2;0.723
-Password Dumper;8.2;0.703
-Ramscraper;8.2;0.703
-Ransomware;8.2;0.769
-Rootkit;8.2;0.872
-Rootkit;8.2;0.686
-Spyware/keylogger;8.2;0.782
-Worm;8.2;0.89
-Surveillance;8.3;0.708
-Unapproved Hardware;8.3;0.797
-Unapproved Workaround;8.3;0.94
-Wiretapping;8.3;0.847
-Capture App Data;14.4;0.717
-Spyware/keylogger;8.2;0.859
-Spyware/keylogger;2.1;0.858
-Pretexting;17.1;0.682
-Pretexting;17.4;0.801
-Influence;17.1;0.971
-Influence;17.4;0.931
-Forgery;3.5;0.772
-Bribery;17.1;0.749
-Extortion ;17.1;0.692
-Extortion ;16.10;0.695
-Fire;10.1;0.618
-Omission;18.8;0.788
-Omission;18.5;0.758
-Loss;5.6;0.689
-Loss;10.1;0.769
-Publishing Error;17.5;0.77
-Publishing Error;18.5;0.962
-Programming Error;17.2;0.63
-Programming Error;18.3;0.8
-Capture Stored Data;13.2;0.756
-Capture Stored Data;13.3;0.948
-Malfunction;19.1;0.994
-Bribery;19.6;0.986
-Data Entry Error;20.1;0.631
-Data Entry Error;20.3.2;0.885
-Gaffe;17.1;0.79
-Unapproved Workaround;1.4;0.758
-Unapproved Workaround;1.2;0.957
-Email Misuse;16.10;0.635
-Email Misuse;13.3;0.945
-Possession abuse;13.3;0.925
-Possession abuse;5.1;0.644
-Knowledge Abuse;17.1;0.6
-Knowledge Abuse;14.4;0.755
-Buffer Overflow;18.3;0.894
-Buffer Overflow;18.4;0.922
-Buffer Overflow;18.8;0.999
-Exploit Vuln;4.1;0.787
-Footprinting;4.1;0.929
-Footprinting;9.5;0.814
-Privilege Abuse;5.1;0.645
-Privilege Abuse;14.4;0.627
-Cryptanalysis;16.11;0.898
-Cryptanalysis;5.3;0.625
-Cryptanalysis;5.7;0.691
-Reverse Engineering;13.4;0.949
-Use of Backdoor or C2;13.7;0.985
-Session Prediction;16.4;0.712
-Session Prediction;20.1;0.892
-Url Redirector Abuse;18.8;0.833
-Url Redirector Abuse;20.1;0.923
-Other;4.8;0.718
-Session Replay;16.4;0.837
-Theft;5.6;0.649
-Theft;10.1;0.944
-Os Commanding;18.8;0.981
-Os Commanding;20.3.2;0.728
-DoS;6.4;0.966
-DoS;12.9;0.658
-Assault ;19.4;0.786
-Disposal Error;13.4;0.992
-Disposal Error;17.4;0.611
-Disposal Error;19.6;0.698
+Spam;7.1;0.804
+URL Redirect or Abuse;7.4;0.986
+Connection;7.5;0.804
+C2;7.6;0.74
+Baiting;7.6;0.667
+Phishing;7.7;0.788
+Scam;7.7;0.66
+Phishing;7.8;0.766
+Use of Stolen Creds;5.6;0.998
+XSS;7.8;0.612
+Adminware;8.1;0.814
+Adware;8.1;0.899
+Password Dumper;8.1;0.658
+Ramscraper;8.1;0.904
+Ransomware;8.1;0.649
+Rootkit;8.1;0.82
+Spyware/keylogger;8.1;0.654
+Worm;8.1;0.683
+Adminware;8.2;0.684
+Adware;8.2;0.609
+Password Dumper;8.2;0.954
+Ramscraper;8.2;0.628
+Ransomware;8.2;0.606
+Rootkit;8.2;0.772
+Rootkit;8.2;0.871
+Spyware/keylogger;8.2;0.788
+Worm;8.2;0.827
+Surveillance;8.3;0.68
+Unapproved Hardware;8.3;0.936
+Unapproved Workaround;8.3;0.922
+Wiretapping;8.3;0.722
+Capture App Data;14.4;0.721
+Spyware/keylogger;8.2;0.753
+Spyware/keylogger;2.1;0.888
+Pretexting;17.1;0.912
+Pretexting;17.4;0.678
+Influence;17.1;0.886
+Influence;17.4;0.61
+Forgery;3.5;0.918
+Bribery;17.1;0.99
+Extortion ;17.1;0.979
+Extortion ;16.10;0.737
+Fire;10.1;0.953
+Omission;18.8;0.803
+Omission;18.5;0.959
+Loss;5.6;0.872
+Loss;10.1;0.975
+Publishing Error;17.5;0.989
+Publishing Error;18.5;0.919
+Programming Error;17.2;0.75
+Programming Error;18.3;0.944
+Capture Stored Data;13.2;0.921
+Capture Stored Data;13.3;0.814
+Malfunction;19.1;0.75
+Bribery;19.6;0.893
+Data Entry Error;20.1;0.845
+Data Entry Error;20.3.2;0.835
+Gaffe;17.1;0.902
+Unapproved Workaround;1.4;0.978
+Unapproved Workaround;1.2;0.988
+Email Misuse;16.10;0.897
+Email Misuse;13.3;0.86
+Possession abuse;13.3;0.864
+Possession abuse;5.1;0.733
+Knowledge Abuse;17.1;0.76
+Knowledge Abuse;14.4;0.622
+Buffer Overflow;18.3;0.872
+Buffer Overflow;18.4;0.878
+Buffer Overflow;18.8;0.845
+Exploit Vuln;4.1;0.945
+Footprinting;4.1;0.64
+Footprinting;9.5;0.866
+Privilege Abuse;5.1;0.981
+Privilege Abuse;14.4;0.685
+Cryptanalysis;16.11;0.708
+Cryptanalysis;5.3;0.673
+Cryptanalysis;5.7;0.856
+Reverse Engineering;13.4;0.805
+Use of Backdoor or C2;13.7;0.747
+Session Prediction;16.4;0.724
+Session Prediction;20.1;0.935
+Url Redirector Abuse;18.8;0.851
+Url Redirector Abuse;20.1;0.767
+Other;4.8;0.634
+Session Replay;16.4;0.744
+Theft;5.6;0.644
+Theft;10.1;0.815
+Os Commanding;18.8;0.681
+Os Commanding;20.3.2;0.64
+DoS;6.4;0.982
+DoS;12.9;0.818
+Assault ;19.4;0.819
+Disposal Error;13.4;0.966
+Disposal Error;17.4;0.927
+Disposal Error;19.6;0.707

@@ -1,5 +1,44 @@
 import ProjectConfigFile
 
+def determineCostEffectiveness(selected_security_controls,security_control_list,risk_threat_action,threat_action_id_list_for_all_assets,
+                               threat_action_id_to_name,cost_effectiveness_sc):
+    asset_index = 0
+    for asset_type in range(len(risk_threat_action)):
+        for index in range(len(risk_threat_action[asset_type])):
+            cost_effectiveness_sc.append(0.0)
+            asset_specific_sc_cost = 0.0
+            for security_control_id in selected_security_controls[asset_index]:
+                for threat_action_id in security_control_list[security_control_id].threat_action:
+                    if threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
+                        cost_effectiveness_sc[asset_index] += security_control_list[security_control_id].threat_action_effectiveness[threat_action_id]\
+                                         *risk_threat_action[asset_type][index][threat_action_id_to_name[threat_action_id]]
+                asset_specific_sc_cost += security_control_list[security_control_id].investment_cost
+            cost_effectiveness_sc[asset_index] /= asset_specific_sc_cost
+            asset_index += 1
+    # printSecurityControlsEnforcementEffectiveness(selected_security_controls, security_control_list, threat_action_id_list_for_all_assets,
+    #                       threat_action_id_to_name,risk_threat_action)
+    # printCostEffectiveness(cost_effectiveness_sc)
+
+def printSecurityControlsEnforcementEffectiveness(selected_security_controls,security_control_list,threat_action_id_list_for_all_assets,threat_action_id_to_name,risk_threat_action):
+    print "********** Security Control Against The Selected Threat Actions************************"
+    asset_index = 0
+    for asset_type in range(len(risk_threat_action)):
+        for index in range(len(risk_threat_action[asset_type])):
+            print "\t Asset Index --> %s" % (asset_index)
+            for security_control_id in selected_security_controls[asset_index]:
+                print "\t\t Sc ID: %s Cost: %s" % (security_control_id,security_control_list[security_control_id].investment_cost)
+                for threat_action_id in security_control_list[security_control_id].threat_action:
+                    if threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
+                        print "\t\t\t TA ID: %s Name: %s Effect: %s Risk: %s" % (threat_action_id,threat_action_id_to_name[threat_action_id],
+                                                                 security_control_list[security_control_id].threat_action_effectiveness[threat_action_id],
+                                                                                 risk_threat_action[asset_type][index][threat_action_id_to_name[threat_action_id]])
+            asset_index += 1
+
+def printCostEffectiveness(cost_effectiveness_sc):
+    print "****************Cost Effectiveness*************************************"
+    for i in range(len(cost_effectiveness_sc)):
+        print "\t\t Asset Index: %s Effectiveness: %s" %(i,cost_effectiveness_sc[i])
+
 def printThreat(threat_list,threat_name_to_id):
     for threat in threat_list:
         print "ID : %s ---> Name : (%s,%s)" % (threat.primary_key,threat.threat_name,threat_name_to_id[threat.threat_name])
@@ -253,6 +292,10 @@ def printRiskPerThreatStatistics(risk):
             print "Residual Risk %s" % (risk_row['res_risk'])
             print "Implementation Cost %s" % (risk_row['imp_cost'])
             print "Threat Action %s" % (risk_row['threat_list'])
+
+def printThreatActionList(threat_action_id_list_for_all_assets):
+    for asset_index in range(len(threat_action_id_list_for_all_assets)):
+        print "\t Asset Index :%s Threat Actoin List %s" % (asset_index,threat_action_id_list_for_all_assets[asset_index])
 
 def printRiskThreatAction(risk_threat_action,asset_enterprise_list):
     for i in range(len(asset_enterprise_list)):

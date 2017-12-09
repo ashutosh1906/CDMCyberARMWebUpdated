@@ -41,7 +41,7 @@ def threat_action_security_controls_builder(security_control_version_to_id,secur
         threat_action_obj.addSecurityControl(sec_control_obj.primary_key)
     ta_sc_file.close()
 
-def threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,enterprise_asset_list_given):
+def threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,enterprise_asset_list_given,threat_action_id_to_name):
     start_index = 0
     for asset in enterprise_asset_list_given:
         if asset in prob_threat_action_threat.keys():
@@ -51,6 +51,7 @@ def threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_ex
                         continue
                     if threat_action not in threat_action_name_to_id.keys():
                         threat_action_name_to_id[threat_action] = start_index
+                        threat_action_id_to_name[start_index] = threat_action
                         threat_action_list.append(ThreatAction.ThreatAction(start_index,threat_action))
                         threat_action_list[start_index].setProbThreatAction(prob_threat_action_threat,prob_threat_action_threat_experience,enterprise_asset_list_given)
                         start_index += 1
@@ -60,6 +61,7 @@ def threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_ex
                     for threat_action in prob_threat_action_threat_experience[asset][threat].keys():
                         if threat_action not in threat_action_name_to_id.keys():
                             threat_action_name_to_id[threat_action] = start_index
+                            threat_action_id_to_name[start_index] = threat_action
                             threat_action_list.append(ThreatAction.ThreatAction(start_index, threat_action))
                             threat_action_list[start_index].setProbThreatAction(prob_threat_action_threat,prob_threat_action_threat_experience,enterprise_asset_list_given)
                             start_index += 1
@@ -98,10 +100,11 @@ def prepare_threat_action_for_threat(threat_list,prob_threat_action_threat,prob_
     for threat in threat_list:
         threat.determine_maximum_risk()
 
-def parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given):
+def parseAllScAndTAFiles(security_control_list,security_control_version_to_id,prob_threat_action_threat,prob_threat_action_threat_experience,
+                         threat_action_list,threat_action_name_to_id,risk_threat,threat_list,threat_name_to_id,enterprise_asset_list_given,threat_action_id_to_name):
     # security_controls_list_builder(security_control_list,security_control_version_to_id)
     reinitialize_security_control_list(security_control_list)
-    threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,enterprise_asset_list_given)
+    threat_action_builder(prob_threat_action_threat,prob_threat_action_threat_experience,threat_action_list,threat_action_name_to_id,enterprise_asset_list_given,threat_action_id_to_name)
     threat_action_security_controls_builder(security_control_version_to_id,security_control_list,threat_action_list,threat_action_name_to_id)
     threat_builder(risk_threat,threat_list,threat_name_to_id,len(enterprise_asset_list_given))
     # print "Threat Statistics %s" % (prob_threat_action_threat)

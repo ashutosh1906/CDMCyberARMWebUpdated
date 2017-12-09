@@ -15,8 +15,9 @@ def make_comparator(less_than):
     return compare
 
 def printGlobalRiskThreatAction(risk_threat_action_distribution):
+    print "Global Risk Threat Action structured as :(Consequence, Asset Index, Threat Action Name)"
     for threat_action_row in risk_threat_action_distribution:
-        print threat_action_row
+        print "\t %s" %(threat_action_row)
 
 def generate_risk_distribution(asset_enterprise_list,risk_elimination,global_risk_threat_action):
     print "Risk Elimination Value: %s"%(risk_elimination)
