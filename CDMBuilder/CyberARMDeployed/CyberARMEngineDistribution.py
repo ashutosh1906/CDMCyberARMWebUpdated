@@ -27,6 +27,7 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
             threat_action_name_list.append([])
             min_threat_action_consequence.append(global_risk_threat_action[0][0]) # Put the maximum threat action value
 
+    print "Global Risk Threat Action %s" % (global_risk_threat_action)
     for threat_action_row in global_risk_threat_action:
         threat_action_name_list[threat_action_row[1]].append([threat_action_name_to_id[threat_action_row[2]],threat_action_row[0]])
     Utitilities.printThreatActionNameListIter(threat_action_name_list)
@@ -90,7 +91,7 @@ def select_security_controls(security_control_list,threat_action_list,threat_act
     return DistributedCDMOptimizationTestThresholdTactic.SMT_Environment(security_control_list, selected_security_controls, threat_action_name_list,
                                         threat_action_list, threat_action_id_list_for_all_assets,
                                         threat_id_for_all_assets, threat_list,
-                                        asset_enterprise_list,affordable_risk,budget)
+                                        asset_enterprise_list,affordable_risk,budget,cost_effectiveness_sc)
 
 
 

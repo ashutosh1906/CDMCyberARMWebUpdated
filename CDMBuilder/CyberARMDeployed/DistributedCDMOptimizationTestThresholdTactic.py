@@ -2,7 +2,7 @@ from z3 import *
 import time
 import ProjectConfigFile, Utitilities
 def SMT_Environment(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,
-                    threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget):
+                    threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget,cost_effectiveness_sc):
 
     number_of_unique_asset = len(threat_action_id_list_for_all_assets)
     print "Enterprise Given Asset List %s \nEnterprise Given Asset List Length: %s" % (asset_enterprise_list,number_of_unique_asset)
@@ -85,6 +85,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
     print "Candidate Selected Security Controls %s" % (selected_security_controls)
     print "Candidate Selected Threat %s" % (threat_id_for_all_assets)
     print "Candidate Threat Roll %s" % (threat_id_to_position_roll)
+    print "Candiadet Security Control Set Cost Effectiveness %s" % (cost_effectiveness_sc)
 
     ###################################################### Design All Heuristics Here ############################################
     ###################################################### 1.1 Minimum Affordable Risk ###########################################

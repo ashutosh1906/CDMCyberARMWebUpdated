@@ -83,3 +83,11 @@ class threat_action_kc_phase(models.Model):
     class Meta:
         db_table = 'threat_action_kc_phase'
         unique_together=(('kc_phase','threat_action_name'),)
+
+class threat_action_security_control_map(models.Model):
+    threat_action_name = models.CharField(max_length=200)
+    sc_name = models.CharField(max_length=200)
+    sc_version = models.CharField(max_length=200)
+    class Meta:
+        db_table='threat_action_security_control_map'
+        unique_together = (('sc_name', 'threat_action_name'),)
