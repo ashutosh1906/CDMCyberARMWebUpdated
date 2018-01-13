@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from Views import Login,DatabaseFunctions
+from Views import Login,DatabaseFunctions,Threat_action_security_control_Map
 
 urlpatterns = [
 
@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'^home/',Login.loginPost,name='home'),
     url(r'^display/', Login.cdmDisplaySecurityControl, name='display'),
     url(r'^insert/',Login.cdmInsertSecurityControl,name='insert'),
-    url(r'^threatAction/',Login.insertThreatActions,name='threatAction'),
+    # url(r'^threatAction/',Login.insertThreatActions,name='threatAction'),
+    url(r'^threatAction/',Threat_action_security_control_Map.insertThreatActions,name='threatAction'),
     url(r'^generateCDM/',Login.generate_CDM,name='generateCDM'),
     url(r'^generatereport/',Login.generate_sc_threat_action,name='generatereport'),
     url(r'^cyberARM Old/',Login.cyberARM_request,name='cyberARM Old'),

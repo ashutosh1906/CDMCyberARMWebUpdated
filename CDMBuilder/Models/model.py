@@ -34,6 +34,11 @@ class Threat_Action(models.Model):
     class Meta:
         db_table = 'threat_action'
 
+class Threat_Action_Updated(models.Model):
+    threat_action_name = models.CharField(max_length=200)
+    class Meta:
+        db_table = 'threat_action_updated'
+
 class Asset_VERIS(models.Model):
     asset_name = models.CharField(max_length=200)
     class Meta:
@@ -90,4 +95,3 @@ class threat_action_security_control_map(models.Model):
     sc_version = models.CharField(max_length=200)
     class Meta:
         db_table='threat_action_security_control_map'
-        unique_together = (('sc_name', 'threat_action_name'),)
