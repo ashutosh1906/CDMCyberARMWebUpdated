@@ -5,21 +5,67 @@
         <script type="text/javascript" src="../static/utilities_Custom.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#jqxlistbox").jqxListBox({ source:JSON.parse("{{ sc_source | escapejs}}"), width: '500px', height: '200px' });
-                $("#jqxlistboxTA").jqxListBox({ source:JSON.parse("{{ threat_action_source | escapejs }}"), width: '500px', height: '200px' });
+                var selected_security_control = {};
+                var selected_threat_action = {};
+                $("#jqxlistbox").jqxListBox({ source:JSON.parse("{{ sc_source | escapejs}}"),multiple: true,width: '500px', height: '200px' });
+                $("#jqxlistboxTA").jqxListBox({ source:JSON.parse("{{ threat_action_source | escapejs }}"),multiple: true,width: '500px', height: '200px' });
 
                 $('#jqxlistbox').bind('select', function (event) {
                     var args = event.args;
                     var item = $('#jqxlistbox').jqxListBox('getItem', args.index);
-                    $("#sc_name").val(item.label);
+                    var sc_name = $("#sc_name").val();
+                    if(sc_name==""){
+                        $("#sc_name").val(item.label);
+                    }
+                    else{
+                        $("#sc_name").val(sc_name+";"+item.label);
+                    }
+                    selected_security_control[item.label] = 1;
 {#                    console.log($("#jqxlistbox").jqxListBox('getItem',$("#jqxlistbox").jqxListBox('getSelectedIndex')).value);#}
                 });
                 $('#jqxlistboxTA').bind('select', function (event) {
                     var args = event.args;
                     var item = $('#jqxlistboxTA').jqxListBox('getItem', args.index);
-                    $("#threat_action").val(item.label);
+                    var threat_action_name = $("#threat_action").val();
+                    if(threat_action_name==""){
+                        $("#threat_action").val(item.label);
+                    }
+                    else{
+                        $("#threat_action").val(threat_action_name+";"+item.label);
+                    }
+                    selected_threat_action[item.label] = 1;
 {#                    console.log($("#jqxlistboxTA").jqxListBox('getSelectedIndex'));#}
                 });
+                
+                $('#jqxlistbox').bind('unselect', function (event) {
+                   var args = event.args;
+                   var item = $('#jqxlistbox').jqxListBox('getItem', args.index);
+                   delete selected_security_control[item.label];
+                   $("#sc_name").val(createStringFromDict(selected_security_control));
+
+                });
+
+                $('#jqxlistboxTA').bind('unselect', function (event) {
+                   var args = event.args;
+                   var item = $('#jqxlistboxTA').jqxListBox('getItem', args.index);
+                   delete selected_threat_action[item.label];
+                   $("#threat_action").val(createStringFromDict(selected_threat_action));
+                    
+                });
+                
+                function createStringFromDict(dict_provided) {
+                    var ret_string = "";
+                    var index = 0;
+                    var key = "";
+                    for (key in dict_provided){
+                        if(index!=0){
+                            ret_string += ";"
+                        }
+                        ret_string += key;
+                        index += 1;
+                    }
+                    return ret_string;
+                }
 
                 $(".actionButton").click(function () {
                     console.log("Hiii");

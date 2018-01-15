@@ -51,18 +51,20 @@ def insertThreatActions(request):
         print "******************** sc to threat action *******************************"
         # print all_row
         print "******************** sc to threat action *******************************"
-        return render(request,'SCThreatAction.html',{'sc_source':json.dumps(security_control_list),
+        return render(request,'SCThreatActionMap.html',{'sc_source':json.dumps(security_control_list),
                                                      'threat_action_source': json.dumps(threat_action_name),
                                                      'grid_src':json.dumps(threat_action_security_control_map_dict_all)})
     if request.method=='POST':
         print "Here I am rock you like a hurricane"
-        sc_name = request.POST["sc_name"]
-        threat_action = request.POST['threat_action']
+        sc_name = request.POST["sc_name"].split(';')
+        threat_action = request.POST['threat_action'].split(';')
         print sc_name, " ---> ", threat_action
-        ta_sc = model.threat_action_security_control_map()
-        ta_sc.sc_name=sc_name
-        ta_sc.threat_action_name = threat_action
-        sec_con = model.security_control.objects.get(sc_name=sc_name)
-        ta_sc.sc_version = sec_con.sc_version
-        ta_sc.save()
+        for ta in threat_action:
+            for sc in sc_name:
+                ta_sc = model.threat_action_security_control_map()
+                ta_sc.sc_name = sc
+                ta_sc.threat_action_name = ta
+                sec_con = model.security_control.objects.get(sc_name=sc)
+                ta_sc.sc_version = sec_con.sc_version
+                ta_sc.save()
         return redirect('threatAction')
