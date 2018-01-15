@@ -1,3 +1,4 @@
 CDMBuilder/CyberARMDeployed/ResourceFolder/VERIS
 .idea
 CDMBuilder/wsgi.py
+*.pyc
