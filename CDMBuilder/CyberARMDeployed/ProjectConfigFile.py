@@ -1,11 +1,35 @@
 import os
+############################################################ CyberARM Inputs ###############################################
+BUDGET = 1532900
+AFFORDABLE_RISK = 20069579
+RISK_ELIMINATION = 1.0
+VERIS_ASSET_NUMBER = 100
+FILE_INDEX = 10
 ################################################################## File Names #############################################
-
-############################################################## Global Variables #############################################
+################################################################# Method Flags ############################################
+BINARY_SEARCH = 0
+BINARY_MODIFIED_SEARCH = 1
+ITERATIVE_SEARCH = 2
+ITERATIVE_COST_ALLOCATION_SEARCH = 3
+################################################################# End Method Flags ############################################
+############################################################# Initial Files ###############################################
+SECURITY_CONTROL_FILE = 'ResourceFolder/SecurityControls.csv'
+THREAT_ACTION_SECURITY_CONTROL_FILE = 'ResourceFolder/ThreatActionSecurityControldistribution.csv'
+# ############################################################# Output Files ################################################
+# OUTPUT_FILE_DIRECTORY = "OutputRecords"
+# OUTPUT_FILE_NAME_BINARY_SEARCH = open("%s/VERIS_%s_Compare_%s_0.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX),'w')
+# OUTPUT_FILE_NAME_BINARY_SEARCH_MODIFIED = open("%s/VERIS_%s_Compare_%s_1.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX),'w')
+# OUTPUT_FILE_NAME_ITERATIVE_SEARCH = open("%s/VERIS_%s_Compare_%s_2.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX),'w')
+# # OUTPUT_FILE_NAME_ITERATIVE_COST_ALLOCATION_SEARCH = open("%s/VERIS_%s_Compare_%s_3.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX),'w')
+# OUTPUT_STATISTICAL_FILE_NAME = "%s/StatsFile.csv" %(OUTPUT_FILE_DIRECTORY)
+# OUTPUT_TIME_MIN_RISK_FILE_NAME = '%s/TimeAnalysis.csv' % (OUTPUT_FILE_DIRECTORY)
+# OUTPUT_FILE_NAME_THREAT_ACTION_SPECIFIC_SECURITY_CONTROL = '%s/Ta_SC.csv' % (OUTPUT_FILE_DIRECTORY)
+# ############################################################## Global Variables #############################################
 OTHER_ASSET = 'other'
 DESTROY_C = 4
 DESTROY_I = 2
 DESTROY_A = 1
+ASSET_UNKNOWN_TAG = 'unknown'
 THREAT_ACTION_UNKNOWN_TAG = 'unknown'
 HACKING_COST = DESTROY_C | DESTROY_I | DESTROY_A
 MALWARE_COST = DESTROY_C | DESTROY_I | DESTROY_A
@@ -26,7 +50,31 @@ CYBERARM_CDM_MATRIX = 0
 CYBERARM_RISK = 1
 CYBERARM_ROI = 2
 NUMBER_OF_CYBERARM_OUTPUT = 3
-TIMEOUT_DURATION = 60*1000
+TIMEOUT_DURATION = 1000*1000
+SECURITY_CONTROL_COST_MEAN = 3500
+SECURITY_CONTROL_COST_DEVIATION = 666
+SECURITY_CONTROL_COST_MAX = 3000
+SECURITY_CONTROL_COST_MIN = 5000
+ITERATION_MODEL_SATISFACTION = 1
+COST_MODEL_ITERATION = 1
+################################################### Read from single THreat statistics file ##################
+WRITE_FILE_NAME = 'Global_Threat_Statistics.txt'
+FILENAME_TAG_OPEN = '<'
+FILENAME_TAG_CLOSE = '>'
+ASSET_TAG_WRITE_OPEN = "<<"
+ASSET_TAG_WRITE_CLOSE = ">>"
+THREAT_TAG_OPEN = '<<<'
+THREAT_TAG_CLOSE = '>>>'
+THREAT_ACTION_TAG_OPEN = '<<<<'
+THREAT_ACTION_TAG_CLOSE = '>>>>'
+VERIS_LIST_FILE = 'ResourceFolder/InputFiles/veris_list_%s.txt'%(VERIS_ASSET_NUMBER)
+EXPERIENCE_LIST_FILE = 'ExperienceList.txt'
+
+################################# SMT ENVIRONMENT VARIABLE KEY ##############################################
+GLOBAL_TOTAL_COST_KEY = 'global_total_cost'
+GLOBAL_MIN_RISK_KEY = 'global_min_risk'
+GLOBAL_ESTIMATED_RISK_KEY = 'global_estimated_risk'
+MIN_SEC_CONTROL_COST_KEY = 'min_sec_control_cost'
 
 ######################################### ROI Stattistics #####################################################
 IMPOSED_RISK = 'Imposed Risk'
@@ -34,6 +82,7 @@ RESIDUAL_RISK = 'Residual Risk'
 MITIGATED_RISK = 'Mitigated Risk'
 ROI = 'ROI'
 TOTAL_IMPLEMENTATION_COST = 'Total Implementation Cost'
+K_THRESHOLD = 1000
 ######################################### Kill chain phase dimension ##################################################
 RECON_KEY = 'recon'
 WEAPONIZE_KEY = 'weaponize'
@@ -86,6 +135,7 @@ def init_conf():
     for i in range(len(SECURITY_FUNCTION_LIST)):
         SECURITY_FUNCTION_TO_ID[SECURITY_FUNCTION_LIST[i]] = i
         ID_TO_SECURITY_FUNCTION[i] = SECURITY_FUNCTION_LIST[i]
+
 
 def uploadFiles():
     PROJECT_ROOT = "%s/%s/%s" % (

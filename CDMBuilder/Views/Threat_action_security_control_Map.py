@@ -61,6 +61,7 @@ def insertThreatActions(request):
         print sc_name, " ---> ", threat_action
         for ta in threat_action:
             for sc in sc_name:
+                print "Security Control Name %s" % (sc)
                 ta_sc = model.threat_action_security_control_map()
                 ta_sc.sc_name = sc
                 ta_sc.threat_action_name = ta

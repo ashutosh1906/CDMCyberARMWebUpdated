@@ -1,10 +1,14 @@
 import ProjectConfigFile
+from math import sqrt,pow
 
 def determineCostEffectiveness(selected_security_controls,security_control_list,risk_threat_action,threat_action_id_list_for_all_assets,
                                threat_action_id_to_name,cost_effectiveness_sc):
     asset_index = 0
+    # print threat_action_id_list_for_all_assets
     for asset_type in range(len(risk_threat_action)):
         for index in range(len(risk_threat_action[asset_type])):
+            # print "Asset Index %s" % (asset_index)
+            # print "Risk Threat Action %s" % (risk_threat_action[asset_type][index])
             cost_effectiveness_sc.append(0.0)
             asset_specific_sc_cost = 0.0
             for security_control_id in selected_security_controls[asset_index]:
@@ -13,7 +17,10 @@ def determineCostEffectiveness(selected_security_controls,security_control_list,
                         cost_effectiveness_sc[asset_index] += security_control_list[security_control_id].threat_action_effectiveness[threat_action_id]\
                                          *risk_threat_action[asset_type][index][threat_action_id_to_name[threat_action_id]]
                 asset_specific_sc_cost += security_control_list[security_control_id].investment_cost
-            cost_effectiveness_sc[asset_index] /= asset_specific_sc_cost
+            if asset_specific_sc_cost <> 0:
+                cost_effectiveness_sc[asset_index] /= asset_specific_sc_cost
+            else:
+                cost_effectiveness_sc[asset_index] = 0.0
             asset_index += 1
     # printSecurityControlsEnforcementEffectiveness(selected_security_controls, security_control_list, threat_action_id_list_for_all_assets,
     #                       threat_action_id_to_name,risk_threat_action)
@@ -305,5 +312,144 @@ def printRiskThreatAction(risk_threat_action,asset_enterprise_list):
                 print "    Threat Action %s ----> %s" % (threat_action,risk_threat_action[i][j][threat_action])
 
 
+def calculateRiskRatioBasedOnSelectedThreatAction(threat_action_id_list_for_all_assets,risk_threat_action,threat_action_id_to_name):
+    asset_index = 0
+    risk_ratio_threat_action = []
+    total_risk = 0.0
+    for i in range(len(risk_threat_action)):
+        for j in range(len(risk_threat_action[i])):
+            risk_ratio_threat_action.append(0.0)
+            for threat_action_id in threat_action_id_list_for_all_assets[asset_index]:
+                if threat_action_id_to_name[threat_action_id] not in risk_threat_action[i][j].keys():
+                    print "(^_^)(^_^)(^_^)(^_^)Error: Why %s (threat action id: %s) not in the risk_threat_action_list" % (threat_action_id_to_name[threat_action_id],threat_action_id)
+                risk_ratio_threat_action[asset_index] += risk_threat_action[i][j][threat_action_id_to_name[threat_action_id]]
+            # print risk_ratio_threat_action[asset_index]
+            total_risk += risk_ratio_threat_action[asset_index]
+            asset_index += 1
+
+    number_of_asset = asset_index
+
+    for asset_index in range(number_of_asset):
+        risk_ratio_threat_action[asset_index] /= total_risk
+    return risk_ratio_threat_action
+
+def calculateKConstant(risk_ratio_threat_action, cost_effectiveness_sc,resource_available,max_cost_asset,k_based_cost_allocation,updated_risk_ratio):
+    print "Updated Risk Ratio %s" % (updated_risk_ratio)
+    constant_k_list = []
+    for asset_index in range(len(max_cost_asset)):
+        if cost_effectiveness_sc[asset_index] == 0 or\
+                        risk_ratio_threat_action[asset_index]==0 or\
+                        max_cost_asset[asset_index] ==0 or k_based_cost_allocation[asset_index] >= max_cost_asset[asset_index]:
+            constant_k_list.append(0.0)
+            continue
+        constant_k_list.append(pow(risk_ratio_threat_action[asset_index]/updated_risk_ratio,2) * sqrt(max_cost_asset[asset_index]-k_based_cost_allocation[asset_index])/cost_effectiveness_sc[asset_index])
+    constant_k = sum(constant_k_list)
+    if constant_k <> 0 :
+        constant_k = resource_available / constant_k
+    print "Value of Constant K %s" % (constant_k)
+    for asset_index in range(len(max_cost_asset)):
+        k_based_cost_allocation[asset_index] += constant_k * constant_k_list[asset_index]
+    print "Resource Provided %s Total Distribution %s" % (resource_available,sum(k_based_cost_allocation))
+    return constant_k
+
+def rationalCostAllocation(security_control_list,selected_security_controls,risk_ratio_threat_action,cost_effectiveness_sc,alloted_cost_asset_specific,budget):
+    max_cost_asset = []
+    for asset_index in range(len(selected_security_controls)):
+        max_cost_asset.append(0.0)
+        for sec_control in selected_security_controls[asset_index]:
+            max_cost_asset[asset_index] += security_control_list[sec_control].investment_cost
+
+    k_based_cost_allocation = [0.0 for i in range(len(selected_security_controls))]
+    updated_risk_ratio = 1.0
+    resource_available = budget
+    contant_k = calculateKConstant(risk_ratio_threat_action, cost_effectiveness_sc, resource_available, max_cost_asset,k_based_cost_allocation,updated_risk_ratio)
+    updated_risk_ratio = 0.0
+    rest_cost = 0
+    cost_starving = []
+    rest_cost_k_based = 0
+    for asset_index in range(len(selected_security_controls)):
+        # print "Alloted Cost %s <------> Max Cost %s" % (alloted_cost_asset_specific[asset_index],max_cost_asset[asset_index])
+        # print "Risk Ratio %s <-------> Cost Effectiveness %s" % (risk_ratio_threat_action[asset_index],cost_effectiveness_sc[asset_index])
+        if max_cost_asset[asset_index] < alloted_cost_asset_specific[asset_index]:
+            rest_cost += alloted_cost_asset_specific[asset_index] - max_cost_asset[asset_index]
+            cost_starving.append(asset_index)
+        # print "K Based Cost Allocation ::::: %s" % (k_based_cost_allocation[asset_index])
+        if max_cost_asset[asset_index] < k_based_cost_allocation[asset_index]:
+            rest_cost_k_based += k_based_cost_allocation[asset_index] - max_cost_asset[asset_index]
+            k_based_cost_allocation[asset_index] = max_cost_asset[asset_index]
+        elif max_cost_asset[asset_index] > k_based_cost_allocation[asset_index]:
+            updated_risk_ratio += risk_ratio_threat_action[asset_index]
+    print "Unnecessary K Cost Allocation %s" % (rest_cost_k_based)
+
+    if rest_cost_k_based > ProjectConfigFile.K_THRESHOLD:
+        while(True):
+            resource_available = rest_cost_k_based
+            rest_cost_k_based = 0
+            constant_k_updated = calculateKConstant(risk_ratio_threat_action,cost_effectiveness_sc,resource_available,max_cost_asset,k_based_cost_allocation,updated_risk_ratio)
+            updated_risk_ratio = 0.0
+            for asset_index in range(len(selected_security_controls)):
+                if max_cost_asset[asset_index] < k_based_cost_allocation[asset_index]:
+                    rest_cost_k_based += k_based_cost_allocation[asset_index] - max_cost_asset[asset_index]
+                    k_based_cost_allocation[asset_index] = max_cost_asset[asset_index]
+                elif max_cost_asset[asset_index] > k_based_cost_allocation[asset_index]:
+                    updated_risk_ratio += risk_ratio_threat_action[asset_index]
+            print "Unnecessary K Cost Allocation %s" % (rest_cost_k_based)
+            if abs(resource_available-rest_cost_k_based) <= ProjectConfigFile.K_THRESHOLD or rest_cost_k_based <= ProjectConfigFile.K_THRESHOLD:
+                break
 
 
+    print "Unnecessary Allocation %s" % (rest_cost)
+    print "Unnecessary Allocation K Based %s" % (rest_cost_k_based)
+    print "Cost Starving %s" % (cost_starving)
+    for asset_index in range(len(selected_security_controls)):
+        print "Alloted Cost %s <------> Max Cost %s K Based Cost %s" % (alloted_cost_asset_specific[asset_index], max_cost_asset[asset_index],k_based_cost_allocation[asset_index])
+
+def appendStatsInFile(components):
+    """ Components should be in (Asset,Total Risk,Maximum Achievable Risk,Residual Risk,Implementation Cost,Computation Time in Sec) Format"""
+    append_file_iteration_index = open(ProjectConfigFile.OUTPUT_STATISTICAL_FILE_NAME,'a')
+    # print "Components %s" % (components)
+    for comp in components[:-1]:
+        append_file_iteration_index.write("%s,"%(comp))
+    append_file_iteration_index.write("%s," % (ProjectConfigFile.RISK_ELIMINATION))
+    append_file_iteration_index.write("%s\n" % (components[-1]))
+    append_file_iteration_index.close()
+
+def appendTimeRiskStatsInFile(components):
+    """ Components should be in (Assets,Total Risk,Maximum Achievable Risk,Budget,Implementation Cost,Residual Risk,Time,Threat Elimination,Security Controls) Format"""
+    # print "()() Components %s" % (components)
+    append_file_iteration_index = open(ProjectConfigFile.OUTPUT_TIME_MIN_RISK_FILE_NAME, 'a')
+    # print "Components %s" % (components)
+    for comp in components[:-1]:
+        append_file_iteration_index.write("%s," % (comp))
+    append_file_iteration_index.write("%s\n" % (components[-1]))
+    append_file_iteration_index.close()
+
+def determineSizeCandidateSet(selected_security_controls):
+    total_size = 0
+    for i in range(len(selected_security_controls)):
+        total_size += len(selected_security_controls[i])
+    return total_size
+
+def chosen_security_controls_threat_action_classified(selected_security_controls_length,threat_action_name_list,threat_action_list,security_control_list):
+    classified_selected_security_controls_threat_action = []
+    for asset_index in range(selected_security_controls_length):
+        classified_selected_security_controls_threat_action_asset_specific = {}
+        threat_action_index = 0
+        for threat_action in threat_action_name_list[asset_index]:
+            classified_selected_security_controls_threat_action_asset_specific[threat_action[0]] = [threat_action[1]]
+            for security_control in threat_action_list[threat_action[0]].applicable_security_controls:
+                if threat_action[1] < security_control_list[security_control].investment_cost:
+                    continue
+                if security_control not in classified_selected_security_controls_threat_action_asset_specific:
+                    classified_selected_security_controls_threat_action_asset_specific[threat_action[0]].append(security_control)
+            threat_action_index += 1
+
+
+        classified_selected_security_controls_threat_action.append(classified_selected_security_controls_threat_action_asset_specific)
+    printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action)
+
+def printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action):
+    for sc_asset_specific in classified_selected_security_controls_threat_action:
+        for threat_action_id in sc_asset_specific.keys():
+            print "Threat Action ID %s ---> " % (threat_action_id)
+            print "\t \t Security Controls %s" % (sc_asset_specific[threat_action_id])

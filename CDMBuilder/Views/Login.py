@@ -491,12 +491,12 @@ def cyberARM_request_updated_compact(request):
 
         ############################################# Just for Testing ###############################################
         experience_list = []
-        experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
+        # experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
         # experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
         risk_elimination = 0.8
         ############################################# End of Testing #################################################
 
-        veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]]]#,['end-user',[100000,100000,100000]]]
+        # veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]]]#,['end-user',[100000,100000,100000]]]
         asset_enterprise_list_input = [[] for i in range(2)]
         asset_enterprise_list_input[VERIS_LIST] = veris_list
         asset_enterprise_list_input[EXPERIENCE_LIST] = experience_list
@@ -508,6 +508,11 @@ def cyberARM_request_updated_compact(request):
         recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination)
         # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)
         print recommendedCDM
+        ############################################################### One List for Different Risk Elimination Approach #########################################
+        ############################################################### One List for Same Risk Elimination Approach with Different Cost#########################################
+        ############################################################### One List for Same Risk Elimination Approach with Same Cost Different Threshold Value#########################################
+        recommendedCDM = recommendedCDM[0][0][0]
+
         send_data['cdm_list'] = recommendedCDM[CYBERARM_CDM_MATRIX]
         send_data['risk_list'] = recommendedCDM[CYBERARM_RISK]
         send_data['roi'] = recommendedCDM[CYBERARM_ROI]
