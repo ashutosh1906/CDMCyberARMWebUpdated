@@ -55,7 +55,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     threat_actions_frequency = generate_risk_distribution(asset_enterprise_list,risk_elimination,global_risk_threat_action)
     print "Frequency Threat Actions %s" % (threat_actions_frequency)
     global_risk_threat_action = global_risk_threat_action[0:threat_actions_frequency]
-    printGlobalRiskThreatAction(global_risk_threat_action)
+    # printGlobalRiskThreatAction(global_risk_threat_action)
     ######### ***************************************** end of Check the number of prioritized Threat Actions ****************************##############################################
 
     threat_threatAction_asset.append(threat_threatAction_asset_veris)
