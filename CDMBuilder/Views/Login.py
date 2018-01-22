@@ -494,7 +494,7 @@ def cyberARM_request_updated_compact(request):
             print experience_list[i]
 
         ############################################# Just for Testing ###############################################
-        experience_list = []
+        # experience_list = []
         # experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
         # experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
 
