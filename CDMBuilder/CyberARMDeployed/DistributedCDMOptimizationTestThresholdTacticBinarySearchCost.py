@@ -368,7 +368,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             risk_all = []
             for asset_index in range(len(threat_id_for_all_assets)):
                 risk_all.append({})
-                risk_all[asset_index]['asset_name'] = asset_list_for_smt[asset_index][0]
+                risk_all[asset_index]['asset_name'] = "%s_%s" % (asset_list_for_smt[asset_index][0],asset_index)
                 risk_all[asset_index]['max_risk'] = 0
                 risk_all[asset_index]['res_risk'] = 0
                 risk_all[asset_index]['imp_cost'] = round(local_enforcement_cost[asset_index],3)
