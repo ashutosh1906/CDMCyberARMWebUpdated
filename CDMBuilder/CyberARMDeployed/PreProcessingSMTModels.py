@@ -144,6 +144,7 @@ def PreprocessingSMT_Environment(security_control_list,selected_security_control
 
     print "Global Minimum Risk %s" % (global_min_risk)
     if global_min_risk > affordable_risk:
+        print "Achievable Minimum Risk is less than the threshold"
         max_risk_initial = 0
         for i in range(len(threat_id_for_all_assets)):
             for threat_id in threat_id_for_all_assets[i]:

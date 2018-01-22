@@ -180,11 +180,29 @@
              </div>
         </div>
 
-        <div class="row">
+        <!--div class="row">
             <div class="col-lg-12 col-lg-offset-10">
                 <a id="save_input" class="clickable_custom_a" style="color: red;text-decoration: underline;">Save Input File</a>
             </div>
+        </div-->
+
+        <!-- **********************************Upload Input Files ******************************-->
+        <div class="row">
+            <div class="col-lg-12 col-lg-offset-10">
+                <a id="load_input_asset" class="clickable_custom_a" style="color: red;text-decoration: underline;">Load Input Asset File</a>
+                <input type="file" id="load_input_asset_file" style="display:none;" multiple size="50"></br>
+                <a style="text-decoration:none;" id="uploaded_file_list"></a>
+            </div>
         </div>
+        <!-- **********************************End Upload Input Files ******************************-->
+
+         <!-- **********************************Clear Selection Asset List******************************-->
+        <div class="row">
+            <div class="col-lg-12 col-lg-offset-10">
+                <a id="clear_grid_asset" class="clickable_custom_a" style="color: red;text-decoration: underline;">Delete Asset Grid</a>
+            </div>
+        </div>
+        <!-- **********************************Clear Selection Asset List******************************-->
 
          <div style="margin-top:16px;text-align: center;">
                     <button type="button" class="btn btn-primary" id="generate_cdm">Generate CDM</button>
@@ -1046,6 +1064,56 @@
 {#                data_input['affordable_risk'] = $("#affordable_risk").val();#}
             });
             /*********************************************** End of the input files ***************************************/
+
+            /**************************************************** Load The Input Files **************************************/
+             $("#load_input_asset").click(function(){
+                 $("#load_input_asset_file").click();
+
+             });
+             var file_content = [];
+             $("#load_input_asset_file").change(function(){
+                 var fileUploaded = document.getElementById("load_input_asset_file");
+                 var fileNameStr = "";
+                 for (var i = 0; i < fileUploaded.files.length; i++){
+                     fileNameStr += fileUploaded.files[i].name+" ";
+                 }
+                 $("#uploaded_file_list").text(fileNameStr);
+                 fileReader = new FileReader();
+                 fileReader.onload = function () {
+				// Do stuff on onload, use fr.result for contents of file
+				    file_content = fileReader.result;
+				    file_content = file_content.split('\n');
+				    readFileToGridLoad();
+			    };
+			    fileReader.readAsText(fileUploaded.files[0]);
+
+             });
+
+             $("#clear_grid_asset").click(function () {
+                $("#asset_grid_list").jqxGrid('clear');
+                added_number_of_asset = 0;
+                $("#uploaded_file_list").text("");
+             });
+
+             function readFileToGridLoad(){
+                 console.log(file_content);
+                 for(var asset_index in file_content){
+                         if (file_content[asset_index]=="") continue;
+                         asset = file_content[asset_index].split(',');
+                         row_asset_list = {};
+                         row_asset_list['asset_name'] = asset[0];
+                         row_asset_list['frequency'] = 1;
+                         row_asset_list['confidentiality'] = asset[1];
+                         row_asset_list['integrity'] = asset[2];
+                         row_asset_list['availability'] = asset[3];
+                         row_asset_list['data_source'] = "VERIS";
+                         row_asset_list['threat_list'] = {};
+                         $("#asset_grid_list").jqxGrid('addrow',added_number_of_asset,row_asset_list);
+                         added_number_of_asset += 1;
+                     }
+             }
+
+            /***************************************************** End of Loading Input Files ******************************/
 
            /* ############################################### Threat Actions List ################################# */
             var dataThreatAction = [];

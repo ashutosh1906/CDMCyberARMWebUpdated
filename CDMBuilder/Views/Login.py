@@ -460,6 +460,9 @@ def cyberARM_request_updated_compact(request):
         print asset_list_given
         risk_elimination = float(json_loads['risk_elimination'])/100.0
         threat_elimination = json_loads['threat_elimination']
+        # risk_elimination = 0.8
+        if risk_elimination <= 0:
+            risk_elimination = 0.8
         print "Risk Distribution: %s Threat Distribution: %s" % (risk_elimination,threat_elimination)
         threat_action_distribution_discovered = json_loads['threat_action_distribution']
         print "Threat Action Distribution %s" % (threat_action_distribution_discovered)
@@ -467,6 +470,7 @@ def cyberARM_request_updated_compact(request):
         veris_list = []
         experience_list = []
         for asset_given in asset_list_given:
+            # print asset_given
             if asset_given['data_source'] == 'VERIS':
                 veris_list.append([asset_given['asset_name'],[float(asset_given['confidentiality']),float(asset_given['integrity']),float(asset_given['availability'])]])
             else:
@@ -493,7 +497,7 @@ def cyberARM_request_updated_compact(request):
         experience_list = []
         # experience_list.append([u'laptop_exp', [1222.0, 32345.0, 45678.0],{u'misuse': {u'net misuse': u'32'}, u'hacking': {u'forced browsing': u'329'}, u'social': {u'forgery': u'23'}}])
         # experience_list.append([u'files_exp', [2390.0, 4376.0, 32323.0], {u'misuse': {u'net misuse': u'23'}, u'error': {u'omission': u'32'}}])
-        risk_elimination = 0.8
+
         ############################################# End of Testing #################################################
 
         # veris_list = [['database',[500000,500000,500000]],['desktop',[100000,100000,100000]]]#,['laptop',[100000,100000,100000]]]#,['end-user',[100000,100000,100000]]]

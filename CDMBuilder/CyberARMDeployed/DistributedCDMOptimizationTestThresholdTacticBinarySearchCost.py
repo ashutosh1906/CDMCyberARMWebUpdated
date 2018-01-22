@@ -333,6 +333,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 for security_control_obj in CDM_Global_id[asset_index]:
                     row = {}
                     row['asset_name'] = asset_name_current
+                    row['sc_version'] = security_control_obj.sc_version
                     row['sc_name']=security_control_obj.sc_name
                     row['sc_function'] =ProjectConfigFile.ID_TO_SECURITY_FUNCTION[security_control_obj.sc_function]
                     row['en_level'] =ProjectConfigFile.ID_TO_ENFORCEMENT_LEVEL[security_control_obj.en_level]
