@@ -332,7 +332,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 asset_name_current = asset_list_for_smt[asset_index][0]
                 for security_control_obj in CDM_Global_id[asset_index]:
                     row = {}
-                    row['asset_name'] = asset_name_current
+                    row['asset_name'] = "%s_%s"%(asset_name_current,asset_index)
                     row['sc_version'] = security_control_obj.sc_version
                     row['sc_name']=security_control_obj.sc_name
                     row['sc_function'] =ProjectConfigFile.ID_TO_SECURITY_FUNCTION[security_control_obj.sc_function]
