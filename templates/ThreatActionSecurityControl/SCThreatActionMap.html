@@ -2,7 +2,7 @@
 {% block titlename %} Threat Action {% endblock %}
 
 {% block scriptBlock %}
-        <script type="text/javascript" src="../static/utilities_Custom.js"></script>
+        <script type="text/javascript" src="../../static/utilities_Custom.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 var selected_security_control = {};
@@ -118,7 +118,7 @@
             <div id = "jqxgrid" style="text-align: center;margin-left: auto;margin-right: auto;"></div>
         </div>
     </div>
-    <form method="post" action="/generatereport/">
+    <form method="post" action="/threatAction/generatereport/">
     {% csrf_token %}
         <div class="row" style="text-align: center;padding-top: 10px;">
            <button type="submit" class="btn btn-primary">Generate Report</button>

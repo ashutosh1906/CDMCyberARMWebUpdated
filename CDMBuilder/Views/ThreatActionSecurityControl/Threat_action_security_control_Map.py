@@ -1,13 +1,9 @@
-from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
-from django.template.loader import render_to_string
 from CDMBuilder.Models import model
-from CDMBuilder.Utilities import GlobalVariables
-import json
-from django.db.models import Q
-from django.core import serializers
+import json,random
 from django.db import connection
-from Login import USER_NAME_KEY,dictfetchall
+from CDMBuilder.Views.Login import USER_NAME_KEY
+from CDMBuilder.Views import UtilityFunctions
 
 def insertThreatActions(request):
     if USER_NAME_KEY not in request.session.keys():
@@ -51,7 +47,7 @@ def insertThreatActions(request):
         print "******************** sc to threat action *******************************"
         # print all_row
         print "******************** sc to threat action *******************************"
-        return render(request,'SCThreatActionMap.html',{'sc_source':json.dumps(security_control_list),
+        return render(request, 'ThreatActionSecurityControl/SCThreatActionMap.html', {'sc_source':json.dumps(security_control_list),
                                                      'threat_action_source': json.dumps(threat_action_name),
                                                      'grid_src':json.dumps(threat_action_security_control_map_dict_all)})
     if request.method=='POST':
@@ -69,3 +65,22 @@ def insertThreatActions(request):
                 ta_sc.sc_version = sec_con.sc_version
                 ta_sc.save()
         return redirect('threatAction')
+
+def generate_sc_threat_action(request):
+    print "Thanks for generating threat action to security controls"
+    threat_action_security_control_retrieve = 'select * from %s as ta join %s as sc on ta.threat_action_name=sc.threat_action_name' % ('threat_action_updated','threat_action_security_control_map')
+    cursor = connection.cursor()
+    cursor.execute(threat_action_security_control_retrieve)
+    all_row = UtilityFunctions.dictfetchall(cursor)
+    print "##################### Security Control to Threat Action ################################################"
+    print all_row
+
+    sc_threat_action = open('ThreatActionSecurityControlNew.csv','w')
+    for row in all_row:
+        effectiveness_range = round(random.uniform(0.1,0.9),3)
+        # cursor = connection.cursor()
+        # cursor.execute("SELECT * from cyber_defense_matrix where security_control_name=\'"+row['sc_version']+"\'")
+        # all_row_cdm = UtilityFunctions.dictfetchall(cursor)
+        # sc_name = all_row_cdm[0]['security_control_name']
+        sc_threat_action.write('%s;%s;%s\n'%(row['threat_action_name'].lower(),row['sc_version'].lower(),effectiveness_range))
+    return redirect('threatAction')

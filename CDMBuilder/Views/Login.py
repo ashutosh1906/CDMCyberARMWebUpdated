@@ -89,14 +89,6 @@ def developQueryModel(all_cdm_row):
     print send_data
     return send_data
 
-###################################### fetch all the rows from the raw queries as dictionary ##############################
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
 def createCDMSCName(cdm_dict):
     sc_rows = []
@@ -119,7 +111,7 @@ def insertThreatActions(request):
         cursorSC.execute(
             'SELECT * FROM sc_to_enforcement_level JOIN cyber_defense_matrix ON sc_to_enforcement_level.sc_version=cyber_defense_matrix.sc_version')
 
-        all_cdm_row = dictfetchall(cursorSC)
+        all_cdm_row = UtilityFunctions.dictfetchall(cursorSC)
         print "******************** sc to level *******************************"
         # print createCDMSCName(all_cdm_row)
         print all_cdm_row
@@ -127,7 +119,7 @@ def insertThreatActions(request):
         cursor.execute(
             'SELECT * FROM sc_to_enforcement_level JOIN threat_action_to_security_control ON sc_to_enforcement_level.id=threat_action_to_security_control.security_control_id '
             'JOIN cyber_defense_matrix ON sc_to_enforcement_level.sc_version=cyber_defense_matrix.sc_version')
-        all_row = dictfetchall(cursor)
+        all_row = UtilityFunctions.dictfetchall(cursor)
         print "******************** sc to threat action *******************************"
         print all_row
         print "******************** sc to threat action *******************************"
@@ -208,7 +200,7 @@ def cdmDisplaySecurityControl(request):
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM sc_to_enforcement_level JOIN cyber_defense_matrix ON sc_to_enforcement_level.sc_version=cyber_defense_matrix.sc_version')
 
-        all_cdm_row = dictfetchall(cursor)
+        all_cdm_row = UtilityFunctions.dictfetchall(cursor)
         print "******************** sc to level *******************************"
         print all_cdm_row
         print "******************** sc to level *******************************"
@@ -277,7 +269,7 @@ def cdmDisplaySecurityControl(request):
         # all_searched_entries_json =
         cursor = connection.cursor()
         cursor.execute(custom_query)
-        all_searched_entries = dictfetchall(cursor)
+        all_searched_entries = UtilityFunctions.dictfetchall(cursor)
         all_searched_entries_json = developQueryModel(all_searched_entries)
     return HttpResponse(
         json.dumps(all_searched_entries_json),
@@ -289,7 +281,7 @@ def cdmInsertSecurityControl(request):
     if request.method=='GET':
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM sc_to_enforcement_level JOIN cyber_defense_matrix ON sc_to_enforcement_level.sc_version=cyber_defense_matrix.sc_version')
-        all_cdm_row = dictfetchall(cursor)
+        all_cdm_row = UtilityFunctions.dictfetchall(cursor)
         send_data = developQueryModel(all_cdm_row)
 
         return render(request,"insertCDM.html",{'cdmList': json.dumps(send_data),'kc_phase':GlobalVariables.kill_chain_phase,'enforcement_level':GlobalVariables.enforcement_level,
@@ -321,7 +313,7 @@ def generate_CDM(request):
     print "Thanks for generating the report"
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM cyber_defense_matrix JOIN sc_to_enforcement_level on cyber_defense_matrix.sc_version = sc_to_enforcement_level.sc_version')
-    all_row = dictfetchall(cursor)
+    all_row = UtilityFunctions.dictfetchall(cursor)
     print "##################### CDM Reports ################################################"
     print all_row
 
@@ -333,23 +325,6 @@ def generate_CDM(request):
     cdmFile.close()
     return redirect('insert')
 
-def generate_sc_threat_action(request):
-    print "Thanks for generating threat action to security controls"
-    cursor = connection.cursor()
-    cursor.execute('SELECT * from sc_to_enforcement_level JOIN threat_action_to_security_control on sc_to_enforcement_level.id=threat_action_to_security_control.security_control_id')
-    all_row = dictfetchall(cursor)
-    print "##################### Security Control to Threat Action ################################################"
-    print all_row
-
-    sc_threat_action = open('ThreatActionSecurityControlNew.csv','w')
-    for row in all_row:
-        effectiveness_range = round(random.uniform(0.1,0.9),3)
-        # cursor = connection.cursor()
-        # cursor.execute("SELECT * from cyber_defense_matrix where security_control_name=\'"+row['sc_version']+"\'")
-        # all_row_cdm = dictfetchall(cursor)
-        # sc_name = all_row_cdm[0]['security_control_name']
-        sc_threat_action.write('%s;%s;%s\n'%(row['threat_action'],row['sc_version'],effectiveness_range))
-    return redirect('threatAction')
 
 ################################################################# Call CyberARM #######################################################
 def cyberARM_request_updated(request):

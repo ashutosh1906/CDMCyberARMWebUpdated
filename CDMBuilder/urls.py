@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
-from Views import Login,DatabaseFunctions,Threat_action_security_control_Map
+import threat_acion_security_control_url
+from Views import Login,DatabaseFunctions
 
 urlpatterns = [
 
@@ -24,9 +25,10 @@ urlpatterns = [
     url(r'^display/', Login.cdmDisplaySecurityControl, name='display'),
     url(r'^insert/',Login.cdmInsertSecurityControl,name='insert'),
     # url(r'^threatAction/',Login.insertThreatActions,name='threatAction'),
-    url(r'^threatAction/',Threat_action_security_control_Map.insertThreatActions,name='threatAction'),
+    # url(r'^threatAction/',Threat_action_security_control_Map.insertThreatActions,name='threatAction'),
+    url(r'^threatAction/',include(threat_acion_security_control_url)),
     url(r'^generateCDM/',Login.generate_CDM,name='generateCDM'),
-    url(r'^generatereport/',Login.generate_sc_threat_action,name='generatereport'),
+    # url(r'^generatereport/',Login.generate_sc_threat_action,name='generatereport'),
     url(r'^cyberARM Old/',Login.cyberARM_request,name='cyberARM Old'),
     url(r'^cyberARM/',Login.cyberARM_request_updated_compact,name='cyberARM'),
     url(r'^refreshDatabase/',DatabaseFunctions.insertMapThreatThreatAction,name='TTA'),
