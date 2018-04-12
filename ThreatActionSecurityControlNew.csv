@@ -1,475 +1,475 @@
-unapproved hardware;1.1;0.394
-skimmer;1.1;0.774
-unapproved hardware;1.2;0.329
-wiretapping;1.1;0.723
-possession abuse;1.2;0.511
-possession abuse;1.3;0.419
-unapproved hardware;1.3;0.643
-skimmer;1.3;0.325
-wiretapping;1.3;0.759
-possession abuse;1.4;0.888
-skimmer;1.4;0.376
-unapproved hardware;1.4;0.591
-unapproved hardware;1.5;0.663
-skimmer;1.5;0.487
-possession abuse;1.5;0.618
-unapproved hardware;1.6;0.338
-possession abuse;1.6;0.667
-unapproved software;2.1;0.734
-client-side attack;2.1;0.404
-exploit vuln;2.1;0.101
-downloader;2.2;0.481
-adminware;2.2;0.701
-client-side attack;2.4;0.3
-abuse of functionality;2.4;0.124
-bypassed controls;3.1;0.183
-misconfiguration;3.1;0.713
-misconfiguration;3.2;0.109
-exploit vuln;3.2;0.61
-packet sniffer;3.4;0.299
-snooping;3.4;0.886
-wiretapping;3.4;0.691
-backdoor;3.6;0.868
-c2;3.6;0.111
-connection;3.6;0.665
-backdoor;3.7;0.746
-disabled controls;3.7;0.69
-exploit vuln;4.1;0.782
-exploit vuln;4.3;0.771
-exploit vuln;4.4;0.852
-exploit vuln;4.5;0.417
-maintenance error;4.7;0.484
-exploit vuln;4.7;0.583
-rfi;3.5;0.832
-possession abuse;5.1;0.729
-possession abuse;5.2;0.33
-unapproved workaround;5.1;0.767
-brute force;5.3;0.602
-unapproved workaround;5.4;0.772
-brute force;5.5;0.28
-brute force;5.6;0.865
-spyware/keylogger;5.6;0.29
-skimmer;5.6;0.862
-brute force;5.7;0.511
-data mishandling;5.9;0.11
-misinformation;6.2;0.548
-misdelivery;6.4;0.232
-net misuse;6.4;0.729
-disabled controls;5.1;0.195
-bypassed controls;6.5;0.804
-disabled controls;6.5;0.319
-bypassed controls;6.6;0.398
-disabled controls;6.6;0.252
-net misuse;6.6;0.591
-adware;7.1;0.362
-downloader;7.1;0.488
-adware;7.2;0.706
-forced browsing;7.2;0.871
-client-side attack;7.3;0.422
-sqli;7.3;0.746
-phishing;7.4;0.743
-c2;7.4;0.355
-xss;7.3;0.478
-connection;7.4;0.625
-mail command injection;7.1;0.845
-spam;7.1;0.304
-url redirector abuse;7.4;0.808
-connection;7.5;0.225
-c2;7.6;0.196
-baiting;7.6;0.263
-phishing;7.7;0.331
-scam;7.7;0.75
-phishing;7.8;0.799
-stolen creds;5.6;0.507
-xss;7.8;0.79
-adminware;8.1;0.337
-adware;8.1;0.846
-password dumper;8.1;0.298
-ram scraper;8.1;0.867
-ransomware;8.1;0.278
-rootkit;8.1;0.63
-spyware/keylogger;8.1;0.767
-worm;8.1;0.153
-adminware;8.2;0.437
-adware;8.2;0.624
-password dumper;8.2;0.814
-ram scraper;8.2;0.66
-ransomware;8.2;0.527
-rootkit;8.2;0.581
-spyware/keylogger;8.2;0.569
-worm;8.2;0.653
-surveillance;8.3;0.464
-unapproved hardware;8.3;0.151
-unapproved workaround;8.3;0.7
-wiretapping;8.3;0.727
-capture app data;14.4;0.433
-spyware/keylogger;8.2;0.491
-spyware/keylogger;2.1;0.408
-pretexting;17.1;0.865
-pretexting;17.4;0.715
-influence;17.1;0.827
-influence;17.4;0.405
-forgery;3.5;0.726
-bribery;17.1;0.396
-extortion ;17.1;0.542
-extortion ;16.10;0.635
-fire;10.1;0.718
-omission;18.8;0.389
-omission;18.5;0.397
-loss;5.6;0.448
-loss;10.1;0.384
-publishing error;17.5;0.665
-publishing error;18.5;0.174
-programming error;17.2;0.408
-programming error;18.3;0.483
-capture stored data;13.2;0.146
-capture stored data;13.3;0.705
-malfunction;19.1;0.615
-bribery;19.6;0.671
-data entry error;20.1;0.187
-data entry error;20.3;0.355
-gaffe;17.1;0.762
-unapproved workaround;1.4;0.4
-unapproved workaround;1.2;0.679
-email misuse;16.10;0.552
-email misuse;13.3;0.208
-possession abuse;13.3;0.322
-possession abuse;5.1;0.161
-knowledge abuse;17.1;0.511
-knowledge abuse;14.4;0.401
-buffer overflow;18.3;0.82
-buffer overflow;18.4;0.166
-buffer overflow;18.8;0.438
-exploit vuln;4.1;0.126
-footprinting;4.1;0.357
-footprinting;9.5;0.128
-privilege abuse;5.1;0.266
-privilege abuse;14.4;0.468
-cryptanalysis;16.11;0.618
-cryptanalysis;5.3;0.721
-cryptanalysis;5.7;0.267
-session prediction;16.4;0.44
-session prediction;20.1;0.391
-url redirector abuse;18.8;0.54
-url redirector abuse;20.1;0.304
-other;4.8;0.188
-session replay;16.4;0.754
-theft;5.6;0.673
-theft;10.1;0.43
-os commanding;18.8;0.877
-os commanding;20.3;0.625
-dos;6.4;0.716
-dos;12.9;0.619
-assault ;19.4;0.104
-disposal error;13.4;0.122
-disposal error;17.4;0.367
-disposal error;19.6;0.132
-disabled controls;1.3;0.372
-abuse of functionality;18.8;0.345
-abuse of functionality;20.1;0.723
-abuse of functionality;16.10;0.622
-adminware;8.5;0.664
-assault;10.1;0.74
-assault;10.3;0.459
-assault;19.3;0.297
-backdoor;12.1;0.211
-backdoor;9.2;0.851
-backdoor;6.5;0.459
-backdoor;13.6;0.329
-baiting;16.11;0.298
-baiting;17.2;0.662
+unapproved hardware;1.1;0.626
+skimmer;1.1;0.113
+unapproved hardware;1.2;0.511
+wiretapping;1.1;0.817
+possession abuse;1.2;0.716
+possession abuse;1.3;0.858
+unapproved hardware;1.3;0.54
+skimmer;1.3;0.735
+wiretapping;1.3;0.158
+possession abuse;1.4;0.638
+skimmer;1.4;0.632
+unapproved hardware;1.4;0.81
+unapproved hardware;1.5;0.357
+skimmer;1.5;0.399
+possession abuse;1.5;0.806
+unapproved hardware;1.6;0.144
+possession abuse;1.6;0.623
+unapproved software;2.1;0.899
+client-side attack;2.1;0.285
+exploit vuln;2.1;0.783
+downloader;2.2;0.653
+adminware;2.2;0.453
+client-side attack;2.4;0.435
+abuse of functionality;2.4;0.517
+bypassed controls;3.1;0.795
+misconfiguration;3.1;0.518
+misconfiguration;3.2;0.114
+exploit vuln;3.2;0.294
+packet sniffer;3.4;0.851
+snooping;3.4;0.478
+wiretapping;3.4;0.458
+backdoor;3.6;0.315
+c2;3.6;0.876
+connection;3.6;0.485
+backdoor;3.7;0.686
+disabled controls;3.7;0.312
+exploit vuln;4.1;0.288
+exploit vuln;4.3;0.662
+exploit vuln;4.4;0.605
+exploit vuln;4.5;0.146
+maintenance error;4.7;0.619
+exploit vuln;4.7;0.735
+rfi;3.5;0.364
+possession abuse;5.1;0.152
+possession abuse;5.2;0.342
+unapproved workaround;5.1;0.283
+brute force;5.3;0.329
+unapproved workaround;5.4;0.416
+brute force;5.5;0.546
+brute force;5.6;0.695
+spyware/keylogger;5.6;0.54
+skimmer;5.6;0.702
+brute force;5.7;0.153
+data mishandling;5.9;0.817
+misinformation;6.2;0.223
+misdelivery;6.4;0.176
+net misuse;6.4;0.86
+disabled controls;5.1;0.388
+bypassed controls;6.5;0.403
+disabled controls;6.5;0.715
+bypassed controls;6.6;0.48
+disabled controls;6.6;0.831
+net misuse;6.6;0.708
+adware;7.1;0.734
+downloader;7.1;0.136
+adware;7.2;0.62
+forced browsing;7.2;0.516
+client-side attack;7.3;0.692
+sqli;7.3;0.571
+phishing;7.4;0.81
+c2;7.4;0.546
+xss;7.3;0.379
+connection;7.4;0.71
+mail command injection;7.1;0.66
+spam;7.1;0.428
+url redirector abuse;7.4;0.494
+connection;7.5;0.79
+c2;7.6;0.356
+baiting;7.6;0.355
+phishing;7.7;0.464
+scam;7.7;0.789
+phishing;7.8;0.766
+stolen creds;5.6;0.539
+xss;7.8;0.132
+adminware;8.1;0.624
+adware;8.1;0.768
+password dumper;8.1;0.382
+ram scraper;8.1;0.793
+ransomware;8.1;0.706
+rootkit;8.1;0.684
+spyware/keylogger;8.1;0.261
+worm;8.1;0.898
+adminware;8.2;0.506
+adware;8.2;0.517
+password dumper;8.2;0.436
+ram scraper;8.2;0.227
+ransomware;8.2;0.182
+rootkit;8.2;0.684
+spyware/keylogger;8.2;0.358
+worm;8.2;0.342
+surveillance;8.3;0.401
+unapproved hardware;8.3;0.443
+unapproved workaround;8.3;0.269
+wiretapping;8.3;0.201
+capture app data;14.4;0.731
+spyware/keylogger;8.2;0.495
+spyware/keylogger;2.1;0.762
+pretexting;17.1;0.49
+pretexting;17.4;0.71
+influence;17.1;0.777
+influence;17.4;0.47
+forgery;3.5;0.628
+bribery;17.1;0.272
+extortion ;17.1;0.614
+extortion ;16.10;0.243
+fire;10.1;0.669
+omission;18.8;0.465
+omission;18.5;0.459
+loss;5.6;0.768
+loss;10.1;0.8
+publishing error;17.5;0.381
+publishing error;18.5;0.81
+programming error;17.2;0.418
+programming error;18.3;0.602
+capture stored data;13.2;0.311
+capture stored data;13.3;0.208
+malfunction;19.1;0.141
+bribery;19.6;0.798
+data entry error;20.1;0.62
+data entry error;20.3;0.528
+gaffe;17.1;0.76
+unapproved workaround;1.4;0.559
+unapproved workaround;1.2;0.428
+email misuse;16.10;0.549
+email misuse;13.3;0.115
+possession abuse;13.3;0.551
+possession abuse;5.1;0.176
+knowledge abuse;17.1;0.353
+knowledge abuse;14.4;0.784
+buffer overflow;18.3;0.297
+buffer overflow;18.4;0.261
+buffer overflow;18.8;0.482
+exploit vuln;4.1;0.156
+footprinting;4.1;0.341
+footprinting;9.5;0.837
+privilege abuse;5.1;0.14
+privilege abuse;14.4;0.33
+cryptanalysis;16.11;0.431
+cryptanalysis;5.3;0.824
+cryptanalysis;5.7;0.251
+session prediction;16.4;0.795
+session prediction;20.1;0.146
+url redirector abuse;18.8;0.709
+url redirector abuse;20.1;0.814
+other;4.8;0.85
+session replay;16.4;0.473
+theft;5.6;0.683
+theft;10.1;0.437
+os commanding;18.8;0.409
+os commanding;20.3;0.774
+dos;6.4;0.738
+dos;12.9;0.201
+assault ;19.4;0.22
+disposal error;13.4;0.714
+disposal error;17.4;0.519
+disposal error;19.6;0.611
+disabled controls;1.3;0.615
+abuse of functionality;18.8;0.855
+abuse of functionality;20.1;0.714
+abuse of functionality;16.10;0.731
+adminware;8.5;0.592
+assault;10.1;0.623
+assault;10.3;0.469
+assault;19.3;0.208
+backdoor;12.1;0.324
+backdoor;9.2;0.464
+backdoor;6.5;0.636
+backdoor;13.6;0.295
+baiting;16.11;0.211
+baiting;17.2;0.19
 baiting;19.6;0.753
-baiting;17.1;0.673
-bribery;14.4;0.531
-bribery;5.2;0.474
-bribery;16.10;0.202
-bribery;5.4;0.41
-backdoor;4.3;0.445
-backdoor;3.6;0.88
-bypassed controls;4.3;0.782
-bypassed controls;3.6;0.891
-c2;12.1;0.338
-c2;8.6;0.419
-c2;6.4;0.819
-c2;1.5;0.592
-capture app data;14.6;0.748
-capture app data;13.3;0.468
-capture app data;13.4;0.684
-capture app data;20.4;0.462
-capture stored data;14.6;0.732
-capture stored data;13.4;0.805
-capture stored data;20.4;0.724
-assault;14.2;0.765
-assault;12.10;0.687
-assault;12.4;0.89
-connection;14.2;0.11
-connection;12.10;0.275
-connection;12.4;0.347
-backdoor;12.2;0.112
-backdoor;11.5;0.522
-client-side attack;12.2;0.153
-client-side attack;11.5;0.161
-cryptanalysis;11.4;0.227
-data entry error;8.4;0.645
-data entry error;18.3;0.641
-data entry error;17.1;0.263
-data mishandling;13.1;0.787
-data mishandling;5.1;0.359
-data mishandling;16.11;0.76
-disposal error;16.13;0.7
-disposal error;13.2;0.361
-backdoor;12.1;0.791
-backdoor;4.6;0.573
-backdoor;14.1;0.67
-dos;12.1;0.475
-dos;4.6;0.615
-dos;14.1;0.144
-backdoor;8.2;0.262
-backdoor;2.4;0.219
-backdoor;12.3;0.681
-backdoor;8.5;0.842
-downloader;8.2;0.292
-downloader;2.4;0.213
-downloader;12.3;0.539
-downloader;8.5;0.46
-elicitation;20.4;0.507
-elicitation;13.1;0.638
-elicitation;17.2;0.39
-export data;14.6;0.813
-export data;13.3;0.272
-export data;8.1;0.7
-export data;13.6;0.452
-export data;7.6;0.785
-export data;13.7;0.78
-extortion;5.4;0.885
-extortion;19.3;0.836
-extortion;6.4;0.463
-extortion;19.2;0.137
-footprinting;1.4;0.575
-footprinting;4.3;0.813
-footprinting;3.6;0.399
-footprinting;4.5;0.659
-forced browsing;14.4;0.889
-forced browsing;14.6;0.861
-forced browsing;14.5;0.312
-forced browsing;5.3;0.794
-forced browsing;5.9;0.557
-forgery;11.3;0.874
-forgery;17.2;0.228
-forgery;20.3;0.453
-gaffe;18.4;0.724
-gaffe;20.8;0.346
-gaffe;17.5;0.154
-gaffe;18.8;0.216
-email misuse;16.2;0.784
-email misuse;7.8;0.768
-email misuse;16.3;0.707
-influence;5.2;0.343
-influence;5.4;0.812
-influence;6.6;0.58
-knowledge abuse;16.10;0.688
-knowledge abuse;6.4;0.867
-knowledge abuse;5.1;0.38
-backdoor;10.3;0.436
-backdoor;13.2;0.284
-backdoor;19.3;0.452
-loss;10.3;0.348
-loss;13.2;0.313
-loss;19.3;0.732
-mail command injection;13.8;0.243
-mail command injection;18.3;0.282
-mail command injection;20.7;0.207
-mail command injection;20.1;0.617
-maintenance error;14.7;0.766
-maintenance error;4.5;0.264
-maintenance error;20.4;0.576
-maintenance error;18.3;0.816
-malfunction;19.1;0.852
-malfunction;19.2;0.458
-malfunction;6.2;0.61
-malfunction;3.3;0.158
-misconfiguration;3.6;0.603
-misconfiguration;4.1;0.531
-misconfiguration;20.1;0.624
-misconfiguration;20.5;0.841
-misconfiguration;11.1;0.474
-misconfiguration;18.7;0.189
-misdelivery;14.6;0.149
-misdelivery;19.3;0.479
-misdelivery;19.1;0.772
-misdelivery;19.2;0.154
-misdelivery;16.11;0.105
-misinformation;17.2;0.823
-misinformation;20.7;0.193
-misinformation;20.3;0.521
-mitm;1.6;0.139
-mitm;16.13;0.308
-mitm;14.2;0.629
-mitm;3.5;0.568
-mitm;1.5;0.766
-net misuse;6.5;0.26
-net misuse;4.6;0.322
-baiting;17.4;0.734
-baiting;18.4;0.768
-baiting;18.5;0.757
-omission;17.4;0.715
-omission;18.4;0.766
-omission;18.5;0.69
-buffer overflow;4.4;0.397
-buffer overflow;20.1;0.148
-omission;18.9;0.324
-os commanding;4.1;0.348
-os commanding;4.4;0.729
-os commanding;18.3;0.869
-packet sniffer;12.7;0.38
-packet sniffer;14.2;0.479
-packet sniffer;15.9;0.249
-assault;16.14;0.611
-assault;14.6;0.593
-assault;5.3;0.845
-assault;16.13;0.737
-assault;16.11;0.653
-assault;5.7;0.823
-password dumper;16.14;0.887
-password dumper;14.6;0.733
-password dumper;5.3;0.326
-password dumper;16.13;0.179
-password dumper;16.11;0.712
-password dumper;5.7;0.489
-phishing;17.1;0.75
-phishing;17.5;0.121
-phishing;19.6;0.748
-phishing;17.2;0.249
-phishing;7.6;0.707
-phishing;7.3;0.553
-power failure;10.1;0.849
-power failure;10.2;0.781
-power failure;19.3;0.421
-power failure;19.1;0.632
-pretexting;19.6;0.529
-pretexting;17.2;0.444
-privilege abuse;16.3;0.886
-privilege abuse;5.6;0.749
-privilege abuse;16.11;0.427
-privilege abuse;19.4;0.444
-programming error;4.1;0.567
-programming error;20.7;0.452
-programming error;20.8;0.142
-publishing error;20.1;0.257
-publishing error;18.6;0.316
-publishing error;18.9;0.829
-publishing error;18.8;0.812
-ram scraper;20.4;0.55
-ram scraper;13.2;0.199
-ram scraper;13.1;0.526
-ram scraper;16.13;0.667
-ransomware;13.3;0.718
-ransomware;8.6;0.67
-ransomware;10.3;0.753
-ransomware;3.5;0.51
-ransomware;19.3;0.682
-ransomware;19.1;0.777
-ransomware;19.2;0.211
-ransomware;11.5;0.484
-reverse engineering;8.4;0.152
-reverse engineering;20.4;0.769
-reverse engineering;12.10;0.267
-reverse engineering;6.2;0.361
-reverse engineering;4.6;0.213
-rfi;4.3;0.162
-rfi;4.1;0.174
-rfi;13.8;0.575
-rfi;9.2;0.814
-rfi;8.5;0.508
-rfi;12.3;0.457
-rfi;7.6;0.227
-rfi;12.4;0.697
-rootkit;9.6;0.436
-rootkit;3.5;0.827
-rootkit;11.3;0.844
-rootkit;19.3;0.187
-rootkit;1.5;0.188
-rootkit;14.3;0.522
-rootkit;12.7;0.133
-rootkit;12.8;0.166
-scam;13.4;0.849
-scam;19.3;0.303
-scam;5.6;0.789
-scam;7.6;0.52
-scam;17.2;0.801
-scam;19.6;0.723
-scam;17.1;0.351
-session prediction;14.2;0.7
-session prediction;12.10;0.694
-session prediction;6.4;0.317
-session prediction;5.8;0.574
-session prediction;18.8;0.308
-session fixation;7.2;0.631
-session fixation;7.1;0.13
-session fixation;19.4;0.571
-session fixation;18.8;0.683
-session fixation;7.5;0.458
-session fixation;7.3;0.21
-session replay;16.10;0.485
-session replay;14.2;0.759
-session replay;12.10;0.351
-session replay;7.1;0.634
-session replay;6.2;0.113
-session replay;5.1;0.617
-session replay;5.8;0.208
-session replay;18.8;0.327
-skimmer;9.3;0.538
-skimmer;13.3;0.816
-skimmer;14.2;0.807
-skimmer;6.5;0.433
-skimmer;12.8;0.161
-snooping;14.2;0.698
-snooping;16.13;0.719
-snooping;12.7;0.442
-snooping;11.4;0.593
-snooping;12.6;0.555
-spam;12.1;0.447
-spam;7.8;0.513
-spam;13.8;0.22
-spam;7.6;0.593
-spam;17.2;0.316
-spam;19.6;0.719
-spam;17.5;0.835
-sqli;18.3;0.479
-sqli;20.1;0.101
-sqli;20.3;0.705
-sqli;18.8;0.241
-ssi injection;14.6;0.369
-ssi injection;18.3;0.517
-ssi injection;20.1;0.154
-ssi injection;20.3;0.591
-ssi injection;18.8;0.441
-ssi injection;18.4;0.732
-surveillance;1.3;0.578
-surveillance;1.4;0.114
-surveillance;2.1;0.448
-surveillance;15.1;0.594
-surveillance;15.9;0.289
-unapproved software;2.2;0.137
-unapproved software;7.2;0.491
-unapproved software;18.1;0.479
-unapproved workaround;16.10;0.364
-unapproved workaround;5.2;0.809
-url redirector abuse;17.2;0.169
-url redirector abuse;19.6;0.393
-url redirector abuse;17.4;0.255
-stolen creds;16.10;0.445
-stolen creds;14.6;0.444
-stolen creds;13.3;0.242
-stolen creds;8.1;0.741
-stolen creds;16.13;0.453
-stolen creds;5.6;0.883
-stolen creds;16.11;0.734
-worm;2.1;0.355
-worm;9.2;0.361
-worm;8.5;0.674
-worm;12.4;0.212
-worm;12.5;0.143
-xss;20.1;0.822
-xss;18.8;0.44
-xss;18.3;0.772
+baiting;17.1;0.706
+bribery;14.4;0.487
+bribery;5.2;0.87
+bribery;16.10;0.21
+bribery;5.4;0.429
+backdoor;4.3;0.29
+backdoor;3.6;0.249
+bypassed controls;4.3;0.745
+bypassed controls;3.6;0.604
+c2;12.1;0.71
+c2;8.6;0.671
+c2;6.4;0.6
+c2;1.5;0.495
+capture app data;14.6;0.492
+capture app data;13.3;0.522
+capture app data;13.4;0.656
+capture app data;20.4;0.256
+capture stored data;14.6;0.535
+capture stored data;13.4;0.179
+capture stored data;20.4;0.34
+assault;14.2;0.461
+assault;12.10;0.784
+assault;12.4;0.147
+connection;14.2;0.838
+connection;12.10;0.131
+connection;12.4;0.788
+backdoor;12.2;0.89
+backdoor;11.5;0.809
+client-side attack;12.2;0.252
+client-side attack;11.5;0.507
+cryptanalysis;11.4;0.329
+data entry error;8.4;0.296
+data entry error;18.3;0.186
+data entry error;17.1;0.656
+data mishandling;13.1;0.651
+data mishandling;5.1;0.536
+data mishandling;16.11;0.103
+disposal error;16.13;0.241
+disposal error;13.2;0.448
+backdoor;12.1;0.143
+backdoor;4.6;0.506
+backdoor;14.1;0.274
+dos;12.1;0.391
+dos;4.6;0.479
+dos;14.1;0.186
+backdoor;8.2;0.118
+backdoor;2.4;0.169
+backdoor;12.3;0.546
+backdoor;8.5;0.133
+downloader;8.2;0.376
+downloader;2.4;0.163
+downloader;12.3;0.185
+downloader;8.5;0.241
+elicitation;20.4;0.636
+elicitation;13.1;0.184
+elicitation;17.2;0.317
+export data;14.6;0.709
+export data;13.3;0.326
+export data;8.1;0.145
+export data;13.6;0.686
+export data;7.6;0.47
+export data;13.7;0.708
+extortion;5.4;0.748
+extortion;19.3;0.518
+extortion;6.4;0.68
+extortion;19.2;0.814
+footprinting;1.4;0.143
+footprinting;4.3;0.771
+footprinting;3.6;0.144
+footprinting;4.5;0.871
+forced browsing;14.4;0.795
+forced browsing;14.6;0.342
+forced browsing;14.5;0.189
+forced browsing;5.3;0.814
+forced browsing;5.9;0.107
+forgery;11.3;0.742
+forgery;17.2;0.106
+forgery;20.3;0.465
+gaffe;18.4;0.815
+gaffe;20.8;0.501
+gaffe;17.5;0.593
+gaffe;18.8;0.87
+email misuse;16.2;0.154
+email misuse;7.8;0.65
+email misuse;16.3;0.761
+influence;5.2;0.451
+influence;5.4;0.168
+influence;6.6;0.177
+knowledge abuse;16.10;0.389
+knowledge abuse;6.4;0.496
+knowledge abuse;5.1;0.847
+backdoor;10.3;0.407
+backdoor;13.2;0.837
+backdoor;19.3;0.53
+loss;10.3;0.698
+loss;13.2;0.779
+loss;19.3;0.308
+mail command injection;13.8;0.543
+mail command injection;18.3;0.379
+mail command injection;20.7;0.335
+mail command injection;20.1;0.818
+maintenance error;14.7;0.611
+maintenance error;4.5;0.469
+maintenance error;20.4;0.352
+maintenance error;18.3;0.22
+malfunction;19.1;0.765
+malfunction;19.2;0.118
+malfunction;6.2;0.213
+malfunction;3.3;0.853
+misconfiguration;3.6;0.569
+misconfiguration;4.1;0.48
+misconfiguration;20.1;0.777
+misconfiguration;20.5;0.734
+misconfiguration;11.1;0.13
+misconfiguration;18.7;0.217
+misdelivery;14.6;0.402
+misdelivery;19.3;0.811
+misdelivery;19.1;0.708
+misdelivery;19.2;0.259
+misdelivery;16.11;0.438
+misinformation;17.2;0.735
+misinformation;20.7;0.666
+misinformation;20.3;0.418
+mitm;1.6;0.89
+mitm;16.13;0.879
+mitm;14.2;0.446
+mitm;3.5;0.564
+mitm;1.5;0.132
+net misuse;6.5;0.605
+net misuse;4.6;0.88
+baiting;17.4;0.403
+baiting;18.4;0.589
+baiting;18.5;0.722
+omission;17.4;0.425
+omission;18.4;0.685
+omission;18.5;0.596
+buffer overflow;4.4;0.206
+buffer overflow;20.1;0.207
+omission;18.9;0.813
+os commanding;4.1;0.19
+os commanding;4.4;0.351
+os commanding;18.3;0.786
+packet sniffer;12.7;0.7
+packet sniffer;14.2;0.715
+packet sniffer;15.9;0.585
+assault;16.14;0.284
+assault;14.6;0.659
+assault;5.3;0.465
+assault;16.13;0.829
+assault;16.11;0.862
+assault;5.7;0.776
+password dumper;16.14;0.415
+password dumper;14.6;0.211
+password dumper;5.3;0.634
+password dumper;16.13;0.699
+password dumper;16.11;0.208
+password dumper;5.7;0.535
+phishing;17.1;0.551
+phishing;17.5;0.244
+phishing;19.6;0.654
+phishing;17.2;0.713
+phishing;7.6;0.793
+phishing;7.3;0.295
+power failure;10.1;0.133
+power failure;10.2;0.573
+power failure;19.3;0.872
+power failure;19.1;0.796
+pretexting;19.6;0.859
+pretexting;17.2;0.101
+privilege abuse;16.3;0.73
+privilege abuse;5.6;0.447
+privilege abuse;16.11;0.506
+privilege abuse;19.4;0.26
+programming error;4.1;0.786
+programming error;20.7;0.656
+programming error;20.8;0.657
+publishing error;20.1;0.222
+publishing error;18.6;0.495
+publishing error;18.9;0.464
+publishing error;18.8;0.27
+ram scraper;20.4;0.489
+ram scraper;13.2;0.536
+ram scraper;13.1;0.143
+ram scraper;16.13;0.685
+ransomware;13.3;0.713
+ransomware;8.6;0.539
+ransomware;10.3;0.581
+ransomware;3.5;0.752
+ransomware;19.3;0.808
+ransomware;19.1;0.832
+ransomware;19.2;0.665
+ransomware;11.5;0.896
+reverse engineering;8.4;0.598
+reverse engineering;20.4;0.786
+reverse engineering;12.10;0.209
+reverse engineering;6.2;0.772
+reverse engineering;4.6;0.424
+rfi;4.3;0.569
+rfi;4.1;0.799
+rfi;13.8;0.281
+rfi;9.2;0.804
+rfi;8.5;0.49
+rfi;12.3;0.222
+rfi;7.6;0.739
+rfi;12.4;0.873
+rootkit;9.6;0.129
+rootkit;3.5;0.627
+rootkit;11.3;0.269
+rootkit;19.3;0.323
+rootkit;1.5;0.286
+rootkit;14.3;0.587
+rootkit;12.7;0.569
+rootkit;12.8;0.406
+scam;13.4;0.22
+scam;19.3;0.794
+scam;5.6;0.829
+scam;7.6;0.635
+scam;17.2;0.546
+scam;19.6;0.394
+scam;17.1;0.608
+session prediction;14.2;0.214
+session prediction;12.10;0.738
+session prediction;6.4;0.335
+session prediction;5.8;0.154
+session prediction;18.8;0.284
+session fixation;7.2;0.616
+session fixation;7.1;0.633
+session fixation;19.4;0.254
+session fixation;18.8;0.413
+session fixation;7.5;0.694
+session fixation;7.3;0.587
+session replay;16.10;0.447
+session replay;14.2;0.565
+session replay;12.10;0.746
+session replay;7.1;0.248
+session replay;6.2;0.801
+session replay;5.1;0.443
+session replay;5.8;0.227
+session replay;18.8;0.823
+skimmer;9.3;0.164
+skimmer;13.3;0.322
+skimmer;14.2;0.892
+skimmer;6.5;0.748
+skimmer;12.8;0.608
+snooping;14.2;0.244
+snooping;16.13;0.566
+snooping;12.7;0.874
+snooping;11.4;0.162
+snooping;12.6;0.641
+spam;12.1;0.599
+spam;7.8;0.462
+spam;13.8;0.489
+spam;7.6;0.892
+spam;17.2;0.168
+spam;19.6;0.862
+spam;17.5;0.573
+sqli;18.3;0.812
+sqli;20.1;0.569
+sqli;20.3;0.609
+sqli;18.8;0.889
+ssi injection;14.6;0.261
+ssi injection;18.3;0.216
+ssi injection;20.1;0.101
+ssi injection;20.3;0.562
+ssi injection;18.8;0.782
+ssi injection;18.4;0.615
+surveillance;1.3;0.248
+surveillance;1.4;0.82
+surveillance;2.1;0.873
+surveillance;15.1;0.154
+surveillance;15.9;0.143
+unapproved software;2.2;0.345
+unapproved software;7.2;0.171
+unapproved software;18.1;0.731
+unapproved workaround;16.10;0.219
+unapproved workaround;5.2;0.26
+url redirector abuse;17.2;0.653
+url redirector abuse;19.6;0.668
+url redirector abuse;17.4;0.204
+stolen creds;16.10;0.67
+stolen creds;14.6;0.838
+stolen creds;13.3;0.418
+stolen creds;8.1;0.709
+stolen creds;16.13;0.571
+stolen creds;5.6;0.777
+stolen creds;16.11;0.876
+worm;2.1;0.457
+worm;9.2;0.177
+worm;8.5;0.263
+worm;12.4;0.614
+worm;12.5;0.721
+xss;20.1;0.818
+xss;18.8;0.165
+xss;18.3;0.858
