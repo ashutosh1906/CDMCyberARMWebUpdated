@@ -299,10 +299,10 @@
          <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
 
              <div class="container-fluid" style="margin-top: 30px;font-size: 22px;font-family: 'Comic Sans MS'">
-                    <div class="col-md-2 col-md-offset-4">
+                    <div class="col-md-6 col-md-offset-4">
                         <label for="imposed_risk">Imposed Risk ($)</label>
                     </div>
-                    <div class="col-md-2  col-md-offset-0" style="margin-right: auto;">
+                    <div class="col-md-6  col-md-offset-0" style="margin-right: auto;">
                         <a id="imposed_risk"></a>
                     </div>
               </div>
@@ -371,6 +371,24 @@
 {#            console.log("File List ");#}
 {#            console.log(file_list);#}
 {#            /************************************************ End of List of Files **************************************/#}
+            var windowSize = $(window).width();
+            {#console.log("Window Size"+windowSize);#}
+            var assetGridSizeRequired = 1190,assetGridPercentage = 0.70;
+            var cdmGridSizeRequired = 1200,cdmGridPercentage = 0.70;
+            var riskgridSizeRequired = 1100,riskGridPercentage=0.60;
+            var threatDistributionGridSizeRequired = 500;
+            if (assetGridSizeRequired > (windowSize*assetGridPercentage)){
+                assetGridSizeRequired = windowSize*assetGridPercentage;
+            }
+            if(cdmGridSizeRequired > (windowSize*cdmGridPercentage)){
+                cdmGridSizeRequired = windowSize*cdmGridPercentage;
+            }
+            if(riskgridSizeRequired > (windowSize*riskGridPercentage)){
+                riskgridSizeRequired = (windowSize*riskGridPercentage);
+            }
+            if(threatDistributionGridSizeRequired > (windowSize*assetGridPercentage)){
+                threatDistributionGridSizeRequired = (windowSize*assetGridPercentage);
+            }
 
             /****************************************************** Asset List ****************************************/
             var dataLoad = [];
@@ -394,17 +412,17 @@
             $("#asset_grid_list").jqxGrid(
             {
                 source: dataAdapterAsset,
-                autowidth: true,
+                width:assetGridSizeRequired,
                 autoheight:true,
                 pageable:true,
                 sortable: true,
                 columns: [
-                  { text: 'Asset Name', datafield: 'asset_name', width: 350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                  { text: 'Number', datafield:'frequency', width:  120,renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                  { text: 'Confidentiality ($)', datafield: 'confidentiality', width: 180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                  { text: 'Integrity ($)', datafield: 'integrity', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                  { text: 'Availability ($)', datafield: 'availability', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                    { text: 'Threat Source', datafield: 'data_source', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Asset Name', datafield: 'asset_name', width:350,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Number', datafield:'frequency', width:120,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                  { text: 'Confidentiality ($)', datafield: 'confidentiality', width:180,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Integrity ($)', datafield: 'integrity', width:180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                  { text: 'Availability ($)', datafield: 'availability',  width:180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                    { text: 'Threat Source', datafield: 'data_source', width:180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
 
                 ]
             });
@@ -797,19 +815,19 @@
                 $("#cdm_grid").jqxGrid(
                 {
                     source: dataAdapterCDM,
-                    autowidth: true,
+                    width: '98%',
                     autoheight:true,
                     pageable:true,
                     sortable: true,
                     groupable: true,
                     theme: 'energyblue',
                     columns: [
-                        { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                        { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Sub CSC', datafield: 'sc_version', width: 80,renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Security Function', datafield: 'sc_function', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Enforcement Level', datafield: 'en_level', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180, cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Asset Name', datafield: 'asset_name', width: 200,minwidth:'15%',renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Security Control Name', datafield: 'sc_name', width: 380,minwidth:'24%',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Sub CSC', datafield: 'sc_version', width: 80,width:'10%',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Security Function', datafield: 'sc_function', width: 180,minwidth:'17%', cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Enforcement Level', datafield: 'en_level', width: 180,minwidth:'17%', cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180,minwidth:'17%', cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
 
                     ],
     {#                groups: ['asset_name']#}
@@ -842,16 +860,16 @@
                 $("#risk_grid").jqxGrid(
                 {
                     source: dataAdapterAssetRisk,
-                    autowidth: true,
+                    width:riskgridSizeRequired,
                     autoheight:true,
                     pageable:true,
                     sortable: true,
                     theme: 'energyblue',
                     columns: [
-                      { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                        { text: 'Risk ($)', datafield: 'max_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Residual Risk ($)', datafield: 'res_risk', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                      { text: 'Implementation Cost ($)', datafield: 'imp_cost', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                      { text: 'Asset Name', datafield: 'asset_name',width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Risk ($)', datafield: 'max_risk',width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Residual Risk ($)', datafield: 'res_risk',width: 300,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                      { text: 'Implementation Cost ($)', datafield: 'imp_cost',width: 300, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
                     ],
                 });
             }
@@ -1022,7 +1040,7 @@
                     success: function (data_received) {
                         console.log(data_received);
                         threat_action_distribution_discovered = data_received['percentage'];
-                        threatDistributionGrid("ta_distribution_grid_list",data_received['percentage'])
+                        threatDistributionGrid("ta_distribution_grid_list",data_received['percentage'],threatDistributionGridSizeRequired);
                         $("#ta_elimination_div").show();
                         $("#risk_elimination_div").show();
                         $("#jqxsliderTA").jqxSlider({theme:'summer',value:1,mode:"fixed",min:0,max:100,ticksFrequency:10,width:"400px"});

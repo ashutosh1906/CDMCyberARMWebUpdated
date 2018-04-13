@@ -354,7 +354,7 @@ function downloadFile(filename, text) {
     document.body.removeChild(element);
 }
 
-function threatDistributionGrid(name,dataLoad){
+function threatDistributionGrid(name,dataLoad,gridWidth){
     console.log("Threat Distribution Table");
     console.log(dataLoad);
     var source =
@@ -373,7 +373,7 @@ function threatDistributionGrid(name,dataLoad){
         $("#"+name).jqxGrid(
         {
             source: dataAdapter,
-            autowidth: true,
+            width: gridWidth,
             autoheight:true,
             pageable:true,
             sortable: true,
