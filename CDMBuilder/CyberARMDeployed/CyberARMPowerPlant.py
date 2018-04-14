@@ -25,7 +25,7 @@ def init_power_plant(asset_enterprise_list,enterprise_asset_list_given):
     return asset_index
     # ProjectConfigFile.init_conf()
 
-def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination):
+def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination,max_sec_control_threat_action_index):
     print "The Power Plant has started :: Affordable Risk --> %s Budget --> %s" % (affordable_risk,budget)
     asset_enterprise_list = asset_enterprise_list_input
     ###################################################################################### GLobal Variables ############################################################
@@ -58,6 +58,8 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
     from RiskThreatActionDistribution import generate_risk_distribution,printGlobalRiskThreatAction
     threat_actions_frequency = -1
     global_risk_threat_action = []
+    if risk_elimination == 0:
+        risk_elimination = 0.8
     threat_actions_frequency = generate_risk_distribution(asset_enterprise_list, risk_elimination,
                                                           global_risk_threat_action)
     print "Frequency Threat Actions %s" % (threat_actions_frequency)
@@ -119,7 +121,7 @@ def cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_e
         recommendedCDM = CyberARMEngineDistribution.select_security_controls(security_control_list, threat_action_list,
                                                                  threat_action_name_to_id, risk_threat_action,
                                                                  asset_enterprise_list, threat_list, threat_name_to_id,
-                                                                 float(affordable_risk), float(budget),global_risk_threat_action,threat_action_id_to_name)
+                                                       float(affordable_risk), float(budget),global_risk_threat_action,threat_action_id_to_name,risk_elimination,max_sec_control_threat_action_index)
         ############################################################### One List for Different Risk Elimination Approach #########################################
         ############################################################### One List for Same Risk Elimination Approach with Different Cost#########################################
         ############################################################### One List for Same Risk Elimination Approach with Same Cost Different Threshold Value#########################################

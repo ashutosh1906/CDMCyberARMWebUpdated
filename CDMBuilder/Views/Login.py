@@ -484,7 +484,8 @@ def cyberARM_request_updated_compact(request):
         print asset_enterprise_list_input
 
         from CDMBuilder.CyberARMDeployed import CyberARMPowerPlant
-        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination)
+        from CDMBuilder.CyberARMDeployed import ProjectConfigFile
+        recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(asset_enterprise_list_input,affordable_risk,budget,risk_elimination,ProjectConfigFile.MAX_SEC_THREAT_ACTION)
         # recommendedCDM = CyberARMPowerPlant.cyberarm_init_main(veris_list, affordable_risk, budget)
         print recommendedCDM
         ############################################################### One List for Different Risk Elimination Approach #########################################

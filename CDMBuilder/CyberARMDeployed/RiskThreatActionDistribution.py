@@ -35,7 +35,7 @@ def generate_risk_distribution(asset_enterprise_list,risk_elimination,global_ris
     asset_index = 0
     for i in range(len(risk_threat_action_distribution)):
         for j in range(len(risk_threat_action_distribution[i])):
-            print "Risk (%s,%s) : %s" % (i,j,risk_threat_action_distribution[i][j])
+            # print "Risk (%s,%s) : %s" % (i,j,risk_threat_action_distribution[i][j])
             for ta in risk_threat_action_distribution[i][j].keys():
                 global_risk_threat_action.append([risk_threat_action_distribution[i][j][ta],asset_index,ta])
             asset_index += 1

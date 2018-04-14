@@ -299,10 +299,10 @@
          <div class="container-fluid" id="risk_box" style="width:80%;margin-top:15px;text-align:center;padding: 30px;box-shadow:2px 2px 2px 2px;text-decoration:underline;">
 
              <div class="container-fluid" style="margin-top: 30px;font-size: 22px;font-family: 'Comic Sans MS'">
-                    <div class="col-md-6 col-md-offset-4">
+                    <div class="col-md-2 col-md-offset-4">
                         <label for="imposed_risk">Imposed Risk ($)</label>
                     </div>
-                    <div class="col-md-6  col-md-offset-0" style="margin-right: auto;">
+                    <div class="col-md-2  col-md-offset-0" style="margin-right: auto;">
                         <a id="imposed_risk"></a>
                     </div>
               </div>
@@ -815,19 +815,19 @@
                 $("#cdm_grid").jqxGrid(
                 {
                     source: dataAdapterCDM,
-                    width: '98%',
+                    width: cdmGridSizeRequired,
                     autoheight:true,
                     pageable:true,
                     sortable: true,
                     groupable: true,
                     theme: 'energyblue',
                     columns: [
-                        { text: 'Asset Name', datafield: 'asset_name', width: 200,minwidth:'15%',renderer:columnrenderer,cellsrenderer:cellsrenderer},
-                        { text: 'Security Control Name', datafield: 'sc_name', width: 380,minwidth:'24%',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Sub CSC', datafield: 'sc_version', width: 80,width:'10%',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Security Function', datafield: 'sc_function', width: 180,minwidth:'17%', cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Enforcement Level', datafield: 'en_level', width: 180,minwidth:'17%', cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
-                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180,minwidth:'17%', cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Asset Name', datafield: 'asset_name', width: 200,renderer:columnrenderer,cellsrenderer:cellsrenderer},
+                        { text: 'Security Control Name', datafield: 'sc_name', width: 380,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Sub CSC', datafield: 'sc_version', width: 80,renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Security Function', datafield: 'sc_function', width: 180, cellsalign: 'right',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Enforcement Level', datafield: 'en_level', width: 180,cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
+                        { text: 'Kill Chain Phase', datafield: 'kc_phase', width: 180,cellsalign: 'right', cellsformat: 'c2',renderer:columnrenderer,cellsrenderer:cellsrenderer },
 
                     ],
     {#                groups: ['asset_name']#}

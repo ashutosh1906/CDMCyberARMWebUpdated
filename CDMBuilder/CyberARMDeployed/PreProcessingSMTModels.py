@@ -1,4 +1,36 @@
 import ProjectConfigFile
+def selectedSecurityControlsMatrix(selected_security_controls,security_control_list):
+    sec_control_CDM_index = []
+    global_sec_control_CDM_index_Asset_freq = [
+        [[0 for sc_func in range(ProjectConfigFile.NUMBER_OF_SECURITY_FUNCTION)] for en_level in
+         range(ProjectConfigFile.NUMNBER_OF_ENFORCEMENT_LEVEL)] for kc_phase in
+        range(ProjectConfigFile.NUMBER_OF_KILL_CHAIN_PHASE)]
+
+    for asset_index in range(len(selected_security_controls)):
+        sec_control_CDM_index_Asset_freq = [
+            [[0 for sc_func in range(ProjectConfigFile.NUMBER_OF_SECURITY_FUNCTION)] for en_level in
+             range(ProjectConfigFile.NUMNBER_OF_ENFORCEMENT_LEVEL)] for kc_phase in
+            range(ProjectConfigFile.NUMBER_OF_KILL_CHAIN_PHASE)]
+        # print("Asset Index %s" % (asset_index))
+        # print("\t \t \t Sec Con List %s" % (selected_security_controls[asset_index]))
+        for sc_control in selected_security_controls[asset_index]:
+            sec_control_CDM_index_Asset_freq[security_control_list[sc_control].kc_phase][security_control_list[sc_control].en_level][security_control_list[sc_control].sc_function] += 1
+            global_sec_control_CDM_index_Asset_freq[security_control_list[sc_control].kc_phase][
+                security_control_list[sc_control].en_level][security_control_list[sc_control].sc_function] += 1
+        # print(sec_control_CDM_index_Asset_freq)
+        sec_control_CDM_index.append(sec_control_CDM_index_Asset_freq)
+
+    # print("########################################################### Cyber Defense Matrix #####################################################################")
+    total_select_sec_controls = 0
+    for kc_phase in range(ProjectConfigFile.NUMBER_OF_KILL_CHAIN_PHASE):
+        for en_level in range(ProjectConfigFile.NUMNBER_OF_ENFORCEMENT_LEVEL):
+            for sc_func in range(ProjectConfigFile.NUMBER_OF_SECURITY_FUNCTION):
+                num_sec_controls = global_sec_control_CDM_index_Asset_freq[kc_phase][en_level][sc_func]
+                total_select_sec_controls += num_sec_controls
+                # print("\t \t (%s,%s,%s) --> Number of Security Controls %s" % (kc_phase,en_level,sc_func,num_sec_controls))
+    # print("Total Selected Security Controls %s" % (total_select_sec_controls))
+    return global_sec_control_CDM_index_Asset_freq,sec_control_CDM_index
+
 def PreprocessingSMT_Environment(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,
                     threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget,cost_effectiveness_sc,risk_ratio_threat_action,
                                  risk_list,risk_asset_specific,threat_action_id_to_position_roll,threat_id_to_position_roll,
@@ -9,11 +41,6 @@ def PreprocessingSMT_Environment(security_control_list,selected_security_control
     # asset_enterprise_list, number_of_unique_asset)
     # print "Asset Selected Threat Action Specific Risk Ratio %s" % (risk_ratio_threat_action)
 
-    #########################################  Create the environment for all the selected security controls ##############################
-    for asset_index in range(len(selected_security_controls)):
-        for sec_control in selected_security_controls[asset_index]:
-            security_control_list[sec_control].prepare_global_asset_threat_action_list(
-                threat_action_id_list_for_all_assets)
 
     # print "############################################ Security Controls Properties ########################################################"
     # for asset_index in range(len(selected_security_controls)):
@@ -144,7 +171,7 @@ def PreprocessingSMT_Environment(security_control_list,selected_security_control
 
     print "Global Minimum Risk %s" % (global_min_risk)
     if global_min_risk > affordable_risk:
-        print "Achievable Minimum Risk is less than the threshold"
+        print "\n(^_^) (^_^) (^_^) Global Minimum Risk %s is greater than the threshold %s (^_^) (^_^) (^_^)\n" % (global_min_risk,affordable_risk)
         max_risk_initial = 0
         for i in range(len(threat_id_for_all_assets)):
             for threat_id in threat_id_for_all_assets[i]:
@@ -199,3 +226,5 @@ def PreprocessingSMT_Environment(security_control_list,selected_security_control
     global_risk_related_variable[ProjectConfigFile.GLOBAL_TOTAL_COST_KEY] = global_Total_Cost
     global_risk_related_variable[ProjectConfigFile.GLOBAL_MIN_RISK_KEY] = global_min_risk
     global_risk_related_variable[ProjectConfigFile.MIN_SEC_CONTROL_COST_KEY] = min_sec_control_cost
+    global_sec_control_CDM_index_Asset_freq,sec_control_CDM_index = selectedSecurityControlsMatrix(selected_security_controls,security_control_list)
+    return ["success",global_sec_control_CDM_index_Asset_freq,sec_control_CDM_index]

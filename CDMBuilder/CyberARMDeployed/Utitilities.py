@@ -225,12 +225,17 @@ def printSelectThreatActionName(threat_action_name_list,threat_action_list):
             print "                                 ",
             print "ID %s : %s ---> Risk Value: %s" %(threat_action[0],threat_action_list[threat_action[0]].threat_action_name,threat_action[1])
 
-def printSelectedSecurityControls(security_control_list,selected_security_controls):
+def printSelectedSecurityControls(security_control_list,selected_security_controls,security_control_cost_effectiveness):
     for asset in range(len(selected_security_controls)):
         print "\nName of the asset ::: %s ------> " % (asset)
         for sec_con in selected_security_controls[asset]:
             print "                              ",
             print "Security Control ID : %s ---> Cost : %s" % (sec_con,security_control_list[sec_con].investment_cost)
+            # print "\t \t \tThreat Action Coverage %s" % (security_control_list[sec_con].global_asset_threat_action_list[asset])
+            # print "\t \t \tThreat Action Effectiveness %s" % (security_control_list[sec_con].threat_action_effectiveness)
+            # print "\t \t \tSecurity Control Cost Effectiveness %s == %s" % (security_control_list[sec_con].global_asset_effectiveness[asset]
+            #                                                                 ,security_control_cost_effectiveness[asset][sec_con])
+
         print ""
 
 def printAssetList(asset_eneterprise_list):
@@ -302,7 +307,7 @@ def printRiskPerThreatStatistics(risk):
 
 def printThreatActionList(threat_action_id_list_for_all_assets):
     for asset_index in range(len(threat_action_id_list_for_all_assets)):
-        print "\t Asset Index :%s Threat Actoin List %s" % (asset_index,threat_action_id_list_for_all_assets[asset_index])
+        print "\t Asset Index :%s \n\t \tThreat Actoin List %s" % (asset_index,threat_action_id_list_for_all_assets[asset_index])
 
 def printRiskThreatAction(risk_threat_action,asset_enterprise_list):
     for i in range(len(asset_enterprise_list)):
@@ -410,17 +415,18 @@ def appendStatsInFile(components):
     # print "Components %s" % (components)
     for comp in components[:-1]:
         append_file_iteration_index.write("%s,"%(comp))
-    append_file_iteration_index.write("%s," % (ProjectConfigFile.RISK_ELIMINATION))
+    # append_file_iteration_index.write("%s," % (ProjectConfigFile.RISK_ELIMINATION))
     append_file_iteration_index.write("%s\n" % (components[-1]))
     append_file_iteration_index.close()
 
-def appendTimeRiskStatsInFile(components):
+def appendTimeRiskStatsInFile(components,max_sec_control_threat_action_index):
     """ Components should be in (Assets,Total Risk,Maximum Achievable Risk,Budget,Implementation Cost,Residual Risk,Time,Threat Elimination,Security Controls) Format"""
     # print "()() Components %s" % (components)
     append_file_iteration_index = open(ProjectConfigFile.OUTPUT_TIME_MIN_RISK_FILE_NAME, 'a')
     # print "Components %s" % (components)
     for comp in components[:-1]:
         append_file_iteration_index.write("%s," % (comp))
+    append_file_iteration_index.write("%s,"%(max_sec_control_threat_action_index))
     append_file_iteration_index.write("%s\n" % (components[-1]))
     append_file_iteration_index.close()
 
@@ -446,10 +452,143 @@ def chosen_security_controls_threat_action_classified(selected_security_controls
 
 
         classified_selected_security_controls_threat_action.append(classified_selected_security_controls_threat_action_asset_specific)
-    printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action)
+    # printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action)
+    return classified_selected_security_controls_threat_action
 
-def printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action):
+def printClassifiedSecurityControl_ThreatAction(classified_selected_security_controls_threat_action,threat_action_id_to_name):
+    asset_index = 0
     for sc_asset_specific in classified_selected_security_controls_threat_action:
+        print "Asset Index %s" % (asset_index)
         for threat_action_id in sc_asset_specific.keys():
-            print "Threat Action ID %s ---> " % (threat_action_id)
-            print "\t \t Security Controls %s" % (sc_asset_specific[threat_action_id])
+            print "\t Threat Action ID %s :: %s ---> " % (threat_action_id,threat_action_id_to_name[threat_action_id])
+            print "\t \t \t Security Controls %s" % (sc_asset_specific[threat_action_id])
+            if len(sc_asset_specific[threat_action_id])==0:
+                print "Threat Action Error : ******* \t \t &&&&&&&&&&&&& %s &&&&&&&&&&&&& \t \t *******" % (threat_action_id_to_name[threat_action_id])
+        asset_index += 1
+
+def prune_security_controls_list(classified_selected_security_controls_threat_action,security_control_list,
+                                 selected_security_controls,security_control_cost_effectiveness,max_sec_control_threat_action_index):
+    number_of_asset = len(selected_security_controls)
+    for asset_index in range(number_of_asset):
+        number_ta_asset = len(classified_selected_security_controls_threat_action[asset_index])
+        ta_frequency = {ta:0 for ta in classified_selected_security_controls_threat_action[asset_index]}
+
+        sorted_sec_control_by_effectivenes = sorted(security_control_cost_effectiveness[asset_index],
+                                                 key=security_control_cost_effectiveness[asset_index].__getitem__,reverse=True)
+        # print "Asset Index %s" % (asset_index)
+        # for sec_con in sorted_sec_control_by_effectivenes:
+        #     print "\t \tSecurity Control ID %s : %s" % (sec_con,security_control_cost_effectiveness[asset_index][sec_con])
+
+        pruned_selected_security_controls_asset = []
+        for index in range(len(sorted_sec_control_by_effectivenes)):
+            sec_con = sorted_sec_control_by_effectivenes[index]
+            if index < max_sec_control_threat_action_index:
+                pruned_selected_security_controls_asset.append(sorted_sec_control_by_effectivenes[index])
+                for ta in security_control_list[sec_con].global_asset_threat_action_list[asset_index]:
+                    if ta in ta_frequency.keys():
+                        ta_frequency[ta] += 1
+            else:
+                ta_sec_length = len(security_control_list[sec_con].global_asset_threat_action_list[asset_index])
+                for ta_index in range(ta_sec_length):
+                     ta = security_control_list[sec_con].global_asset_threat_action_list[asset_index][ta_index]
+                     if ta not in ta_frequency.keys():
+                         continue
+                     if ta_frequency[ta] < max_sec_control_threat_action_index:
+                         pruned_selected_security_controls_asset.append(sec_con)
+                         for change_ta_index in range(ta_index,ta_sec_length):
+                             change_ta = security_control_list[sec_con].global_asset_threat_action_list[asset_index][change_ta_index]
+                             if change_ta in ta_frequency.keys():
+                                 ta_frequency[change_ta] += 1
+
+        # print "TA Frequency %s" % (ta_frequency)
+        # print "Previous Selected Security Controls %s" % (selected_security_controls[asset_index])
+        selected_security_controls[asset_index] = pruned_selected_security_controls_asset
+        # print "Pruned Selected Security Controls %s" % (selected_security_controls[asset_index])
+
+def printPrunedSelectedSecurityControlsWithProperties(security_control_list,selected_security_controls):
+    security_function_cost = [0.0 for i in range(len(ProjectConfigFile.SECURITY_FUNCTION_TO_ID))]
+    en_level_cost = [0.0 for i in range(len(ProjectConfigFile.ENFORCEMENT_LEVEL_TO_ID))]
+    kc_phase_cost = [0.0 for i in range(len(ProjectConfigFile.KILL_CHAIN_PHASE_TO_ID))]
+    security_function_cost_Asset_Specific = [[0.0 for i in range(len(ProjectConfigFile.SECURITY_FUNCTION_TO_ID))] for i in range(len(selected_security_controls))]
+    en_level_cost_Asset_Specific = [[0.0 for i in range(len(ProjectConfigFile.ENFORCEMENT_LEVEL_TO_ID))] for i in range(len(selected_security_controls))]
+    kc_phase_cost_Asset_Specific = [[0.0 for i in range(len(ProjectConfigFile.KILL_CHAIN_PHASE_TO_ID))] for i in range(len(selected_security_controls))]
+    total_cost = 0.0
+    for asset_index in range(len(selected_security_controls)):
+        # print "\nAsset Index %s --> %s"%(asset_index,selected_security_controls[asset_index])
+        for sec_id in selected_security_controls[asset_index]:
+            security_control_obj = security_control_list[sec_id]
+            # security_control_list[sec_id].printCDMProperties()
+            ################################################ Global Cost ##############################################
+            security_function_cost[security_control_obj.sc_function] += security_control_obj.investment_cost
+            en_level_cost[security_control_obj.en_level] += security_control_obj.investment_cost
+            kc_phase_cost[security_control_obj.kc_phase] += security_control_obj.investment_cost
+
+            ################################################# Asset Specific Dimension Based Cost ##############################
+            security_function_cost_Asset_Specific[asset_index][security_control_obj.sc_function] += security_control_obj.investment_cost
+            en_level_cost_Asset_Specific[asset_index][security_control_obj.en_level] += security_control_obj.investment_cost
+            kc_phase_cost_Asset_Specific[asset_index][security_control_obj.kc_phase] += security_control_obj.investment_cost
+            total_cost += security_control_obj.investment_cost
+
+    security_function_cost_distribution = [security_function_cost[i]/sum(security_function_cost) for i in range(len(ProjectConfigFile.SECURITY_FUNCTION_TO_ID))]
+    en_level_cost_distribution = [en_level_cost[i]/sum(en_level_cost) for i in range(len(ProjectConfigFile.ENFORCEMENT_LEVEL_TO_ID))]
+    kc_phase_cost_distribution = [kc_phase_cost[i]/sum(kc_phase_cost) for i in range(len(ProjectConfigFile.KILL_CHAIN_PHASE_TO_ID))]
+
+    # print("************************************** Check the cost Distribution*****************************************")
+    # print("$$$$$$$$$$$$$$$ Global Total Costs : %s $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" % (total_cost))
+    # print("\t\t Global Security Function Cost : %s" % (security_function_cost))
+    # print("\t\t Global Security Function Cost Distribution : %s" % (security_function_cost_distribution))
+    # print("\t\t Global Enforcement Level Cost : %s" % (en_level_cost))
+    # print("\t\t Global Enforcement Level Cost Distribution : %s" % (en_level_cost_distribution))
+    # print("\t\t Global Kill Chain Phase Cost : %s" % (kc_phase_cost))
+    # print("\t\t Global Kill Chain Phase Cost Distribution : %s" % (kc_phase_cost_distribution))
+    return [[security_function_cost,en_level_cost,kc_phase_cost],
+            [kc_phase_cost_Asset_Specific,en_level_cost_Asset_Specific,security_function_cost_Asset_Specific]]
+
+def build_constraints(asset_enterprise_list,selected_security_controls):
+    all_smt_constraints = {}
+    if ProjectConfigFile.COST_DISTRIBUTION_CONSTRAINT_ENABLED:
+        all_smt_constraints[ProjectConfigFile.COST_DISTRIBUTION_PROPERTIES] = ProjectConfigFile.cost_constraint_development()
+    if ProjectConfigFile.ASSET_BASED_DISTRIBUTION_CONSTRAINT_ENABLED:
+        all_smt_constraints[ProjectConfigFile.ASSET_BASED_DISTRIBUTION_PROPERTIES] = \
+            ProjectConfigFile.asset_based_distribution_development(asset_enterprise_list,selected_security_controls)
+    return all_smt_constraints
+
+def verify_cost_reult(cost_distribution_CDM):
+    print "Cost Distribution SMT Output %s" % (cost_distribution_CDM)
+    for i in range(3):
+        print "Total Implementaion Cost from Distribution %s" % (sum(cost_distribution_CDM[i]))
+
+def build_Dynamic_Constraint(all_smt_constraints,asset_specific_constraints_asset_id):
+    dynamic_constraint_builder = {}
+    for property_constraint_name in all_smt_constraints.keys():
+        dynamic_constraint_builder[property_constraint_name] = []
+        if property_constraint_name == ProjectConfigFile.COST_DISTRIBUTION_PROPERTIES:
+            for axis_name in range(ProjectConfigFile.NUMBER_OF_AXIS):
+                constraints_placements = [index_non_zero for index_non_zero, val in
+                                          enumerate(all_smt_constraints[property_constraint_name][axis_name]) if
+                                          val != 0.0]
+                for rank_cons in constraints_placements:
+                    print "Axis : %s --> Rank : %s" % (axis_name, rank_cons)
+                    dynamic_constraint_builder[property_constraint_name].append((axis_name, rank_cons,all_smt_constraints[property_constraint_name][axis_name][rank_cons]))
+        if property_constraint_name == ProjectConfigFile.ASSET_BASED_DISTRIBUTION_PROPERTIES:
+            print "Asset Specific Constraints %s" % (asset_specific_constraints_asset_id)
+            all_asset_specific_cons = all_smt_constraints[ProjectConfigFile.ASSET_BASED_DISTRIBUTION_PROPERTIES]
+            for asset_specific_cons in asset_specific_constraints_asset_id:
+                for asset_specific_cons_iter in all_asset_specific_cons[asset_specific_cons]:
+                    dynamic_constraint_builder[property_constraint_name].append(asset_specific_cons_iter)
+    return dynamic_constraint_builder
+
+def test_properties_smt_constraints(smt_properties,constraint_properties):
+    print("SMT Properties %s" % (smt_properties))
+    print("Constraint properties %s" % (constraint_properties))
+    for asset_index in smt_properties.keys():
+        print("Asset Name %s " % (asset_index))
+        print "Maximum Cost %s" % (constraint_properties[0][asset_index])
+        cons_proper = smt_properties[asset_index]
+        for cons_prop_iter in cons_proper:
+            print "Property %s" % (cons_proper)
+            print "Alloted Cost For Specific One %s : Cons Value %s" % (constraint_properties[0][asset_index],cons_prop_iter[2])
+            print "Alloted Cost For Specific One %s : Cons Value %s" % (
+            constraint_properties[1][asset_index], cons_prop_iter[2])
+            print "Alloted Cost For Specific One %s : Cons Value %s" % (
+            constraint_properties[2][asset_index], cons_prop_iter[2])

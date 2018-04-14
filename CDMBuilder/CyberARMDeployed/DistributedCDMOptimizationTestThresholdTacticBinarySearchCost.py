@@ -12,7 +12,7 @@ def allocated_cost(number_of_unique_asset,global_estimated_risk,risk_asset_speci
 def SMT_Environment(security_control_list,selected_security_controls,threat_action_name_list,threat_action_list,
                     threat_action_id_list_for_all_assets,threat_id_for_all_assets,threat_list,asset_enterprise_list,affordable_risk,budget,cost_effectiveness_sc,risk_ratio_threat_action,
                     risk_list,global_Total_Cost,global_estimated_risk,global_min_risk,risk_asset_specific,min_sec_control_cost,threat_action_id_to_position_roll,threat_id_to_position_roll,
-                    minimum_threat_specific_risk, minimum_affordable_risk):
+                    minimum_threat_specific_risk, minimum_affordable_risk,risk_elimination,max_sec_control_threat_action_index):
     print "*********************************************** In Binary Search ********************************************************************************"
     # ProjectConfigFile.OUTPUT_FILE_NAME_BINARY_SEARCH.write("*************************** In Binary Search *****************************\n")
     number_of_unique_asset = len(threat_action_id_list_for_all_assets)
@@ -148,13 +148,15 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                         # print "Security Control Position %s" % (sec_control_position)
                         cons = (smt_Threat_Action_Security_Control[asset_index][threat_action_id_to_position_roll[asset_index][threat_action_id]][sec_control_position]==
                                 If(smt_Security_Control_Bool[asset_index][sec_index],(1-effectiveness_threat_action),1))
-                        cost_cons = (smt_Security_Control_Cost[asset_index][sec_index]==
-                                     If(smt_Security_Control_Bool[asset_index][sec_index],
-                                      security_control_list[sec_control].investment_cost,0))
-                        security_control_flag_cons = (smt_Security_Control_Flag[asset_index][sec_index]==If(smt_Security_Control_Bool[asset_index][sec_index],1,0))
                         cyberARMGoal.add(cons)
-                        cyberARMGoal.add(cost_cons)
-                        cyberARMGoal.add(security_control_flag_cons)
+
+                    security_control_flag_cons = (smt_Security_Control_Flag[asset_index][sec_index] == If(
+                        smt_Security_Control_Bool[asset_index][sec_index], 1, 0))
+                    cyberARMGoal.add(security_control_flag_cons)
+                    cost_cons = (smt_Security_Control_Cost[asset_index][sec_index] ==
+                                 If(smt_Security_Control_Bool[asset_index][sec_index],
+                                    security_control_list[sec_control].investment_cost, 0))
+                    cyberARMGoal.add(cost_cons)
                     sec_index += 1
 
             ############################################################# 2.2 Threat Action Success Constraint #####################################
@@ -332,11 +334,11 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
                 asset_name_current = asset_list_for_smt[asset_index][0]
                 for security_control_obj in CDM_Global_id[asset_index]:
                     row = {}
-                    row['asset_name'] = "%s_%s"%(asset_name_current,asset_index)
-                    row['sc_version'] = security_control_obj.sc_version
+                    row['asset_name'] = asset_name_current
                     row['sc_name']=security_control_obj.sc_name
                     row['sc_function'] =ProjectConfigFile.ID_TO_SECURITY_FUNCTION[security_control_obj.sc_function]
                     row['en_level'] =ProjectConfigFile.ID_TO_ENFORCEMENT_LEVEL[security_control_obj.en_level]
+                    row['sc_version'] = security_control_obj.sc_version
                     row['kc_phase'] =ProjectConfigFile.ID_TO_KILL_CHAIN_PHASE[security_control_obj.kc_phase]
                     CDM_Global.append(row)
             ########################################################### End of the dataset of the grid view #################################
@@ -356,11 +358,14 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             #      roi_statistics[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST],
             #      roi_statistics[ProjectConfigFile.RESIDUAL_RISK],
             #      roi_statistics[ProjectConfigFile.MITIGATED_RISK], number_of_selected_countermeasures))
-            """ Components should be in (Asset,Total Risk,Maximum Achievable Risk,Residual Risk,Implementation Cost,Computation Time in Sec,Number of Selected Countermeasures,Approach) Format"""
-            # Utitilities.appendStatsInFile([number_of_unique_asset, global_estimated_risk, global_min_risk,
+            # """ Components should be in (Asset,Total Risk,Affordable Risk,Maximum Achievable Risk,Residual Risk,Budget,Implementation Cost,Computation Time in Sec,Risk Elimination,Max Sec Threat Action,Number of Selected Countermeasures,Approach) Format"""
+            # Utitilities.appendStatsInFile([number_of_unique_asset, global_estimated_risk, affordable_risk_variable,global_min_risk,
             #                                roi_statistics[ProjectConfigFile.RESIDUAL_RISK],
+            #                                budget_variable,
             #                                roi_statistics[ProjectConfigFile.TOTAL_IMPLEMENTATION_COST],
-            #                                time_required_specific, number_of_selected_countermeasures,
+            #                                time_required_specific,
+            #                                risk_elimination,
+            #                                max_sec_control_threat_action_index,number_of_selected_countermeasures,
             #                                ProjectConfigFile.BINARY_SEARCH])
             ########################################################### End of Capture of The Risk ####################################################
 
@@ -368,7 +373,7 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
             risk_all = []
             for asset_index in range(len(threat_id_for_all_assets)):
                 risk_all.append({})
-                risk_all[asset_index]['asset_name'] = "%s_%s" % (asset_list_for_smt[asset_index][0],asset_index)
+                risk_all[asset_index]['asset_name'] = asset_list_for_smt[asset_index][0]
                 risk_all[asset_index]['max_risk'] = 0
                 risk_all[asset_index]['res_risk'] = 0
                 risk_all[asset_index]['imp_cost'] = round(local_enforcement_cost[asset_index],3)
@@ -412,10 +417,10 @@ def SMT_Environment(security_control_list,selected_security_controls,threat_acti
         #     "Time Required For Specific Cost Iteration %s\n\n" % (cost_iteration_total_time))
 
         CDM_Global_All_Statistice_Iterative.append(CDM_Global_All_Statistice_Iterative_Budget)
-        """ Components should be in (Assets,Total Risk,Maximum Achievable Risk,Budget,Implementation Cost,Residual Risk,Time,Threat Elimination,Security Controls,Approach) Format"""
-        # Utitilities.appendTimeRiskStatsInFile([number_of_unique_asset,global_estimated_risk,global_min_risk,
+        # """ Components should be in (Assets,Total Risk,Affordable Risk,Maximum Achievable Risk,Budget,Implementation Cost,Residual Risk,Time,Threat Elimination,Security Controls,Approach) Format"""
+        # Utitilities.appendTimeRiskStatsInFile([number_of_unique_asset,global_estimated_risk,affordable_risk,global_min_risk,
         #                                        budget_variable,implementation_cost_best_solution,satisfied_risk_variable,cost_iteration_total_time,
-        #                                        ProjectConfigFile.RISK_ELIMINATION,Utitilities.determineSizeCandidateSet(selected_security_controls),ProjectConfigFile.BINARY_SEARCH])
+        #                                        risk_elimination,Utitilities.determineSizeCandidateSet(selected_security_controls),ProjectConfigFile.BINARY_SEARCH],max_sec_control_threat_action_index)
         budget_variable += increase_budget
     return CDM_Global_All_Statistice_Iterative
 
