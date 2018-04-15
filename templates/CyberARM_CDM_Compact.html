@@ -191,6 +191,7 @@
             <div class="col-lg-12 col-lg-offset-10">
                 <a id="load_input_asset" class="clickable_custom_a" style="color: red;text-decoration: underline;">Load Input Asset File</a>
                 <input type="file" id="load_input_asset_file" style="display:none;" multiple size="50"></br>
+                <input type="checkbox" name="pre_output" value="Pre Output" id="pre_output">Pre-Generated Output<br>
                 <a style="text-decoration:none;" id="uploaded_file_list"></a>
             </div>
         </div>
@@ -389,6 +390,9 @@
             if(threatDistributionGridSizeRequired > (windowSize*assetGridPercentage)){
                 threatDistributionGridSizeRequired = (windowSize*assetGridPercentage);
             }
+
+            var portfolio_statistiics = JSON.parse("{{ asset_input_parameters | escapejs }}");
+            console.log(portfolio_statistiics);
 
             /****************************************************** Asset List ****************************************/
             var dataLoad = [];
@@ -771,6 +775,7 @@
                 data_input['risk_elimination'] = risk_elimination_value;
                 data_input['threat_elimination'] = threat_elimination_value;
                 data_input['threat_action_distribution'] = threat_action_distribution_discovered;
+                data_input['pre_ouput'] = $('#pre_output').prop('checked');
                 if (data_input['budget']==""){
                     $("#risk_budget_label").toggle();
                     box_flag = 1;
@@ -1129,6 +1134,10 @@
                          $("#asset_grid_list").jqxGrid('addrow',added_number_of_asset,row_asset_list);
                          added_number_of_asset += 1;
                      }
+
+                 console.log("File Content Size "+added_number_of_asset);
+                 $("#budget").val(portfolio_statistiics[added_number_of_asset][0][1]);
+                 $("#affordable_risk").val(portfolio_statistiics[added_number_of_asset][0][2]);
              }
 
             /***************************************************** End of Loading Input Files ******************************/

@@ -8,13 +8,13 @@ RISK_ELIMINATION = 0.65
 VERIS_ASSET_NUMBER_LIST = [600,500,400,300,200,100,50]
 VERIS_ASSET_NUMBER = VERIS_ASSET_NUMBER_LIST[ASSET_LIST_INDEX]
 FILE_INDEX = 500
-MAX_SEC_THREAT_ACTION = 2
+MAX_SEC_THREAT_ACTION = 1
 # RISK_ELIMINATION_LIST = [0.65,0.70,0.75,0.8,0.85,0.9,0.95,0.98,1.0]
 RISK_ELIMINATION_LIST = [.8]
 OUTPUT_STATISTIC_FILE_ID = 'Test'
-ROI_VALUE = 18.0
-
-INCLUDE_ROI = False
+ROI_VALUE = 16.0
+OUTPUT_RESULT_FILE_INDEX = 0
+INCLUDE_ROI = True
 ################################################################## File Names #############################################
 ################################################################# Method Flags ############################################
 BINARY_SEARCH = 0
@@ -23,14 +23,16 @@ ITERATIVE_SEARCH = 2
 ITERATIVE_COST_ALLOCATION_SEARCH = 3
 ################################################################# End Method Flags ############################################
 ############################################################# Initial Files ###############################################
+############################################################# Initial Files ###############################################
 RESOURCE_FOLDER = 'ResourceFolder'
 # SECURITY_CONTROL_FILE = 'ResourceFolder/SecurityControls.csv'
 SECURITY_CONTROL_FILE = '%s/%s/CSCMapping.csv' % (os.path.abspath(os.path.dirname(__file__)),RESOURCE_FOLDER)
 THREAT_ACTION_SECURITY_CONTROL_FILE = '%s/%s/ThreatActionSecurityControlNew.csv' % (os.path.abspath(os.path.dirname(__file__)),RESOURCE_FOLDER)
 # THREAT_ACTION_SECURITY_CONTROL_FILE = 'ResourceFolder/ThreatActionSecurityControldistribution.csv'
 
-# ############################################################# Output Files ################################################
-# OUTPUT_FILE_DIRECTORY = "OutputRecords"
+
+############################################################# Output Files ################################################
+OUTPUT_FILE_DIRECTORY = "OutputRecords"
 # OUTPUT_FILE_NAME_BINARY_SEARCH = open("%s/VERIS_%s_Compare_%s_%s_0.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX,MAX_SEC_THREAT_ACTION),'w')
 # # OUTPUT_FILE_NAME_BINARY_SEARCH_MODIFIED = open("%s/VERIS_%s_Compare_%s_%s_1.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX,MAX_SEC_THREAT_ACTION),'w')
 # # OUTPUT_FILE_NAME_ITERATIVE_SEARCH = open("%s/VERIS_%s_Compare_%s_%s_2.txt"%(OUTPUT_FILE_DIRECTORY,VERIS_ASSET_NUMBER,FILE_INDEX,MAX_SEC_THREAT_ACTION),'w')
@@ -56,7 +58,7 @@ THREAT_MAP_COST = {}
 THREAT_PRIORITIZATION_THRESHOLD = 0.05
 THREAT_ACTION_MINIMUM_CONSEQUENCE = 2
 CHOSEN_NUMBER_THREAT_ACTION = 6
-
+RESOURCE_FOLDER = 'ResourceFolder'
 INPUT_FILE_PATH = 'CyberARMInputFile'
 VERIS_LIST = 0
 EXPERIENCE_LIST = 1
@@ -71,6 +73,8 @@ SECURITY_CONTROL_COST_MAX = 3000
 SECURITY_CONTROL_COST_MIN = 5000
 ITERATION_MODEL_SATISFACTION = 1
 COST_MODEL_ITERATION = 1
+RESULT_OUTPUT_FILE_NAME = '%s/%s/OutResult' % (os.path.abspath(os.path.dirname(__file__)),OUTPUT_FILE_DIRECTORY)
+BUDGET_COST_DISTRIBUTION_FILE = ('%s/%s/InputBudgetAffordableRisk.txt')%(os.path.abspath(os.path.dirname(__file__)),RESOURCE_FOLDER)
 ################################################### Read from single THreat statistics file ##################
 WRITE_FILE_NAME = 'Global_Threat_Statistics.txt'
 FILENAME_TAG_OPEN = '<'
@@ -208,7 +212,7 @@ def uploadFiles():
 #     #     "Number of Selected Security Controls %s\n" % (number_selected_security_controls))
 #     # OUTPUT_FILE_NAME_ITERATIVE_SEARCH.write(
 #     #     "Number of Selected Security Controls %s\n" % (number_selected_security_controls))
-
+#
 # def closeFiles():
 #     OUTPUT_FILE_NAME_BINARY_SEARCH.close()
 #     # OUTPUT_FILE_NAME_BINARY_SEARCH_MODIFIED.close()
