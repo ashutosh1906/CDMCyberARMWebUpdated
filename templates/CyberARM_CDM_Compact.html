@@ -19,6 +19,10 @@
         <div class="container-fluid" style="text-align: center;">
             <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;">Please Fill The Affordable Risk & Budget Input</p>
         </div>
+         <div class="container-fluid" style="text-align: center;">
+            <p id="wrong_risk" style="display:none;color: red;font-size: 26px;">Affordable Risk is less than the minimum achievable risk. So, there is no Satisfiable Model.
+                <br/> Increase the Affordable Risk</p>
+        </div>
         <div class="container-fluid ">
             <div class="col">
                     <label for="Threat Data Source">Threat Data Source</label>
@@ -1006,7 +1010,8 @@
 
                         },
                         error: function () {
-                            alert("Error");
+                            {#alert("Error");#}
+                            $("#wrong_risk").show();
                             $("#wait_loading_div").toggle();
                         }
                     });

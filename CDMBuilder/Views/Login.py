@@ -439,7 +439,7 @@ def cyberARM_request_updated_compact(request):
             send_data['cdm_list'] = recommendedCDM[CYBERARM_CDM_MATRIX]
             send_data['risk_list'] = recommendedCDM[CYBERARM_RISK]
             send_data['roi'] = recommendedCDM[CYBERARM_ROI]
-            pass
+
         else:
             # print request.body.decode("utf-8")
             # print json_loads
@@ -503,11 +503,18 @@ def cyberARM_request_updated_compact(request):
             ############################################################### One List for Different Risk Elimination Approach #########################################
             ############################################################### One List for Same Risk Elimination Approach with Different Cost#########################################
             ############################################################### One List for Same Risk Elimination Approach with Same Cost Different Threshold Value#########################################
-            recommendedCDM = recommendedCDM[0][0][0]
+            # if(len(recommendedCDM)==0):
+            #     send_data['cdm_list'] = []
+            #     send_data['risk_list'] = []
+            #     send_data['roi'] = []
 
+
+            recommendedCDM = recommendedCDM[0][0][0]
             send_data['cdm_list'] = recommendedCDM[CYBERARM_CDM_MATRIX]
             send_data['risk_list'] = recommendedCDM[CYBERARM_RISK]
             send_data['roi'] = recommendedCDM[CYBERARM_ROI]
+
+
         return HttpResponse(
             json.dumps(send_data),
             content_type="application/json"
