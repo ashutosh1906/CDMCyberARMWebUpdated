@@ -31,9 +31,12 @@ def readBudgetAffordableRisk():
         asset_numbers = int(line[0])
         budget_afford_risk_str = line[1].split(',')
         budget_afford_risk = []
+        risk_elem_value = float(budget_afford_risk_str[0])
         for value in budget_afford_risk_str:
             budget_afford_risk.append(float(value))
         if asset_numbers not in budget_risk_dict.keys():
-            budget_risk_dict[asset_numbers] = []
-        budget_risk_dict[asset_numbers].append(budget_afford_risk)
+            budget_risk_dict[asset_numbers] = {}
+        if risk_elem_value not in budget_risk_dict[asset_numbers].keys():
+            budget_risk_dict[asset_numbers][float(budget_afford_risk_str[0])]=[budget_afford_risk]
+    print "Budget Risk %s" % (budget_risk_dict)
     return budget_risk_dict

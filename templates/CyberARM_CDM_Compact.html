@@ -17,10 +17,10 @@
                     </div>
         </div>
         <div class="container-fluid" style="text-align: center;">
-            <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;">Please Fill The Affordable Risk & Budget Input</p>
+            <p id="risk_budget_label" style="display:none;color: red;font-size: 20px;" class="alert_tyep_msg">Please Fill The Affordable Risk & Budget Input</p>
         </div>
          <div class="container-fluid" style="text-align: center;">
-            <p id="wrong_risk" style="display:none;color: red;font-size: 26px;">Affordable Risk is less than the minimum achievable risk. So, there is no Satisfiable Model.
+            <p id="wrong_risk" style="display:none;color: red;font-size: 26px;" class="alert_tyep_msg">Affordable Risk is less than the minimum achievable risk. So, there is no Satisfiable Model.
                 <br/> Increase the Affordable Risk</p>
         </div>
         <div class="container-fluid ">
@@ -771,6 +771,7 @@
 
            var box_flag = 0;
            $("#generate_cdm").click(function () {
+                $(".alert_tyep_msg").hide();
                 loadDataFromAssetGRID();
                 var data_input = {};
                 data_input['real_data'] = asset_list_given;
@@ -1141,8 +1142,8 @@
                      }
 
                  console.log("File Content Size "+added_number_of_asset);
-                 $("#budget").val(portfolio_statistiics[added_number_of_asset][0][1]);
-                 $("#affordable_risk").val(portfolio_statistiics[added_number_of_asset][0][2]);
+                 $("#budget").val(portfolio_statistiics[added_number_of_asset][0.9][0][1]);
+                 $("#affordable_risk").val(portfolio_statistiics[added_number_of_asset][0.7][0][2]);
              }
 
             /***************************************************** End of Loading Input Files ******************************/
