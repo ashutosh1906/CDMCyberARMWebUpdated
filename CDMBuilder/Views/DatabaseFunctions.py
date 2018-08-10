@@ -50,8 +50,8 @@ def objectToArrayOfDict():
     return cdm_entries_grid_list
 
 def CSC_Classification(request):
-    if USER_NAME_KEY not in request.session.keys():
-        return redirect('login')
+    # if USER_NAME_KEY not in request.session.keys():
+    #     return redirect('login')
     if request.method == "GET":
         send_data = {}
         send_data['kc_phase'] = json.dumps(GlobalVariables.DATABASE_KILL_CHAIN_PHASE.keys())
